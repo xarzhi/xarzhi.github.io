@@ -116,10 +116,6 @@ $ bun vitepress init
 
 `docs` 目录作为 VitePress 站点的项目**根目录**。`.vitepress` 目录是 VitePress 配置文件、开发服务器缓存、构建输出和可选主题自定义代码的位置。
 
-:::tip
-默认情况下，VitePress 将其开发服务器缓存存储在 `.vitepress/cache` 中，并将生产构建输出存储在 `.vitepress/dist` 中。如果使用 Git，应该将它们添加到 `.gitignore` 文件中。也可以手动[配置](../reference/site-config#outdir)这些位置。
-:::
-
 
 
 ### 2.7 配置文件
@@ -138,8 +134,6 @@ export default {
   }
 }
 ```
-
-还可以通过 `themeConfig` 选项配置主题的行为。有关所有配置选项的完整详细信息，请参见[配置参考](https://vitepress.dev/zh/reference/site-config)。
 
 
 
@@ -613,3 +607,4 @@ jobs:
 
 效果
 
+![image-20240522160815725](https://gitee.com/xarzhi/picture/raw/master/img/image-20240522160815725.png)

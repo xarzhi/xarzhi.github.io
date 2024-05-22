@@ -118,6 +118,8 @@ $ bun vitepress init
 
 
 
+
+
 ### 2.7 配置文件
 
 配置文件 (`.vitepress/config.js`) 让你能够自定义 VitePress 站点的各个方面，最基本的选项是站点的标题和描述：
@@ -210,8 +212,6 @@ $ bun vitepress dev docs
 运行打开`http://localhost:5173`，我们可以看到出现如下页面
 
 ![image-20240522145503806](https://gitee.com/xarzhi/picture/raw/master/img/image-20240522145503806.png)
-
-更多的命令行用法请参见 [CLI 参考](../reference/cli)。
 
 
 
@@ -587,7 +587,7 @@ jobs:
 
 ![image-20240522155435153](https://gitee.com/xarzhi/picture/raw/master/img/image-20240522155435153.png)
 
-在此之后，仓库中会多一此commit记录，并且在项目根目录中会新增一个`.github/workflows/deploy.yml`文件，以后每次push代码，都会自动部署更新我们的静态网站
+在此之后，仓库中会多一此commit记录，并且在项目根目录中会新增一个`.github/workflows/deploy.yml`文件，之后等待片刻再打开pages
 
 
 

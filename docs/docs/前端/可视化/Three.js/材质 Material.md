@@ -1,0 +1,304 @@
+# 材质 Material
+
+## 1.创建材质
+
+```js
+const material = new THREE.xxxMaterial(parameters:Object)
+```
+
+`parameters`为创建材质时赋予材质的基本属性
+
+## 2.材质类型
+
+设置材质类型的属性可以在创建属性时配置`parameters`，也可以通过材质对象`material.key=value`修改
+
+### Material
+
+**所有材质的抽象基类**。
+
+材质描述了对象objects的外观。它们的定义方式与渲染器无关， 因此，如果您决定使用不同的渲染器，不必重写材质。
+
+详细说明见：[Material – three.js docs (threejs.org)](https://threejs.org/docs/#api/zh/materials/Material)
+
+
+
+### LineBasicMaterial
+
+**基础线条材质类**，一种用于绘制线框样式几何体的材质。
+
+```js
+const material = new THREE.LineBasicMaterial({
+    color:Color,
+    fog:Boolean,
+    linewidth:Float.
+    linecap:String,
+    linejoin:String,
+    map:Texture
+})
+```
+
+- color：材质的颜色([Color](https://threejs.org/docs/index.html#api/zh/math/Color))，默认值为白色 (0xffffff)。
+- fog：：材质是否受雾影响。默认为**true**。
+- linewidth：控制线宽。默认值为 **1**。
+- linecap：定义线两端的样式。可选值为 'butt', 'round' 和 'square'。默认值为 'round'。
+- linejoin：定义线连接节点的样式。可选值为 'round', 'bevel' 和 'miter'。默认值为 'round'。
+- map：使用[纹理](https://threejs.org/docs/index.html#api/zh/textures/Texture)中的数据设置线条的颜色。
+
+
+
+### LineDashedMaterial
+
+**虚线材质类**，一种用于绘制虚线样式几何体的材质。
+
+```js
+const material = new THREE.LineDashedMaterial({
+	dashSize: number,
+	gapSize: number,
+	scale: number,
+    isLineDashedMaterial:Boolean
+});
+```
+
+`LineDashedMaterial`继承于`LineBasicMaterial`，拥有`LineBasicMaterial`类的基本属性，除此之外，以下是`LineDashedMaterial`类的属性
+
+- dashSize：虚线的大小，是指破折号和间隙之和。默认值为 **3**。
+- gapSize：间隙的大小，默认值为 **1**。
+- scale：线条中虚线部分的占比。默认值为 **1**。
+- isLineDashedMaterial：只读标志，用于检查给定对象是否为“线条虚线材料”类型。
+
+
+
+### MeshBasicMaterial
+
+**基础网格材质**，一个以简单着色（平面或线框）方式来绘制几何体的材质。这种材质不受光照的影响。
+
+```js
+const material = new THREE.MeshBasicMaterial({
+    aplhaMap: Texture,
+    aoMap: Texture,
+    aoMapIntensity: Float,
+    color: Color,
+    combine: Integer,
+    envMap: Texture,
+    fog: Boolean,
+    lightMap: Texture,
+    lightMapIntensity: Float,
+    map: Texture,
+    reflectivity: Float,
+    refractionRatio: Float,
+    specularMap: Texture,
+    wireframe: Boolean,
+    wireframeLinecap: String,
+    wireframeLinejoin: String,
+    wireframeLinewidth: Float
+});
+```
+
+- aplhaMap：alpha贴图是一张灰度纹理，用于控制整个表面的不透明度。（黑色：完全透明；白色：完全不透明）。 默认值为null。
+- aoMap：该纹理的红色通道用作环境遮挡贴图。默认值为null。aoMap需要第二组UV。
+- aoMapIntensity：环境遮挡效果的强度。默认值为1。零是不遮挡效果。
+- color：**材质的颜色**([Color](https://threejs.org/docs/index.html#api/zh/math/Color))，默认值为白色 (0xffffff)。
+- combine：如何将表面颜色的结果与环境贴图（如果有）结合起来。
+- envMap：环境贴图。默认值为null。
+- fog：材质是否受雾影响。默认为**true**。
+- lightMap：光照贴图。默认值为null。lightMap需要第二组UV。
+- lightMapIntensity：烘焙光的强度。默认值为1。
+- map：颜色贴图。可以选择包括一个alpha通道，通常与[.transparent](https://threejs.org/docs/index.html#api/zh/materials/Material.transparent) 或[.alphaTest](https://threejs.org/docs/index.html#api/zh/materials/Material.alphaTest)。默认为null。
+- reflectivity：环境贴图对表面的影响程度; 见[.combine](https://threejs.org/docs/index.html#api/zh/materials/MeshBasicMaterial.combine)。默认值为1，有效范围介于0（无反射）和1（完全反射）之间。
+- refractionRatio：空气的折射率（IOR）（约为1）除以材质的折射率。它与环境映射模式[THREE.CubeRefractionMapping](https://threejs.org/docs/index.html#api/zh/constants/Textures) 和[THREE.EquirectangularRefractionMapping](https://threejs.org/docs/index.html#api/zh/constants/Textures)一起使用。 The index of refraction (IOR) of air (approximately 1) divided by the index of refraction of the material. It is used with environment mapping mode [THREE.CubeRefractionMapping](https://threejs.org/docs/index.html#api/zh/constants/Textures). 折射率不应超过1。默认值为**0.98**。
+- specularMap：材质使用的高光贴图。默认值为null。
+- wireframe：**将几何体渲染为线框**。默认值为`false`（即渲染为平面多边形）。
+- wireframeLinecap：定义线两端的外观。可选值为 'butt'，'round' 和 'square'。默认为'round'。
+- wireframeLinejoin：定义线连接节点的样式。可选值为 'round', 'bevel' 和 'miter'。默认值为 'round'。
+- wireframeLinewidth：控制线框宽度。默认值为1。
+
+![mesjbasic](threeImgs/mesjbasic.gif)
+
+
+
+### MeshDepthMaterial
+
+**深度网格材质**，一种按深度绘制几何体的材质。深度基于相机远近平面。白色最近，黑色最远。
+
+```js
+const material = new THREE.MeshDepthMaterial({
+    aplhaMap: Texture,
+    depthPacking:Constant,
+    displacementMap:Texture,
+    displacementScale:Float,
+    displacementBias:Float,
+    map:Texture,
+    wireframe:Boolean,
+    wireframeLinewidth:Float
+})
+```
+
+- aplhaMap：alpha贴图是一张灰度纹理，用于控制整个表面的不透明度。（黑色：完全透明；白色：完全不透明）。 默认值为null。
+- depthPacking：depth packing的编码。默认为[BasicDepthPacking](https://threejs.org/docs/index.html#api/zh/constants/Textures)。
+- displacementMap：位移贴图会影响网格顶点的位置，与仅影响材质的光照和阴影的其他贴图不同，移位的顶点可以投射阴影，阻挡其他对象，以及充当真实的几何体。 位移纹理是指：网格的所有顶点被映射为图像中每个像素的值（白色是最高的），并且被重定位。
+- displacementScale：位移贴图对网格的影响程度（黑色是无位移，白色是最大位移）。如果没有设置位移贴图，则不会应用此值。默认值为1。
+- displacementBias：位移贴图在网格顶点上的偏移量。如果没有设置位移贴图，则不会应用此值。默认值为0。
+- map：颜色贴图。可以选择包括一个alpha通道，通常与[.transparent](https://threejs.org/docs/index.html#api/zh/materials/Material.transparent) 或[.alphaTest](https://threejs.org/docs/index.html#api/zh/materials/Material.alphaTest)。默认为null。
+- wireframe：将几何体渲染为线框。默认值为**false**（即渲染为平滑着色）。
+- wireframeLinewidth：控制线框宽度。默认值为1。
+
+![sdwgcz](threeImgs/sdwgcz.gif)
+
+
+
+### MeshDistanceMaterial
+
+详情见：[MeshDistanceMaterial – three.js docs (threejs.org)](https://threejs.org/docs/#api/zh/materials/MeshDistanceMaterial)
+
+
+
+### MeshLambertMaterial
+
+一种非光泽表面的材质，没有镜面高光。
+
+详情属性见：[MeshLambertMaterial – three.js docs (threejs.org)](https://threejs.org/docs/#api/zh/materials/MeshLambertMaterial)
+
+![lambert](threeImgs/lambert.gif)
+
+### MeshMatcapMaterial
+
+MeshMatcapMaterial 由一个材质捕捉（MatCap，或光照球（Lit Sphere））纹理所定义，其编码了材质的颜色与明暗。
+
+由于mapcap图像文件编码了烘焙过的光照，因此MeshMatcapMaterial 不对灯光作出反应。 它将会投射阴影到一个接受阴影的物体上(and shadow clipping works)，但不会产生自身阴影或是接受阴影。
+
+详情属性见：[MeshMatcapMaterial – three.js docs (threejs.org)](https://threejs.org/docs/#api/zh/materials/MeshMatcapMaterial)
+
+![matcap](threeImgs/matcap.gif)
+
+
+
+### MeshNormalMaterial
+
+一种**把法向量映射到RGB颜色的材质。**
+
+详情属性见：[MeshNormalMaterial – three.js docs (threejs.org)](https://threejs.org/docs/#api/zh/materials/MeshNormalMaterial)
+
+![normal](threeImgs/normal.gif)
+
+
+
+### MeshPhongMaterial
+
+一种用于**具有镜面高光的光泽表面的材质**。
+
+详情属性见：[MeshPhongMaterial – three.js docs (threejs.org)](https://threejs.org/docs/#api/zh/materials/MeshPhongMaterial)
+
+![phong](threeImgs/phong.gif)
+
+#### 1.构造函数
+
+```js
+MeshPhongMaterial( parameters : Object )
+```
+
+- parameters - (可选)用于定义材质外观的对象，具有一个或多个属性。 材质的任何属性都可以从此处传入(包括从[Material](https://threejs.org/docs/index.html#api/zh/materials/Material)继承的任何属性)。
+
+属性color例外，其可以作为十六进制字符串传递，默认情况下为 **0xffffff**（白色），内部调用[Color.set](https://threejs.org/docs/index.html#api/zh/math/Color.set)(color)。
+
+
+
+#### 2.属性
+
+| 属性名             | 数据类型                                                     | 默认值                  | 描述                                                         |
+| ------------------ | ------------------------------------------------------------ | ----------------------- | ------------------------------------------------------------ |
+| color              | [Color](https://threejs.org/docs/index.html#api/zh/math/Color) | 0xffffff                | 材质的颜色                                                   |
+| fog                | Boolean                                                      | true                    | 材质是否受雾影响                                             |
+| shininess          | Float                                                        | 30                      | 高亮的程度，越高的值越闪亮                                   |
+| specular           | [Color](https://threejs.org/docs/index.html#api/zh/math/Color) | 0x111111                | 材质的**光泽度**和**光泽的颜色**                             |
+| wireframe          | Boolean                                                      | false                   | 将几何体渲染为线框。                                         |
+| wireframeLinecap   | String                                                       | round                   | 定义线两端的外观。<br/>可选值为 'butt'，'round' 和 'square'。 |
+| wireframeLinejoin  | String                                                       | round                   | 定义线连接节点的样式。<br/>可选值为 'round', 'bevel' 和 'miter' |
+| wireframeLinewidth | Float                                                        | 1                       | 控制线框宽度                                                 |
+| alphaMap           | [Texture](https://threejs.org/docs/index.html#api/zh/textures/Texture) | null                    | alpha贴图是一张灰度纹理，用于控制整个表面的不透明度。<br/>（黑色：完全透明；白色：完全不透明） |
+| aoMap              | [Texture](https://threejs.org/docs/index.html#api/zh/textures/Texture) | null                    | 该纹理的红色通道用作环境遮挡贴图<br/>aoMap需要第二组UV。     |
+| aoMapIntensity     | Float                                                        | 1                       | 环境遮挡效果的强度。零是不遮挡效果。                         |
+| bumpMap            | [Texture](https://threejs.org/docs/index.html#api/zh/textures/Texture) | --                      | 用于创建凹凸贴图的纹理。黑色和白色值映射到与光照相关的感知深度。凹凸实际上不会影响对象的几何形状，只影响光照。如果定义了法线贴图，则将忽略该贴图。 |
+| bumpScale          | Float                                                        | 1                       | 凹凸贴图会对材质产生多大影响。典型范围是0-1                  |
+| combine            | Integer                                                      | THREE.MultiplyOperation | 如何将表面颜色的结果与环境贴图（如果有）结合起来。选项为<br/>[THREE.MultiplyOperation](https://threejs.org/docs/index.html#api/zh/constants/Materials)（默认值），<br/>[THREE.MixOperation](https://threejs.org/docs/index.html#api/zh/constants/Materials)，<br/> [THREE.AddOperation](https://threejs.org/docs/index.html#api/zh/constants/Materials)。<br/>如果选择多个，则使用[.reflectivity](https://threejs.org/docs/index.html#api/zh/materials/MeshPhongMaterial.reflectivity)在两种颜色之间进行混合。 |
+| displacementMap    | [Texture](https://threejs.org/docs/index.html#api/zh/textures/Texture) | --                      | 位移贴图会影响网格顶点的位置，与仅影响材质的光照和阴影的其他贴图不同，移位的顶点可以投射阴影，阻挡其他对象， 以及充当真实的几何体。位移纹理是指：网格的所有顶点被映射为图像中每个像素的值（白色是最高的），并且被重定位。 |
+|                    |                                                              |                         |                                                              |
+|                    |                                                              |                         |                                                              |
+|                    |                                                              |                         |                                                              |
+
+
+
+
+
+### MeshPhysicalMaterial
+
+[MeshStandardMaterial](https://threejs.org/docs/index.html#api/zh/materials/MeshStandardMaterial)的扩展，提供了更高级的基于物理的渲染属性：
+
+- **Clearcoat:** 有些类似于车漆，碳纤，被水打湿的表面的材质需要在面上再增加一个透明的，具有一定反光特性的面。而且这个面说不定有一定的起伏与粗糙度。Clearcoat可以在不需要重新创建一个透明的面的情况下做到类似的效果。
+- **基于物理的透明度**:[.opacity](https://threejs.org/docs/index.html#api/zh/materials/Material.opacity)属性有一些限制:在透明度比较高的时候，反射也随之减少。使用基于物理的透光性[.transmission](https://threejs.org/docs/index.html#api/zh/materials/MeshPhysicalMaterial.transmission)属性可以让一些很薄的透明表面，例如玻璃，变得更真实一些。
+- **高级光线反射:** 为非金属材质提供了更多更灵活的光线反射。
+- **Sheen:** Can be used for representing cloth and fabric materials.
+
+详情属性见：[MeshPhysicalMaterial – three.js docs (threejs.org)](https://threejs.org/docs/#api/zh/materials/MeshPhysicalMaterial)
+
+![physical](threeImgs/physical.gif)
+
+
+
+### MeshStandardMaterial
+
+一种基于物理的标准材质，使用Metallic-Roughness工作流程。
+
+详情属性见：[MeshStandardMaterial – three.js docs (threejs.org)](https://threejs.org/docs/#api/zh/materials/MeshStandardMaterial)
+
+![standard](threeImgs/standard.gif)
+
+
+
+### MeshToonMaterial
+
+一种实现卡通着色的材质。
+
+详情属性见：[MeshToonMaterial – three.js docs (threejs.org)](https://threejs.org/docs/#api/zh/materials/MeshToonMaterial)
+
+![toon](threeImgs/toon.gif)
+
+
+
+### PointsMaterial
+
+[Points](https://threejs.org/docs/index.html#api/zh/objects/Points)使用的默认材质。
+
+详情属性见：[PointsMaterial – three.js docs (threejs.org)](https://threejs.org/docs/#api/zh/materials/PointsMaterial)
+
+
+
+### RawShaderMaterial
+
+此类的工作方式与[ShaderMaterial](https://threejs.org/docs/index.html#api/zh/materials/ShaderMaterial)类似，不同之处在于内置的uniforms和attributes的定义不会自动添加到GLSL shader代码中。
+
+详情属性见：[RawShaderMaterial – three.js docs (threejs.org)](https://threejs.org/docs/#api/zh/materials/RawShaderMaterial)
+
+
+
+### ShaderMaterial
+
+使用自定义shader渲染的材质。 shader是一个用[GLSL](https://www.khronos.org/files/opengles_shading_language.pdf)编写的小程序 ，在GPU上运行。 您可能需要使用自定义shader，如果你要：
+
+详情属性见：[ShaderMaterial – three.js docs (threejs.org)](https://threejs.org/docs/#api/zh/materials/ShaderMaterial)
+
+
+
+### ShadowMaterial
+
+阴影材质，此材质可以接收阴影，但在其他方面完全透明。
+
+详情属性见：[ShadowMaterial – three.js docs (threejs.org)](https://threejs.org/docs/#api/zh/materials/ShadowMaterial)
+
+
+
+### SpriteMaterial
+
+点精灵材质(SpriteMaterial)，一种使用[Sprite](https://threejs.org/docs/index.html#api/zh/objects/Sprite)的材质。
+
+详情属性见：[SpriteMaterial – three.js docs (threejs.org)](https://threejs.org/docs/#api/zh/materials/SpriteMaterial)
+

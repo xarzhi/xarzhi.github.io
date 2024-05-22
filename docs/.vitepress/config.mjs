@@ -64,6 +64,10 @@ export default defineConfig({
 				lazyLoading: true,
 			},
 		},
-		socialLinks: [{ icon: 'github', link: 'https://github.com/vuejs/vitepress' }],
+		socialLinks: [{ icon: 'github', link: 'https://github.com/xarzhi/xarzhi.github.io' }],
+		footer: {
+			message: 'MIT Licensed',
+			copyright: 'Copyright © 2024-present xarzhi',
+		}
 	},
 })

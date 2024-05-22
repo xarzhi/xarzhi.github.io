@@ -1,8 +1,6 @@
 /* var.css */
 :root {
-	--vp-c-brand-1: #18794e;
-	--vp-c-brand-2: #299764;
-	--vp-c-brand-3: #30a46c;
+	--vp-c-brand-3: #0091ff;
 	--vp-custom-block-tip-bg: var(--vp-c-green-soft);
 }
 
@@ -13,7 +11,7 @@
 }
 
 h1 {
-	background: -webkit-linear-gradient(0deg, #ff00d4, #3700ff, #ffcc00, #ff0066);
+	background: -webkit-linear-gradient(0deg, #3700ff 5%, #ff00d4 10%, #ffcc00 25%, #ff0066 50%);
 	background-clip: text;
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
@@ -25,21 +23,22 @@ h1 {
 
 /* 警告框 */
 .custom-block.warning {
-	/* border-color: #d97706; */
+	border-color: #d97706; 
 	border-color: var(--vp-c-yellow-2);
 }
 
 /* 危险框 */
 .custom-block.danger {
-	/* border-color: #f43f5e; */
-	border-color: var(--vp-c-red-2);
+	border-color: #f43f5e;
+	/* border-color: var(--vp-c-red-2); */
 }
 .vp-doc blockquote {
-	border-radius: 5px;
-	padding: 10px 16px;
-	background-color: var(--vp-badge-danger-bg);
+	/* border-radius: 3px; */
+	/* padding: 10px 16px; */
+	/* background-color: var(--vp-badge-danger-bg); */
+	background-color: rgba(128, 128, 128, 0.1);
 	position: relative;
-	border-left: 4px solid #e95f59;
+	border-left: 2px solid gray;
 }
 
 .medium-zoom-overlay {
@@ -49,7 +48,43 @@ h1 {
 .medium-zoom-image {
 	z-index: 9999 !important; /* 给的值是21，但是实测盖不住，直接999 */
 }
+.VPDoc .container {
+	margin: 0 !important;
+}
+@media (min-width: 960px) {
+	.VPDoc:not(.has-sidebar) .content {
+		max-width: 1552px !important;
+	}
+}
+.VPDoc.has-aside .content-container {
+	max-width: 1488px !important;
+}
+@media (min-width: 960px) {
+	.VPDoc:not(.has-sidebar) .container {
+		display: flex;
+		justify-content: center;
+		max-width: 1562px !important;
+	}
+}
+.aside-container {
+	position: fixed;
+	top: 0;
+	padding-top: calc(
+		var(--vp-nav-height) + var(--vp-layout-top-height, 0px) + var(--vp-doc-top-height, 0px) + 10px
+	) !important;
+	width: 224px;
+	height: 100vh;
+	overflow-x: hidden;
+	overflow-y: auto;
+	scrollbar-width: none;
+}
 
+/* 自定义h2的间距 */
+.vp-doc h2 {
+	margin: 0px 0 16px;
+	padding-top: 24px;
+	border: none;
+}
 /* @media (min-width: 1440px) {
 	.VPSidebar[data-v-6750ea26] {
 		padding-left: max(32px, calc((100% - (var(--vp-layout-max-width) - -185px)) / 2));
@@ -59,4 +94,58 @@ h1 {
 		padding-left: max(32px, calc((100% - (var(--vp-layout-max-width) - -185px)) / 2));
 		width: calc((100% - (var(--vp-layout-max-width) - 64px)) / 2 + var(--vp-sidebar-width) - 266px);
 	}
+} */
+/* 标题 */
+:root {
+	/* 标题 */
+	--vp-home-hero-name-color: transparent;
+	--vp-home-hero-name-background: linear-gradient(135deg, #664df5 10%, #fbff00 100%);
+
+	/* 图标背景 */
+	--vp-home-hero-image-background-image: linear-gradient(135deg, #1900ff 10%, #ffee00 100%);
+	--vp-home-hero-image-filter: blur(150px);
+}
+
+.VPHomeFeatures {
+	margin-top: 80px;
+}
+.VPHomeFeatures .VPLink {
+	box-shadow: 1px 1px 5px 5px #ddd;
+	box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+}
+
+/* .VPHomeFeatures .VPLink::before {
+	content: '';
+	z-index: -1;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: linear-gradient(-45deg, #ff3d00 0%, #0400ff 100%);
+	transform: translate3d(0px, 20px, 0) scale(0.95);
+	filter: blur(20px);
+	opacity: var(0.7);
+	transition: opacity 0.3s;
+	border-radius: inherit;
+} */
+
+/* .VPHomeFeatures .VPLink::after {
+	content: '';
+	z-index: -1;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: inherit;
+	border-radius: inherit;
+} */
+
+/* body {
+	background: url('https://xarzhi.gitee.io/img/bg/bg13.jpg') 0% 0% / cover no-repeat fixed;
+} */
+/* .main {
+	display: flex;
+	justify-content: center;
 } */

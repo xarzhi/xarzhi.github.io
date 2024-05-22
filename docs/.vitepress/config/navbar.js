@@ -61,20 +61,6 @@ export default [
 		text: '学习git',
 		link: '/docs/学习git/git',
 	},
-	// {
-	// 	text: '可视化',
-	// 	link: '/可视化/Canvas/01.认识Canvas',
-	// 	items: [
-	// 		{ text: 'Canvas', link: '/可视化/Canvas/01.认识Canvas' },
-	// 		{ text: 'WebGl', link: '/可视化/WebGl/01.WebGL基础' },
-	// 		{ text: 'Three.js', link: '/可视化/Three.js/01.基础用法' },
-	// 	],
-	// },
-	// {
-	//   text: "面试题",
-	//   link: "/面试题/01.Html+Css面试题",
-	// },
-
 	{
 		text: '收藏网址',
 		link: '/docs/收藏的网站/index',

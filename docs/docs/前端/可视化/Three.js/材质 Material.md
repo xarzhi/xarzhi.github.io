@@ -1,4 +1,4 @@
-# 材质 Material
+质 Material
 
 ## 1.创建材质
 
@@ -112,7 +112,7 @@ const material = new THREE.MeshBasicMaterial({
 - wireframeLinejoin：定义线连接节点的样式。可选值为 'round', 'bevel' 和 'miter'。默认值为 'round'。
 - wireframeLinewidth：控制线框宽度。默认值为1。
 
-![mesjbasic](threeImgs/mesjbasic.gif)
+
 
 
 
@@ -142,7 +142,7 @@ const material = new THREE.MeshDepthMaterial({
 - wireframe：将几何体渲染为线框。默认值为**false**（即渲染为平滑着色）。
 - wireframeLinewidth：控制线框宽度。默认值为1。
 
-![sdwgcz](threeImgs/sdwgcz.gif)
+
 
 
 
@@ -158,7 +158,7 @@ const material = new THREE.MeshDepthMaterial({
 
 详情属性见：[MeshLambertMaterial – three.js docs (threejs.org)](https://threejs.org/docs/#api/zh/materials/MeshLambertMaterial)
 
-![lambert](threeImgs/lambert.gif)
+
 
 ### MeshMatcapMaterial
 
@@ -168,7 +168,7 @@ MeshMatcapMaterial 由一个材质捕捉（MatCap，或光照球（Lit Sphere）
 
 详情属性见：[MeshMatcapMaterial – three.js docs (threejs.org)](https://threejs.org/docs/#api/zh/materials/MeshMatcapMaterial)
 
-![matcap](threeImgs/matcap.gif)
+
 
 
 
@@ -178,7 +178,7 @@ MeshMatcapMaterial 由一个材质捕捉（MatCap，或光照球（Lit Sphere）
 
 详情属性见：[MeshNormalMaterial – three.js docs (threejs.org)](https://threejs.org/docs/#api/zh/materials/MeshNormalMaterial)
 
-![normal](threeImgs/normal.gif)
+
 
 
 
@@ -188,7 +188,7 @@ MeshMatcapMaterial 由一个材质捕捉（MatCap，或光照球（Lit Sphere）
 
 详情属性见：[MeshPhongMaterial – three.js docs (threejs.org)](https://threejs.org/docs/#api/zh/materials/MeshPhongMaterial)
 
-![phong](threeImgs/phong.gif)
+
 
 #### 1.构造函数
 
@@ -240,8 +240,6 @@ MeshPhongMaterial( parameters : Object )
 
 详情属性见：[MeshPhysicalMaterial – three.js docs (threejs.org)](https://threejs.org/docs/#api/zh/materials/MeshPhysicalMaterial)
 
-![physical](threeImgs/physical.gif)
-
 
 
 ### MeshStandardMaterial
@@ -249,8 +247,6 @@ MeshPhongMaterial( parameters : Object )
 一种基于物理的标准材质，使用Metallic-Roughness工作流程。
 
 详情属性见：[MeshStandardMaterial – three.js docs (threejs.org)](https://threejs.org/docs/#api/zh/materials/MeshStandardMaterial)
-
-![standard](threeImgs/standard.gif)
 
 
 
@@ -260,7 +256,7 @@ MeshPhongMaterial( parameters : Object )
 
 详情属性见：[MeshToonMaterial – three.js docs (threejs.org)](https://threejs.org/docs/#api/zh/materials/MeshToonMaterial)
 
-![toon](threeImgs/toon.gif)
+
 
 
 

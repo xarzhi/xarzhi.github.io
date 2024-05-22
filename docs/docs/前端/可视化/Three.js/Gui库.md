@@ -66,7 +66,7 @@ const gui = new GUI();
 
 `gui`元素默认添加到`body`元素下
 
-![image-20231015104009053](threeImgs/image-20231015104009053.png)
+
 
 
 
@@ -122,7 +122,7 @@ gui.add(obj, 'y', 0, 50);
 gui.add(obj, 'z', 0, 60);
 ```
 
-![image-20231015105915154](threeImgs/image-20231015105915154.png)
+
 
 
 
@@ -160,7 +160,7 @@ gui.add( obj, 'hasMax' ).max( 100 );
 gui.add( obj, 'hasStep' ).step( 10 );
 ```
 
-![image-20231015124812182](threeImgs/image-20231015124812182.png)
+
 
 
 
@@ -177,9 +177,7 @@ gui.add( obj, 'size', [ 'Small', 'Medium', 'Large' ] )
 gui.add( obj, 'speed', { Slow: 0.1, Normal: 1, Fast: 5 } )
 ```
 
-![image-20231015124940025](threeImgs/image-20231015124940025.png)
 
-![image-20231015124950553](threeImgs/image-20231015124950553.png)
 
 
 
@@ -328,8 +326,6 @@ ambientLightFolder
 });
 ```
 
-![image-20231015130135475](threeImgs/image-20231015130135475.png)
-
 
 
 ### 3.9 更改事件
@@ -377,8 +373,6 @@ gui.add( obj, 'savePreset' );
 
 const loadButton = gui.add( obj, 'loadPreset' ).disable();
 ```
-
-![image-20231015130541584](threeImgs/image-20231015130541584.png)
 
 
 
@@ -636,7 +630,7 @@ gui.title(title)
 
 - title：`String`，gui的标题
 
-![image-20231015142200376](threeImgs/image-20231015142200376.png)
+
 
 
 
@@ -868,7 +862,7 @@ controller.name(name)
 controller.name('标题')
 ```
 
-![image-20231015171939194](threeImgs/image-20231015171939194.png)
+
 
 
 

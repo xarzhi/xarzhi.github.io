@@ -61,8 +61,4 @@ export default [
 		text: '学习git',
 		link: '/docs/学习git/git',
 	},
-	{
-		text: '收藏网址',
-		link: '/docs/收藏的网站/index',
-	},
 ]

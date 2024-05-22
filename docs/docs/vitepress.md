@@ -118,8 +118,6 @@ $ bun vitepress init
 
 
 
-
-
 ### 2.7 配置文件
 
 配置文件 (`.vitepress/config.js`) 让你能够自定义 VitePress 站点的各个方面，最基本的选项是站点的标题和描述：
@@ -608,3 +606,11 @@ jobs:
 效果
 
 ![image-20240522160815725](https://gitee.com/xarzhi/picture/raw/master/img/image-20240522160815725.png)
+
+
+
+
+
+之后进入`Actions`界面，会显示每次的部署记录，若部署失败，可以点击进入查看失败原因
+
+![image-20240522161824842](https://gitee.com/xarzhi/picture/raw/master/img/image-20240522161824842.png)

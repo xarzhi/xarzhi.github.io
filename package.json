@@ -19,5 +19,7 @@
     "vitepress": "^1.2.0",
     "vue": "^3.4.27"
   },
-  "dependencies": {}
+  "dependencies": {
+    "vitepress-markdown-timeline": "^1.2.1"
+  }
 }

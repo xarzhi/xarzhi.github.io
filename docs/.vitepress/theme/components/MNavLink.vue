@@ -2,31 +2,31 @@
 import { computed } from 'vue'
 import { withBase } from 'vitepress'
 import { slugify } from '@mdit-vue/shared'
-const props = defineProps(['noIcon','icon','badge','title','desc','link'])
+const props = defineProps(['noIcon', 'icon', 'badge', 'title', 'desc', 'link'])
 
 const formatTitle = computed(() => {
-  if (!props.title) {
-    return ''
-  }
-  return slugify(props.title)
+	if (!props.title) {
+		return ''
+	}
+	return slugify(props.title)
 })
 
 const svg = computed(() => {
-  if (typeof props.icon === 'object') return props.icon.svg
-  return ''
+	if (typeof props.icon === 'object') return props.icon.svg
+	return ''
 })
 
 const formatBadge = computed(() => {
-  if (typeof props.badge === 'string') {
-    return { text: props.badge, type: 'info' }
-  }
-  return props.badge
+	if (typeof props.badge === 'string') {
+		return { text: props.badge, type: 'info' }
+	}
+	return props.badge
 })
 </script>
 
 <template>
 	<a v-if="link" class="m-nav-link" :href="link" target="_blank" rel="noreferrer">
-		<article class="box" :class="{ 'has-badge': formatBadge }">
+		<article class="box" :class="{ 'has-badge': formatBadge }" :desc="desc">
 			<div class="box-header">
 				<template v-if="!noIcon">
 					<div v-if="svg" class="icon" v-html="svg"></div>
@@ -49,13 +49,14 @@ const formatBadge = computed(() => {
 	--m-nav-icon-box-size: 50px;
 	--m-nav-icon-size: 45px;
 	--m-nav-box-gap: 12px;
-
 	display: block;
 	border: 1px solid var(--vp-c-bg-soft);
 	border-radius: 12px;
 	height: 100%;
 	background-color: var(--vp-c-bg-soft);
 	transition: all 0.25s;
+	position: relative;
+
 	&:hover {
 		box-shadow: var(--vp-shadow-2);
 		border-color: var(--vp-c-brand);
@@ -77,6 +78,45 @@ const formatBadge = computed(() => {
 		&-header {
 			display: flex;
 			align-items: center;
+		}
+		&::before {
+			content: attr(desc);
+			position: absolute;
+			width: 260px;
+			height: auto;
+			background: var(--tip-bg);
+			color: var(--tip-text);
+			display: none;
+			padding: 5px;
+			box-sizing: border-box;
+			border-radius: 8px;
+			font-size: 14px;
+			top: 0;
+			left: 50%;
+			transform: translate(-50%, calc(-100% - 20px));
+		}
+		&::after {
+			content: '';
+			position: absolute;
+			width: 0;
+			height: 0;
+			top: -3px;
+			border: 10px solid var(--tip-bg);
+			color: var(--tip-text);
+			border-right: 10px solid transparent;
+			border-left: 10px solid transparent;
+			border-bottom: 10px solid transparent;
+			left: 50%;
+			transform: translate(-50%, calc(-100% + 3px));
+			display: none;
+		}
+		&:hover {
+			&::before {
+				display: block;
+			}
+			&::after {
+				display: block;
+			}
 		}
 	}
 

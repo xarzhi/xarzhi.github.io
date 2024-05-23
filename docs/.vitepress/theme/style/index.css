@@ -2,12 +2,18 @@
 :root {
 	--vp-c-brand-3: #0091ff;
 	--vp-custom-block-tip-bg: var(--vp-c-green-soft);
+	--tip-bg: rgba(0, 0, 0, 0.8);
+	--tip-text: whitesmoke;
+	--tip-shadow: #333;
 }
 
 .dark {
 	--vp-c-brand-1: #3dd68c;
 	--vp-c-brand-2: #30a46c;
 	--vp-c-brand-3: #298459;
+	--tip-bg: #454753;
+	--tip-text: #e0e0d8;
+	--tip-shadow: #fff;
 }
 
 h1 {
@@ -23,7 +29,7 @@ h1 {
 
 /* 警告框 */
 .custom-block.warning {
-	border-color: #d97706; 
+	border-color: #d97706;
 	border-color: var(--vp-c-yellow-2);
 }
 
@@ -85,16 +91,6 @@ h1 {
 	padding-top: 24px;
 	border: none;
 }
-/* @media (min-width: 1440px) {
-	.VPSidebar[data-v-6750ea26] {
-		padding-left: max(32px, calc((100% - (var(--vp-layout-max-width) - -185px)) / 2));
-		width: calc((100% - (var(--vp-layout-max-width) - 64px)) / 2 + var(--vp-sidebar-width) - 266px);
-	}
-	.VPNavBar.has-sidebar .title[data-v-cf6e7c5e] {
-		padding-left: max(32px, calc((100% - (var(--vp-layout-max-width) - -185px)) / 2));
-		width: calc((100% - (var(--vp-layout-max-width) - 64px)) / 2 + var(--vp-sidebar-width) - 266px);
-	}
-} */
 /* 标题 */
 :root {
 	/* 标题 */
@@ -114,38 +110,17 @@ h1 {
 	box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
 }
 
-/* .VPHomeFeatures .VPLink::before {
-	content: '';
-	z-index: -1;
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	background: linear-gradient(-45deg, #ff3d00 0%, #0400ff 100%);
-	transform: translate3d(0px, 20px, 0) scale(0.95);
-	filter: blur(20px);
-	opacity: var(0.7);
-	transition: opacity 0.3s;
-	border-radius: inherit;
-} */
-
-/* .VPHomeFeatures .VPLink::after {
-	content: '';
-	z-index: -1;
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	background: inherit;
-	border-radius: inherit;
-} */
-
-/* body {
-	background: url('https://xarzhi.gitee.io/img/bg/bg13.jpg') 0% 0% / cover no-repeat fixed;
-} */
-/* .main {
-	display: flex;
-	justify-content: center;
-} */
+.VPDoc:not(.has-sidebar) .container{
+	width: 100%;
+	padding-left: 200px;
+}
+.VPDoc:not(.has-sidebar) .container .aside {
+	order: 1;
+	/* padding-left: 100px; */
+	max-width: 224px;
+}
+.VPDoc:not(.has-sidebar) .container .content {
+	flex: 1;
+	/* max-width: 100% !important;
+	margin-left: 100px; */
+}

@@ -7,12 +7,14 @@ import { useRoute } from 'vitepress'
 import { h } from 'vue'
 import { useData } from 'vitepress'
 import MNavLinks from './components/MNavLinks.vue'
+import GoTop from './components/GoTop.vue'
 export default {
 	extends: DefaultTheme,
 	enhanceApp({ app }) {
 		// 注册全局组件
 		app.component('Layout', Layout)
 		app.component('MNavLinks', MNavLinks)
+		app.component('GoTop', GoTop)
 	},
 	Layout: () => {
 		const props = {}
@@ -21,7 +23,7 @@ export default {
 		if (frontmatter.value?.layoutClass) {
 			props.class = frontmatter.value.layoutClass
 		}
-		return h(DefaultTheme.Layout, props)
+		return h(Layout, props)
 	},
 	setup() {
 		const route = useRoute()

@@ -1,6 +1,6 @@
 .m-nav-layout {
 	/* 覆盖全局的 vp-layout-max-width（仅当前页面使用） */
-	--vp-layout-max-width: 1660px;
+	--vp-layout-max-width: 1440px;
 
 	/* layout 样式 */
 	.container {
@@ -9,11 +9,13 @@
 	.content-container,
 	.content {
 		max-width: 100% !important;
+		// margin-left: 100px;
 	}
 
 	/* aside 样式 */
 	.aside {
-		padding-left: 0;
+		order: 1;
+		// padding-left: 100px;
 		max-width: 224px;
 	}
 

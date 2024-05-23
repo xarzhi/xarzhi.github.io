@@ -5,7 +5,6 @@ import { useData } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import { nextTick, provide } from 'vue'
 const { isDark } = useData()
-console.log(useData())
 const enableTransitions = () =>
 	'startViewTransition' in document && window.matchMedia('(prefers-reduced-motion: no-preference)').matches
 

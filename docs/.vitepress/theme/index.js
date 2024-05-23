@@ -8,7 +8,7 @@ import { h } from 'vue'
 import { useData } from 'vitepress'
 import MNavLinks from './components/MNavLinks.vue'
 import GoTop from './components/GoTop.vue'
-import './utils/mouse-click-particles'
+import mouseClick from './utils/mouse-click-particles'
 export default {
 	extends: DefaultTheme,
 	enhanceApp({ app }) {
@@ -27,6 +27,7 @@ export default {
 		return h(Layout, props)
 	},
 	setup() {
+		mouseClick(document)
 		const route = useRoute()
 		const initZoom = () => {
 			// mediumZoom('[data-zoomable]', { background: 'var(--vp-c-bg)' }); // 默认

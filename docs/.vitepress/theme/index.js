@@ -8,6 +8,7 @@ import { h } from 'vue'
 import { useData } from 'vitepress'
 import MNavLinks from './components/MNavLinks.vue'
 import GoTop from './components/GoTop.vue'
+import './utils/mouse-click-particles'
 export default {
 	extends: DefaultTheme,
 	enhanceApp({ app }) {

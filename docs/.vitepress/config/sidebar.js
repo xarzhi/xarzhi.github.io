@@ -37,9 +37,10 @@ const sidebar = {
 	'/docs/前端/可视化/Canvas/': getItems('/docs/前端/可视化/Canvas'),
 	'/docs/前端/可视化/WebGL/': getItems('/docs/前端/可视化/WebGL'),
 	'/docs/前端/可视化/Three.js/': getItems('/docs/前端/可视化/Three.js'),
-	'/docs/C++/': getItems('/docs/后端/C++'),
+	'/docs/后端/C++/': getItems('/docs/后端/C++'),
 	'/docs/前端/小程序/': getItems('/docs/前端/小程序'),
 	'/docs/后端/Node.js/': getItems('/docs/后端/Node.js/'),
+	'/docs/前端/一些问题/': getItems('/docs/前端/一些问题/'),
 }
 
 for (let key in sidebar) {

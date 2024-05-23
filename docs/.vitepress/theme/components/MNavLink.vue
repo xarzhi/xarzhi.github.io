@@ -45,6 +45,9 @@ const formatBadge = computed(() => {
 </template>
 
 <style lang="scss" scoped>
+a {
+	text-decoration: none;
+}
 .m-nav-link {
 	--m-nav-icon-box-size: 50px;
 	--m-nav-icon-size: 45px;

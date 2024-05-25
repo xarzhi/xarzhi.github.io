@@ -33,11 +33,6 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
 		}
 	)
 } )
-fetch('https://gitee.com/xarzhi/my-json/raw/master/test.json')
-	.then(res => res.json())
-	.then(res => {
-		console.log(res)
-	})
 
 </script>
 

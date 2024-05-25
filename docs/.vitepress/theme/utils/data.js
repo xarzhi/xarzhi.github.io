@@ -21,12 +21,6 @@ export const NAV_DATA = [
 				desc: '菜鸟工具 - 不止于工具',
 			},
 			{
-				title: 'Can I Use',
-				link: 'https://caniuse.com/',
-				icon: 'https://caniuse.com/img/favicon-128.png',
-				desc: '查看Api在各大浏览器的兼容性',
-			},
-			{
 				icon: 'https://tinypng.com/images/apple-touch-icon.png',
 				title: 'TinyPNG',
 				desc: '在线图片压缩工具',

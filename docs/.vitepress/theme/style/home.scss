@@ -1,0 +1,35 @@
+.VPHero {
+	padding:0 !important;
+	margin-top: 0 !important;
+}
+.VPContent{
+	padding: 0;
+	margin: 0;
+}
+.VPHomeHero {
+	.container {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		.main {
+			order: 2 !important;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+		}
+
+		.image {
+			order: 1;
+			width: 400px;
+			height: 400px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			.image-container {
+				transform: translate(0) !important;
+			}
+		}
+	}
+}

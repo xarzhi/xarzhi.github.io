@@ -1,5 +1,6 @@
 import DefaultTheme from 'vitepress/theme'
 import './style/index.css'
+import './style/home.scss'
 import Layout from './Layout.vue'
 import mediumZoom from 'medium-zoom'
 import { onMounted, watch, nextTick } from 'vue'
@@ -8,6 +9,7 @@ import { h } from 'vue'
 import { useData } from 'vitepress'
 import MNavLinks from './components/MNavLinks.vue'
 import GoTop from './components/GoTop.vue'
+import Home from './components/Home.vue'
 import mouseClick from './utils/mouse-click-particles'
 export default {
 	extends: DefaultTheme,
@@ -16,6 +18,7 @@ export default {
 		app.component('Layout', Layout)
 		app.component('MNavLinks', MNavLinks)
 		app.component('GoTop', GoTop)
+		app.component('Home', Home)
 	},
 	Layout: () => {
 		const props = {}

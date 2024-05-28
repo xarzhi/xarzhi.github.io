@@ -1,0 +1,82 @@
+<template>
+	<div class="home">
+		<div class="image">
+			<Circle/>
+		</div>
+		<div class="content">
+			<div class="title">Fade away</div>
+			<div class="desc">花有重开日，人无再少年</div>
+			<div class="btns">
+				<button class="btn1">VitePress</button>
+				<button class="btn2">网址导航</button>
+			</div>
+		</div>
+	</div>
+</template>
+
+<script setup>
+import Circle from './Circle.vue';
+</script>
+
+<style lang="scss" scoped>
+.home {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	.image {
+		width: 100%;
+		height: 500px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.content {
+		height: 200px;
+		.title {
+			background: var(--vp-home-hero-name-background);
+			-webkit-background-clip: text;
+			background-clip: text;
+			-webkit-text-fill-color: var(--vp-home-hero-name-color);
+			height: 70px;
+			line-height: 64px;
+			font-weight: 600;
+			font-size: 56px;
+		}
+		.desc {
+			font-size: 24px;
+			line-height: 36px;
+			color: var(--vp-c-text-2);
+		}
+		.btns {
+			display: flex;
+			justify-content: space-around;
+			margin-top: 10px;
+			button {
+				width: 106px;
+				border-radius: 8px;
+				height: 40px;
+				border-radius: 20px;
+				font-size: 14px;
+				transition: color 0.25s, border-color 0.25s, background-color 0.25s;
+				font-family: var(--vp-font-family-base);
+				font-weight: 600;
+				font-synthesis: style;
+				text-rendering: optimizeLegibility;
+				-webkit-font-smoothing: antialiased;
+			}
+			.btn1 {
+				color: var(--vp-button-brand-text);
+				border-color: var(--vp-button-brand-border);
+				background-color: var(--vp-button-brand-bg);
+			}
+			.btn2 {
+				border-color: var(--vp-button-alt-border);
+				color: var(--vp-button-alt-text);
+				background-color: var(--vp-button-alt-bg);
+			}
+		}
+	}
+}
+</style>

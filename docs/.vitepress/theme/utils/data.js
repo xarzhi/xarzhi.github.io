@@ -15,6 +15,12 @@ export const NAV_DATA = [
 				desc: '在线工具箱 - 要你命 3000',
 			},
 			{
+				title: 'Json.cn',
+				link: 'https://www.json.cn/',
+				icon: 'https://static.json.cn/r/img/favicon/favicon.ico',
+				desc: '一款在线工具箱，可以Json在线转换、在线运行各种主流代码、代码格式化、图片处理、文本工具、网络工具等等',
+			},
+			{
 				title: '菜鸟工具',
 				link: 'https://c.runoob.com/',
 				icon: 'https://www.jyshare.com/favicon.ico',

@@ -8,7 +8,6 @@ import * as THREE from '../utils/three'
 const init = () => {
 	// 创建一个场景
 	const scene = new THREE.Scene()
-	scene.background = new THREE.Color('transparent')
 	// 创建一个相机
 	const camera = new THREE.PerspectiveCamera(40, innerWidth / innerHeight, 1, 2000)
 	// 设置相机的位置
@@ -17,6 +16,7 @@ const init = () => {
 	const renderer = new THREE.WebGLRenderer({
 		antialias: true,
 	})
+	renderer.setClearColor(0x000000, 0)
 	//设置渲染尺寸
 	renderer.setSize(800, 500)
 	const box = document.querySelector('.circle_box')
@@ -59,7 +59,7 @@ const init = () => {
 
 	let middle = innerWidth / 2
 	window.onresize = function () {
-		renderer.setSize(window.innerWidth, window.innerHeight)
+		renderer.setSize(800, 500)
 		camera.aspect = window.innerWidth / window.innerHeight
 		camera.updateProjectionMatrix()
 		middle = innerWidth / 2
@@ -71,7 +71,7 @@ const init = () => {
 	})
 }
 
-onMounted( () => {
+onMounted(() => {
 	init()
 })
 </script>

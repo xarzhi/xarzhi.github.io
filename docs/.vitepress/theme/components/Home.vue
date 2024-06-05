@@ -1,21 +1,21 @@
 <template>
 	<div class="home">
 		<div class="image">
-			<Circle/>
+			<Circle />
 		</div>
 		<div class="content">
 			<div class="title">Fade away</div>
 			<div class="desc">花有重开日，人无再少年</div>
 			<div class="btns">
-				<button class="btn1">VitePress</button>
-				<button class="btn2">网址导航</button>
+				<a class="btn1" href="/docs/vitepress">VitePress</a>
+				<a class="btn2" href="/docs/收藏的网站/">网址导航</a>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script setup>
-import Circle from './Circle.vue';
+import Circle from './Circle.vue'
 </script>
 
 <style lang="scss" scoped>
@@ -53,7 +53,7 @@ import Circle from './Circle.vue';
 			display: flex;
 			justify-content: space-around;
 			margin-top: 10px;
-			button {
+			a {
 				width: 106px;
 				border-radius: 8px;
 				height: 40px;
@@ -65,6 +65,10 @@ import Circle from './Circle.vue';
 				font-synthesis: style;
 				text-rendering: optimizeLegibility;
 				-webkit-font-smoothing: antialiased;
+				text-decoration: none;
+				display: flex;
+				justify-content: center;
+				align-items: center;
 			}
 			.btn1 {
 				color: var(--vp-button-brand-text);

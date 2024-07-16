@@ -6,3 +6,8 @@ cache
 .cache
 .temp
 *.local
+.pnp.cjs
+.pnp.loader.mjs
+package-lock.json
+yarn.lock
+.yarn

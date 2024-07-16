@@ -390,8 +390,14 @@ export const NAV_DATA = [
 		title: '学习编程',
 		items: [
 			{
-				title: 'MDN',
+				title: 'Hello 算法',
 				link: 'https://developer.mozilla.org/zh-CN/docs/Web',
+				desc: '动画图解、一键运行的数据结构与算法教程。支持 Python, Java, C++, C, C#, JS, Go, Swift, Rust, Ruby, Kotlin, TS, Dart 代码。简体版和繁体版同步更新，English version ongoing',
+				icon: 'https://www.hello-algo.com/assets/images/favicon.png',
+			},
+			{
+				title: 'MDN',
+				link: 'https://www.hello-algo.com/',
 				desc: 'Web 开发技术 | MDN',
 				icon: '',
 			},

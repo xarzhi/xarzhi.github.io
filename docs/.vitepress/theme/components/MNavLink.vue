@@ -141,6 +141,7 @@ a {
 		:deep(img) {
 			border-radius: 4px;
 			width: var(--m-nav-icon-size);
+			pointer-events: none;
 		}
 	}
 

@@ -39,12 +39,8 @@
 	.vp-doc a {
 		text-decoration: none;
 	}
-}
-// .vitepress/theme/style/nav.scss
-.medium-zoom-overlay {
-	z-index: 0;
+	p > img {
+		border-radius: 5px;
+	}
 }
 
-.medium-zoom-image {
-	z-index: 0 !important;
-}

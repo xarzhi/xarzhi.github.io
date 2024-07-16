@@ -126,3 +126,20 @@ h1 {
 	flex: 1;
 	border: none;
 }
+
+p > img {
+	border-radius: 5px;
+	/* box-shadow: 1px 1px 10px 1px #999; */
+	box-shadow: 1px 1px 10px 1px rgba(110, 110, 243, 0.5);
+}
+.medium-zoom-overlay {
+	z-index: 100;
+}
+
+.medium-zoom-overlay ~ img {
+	z-index: 101;
+}
+
+.medium-zoom--opened .medium-zoom-overlay {
+	opacity: 0.9 !important;
+}

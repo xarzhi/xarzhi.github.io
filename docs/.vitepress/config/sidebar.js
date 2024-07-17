@@ -37,7 +37,7 @@ const sidebar = {
 	'/docs/前端/可视化/Canvas/': getItems('/docs/前端/可视化/Canvas'),
 	'/docs/前端/可视化/WebGL/': getItems('/docs/前端/可视化/WebGL'),
 	'/docs/前端/可视化/Three.js/': getItems('/docs/前端/可视化/Three.js'),
-	'/docs/后端/C++/C++基础': [
+	'/docs/后端/C++': [
 		{ text: 'C++基础', items: getItems('/docs/后端/C++/C++基础') },
 		{ text: '面向对象', items: getItems('/docs/后端/C++/面向对象') },
 	],
@@ -56,5 +56,5 @@ for (let key in sidebar) {
 		})
 	}
 }
-
+console.log(sidebar)
 export default sidebar

@@ -34,7 +34,7 @@ export default {
 		mouseClick(document)
 		const route = useRoute()
 		const initZoom = () => {
-			mediumZoom('.main img,div:not(a) > img', { background: 'rgba(0, 0, 0, 0.6)' }) // 不显式添加{data-zoomable}的情况下为所有图像启用此功能
+			mediumZoom('.main img,div:not(a) > img', { background: 'rgba(0, 0, 0, 0.6)' }) 
 		}
 		onMounted(() => {
 			initZoom()

@@ -37,7 +37,10 @@ const sidebar = {
 	'/docs/前端/可视化/Canvas/': getItems('/docs/前端/可视化/Canvas'),
 	'/docs/前端/可视化/WebGL/': getItems('/docs/前端/可视化/WebGL'),
 	'/docs/前端/可视化/Three.js/': getItems('/docs/前端/可视化/Three.js'),
-	'/docs/后端/C++/': getItems('/docs/后端/C++'),
+	'/docs/后端/C++/C++基础': [
+		{ text: 'C++基础', items: getItems('/docs/后端/C++/C++基础') },
+		{ text: '面向对象', items: getItems('/docs/后端/C++/面向对象') },
+	],
 	'/docs/前端/小程序/': getItems('/docs/前端/小程序'),
 	'/docs/后端/Node.js/': getItems('/docs/后端/Node.js/'),
 	'/docs/前端/一些问题/': getItems('/docs/前端/一些问题/'),

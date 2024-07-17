@@ -57,7 +57,7 @@ export default [
 			},
 			{
 				text: '⚡C++',
-				link: '/docs/后端/C++/01.环境配置',
+				link: '/docs/后端/C++/C++基础/01.环境配置',
 			},
 		],
 	},

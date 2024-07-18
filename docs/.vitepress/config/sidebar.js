@@ -56,5 +56,4 @@ for (let key in sidebar) {
 		})
 	}
 }
-console.log(sidebar)
 export default sidebar

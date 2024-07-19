@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitepress'
 import navbar from './config/navbar'
 import sidebar from './config/sidebar'
-import timeline from 'vitepress-markdown-timeline' 
+import timeline from 'vitepress-markdown-timeline'
 export default defineConfig({
 	base: '/',
 	head: [
@@ -60,6 +60,7 @@ export default defineConfig({
 		},
 		//markdown配置
 		markdown: {
+			lineNumbers: true,
 			image: {
 				// 开启图片懒加载
 				lazyLoading: true,

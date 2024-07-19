@@ -51,7 +51,7 @@ for (let key in sidebar) {
 		sidebar[key] = sidebar[key].map(item => {
 			return {
 				...item,
-				collapsed: false,
+				collapsed: item.collapsed || false,
 			}
 		})
 	}

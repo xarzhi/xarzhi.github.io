@@ -1,8 +1,8 @@
 .VPHero {
-	padding:0 !important;
+	padding: 0 !important;
 	margin-top: 0 !important;
 }
-.VPContent{
+.VPContent {
 	padding: 0;
 	margin: 0;
 }
@@ -31,5 +31,22 @@
 				transform: translate(0) !important;
 			}
 		}
+	}
+}
+.VPSidebar,
+html {
+	&::-webkit-scrollbar {
+		width: 8px;
+		height: 8px;
+		transition: all 2s;
+	}
+	&::-webkit-scrollbar-thumb {
+		background: -webkit-gradient(linear, left top, left bottom, from(#ff8a00), to(#e52e71));
+		background: rgb(199, 199, 201);
+		border-radius: 30px;
+		box-shadow: inset 2px 2px 2px hsla(0, 11%, 78%, 0.25), inset -2px -2px 2px rgba(207, 203, 203, 0.25);
+	}
+	&::-webkit-scrollbar-thumb:hover {
+		background: rgb(181, 184, 189);
 	}
 }

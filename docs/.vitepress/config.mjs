@@ -21,7 +21,8 @@ export default defineConfig({
 		nav: navbar,
 		sidebar: sidebar,
 		outline: {
-			level: [2, 3, 4], // 显示2-4级标题
+			//level: [2, 3, 4, 5], // 显示2-4级标题
+			level: 'deep', // 显示2-4级标题
 			label: '当前页大纲', // 文字显示
 		},
 		logo: '/logo.png',

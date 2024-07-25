@@ -77,3 +77,8 @@ html[class='dark'] {
 html {
 	@include scroll;
 }
+
+
+.aside-container{	
+	width: 250px !important;	
+}

@@ -76,5 +76,7 @@ export default defineConfig({
 			message: 'MIT Licensed',
 			copyright: 'Copyright © 2024-present xarzhi',
 		},
+		lightModeSwitchTitle: '切换至深色模式',
+		darkModeSwitchTitle: '切换至浅色模式',
 	},
 })

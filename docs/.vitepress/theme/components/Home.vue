@@ -5,7 +5,7 @@
 		</div>
 		<div class="content">
 			<div class="title">Fade away</div>
-			<div class="desc">花有重开日，人无再少年</div>
+			<div class="desc" ref="textRef">{{ text }}</div>
 			<div class="btns">
 				<a class="btn1" href="/docs/vitepress">VitePress</a>
 				<a class="btn2" href="/docs/收藏的网站/">网址导航</a>
@@ -16,6 +16,29 @@
 
 <script setup>
 import Circle from './Circle.vue'
+import { onMounted, ref, onUnmounted } from 'vue'
+import { getRandom } from '../utils/utils'
+const textArr = [
+	'花有重开日，人无再少年',
+	'街喧闹，人过往，且记曾相识，不为少年留',
+	'欲买桂花同载酒，终不似，少年游',
+	'种一棵树最好的时间是在十年前，其次就是现在',
+]
+const text = ref('')
+const timer = ref()
+const textRef = ref()
+const changeText = () => {
+	text.value = textArr[getRandom(0, textArr.length - 1)]
+}
+onMounted(() => {
+	changeText()
+	timer.value = setInterval(() => {
+		changeText()
+	}, 1000 * 10)
+})
+onUnmounted(() => {
+	clearInterval(timer.value)
+})
 </script>
 
 <style lang="scss" scoped>
@@ -33,6 +56,7 @@ import Circle from './Circle.vue'
 		align-items: center;
 	}
 	.content {
+		min-width: 500px;
 		height: 200px;
 		.title {
 			background: var(--vp-home-hero-name-background);
@@ -43,16 +67,23 @@ import Circle from './Circle.vue'
 			line-height: 64px;
 			font-weight: 600;
 			font-size: 56px;
+			text-align: center;
 		}
 		.desc {
 			font-size: 24px;
 			line-height: 36px;
+			margin: 20px 0;
 			color: var(--vp-c-text-2);
+			width: 100%;
+			text-align: center;
 		}
+
 		.btns {
 			display: flex;
-			justify-content: space-around;
-			margin-top: 10px;
+			justify-content: center;
+			margin-top: 30px;
+			overflow: hidden;
+			text-align: center;
 			a {
 				width: 106px;
 				border-radius: 8px;
@@ -74,6 +105,7 @@ import Circle from './Circle.vue'
 				color: var(--vp-button-brand-text);
 				border-color: var(--vp-button-brand-border);
 				background-color: var(--vp-button-brand-bg);
+				margin-right: 100px;
 			}
 			.btn2 {
 				border-color: var(--vp-button-alt-border);

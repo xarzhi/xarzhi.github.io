@@ -52,12 +52,25 @@ export default [
 		text: '后端',
 		items: [
 			{
-				text: '🍔Node.js',
+				text: 'Node.js',
 				link: '/docs/后端/Node.js/01.初识Node.js',
 			},
 			{
-				text: '⚡C++',
-				link: '/docs/后端/C++/C++基础/01.环境配置',
+				text: 'C++',
+				items: [
+					{
+						text: '🍌C++基础',
+						link: '/docs/后端/C++/C++基础/01.环境配置',
+					},
+					{
+						text: '🍍Win32 spi',
+						link: '/docs/后端/C++/C++基础/01.环境配置',
+					},
+					{
+						text: '🍉QT',
+						link: '/docs/后端/C++/C++基础/01.环境配置',
+					},
+				],
 			},
 		],
 	},
@@ -66,4 +79,3 @@ export default [
 		link: '/docs/学习git/git',
 	},
 ]
-

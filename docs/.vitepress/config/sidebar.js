@@ -41,6 +41,7 @@ const sidebar = {
 		{ text: 'C++基础', items: getItems('/docs/后端/C++/C++基础') },
 		{ text: 'C++进阶', items: getItems('/docs/后端/C++/C++进阶') },
 		{ text: '面向对象', items: getItems('/docs/后端/C++/面向对象') },
+		{ text: 'STL', items: getItems('/docs/后端/C++/STL') },
 	],
 	'/docs/前端/小程序/': getItems('/docs/前端/小程序'),
 	'/docs/后端/Node.js/': getItems('/docs/后端/Node.js/'),

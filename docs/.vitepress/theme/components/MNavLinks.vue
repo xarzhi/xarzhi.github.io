@@ -3,8 +3,6 @@ import { computed } from 'vue'
 import { slugify } from '@mdit-vue/shared'
 
 import MNavLink from './MNavLink.vue'
-// import type { NavLink } from '../untils/types'
-
 const props = defineProps(['title','items','noIcon'])
 
 const formatTitle = computed(() => {

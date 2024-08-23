@@ -64,7 +64,7 @@ export default [
 					},
 					{
 						text: '🍍Win32 spi',
-						link: '/docs/后端/C++/C++基础/01.环境配置',
+						link: '/docs/后端/C++/Win32/01.基础知识',
 					},
 					{
 						text: '🍉QT',

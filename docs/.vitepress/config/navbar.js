@@ -63,7 +63,7 @@ export default [
 						link: '/docs/后端/C++/C++基础/C++基础/01.环境配置',
 					},
 					{
-						text: '🍍Win32 spi',
+						text: '🍍Win32 api',
 						link: '/docs/后端/C++/Win32/01.基础知识',
 					},
 					{

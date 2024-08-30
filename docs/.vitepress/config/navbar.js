@@ -77,11 +77,11 @@ export default [
 				items: [
 					{
 						text: '🍌C#基础',
-						link: '/docs/后端/CS/CS基础/01.基础语法.md',
+						link: '/docs/后端/CS/CS基础/CS基础/01.环境配置.md',
 					},
 					{
-						text: '🍌C#高级',
-						link: '/docs/后端/CS/CS高级/01.呦西.md',
+						text: '🍌WPF',
+						link: '/docs/后端/CS/WPF/01.环境配置.md',
 					},
 				],
 			},

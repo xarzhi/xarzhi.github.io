@@ -66,6 +66,13 @@ export default defineConfig({
 				// 开启图片懒加载
 				lazyLoading: true,
 			},
+			container: {
+				tipLabel: '提示',
+				warningLabel: '警告',
+				dangerLabel: '危险',
+				infoLabel: '信息',
+				detailsLabel: '详细信息',
+			},
 			//时间线
 			config: md => {
 				md.use(timeline)

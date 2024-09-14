@@ -33,6 +33,7 @@ const sidebar = {
 		{ text: 'Vue2', items: getItems('/docs/前端/框架/Vue/Vue2') },
 		{ text: 'Vue3', items: getItems('/docs/前端/框架/Vue/Vue3') },
 	],
+	'/docs/前端/TypeScript/Ts入门/': [{ text: 'Ts入门', items: getItems('/docs/前端/TypeScript/Ts入门') }],
 	'/docs/前端/框架/React/': getItems('/docs/前端/框架/React'),
 	'/docs/前端/可视化/Canvas/': getItems('/docs/前端/可视化/Canvas'),
 	'/docs/前端/可视化/WebGL/': getItems('/docs/前端/可视化/WebGL'),
@@ -48,9 +49,7 @@ const sidebar = {
 		{ text: 'CS高级', items: getItems('/docs/后端/CS/CS基础/CS高级') },
 		{ text: '面向对象', items: getItems('/docs/后端/CS/CS基础/面向对象') },
 	],
-	'/docs/后端/CS/WPF': [
-		{ text: 'WPF基础', items: getItems('/docs/后端/CS/WPF') },
-	],
+	'/docs/后端/CS/WPF': [{ text: 'WPF基础', items: getItems('/docs/后端/CS/WPF') }],
 	'/docs/后端/C++/Win32': [{ text: 'Win32', items: getItems('/docs/后端/C++/Win32') }],
 	'/docs/前端/小程序/': getItems('/docs/前端/小程序'),
 	'/docs/后端/Node.js/': getItems('/docs/后端/Node.js/'),

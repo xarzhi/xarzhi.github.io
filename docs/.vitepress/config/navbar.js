@@ -20,6 +20,10 @@ export default [
 				],
 			},
 			{
+				text: 'TypeScript',
+				items: [{ text: '🚢Ts入门', link: '/docs/前端/TypeScript/Ts入门/01.基本配置' }],
+			},
+			{
 				text: '框架',
 				items: [
 					{ text: '😺Vue', link: '/docs/前端/框架/Vue/Vue2/01.Vue基础' },

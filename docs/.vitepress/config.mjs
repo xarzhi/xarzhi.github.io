@@ -89,7 +89,7 @@ export default withPwa(
 			darkModeSwitchTitle: '切换至浅色模式',
 		},
 		pwa: {
-			outDir: '.vitepress/dist', // 输出目录
+			outDir: 'docs/.vitepress/dist', // 输出目录
 			registerType: 'autoUpdate', // 注册类型为自动更新
 			includeManifestIcons: false, // 不包含清单图标
 			manifest: {

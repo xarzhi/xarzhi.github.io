@@ -1,4 +1,4 @@
-import { defineConfig } from 'vitepress'
+import { defineConfig } from 'vite'
 import navbar from './config/navbar'
 import sidebar from './config/sidebar'
 import timeline from 'vitepress-markdown-timeline'
@@ -87,38 +87,39 @@ export default withPwa(
 			},
 			lightModeSwitchTitle: '切换至深色模式',
 			darkModeSwitchTitle: '切换至浅色模式',
-			pwa: {
-				outDir: '.vitepress/dist', // 输出目录
-				registerType: 'autoUpdate', // 注册类型为自动更新
-				includeManifestIcons: false, // 不包含清单图标
-				manifest: {
-					id: '/', // 清单 ID
-					name: "xarzhi's blog", // 应用名称", // 应用名称
-					short_name: 'xarzhi', // 应用的短名称
-					description: '个人笔记', // 应用的描述
-					theme_color: '#ffffff', // 主题颜色
-					icons: [
-						{
-							src: '/images/pwa-120x120.png', // 图标路径
-							sizes: '120x120', // 图标尺寸
-							type: 'image/png', // 图标类型
-						},
-						{
-							src: '/images/pwa-192x192.png',
-							sizes: '192x192',
-							type: 'image/png',
-						},
-						{
-							src: '/images/pwa-512x512.png',
-							sizes: '512x512',
-							type: 'image/png',
-							purpose: 'any',
-						},
-					],
-				},
+		},
+		pwa: {
+			outDir: '.vitepress/dist', // 输出目录
+			registerType: 'autoUpdate', // 注册类型为自动更新
+			includeManifestIcons: false, // 不包含清单图标
+			manifest: {
+				id: '/', // 清单 ID
+				name: "xarzhi's blog", // 应用名称", // 应用名称
+				short_name: 'xarzhi', // 应用的短名称
+				description: '个人笔记', // 应用的描述
+				theme_color: '#ffffff', // 主题颜色
+				icons: [
+					{
+						src: '/images/pwa-120x120.png', // 图标路径
+						sizes: '120x120', // 图标尺寸
+						type: 'image/png', // 图标类型
+					},
+					{
+						src: '/images/pwa-192x192.png',
+						sizes: '192x192',
+						type: 'image/png',
+					},
+					{
+						src: '/images/pwa-512x512.png',
+						sizes: '512x512',
+						type: 'image/png',
+						purpose: 'any',
+					},
+				],
 			},
 			workbox: {
 				globPatterns: ['**/*.{css,js,html,svg,png,ico,txt,woff2}'], // 匹配需要缓存的文件类型
+				maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 设置最大缓存文件大小为5 MiB
 				runtimeCaching: [
 					{
 						urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i, // 匹配需要缓存的 Google 字体

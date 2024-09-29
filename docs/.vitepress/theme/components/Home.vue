@@ -5,7 +5,7 @@
 		</div>
 		<div class="content">
 			<div class="title">Fade away</div>
-			<div class="desc" ref="textRef">{{ text }}</div>
+			<div class="desc">{{ text }}</div>
 			<div class="btns">
 				<a class="btn1" href="/docs/vitepress">VitePress</a>
 				<a class="btn2" href="/docs/收藏的网站/">网址导航</a>
@@ -17,19 +17,22 @@
 <script setup>
 import Circle from './Circle.vue'
 import { onMounted, ref, onUnmounted } from 'vue'
-import { getRandom } from '../utils/utils'
 const textArr = [
 	'花有重开日，人无再少年',
 	'街喧闹，人过往，且记曾相识，不为少年留',
 	'欲买桂花同载酒，终不似，少年游',
 	'种一棵树最好的时间是在十年前，其次就是现在',
-	'未曾绽放就要枯萎吗'
+	'未曾绽放就要枯萎吗',
 ]
 const text = ref('')
 const timer = ref()
-const textRef = ref()
+const textIndex = ref(0)
 const changeText = () => {
-	text.value = textArr[getRandom(0, textArr.length - 1)]
+	text.value = textArr[textIndex]
+	textIndex.value++
+	if (textIndex.value >= textArr.length) {
+		textIndex.value = 0
+	}
 }
 onMounted(() => {
 	changeText()

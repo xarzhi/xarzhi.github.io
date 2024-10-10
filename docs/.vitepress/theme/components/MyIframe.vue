@@ -25,7 +25,7 @@ const props = defineProps({
 })
 const iframeLoad = () => {
 	loading.value = true
-	const iframe = this.$refs.Iframe
+	const iframe = Iframe.value
 	if (iframe.attachEvent) {
 		iframe.attachEvent('onload', () => {
 			loading.value = false

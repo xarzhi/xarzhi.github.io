@@ -36,7 +36,7 @@ const geometry = new THREE.CircleGeometry(
 -   thetaStart — 第一个分段的起始角度，默认为 0。（three o'clock position）
 -   thetaLength — 圆形扇区的中心角，通常被称为“θ”（西塔）。默认值是 2\*Pi，这使其成为一个完整的圆。
 
-<iframe src="https://xarzhi.github.io/geometry/index.html#CircleGeometry" width="100%"></iframe>
+<MyIframe src="https://xarzhi.github.io/geometry/index.html#CircleGeometry"></MyIframe>
 
 ### ConeGeometry
 
@@ -62,7 +62,7 @@ const geometry = new THREE.ConeGeometry(
 -   thetaStart — 第一个分段的起始角度，默认为 0。（three o'clock position）
 -   thetaLength — 圆锥底面圆扇区的中心角，通常被称为“θ”（西塔）。默认值是 2\*Pi，这使其成为一个完整的圆锥。
 
-<iframe src="https://xarzhi.github.io/geometry/index.html#ConeGeometry" width="100%"></iframe>
+<MyIframe src="https://xarzhi.github.io/geometry/index.html#ConeGeometry"></MyIframe>
 
 ### CylinderGeometry
 
@@ -90,7 +90,7 @@ const geometry = new THREE.CylinderGeometry(
 -   thetaStart — 第一个分段的起始角度，默认为 0。（three o'clock position）
 -   thetaLength — 圆柱底面圆扇区的中心角，通常被称为“θ”（西塔）。默认值是 2\*Pi，这使其成为一个完整的圆柱。
 
-<iframe src="https://xarzhi.github.io/geometry/index.html#CylinderGeometry" width="100%"></iframe>
+<MyIframe src="https://xarzhi.github.io/geometry/index.html#CylinderGeometry"></MyIframe>
 
 ### DodecahedronGeometry
 
@@ -106,7 +106,7 @@ const geometry = new THREE.DodecahedronGeometry(
 -   radius — 十二面体的半径，默认值为 1。
 -   detail — 默认值为 0。将这个值设为一个大于 0 的数将会为它增加一些顶点，使其不再是一个十二面体。
 
-<iframe src="https://xarzhi.github.io/geometry/index.html#DodecahedronGeometry" width="100%"></iframe>
+<MyIframe src="https://xarzhi.github.io/geometry/index.html#DodecahedronGeometry"></MyIframe>
 
 ### EdgesGeometry
 
@@ -161,7 +161,7 @@ const geometry = new THREE.ExtrudeGeometry(
 
 当使用这个几何体创建 Mesh 的时候，如果你希望分别对它的表面和它挤出的侧面使用单独的材质，你可以使用一个材质数组。 第一个材质将用于其表面；第二个材质则将用于其挤压出的侧面。
 
-<iframe src="https://xarzhi.github.io/geometry/index.html#ExtrudeGeometry" width="100%"></iframe>
+<MyIframe src="https://xarzhi.github.io/geometry/index.html#ExtrudeGeometry"></MyIframe>
 
 ### IcosahedronGeometry
 
@@ -177,7 +177,7 @@ const geometry = new THREE.IcosahedronGeometry(
 -   radius — 二十面体的半径，默认为 1。
 -   detail — 默认值为 0。将这个值设为一个大于 0 的数将会为它增加一些顶点，使其不再是一个二十面体。当这个值大于 1 的时候，实际上它将变成一个球体。
 
-<iframe src="https://xarzhi.github.io/geometry/index.html#IcosahedronGeometry" width="100%"></iframe>
+<MyIframe src="https://xarzhi.github.io/geometry/index.html#IcosahedronGeometry"></MyIframe>
 
 ### LatheGeometry
 
@@ -197,4 +197,4 @@ const geometry = new THREE.LatheGeometry(
 -   phiStart — 以弧度表示的起始角度，默认值为 0。
 -   phiLength — 车削部分的弧度（0-2PI）范围，2PI 将是一个完全闭合的、完整的车削几何体，小于 2PI 是部分的车削。默认值是 2PI。
 
-<iframe src="https://xarzhi.github.io/geometry/index.html#LatheGeometry" width="100%"></iframe>
+<MyIframe src="https://xarzhi.github.io/geometry/index.html#LatheGeometry"></MyIframe>

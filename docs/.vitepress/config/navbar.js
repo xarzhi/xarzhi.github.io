@@ -35,7 +35,7 @@ export default [
 				items: [
 					{ text: '🍬Canvas', link: '/docs/前端/可视化/Canvas/01.认识Canvas' },
 					{ text: '🍭WebGl', link: '/docs/前端/可视化/WebGL/01.WebGL基础' },
-					{ text: '🍦Threejs', link: '/docs/前端/可视化/Three.js/01.基础用法' },
+					{ text: '🍦Threejs', link: '/docs/前端/可视化/Three.js/基本使用/01.安装threejs' },
 				],
 			},
 			{

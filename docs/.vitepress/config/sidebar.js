@@ -43,9 +43,8 @@ const sidebar = {
 		{ text: '材质', items: getItems('/docs/前端/可视化/Three.js/材质'), collapsed: true },
 		{ text: '物体', items: getItems('/docs/前端/可视化/Three.js/物体'), collapsed: true },
 		{ text: '纹理贴图', items: getItems('/docs/前端/可视化/Three.js/纹理贴图'), collapsed: true },
-		{ text: '灯光', items: getItems('/docs/前端/可视化/Three.js/灯光'), collapsed: true },
+		{ text: '灯光', items: getItems('/docs/前端/可视化/Three.js/光源'), collapsed: true },
 		{ text: '阴影', items: getItems('/docs/前端/可视化/Three.js/阴影'), collapsed: true },
-		{ text: '阴影', items: getItems('/docs/前端/可视化/Three.js'), collapsed: true },
 	],
 	'/docs/后端/C++/C++基础': [
 		{ text: 'C++基础', items: getItems('/docs/后端/C++/C++基础/C++基础') },

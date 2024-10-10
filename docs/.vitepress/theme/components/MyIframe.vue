@@ -49,6 +49,7 @@ onMounted(() => {
 	width: 100%;
 	height: 500px;
 	position: relative;
+	box-shadow: 1px 1px 10px 1px rgba(110, 110, 243, 0.5);
 	.loading {
 		position: absolute;
 		width: 100%;

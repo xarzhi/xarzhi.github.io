@@ -11,6 +11,7 @@ import { useData } from 'vitepress'
 import MNavLinks from './components/MNavLinks.vue'
 import GoTop from './components/GoTop.vue'
 import Home from './components/Home.vue'
+import MyIframe from './components/MyIframe.vue'
 import mouseClick from './utils/mouse-click-particles'
 export default {
 	extends: DefaultTheme,
@@ -20,6 +21,7 @@ export default {
 		app.component('MNavLinks', MNavLinks)
 		app.component('GoTop', GoTop)
 		app.component('Home', Home)
+		app.component('MyIframe', MyIframe)
 	},
 	Layout: () => {
 		const props = {}

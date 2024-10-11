@@ -2,6 +2,7 @@
 	<div class="home">
 		<div class="image">
 			<Circle />
+			<!-- <LinesBox /> -->
 		</div>
 		<div class="content">
 			<div class="title">Fade away</div>
@@ -15,7 +16,8 @@
 </template>
 
 <script setup>
-import Circle from './Circle.vue'
+import Circle from './ThreeComponents/Circle.vue'
+// import LinesBox from './ThreeComponents/LinesBox.vue'
 import { onMounted, ref, onUnmounted } from 'vue'
 const textArr = [
 	'花有重开日，人无再少年',

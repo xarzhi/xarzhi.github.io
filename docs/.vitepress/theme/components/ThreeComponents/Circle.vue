@@ -4,7 +4,7 @@
 
 <script setup>
 import { onMounted } from 'vue'
-import * as THREE from '../utils/three'
+import * as THREE from '../../utils/three'
 const init = () => {
 	// 创建一个场景
 	const scene = new THREE.Scene()

@@ -1,0 +1,147 @@
+{
+  "main": {
+    "id": "a64e1aa8653fcaf5",
+    "type": "split",
+    "children": [
+      {
+        "id": "33ed53ea913eb9fa",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c1cb1232f6008b51",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "6f4665693d6f4ee7",
+    "type": "split",
+    "children": [
+      {
+        "id": "3731e8c28f7ef780",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "fae90e0810ee0309",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "e92ead092546a376",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "7b0e35c60d99458f",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 350.5
+  },
+  "right": {
+    "id": "84681198a2461d0f",
+    "type": "split",
+    "children": [
+      {
+        "id": "1a3c69bf2b1005c7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "dfc1076c32194a75",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "006b325326a8e583",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "041efaaa333f4011",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "11f29a8810e1da69",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false
+    }
+  },
+  "active": "c1cb1232f6008b51",
+  "lastOpenFiles": [
+    "未命名.canvas",
+    "docs/docs/前端/可视化/Three.js/基本使用/07.几何变换.md",
+    "docs/docs/前端/可视化/Three.js/核心/01.Object3D.md"
+  ]
+}

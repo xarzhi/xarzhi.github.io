@@ -1,8 +1,7 @@
 <template>
 	<div class="home">
 		<div class="image">
-			<Circle />
-			<!-- <LinesBox /> -->
+			<component :is="componentName" />
 		</div>
 		<div class="content">
 			<div class="title">Fade away</div>
@@ -17,8 +16,12 @@
 
 <script setup>
 import Circle from './ThreeComponents/Circle.vue'
+import GlassBox from './ThreeComponents/GlassBox.vue'
 // import LinesBox from './ThreeComponents/LinesBox.vue'
+
 import { onMounted, ref, onUnmounted } from 'vue'
+import { getRandom } from '../utils/utils'
+
 const textArr = [
 	'花有重开日，人无再少年',
 	'街喧闹，人过往，且记曾相识，不为少年留',
@@ -29,6 +32,13 @@ const textArr = [
 const text = ref('')
 const timer = ref()
 const textIndex = ref(0)
+const componentName = ref('')
+const boxArr = [Circle, GlassBox]
+
+const randomBox = () => {
+	componentName.value = boxArr[getRandom(0, boxArr.length - 1)]
+}
+randomBox()
 const changeText = () => {
 	text.value = textArr[textIndex]
 	textIndex.value++

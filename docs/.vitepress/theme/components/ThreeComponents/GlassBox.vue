@@ -115,7 +115,6 @@ function onWindowResize() {
 	renderer.setSize(800, 500)
 }
 
-//
 
 function animate() {
 	const time = performance.now()

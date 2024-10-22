@@ -24,11 +24,15 @@ export default [
 				items: [{ text: '🚢Ts入门', link: '/docs/前端/TypeScript/Ts入门/01.基本配置' }],
 			},
 			{
-				text: '框架',
+				text: 'Vue',
 				items: [
-					{ text: '😺Vue', link: '/docs/前端/框架/Vue/Vue2/01.Vue基础' },
-					{ text: '🐨React', link: '/docs/前端/框架/React/01.React入门' },
+					{ text: '🥈Vue2', link: '/docs/前端/框架/Vue/Vue2/Vue2基础/01.Vue2基础' },
+					{ text: '🥉Vue3', link: '/docs/前端/框架/Vue/Vue3/Vue3基础/01.Vue3基础' },
 				],
+			},
+			{
+				text: 'React',
+				items: [{ text: '🐨React', link: '/docs/前端/框架/React/01.React入门' }],
 			},
 			{
 				text: '可视化',

@@ -29,9 +29,13 @@ const sidebar = {
 		{ text: 'js基础', items: getItems('/docs/前端/前端三剑客/javascript/js基础') },
 		{ text: 'js高级', items: getItems('/docs/前端/前端三剑客/javascript/js高级') },
 	],
-	'/docs/前端/框架/Vue/': [
-		{ text: 'Vue2', items: getItems('/docs/前端/框架/Vue/Vue2') },
-		{ text: 'Vue3', items: getItems('/docs/前端/框架/Vue/Vue3') },
+	'/docs/前端/框架/Vue/Vue2/': [
+		{ text: 'Vue2基础', items: getItems('/docs/前端/框架/Vue/Vue2/Vue2基础') },
+		{ text: 'Vue2进阶', items: getItems('/docs/前端/框架/Vue/Vue2/Vue2进阶') },
+	],
+	'/docs/前端/框架/Vue/Vue3/': [
+		{ text: 'Vue3基础', items: getItems('/docs/前端/框架/Vue/Vue3/Vue3基础') },
+		{ text: '组合式Api', items: getItems('/docs/前端/框架/Vue/Vue3/组合式Api') },
 	],
 	'/docs/前端/TypeScript/Ts入门/': [{ text: 'Ts入门', items: getItems('/docs/前端/TypeScript/Ts入门') }],
 	'/docs/前端/框架/React/': getItems('/docs/前端/框架/React'),

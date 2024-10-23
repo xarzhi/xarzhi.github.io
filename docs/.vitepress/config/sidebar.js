@@ -36,6 +36,7 @@ const sidebar = {
 	'/docs/前端/框架/Vue/Vue3/': [
 		{ text: 'Vue3基础', items: getItems('/docs/前端/框架/Vue/Vue3/Vue3基础') },
 		{ text: '组合式Api', items: getItems('/docs/前端/框架/Vue/Vue3/组合式Api') },
+		{ text: 'Vue3进阶', items: getItems('/docs/前端/框架/Vue/Vue3/Vue3进阶') },
 	],
 	'/docs/前端/TypeScript/Ts入门/': [{ text: 'Ts入门', items: getItems('/docs/前端/TypeScript/Ts入门') }],
 	'/docs/前端/框架/React/': getItems('/docs/前端/框架/React'),

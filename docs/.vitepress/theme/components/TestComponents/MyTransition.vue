@@ -1,6 +1,6 @@
 <template>
 	<div class="demo">
-		<button @click="show[demo] = !show[demo]" class="btn" v-if="![6, 7, 8].includes(demo)">Toggle</button>
+		<button @click="show[demo] = !show[demo]" class="btn" v-if="![6, 7, 8, 9].includes(demo)">Toggle</button>
 
 		<div v-if="demo === 1">
 			<Transition>
@@ -51,9 +51,30 @@
 			</Transition>
 		</div>
 		<div v-if="demo === 8">
-			<button class="btn" style="margin-right: 10px" @click="items.push(items.length + 1)">添加一项</button>
-			<button class="btn" @click="items.pop()">移除一项</button>
+			<button
+				class="btn"
+				style="margin-right: 10px"
+				@click="items.splice(getRandom(0, items.length - 1), 0, items.length + 1)"
+			>
+				任意位置添加一项
+			</button>
+			<button class="btn" @click="items.splice(getRandom(0, items.length - 1), 1)">任意位置移除一项</button>
 			<TransitionGroup name="list" tag="ul">
+				<li v-for="item in items" :key="item">
+					{{ item }}
+				</li>
+			</TransitionGroup>
+		</div>
+		<div v-if="demo === 9">
+			<button
+				class="btn"
+				style="margin-right: 10px"
+				@click="items.splice(getRandom(0, items.length - 1), 0, items.length + 1)"
+			>
+				任意位置添加一项
+			</button>
+			<button class="btn" @click="items.splice(getRandom(0, items.length - 1), 1)">任意位置移除一项</button>
+			<TransitionGroup name="list1" tag="ul">
 				<li v-for="item in items" :key="item">
 					{{ item }}
 				</li>
@@ -63,12 +84,13 @@
 </template>
 
 <script setup>
+import { getRandom } from '../../utils/utils'
 import { reactive, ref } from 'vue'
 defineProps({
 	demo: Number,
 })
 const docState = ref('saved')
-const show = reactive( [false, false, false, false, false, false, false] )
+const show = reactive([false, false, false, false, false, false, false])
 const items = ref([1, 2, 3])
 </script>
 <style>
@@ -188,5 +210,21 @@ const items = ref([1, 2, 3])
 .list-leave-to {
 	opacity: 0;
 	transform: translateX(30px);
+}
+
+.list1-move,
+.list1-enter-active,
+.list1-leave-active {
+	transition: all 0.5s ease;
+}
+.list1-enter-from,
+.list1-leave-to {
+	opacity: 0;
+	transform: translateX(30px);
+}
+/* 确保将离开的元素从布局流中删除
+  以便能够正确地计算移动的动画。 */
+.list1-leave-active {
+	position: absolute;
 }
 </style>

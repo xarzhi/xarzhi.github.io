@@ -1,5 +1,8 @@
 <template>
-	<div class="container" ref="container"></div>
+	<div class="cube">
+		<div class="container" ref="container"></div>
+		<a href="https://pengfeiw.github.io/minicode/threejs-rubik" target="_blank">Auther is here</a>
+	</div>
 </template>
 
 <script setup>
@@ -10,3 +13,18 @@ onMounted(() => {
 	new Rubiks(container.value)
 })
 </script>
+
+<style scoped lang="scss">
+.cube{
+	&:hover{
+		a{
+			display: block;
+		}
+	}
+}
+a{
+	display: none;
+	text-decoration: none;
+	position: absolute;
+}
+</style>

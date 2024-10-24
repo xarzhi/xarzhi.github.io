@@ -1,6 +1,6 @@
 <template>
 	<div class="demo">
-		<button @click="show[demo] = !show[demo]" class="btn" v-if="![6, 7, 8, 9].includes(demo)">Toggle</button>
+		<button @click="show[demo] = !show[demo]" class="btn" v-if="![6, 7, 8, 9, 11].includes(demo)">Toggle</button>
 
 		<div v-if="demo === 1">
 			<Transition>
@@ -80,18 +80,59 @@
 				</li>
 			</TransitionGroup>
 		</div>
+		<div v-if="demo === 11">
+			<input type="text" v-model="query" class="ipt" />
+			<TransitionGroup tag="ul" :css="false" @before-enter="onBeforeEnter" @enter="onEnter" @leave="onLeave">
+				<li v-for="(item, index) in computedList" :key="item.msg" :data-index="index">
+					{{ item.msg }}
+				</li>
+			</TransitionGroup>
+		</div>
 	</div>
 </template>
 
 <script setup>
 import { getRandom } from '../../utils/utils'
-import { reactive, ref } from 'vue'
+import { reactive, ref, computed } from 'vue'
+import { gsap } from 'gsap'
+
 defineProps({
 	demo: Number,
 })
 const docState = ref('saved')
 const show = reactive([false, false, false, false, false, false, false])
-const items = ref([1, 2, 3])
+const list = [
+	{ msg: 'Bruce Lee' },
+	{ msg: 'Jackie Chan' },
+	{ msg: 'Chuck Norris' },
+	{ msg: 'Jet Li' },
+	{ msg: 'Kung Fury' },
+]
+
+const query = ref('')
+const computedList = computed(() => {
+	return list.filter(item => item.msg.toLowerCase().includes(query.value))
+})
+function onEnter(el, done) {
+	gsap.to(el, {
+		opacity: 1,
+		height: '1.6em',
+		delay: el.dataset.index * 0.15,
+		onComplete: done,
+	})
+}
+function onBeforeEnter(el) {
+	el.style.opacity = 0
+	el.style.height = 0
+}
+function onLeave(el, done) {
+	gsap.to(el, {
+		opacity: 0,
+		height: 0,
+		delay: el.dataset.index * 0.15,
+		onComplete: done,
+	})
+}
 </script>
 <style>
 @import 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css';
@@ -109,6 +150,12 @@ const items = ref([1, 2, 3])
 	border: 1px solid #c5c5c5;
 	border-radius: 5px;
 	margin-bottom: 20px;
+}
+.ipt {
+	height: 30px;
+	padding: 0 10px;
+	border: 1px solid #c5c5c5;
+	border-radius: 5px;
 }
 /* 下面我们会解释这些 class 是做什么的 */
 .v-enter-active,

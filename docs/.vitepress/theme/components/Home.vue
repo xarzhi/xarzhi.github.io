@@ -20,7 +20,7 @@ import GlassBox from './ThreeComponents/GlassBox.vue'
 import Cube from './ThreeComponents/Cube.vue'
 // import LinesBox from './ThreeComponents/LinesBox.vue'
 
-import { onMounted, ref, onUnmounted } from 'vue'
+import { onMounted, ref, onUnmounted, shallowRef } from 'vue'
 import { getRandom } from '../utils/utils'
 
 const textArr = [
@@ -33,7 +33,7 @@ const textArr = [
 const text = ref('')
 const timer = ref()
 const textIndex = ref(0)
-const componentName = ref(Cube)
+const componentName = shallowRef(Cube)
 const boxArr = [Circle, GlassBox, Cube]
 
 const randomBox = () => {

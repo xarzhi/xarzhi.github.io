@@ -55,4 +55,3 @@ export class SquareMesh extends Object3D {
         this.element = element;
     }
 }
-//# sourceMappingURL=square.js.map

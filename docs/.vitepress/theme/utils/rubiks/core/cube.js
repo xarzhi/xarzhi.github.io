@@ -302,4 +302,3 @@ export class Cube extends Group {
     }
 }
 ;
-//# sourceMappingURL=cube.js.map

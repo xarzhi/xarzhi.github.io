@@ -107,4 +107,3 @@ class CubeData {
     }
 }
 export default CubeData;
-//# sourceMappingURL=cubeData.js.map

@@ -4,4 +4,3 @@ export const setFinish = (finish) => {
         finishEle.innerText = finish ? "👏 恭喜!" : "🤔 加油";
     }
 };
-//# sourceMappingURL=statusbar.js.map

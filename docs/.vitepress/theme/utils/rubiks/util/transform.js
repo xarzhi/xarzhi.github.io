@@ -13,4 +13,3 @@ export const ndcToScreen = (ndc, winW, winH) => {
     const y = halfH - (ndc.y * halfH);
     return { x, y };
 };
-//# sourceMappingURL=transform.js.map

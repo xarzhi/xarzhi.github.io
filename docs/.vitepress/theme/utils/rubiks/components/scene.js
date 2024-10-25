@@ -5,4 +5,3 @@ const createScene = (bgColor) => {
     return scene;
 };
 export default createScene;
-//# sourceMappingURL=scene.js.map

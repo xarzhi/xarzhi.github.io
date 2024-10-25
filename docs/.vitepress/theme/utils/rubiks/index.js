@@ -23,7 +23,7 @@ class Rubiks {
 			this.render()
 		})
 		setSize(container, this.camera, this.renderer)
-		this.setOrder(3)
+		this.setOrder( 3 )
 		this.startAnimation()
 	}
 	setOrder(order) {
@@ -86,4 +86,3 @@ class Rubiks {
 	}
 }
 export default Rubiks
-//# sourceMappingURL=index.js.map

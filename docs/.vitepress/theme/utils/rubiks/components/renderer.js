@@ -6,4 +6,3 @@ const createRenderer = () => {
 	return renderer
 }
 export default createRenderer
-//# sourceMappingURL=renderer.js.map

@@ -11,4 +11,3 @@ export const equalDirection = (vec1, vec2, precision = 0.1) => {
     const angle = vec1.angleTo(vec2);
     return Math.abs(angle) < precision;
 };
-//# sourceMappingURL=math.js.map

@@ -72,4 +72,3 @@ class CubeState {
     }
 }
 export default CubeState;
-//# sourceMappingURL=cubeState.js.map

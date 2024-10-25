@@ -196,4 +196,3 @@ export class TouchControl extends Control {
     }
 }
 export default Control;
-//# sourceMappingURL=control.js.map

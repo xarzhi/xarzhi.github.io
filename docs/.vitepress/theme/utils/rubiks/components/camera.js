@@ -5,4 +5,3 @@ const createCamera = () => {
     return camera;
 };
 export default createCamera;
-//# sourceMappingURL=camera.js.map

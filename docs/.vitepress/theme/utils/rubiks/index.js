@@ -24,6 +24,7 @@ class Rubiks {
 		})
 		setSize(container, this.camera, this.renderer)
 		this.setOrder( 3 )
+		this.restore()
 		this.startAnimation()
 	}
 	setOrder(order) {

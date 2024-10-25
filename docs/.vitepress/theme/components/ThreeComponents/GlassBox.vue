@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import * as THREE from '../../utils/three'
+import * as THREE from 'three'
 import { ref, onMounted } from 'vue'
 onMounted(() => {
 	init()
@@ -98,7 +98,7 @@ function init() {
 	const mesh = new THREE.Mesh(geometry, material)
 	scene.add(mesh)
 
-	renderer = new THREE.WebGLRenderer({ antialias: true })
+	renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
 	renderer.setPixelRatio(window.devicePixelRatio)
 	renderer.setSize(800, 500)
 	renderer.setClearColor(0x000000, 0)
@@ -114,7 +114,6 @@ function onWindowResize() {
 
 	renderer.setSize(800, 500)
 }
-
 
 function animate() {
 	const time = performance.now()

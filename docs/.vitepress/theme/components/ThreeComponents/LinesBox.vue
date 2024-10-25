@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import * as THREE from '../../utils/three'
+import * as THREE from 'three'
 import { ref, reactive, onMounted } from 'vue'
 
 const particlesData = reactive([])

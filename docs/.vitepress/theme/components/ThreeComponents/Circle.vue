@@ -4,7 +4,7 @@
 
 <script setup>
 import { onMounted } from 'vue'
-import * as THREE from '../../utils/three'
+import * as THREE from 'three'
 const init = () => {
 	// 创建一个场景
 	const scene = new THREE.Scene()
@@ -15,6 +15,7 @@ const init = () => {
 	// 创建一个渲染器
 	const renderer = new THREE.WebGLRenderer({
 		antialias: true,
+		alpha: true,
 	})
 	renderer.setClearColor(0x000000, 0)
 	//设置渲染尺寸

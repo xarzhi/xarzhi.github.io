@@ -6,6 +6,7 @@
 	--tip-text: whitesmoke;
 	--tip-shadow: #333;
 	--vplink-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+	--vp-layout-max-width: 1600px;
 }
 
 .dark {
@@ -49,21 +50,10 @@ h1 {
 	border-left: 2px solid gray;
 }
 
-.medium-zoom-overlay {
-	z-index: 20;
-}
-
-.medium-zoom-image {
-	z-index: 9999 !important; /* 给的值是21，但是实测盖不住，直接999 */
-}
 .VPDoc .container {
 	margin: 0 !important;
 }
-@media (min-width: 960px) {
-	.VPDoc:not(.has-sidebar) .content {
-		max-width: 1552px !important;
-	}
-}
+
 .VPDoc.has-aside .content-container {
 	max-width: 1488px !important;
 }
@@ -71,7 +61,20 @@ h1 {
 	.VPDoc:not(.has-sidebar) .container {
 		display: flex;
 		justify-content: center;
-		max-width: 1562px !important;
+		max-width: 1730px !important;
+	}
+	.VPDoc:not(.has-sidebar) .content {
+		max-width: 1730px !important;
+	}
+	.VPContent.is-home {
+		padding-top: 0 !important;
+	}
+}
+
+@media (min-width: 768px) {
+	.VPHome {
+		margin-bottom: 20px !important;
+		margin-top: 60px !important;
 	}
 }
 .aside-container {
@@ -114,7 +117,7 @@ h1 {
 
 .VPDoc:not(.has-sidebar) .container {
 	width: 100%;
-	padding-left: 200px;
+	padding-left: 108px;
 }
 .VPDoc:not(.has-sidebar) .container .aside {
 	order: 1;

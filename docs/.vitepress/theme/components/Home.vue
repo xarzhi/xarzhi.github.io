@@ -18,7 +18,6 @@
 import Circle from './ThreeComponents/Circle.vue'
 import GlassBox from './ThreeComponents/GlassBox.vue'
 import Cube from './ThreeComponents/Cube.vue'
-// import LinesBox from './ThreeComponents/LinesBox.vue'
 
 import { onMounted, ref, onUnmounted, shallowRef } from 'vue'
 import { getRandom } from '../utils/utils'

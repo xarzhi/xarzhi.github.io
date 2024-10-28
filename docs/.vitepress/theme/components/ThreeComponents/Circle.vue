@@ -9,7 +9,7 @@ const init = () => {
 	// 创建一个场景
 	const scene = new THREE.Scene()
 	// 创建一个相机
-	const camera = new THREE.PerspectiveCamera(40, innerWidth / innerHeight, 1, 2000)
+	const camera = new THREE.PerspectiveCamera(40, 800 / 500, 1, 2000)
 	// 设置相机的位置
 	camera.position.set(0, 0, 40)
 	// 创建一个渲染器
@@ -28,10 +28,10 @@ const init = () => {
 		const group = new THREE.Group()
 
 		const heartShape = new THREE.Shape()
-		heartShape.moveTo(-3, -3)
-		heartShape.lineTo(-3, 3)
-		heartShape.lineTo(3, 3)
-		heartShape.lineTo(3, -3)
+		heartShape.moveTo(-2, -2)
+		heartShape.lineTo(-2, 2)
+		heartShape.lineTo(2, 2)
+		heartShape.lineTo(2, -2)
 
 		const geometry = new THREE.ShapeGeometry(heartShape)
 
@@ -39,9 +39,9 @@ const init = () => {
 			color: `hsl(${(360 / max) * i}, 100%, 50%)`,
 		})
 
-		var plane = new THREE.Line(geometry, material, THREE.LinePieces)
+		const plane = new THREE.Line(geometry, material, THREE.LinePieces)
 
-		plane.position.x = 15
+		plane.position.x = 10 // 圆环半径
 		plane.rotation.z = -i / 20
 		group.rotation.y = ((360 / max) * i * Math.PI) / 180
 
@@ -49,25 +49,26 @@ const init = () => {
 		scene.add(group)
 	}
 	let rotateSpeed = 0.001
-	scene.rotation.x = Math.PI / 10
+	scene.rotation.x = Math.PI / 8
 	const animation = () => {
 		requestAnimationFrame(animation)
+		camera.aspect = 800 / 500
+		camera.updateProjectionMatrix()
 		scene.rotation.y -= rotateSpeed
 		renderer.render(scene, camera)
 	}
 	animation()
 	renderer.setPixelRatio(devicePixelRatio)
 
-	let middle = innerWidth / 2
+	let middle = 500 / 2
 	window.onresize = function () {
 		renderer.setSize(800, 500)
-		camera.aspect = window.innerWidth / window.innerHeight
+		camera.aspect = 800 / window.innerHeight
 		camera.updateProjectionMatrix()
-		middle = innerWidth / 2
+		middle = 500 / 2
 	}
 
 	document.addEventListener('mousemove', e => {
-		let direction = 1
 		rotateSpeed = -(e.clientX - middle) * 0.00002
 	})
 }
@@ -77,5 +78,3 @@ onMounted(() => {
 })
 </script>
 
-<style lang="scss" scoped></style>
-../utils/three

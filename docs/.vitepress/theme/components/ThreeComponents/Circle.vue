@@ -3,8 +3,9 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted,ref } from 'vue'
 import * as THREE from 'three'
+const box = ref(null)
 const init = () => {
 	// 创建一个场景
 	const scene = new THREE.Scene()
@@ -20,8 +21,8 @@ const init = () => {
 	renderer.setClearColor(0x000000, 0)
 	//设置渲染尺寸
 	renderer.setSize(800, 500)
-	const box = document.querySelector('.circle_box')
-	box.append(renderer.domElement)
+	
+	box.value.append(renderer.domElement)
 
 	const max = 346
 	for (let i = 0; i < max; i++) {
@@ -60,12 +61,12 @@ const init = () => {
 	animation()
 	renderer.setPixelRatio(devicePixelRatio)
 
-	let middle = 500 / 2
+	let middle = innerHeight / 2
 	window.onresize = function () {
 		renderer.setSize(800, 500)
-		camera.aspect = 800 / window.innerHeight
+		camera.aspect = 800 / 500
 		camera.updateProjectionMatrix()
-		middle = 500 / 2
+		middle = innerHeight / 2
 	}
 
 	document.addEventListener('mousemove', e => {
@@ -77,4 +78,3 @@ onMounted(() => {
 	init()
 })
 </script>
-

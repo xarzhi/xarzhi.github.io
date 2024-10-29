@@ -16,7 +16,6 @@ let camera, scene, renderer
 
 function init() {
 	container = containerRef.value
-	console.log(container)
 
 	camera = new THREE.PerspectiveCamera(50, 800 / 500, 1, 10)
 	camera.position.z = 2

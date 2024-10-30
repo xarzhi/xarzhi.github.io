@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-import { defineProps, onMounted, ref } from 'vue'
+import {  onMounted, ref } from 'vue'
 const loading = ref(false)
 const Iframe = ref(null)
 const props = defineProps({

@@ -17,6 +17,24 @@ export default defineConfig({
 	title: 'Fade away',
 	description: '花有重开日，人无在少年',
 	lastUpdated: true,
+	markdown: {
+		math: true,
+		lineNumbers: true,
+		image: {
+			lazyLoading: true,
+		},
+		container: {
+			tipLabel: '提示',
+			warningLabel: '警告',
+			dangerLabel: '危险',
+			infoLabel: '信息',
+			detailsLabel: '详细信息',
+		},
+		//时间线
+		config: md => {
+			md.use(timeline)
+		},
+	},
 	themeConfig: {
 		nav: navbar,
 		sidebar: sidebar,
@@ -60,24 +78,7 @@ export default defineConfig({
 			next: '下一页',
 		},
 		//markdown配置
-		markdown: {
-			lineNumbers: true,
-			image: {
-				// 开启图片懒加载
-				lazyLoading: true,
-			},
-			container: {
-				tipLabel: '提示',
-				warningLabel: '警告',
-				dangerLabel: '危险',
-				infoLabel: '信息',
-				detailsLabel: '详细信息',
-			},
-			//时间线
-			config: md => {
-				md.use(timeline)
-			},
-		},
+
 		socialLinks: [{ icon: 'github', link: 'https://github.com/xarzhi/xarzhi.github.io' }],
 		footer: {
 			message: 'MIT Licensed',

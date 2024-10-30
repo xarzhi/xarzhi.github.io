@@ -29,6 +29,7 @@ const sidebar = {
 	'/docs/前端/前端三剑客/javascript/': [
 		{ text: 'js基础', items: getItems('/docs/前端/前端三剑客/javascript/js基础') },
 		{ text: 'js高级', items: getItems('/docs/前端/前端三剑客/javascript/js高级') },
+		{ text: 'Web Api', items: getItems('/docs/前端/前端三剑客/javascript/WebApi') },
 	],
 	'/docs/前端/框架/Vue/Vue2/': [
 		{ text: 'Vue2基础', items: getItems('/docs/前端/框架/Vue/Vue2/Vue2基础') },

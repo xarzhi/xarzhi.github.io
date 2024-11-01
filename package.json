@@ -22,6 +22,7 @@
 		"vue": "^3.4.27"
 	},
 	"dependencies": {
+		"element-plus": "^2.8.6",
 		"gsap": "^3.12.5",
 		"three": "0.135",
 		"vitepress-markdown-timeline": "^1.2.1"

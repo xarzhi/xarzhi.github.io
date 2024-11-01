@@ -5,7 +5,9 @@
 		</div>
 		<div class="content">
 			<div class="title">Fade away</div>
-			<div class="desc">{{ text }}</div>
+			<transition name="fade" mode="out-in">
+				<div class="desc">{{ text }}</div>
+			</transition>
 			<div class="btns">
 				<a class="btn1" href="/docs/vitepress">VitePress</a>
 				<a class="btn2" href="/docs/收藏的网站/">网址导航</a>
@@ -28,6 +30,7 @@ const textArr = [
 	'欲买桂花同载酒，终不似，少年游',
 	'种一棵树最好的时间是在十年前，其次就是现在',
 	'未曾绽放就要枯萎吗',
+	'看山是山，看山不是山，看山还是山',
 ]
 const text = ref('')
 const timer = ref()
@@ -40,17 +43,17 @@ const randomBox = () => {
 }
 randomBox()
 const changeText = () => {
-	text.value = textArr[textIndex]
+	text.value = textArr[textIndex.value]
 	textIndex.value++
 	if (textIndex.value >= textArr.length) {
 		textIndex.value = 0
 	}
 }
+changeText()
 onMounted(() => {
-	changeText()
 	timer.value = setInterval(() => {
 		changeText()
-	}, 1000 * 10)
+	}, 5000)
 })
 onUnmounted(() => {
 	clearInterval(timer.value)

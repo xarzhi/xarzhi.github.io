@@ -11,12 +11,15 @@ import { h } from 'vue'
 import { useData } from 'vitepress'
 import { register } from './components/index'
 import Layout from './Layout.vue'
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
 export default {
 	extends: DefaultTheme,
 	enhanceApp({ app }) {
 		// 注册全局组件
 		register(app)
-		app.component('Layout', Layout)
+		app.component( 'Layout', Layout )
+		app.use(ElementPlus)
 	},
 	Layout: () => {
 		const props = {}

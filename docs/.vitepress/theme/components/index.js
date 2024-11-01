@@ -5,6 +5,7 @@ import Modal from './TestComponents/Modal.vue'
 import MyIframe from './MyIframe.vue'
 import MyKeepAlive from './TestComponents/MyKeepAlive.vue'
 import MyTransition from './TestComponents/MyTransition.vue'
+import CanvasCompositeOperation from './TestComponents/CanvasCompositeOperation.vue'
 function register(app) {
 	app.component('Modal', Modal)
 	app.component('MNavLinks', MNavLinks)
@@ -13,5 +14,6 @@ function register(app) {
 	app.component('MyIframe', MyIframe)
 	app.component('MyKeepAlive', MyKeepAlive)
 	app.component('MyTransition', MyTransition)
+	app.component('CanvasCompositeOperation', CanvasCompositeOperation)
 }
 export { register }

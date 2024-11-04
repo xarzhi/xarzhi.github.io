@@ -13,12 +13,13 @@ import { register } from './components/index'
 import Layout from './Layout.vue'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
+import 'element-plus/theme-chalk/dark/css-vars.css'
 export default {
 	extends: DefaultTheme,
 	enhanceApp({ app }) {
 		// 注册全局组件
 		register(app)
-		app.component( 'Layout', Layout )
+		app.component('Layout', Layout)
 		app.use(ElementPlus)
 	},
 	Layout: () => {

@@ -155,3 +155,14 @@ iframe {
 .demo {
 	box-shadow: 1px 1px 10px 1px rgba(110, 110, 243, 0.5);
 }
+
+.VPSidebarItem.level-1 .text {
+	line-height: 20px;
+}
+
+.VPDocOutlineItem .outline-link {
+	line-height: 28px;
+}
+#VPSidebarNav .VPSidebarItem.level-0 {
+	padding-bottom: 10px;
+}

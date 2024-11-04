@@ -19,7 +19,7 @@ export default defineConfig({
 	lastUpdated: true,
 	markdown: {
 		math: true,
-		lineNumbers: true,
+		// lineNumbers: true,  // 显示行号
 		image: {
 			lazyLoading: true,
 		},

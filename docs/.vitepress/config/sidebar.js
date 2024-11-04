@@ -31,6 +31,12 @@ const sidebar = {
 		{ text: 'js高级', items: getItems('/docs/前端/前端三剑客/javascript/js高级') },
 		{ text: 'Web Api', items: getItems('/docs/前端/前端三剑客/javascript/WebApi') },
 	],
+	'/docs/前端/第三方库/': [
+		{
+			text: 'Gsap',
+			items: getItems('/docs/前端/第三方库/Gsap'),
+		},
+	],
 	'/docs/前端/框架/Vue/Vue2/': [
 		{ text: 'Vue2基础', items: getItems('/docs/前端/框架/Vue/Vue2/Vue2基础') },
 		{ text: 'Vue2进阶', items: getItems('/docs/前端/框架/Vue/Vue2/Vue2进阶') },
@@ -59,6 +65,7 @@ const sidebar = {
 		{ text: '摄像机', items: getItems('/docs/前端/可视化/Three.js/摄像机'), collapsed: true },
 		{ text: '加载器', items: getItems('/docs/前端/可视化/Three.js/加载器'), collapsed: true },
 		{ text: '核心', items: getItems('/docs/前端/可视化/Three.js/核心'), collapsed: true },
+		{ text: '数学库', items: getItems('/docs/前端/可视化/Three.js/数学库'), collapsed: true },
 		{ text: '常量', items: getItems('/docs/前端/可视化/Three.js/常量'), collapsed: true },
 	],
 	'/docs/后端/C++/C++基础': [

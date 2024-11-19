@@ -8,6 +8,8 @@ import MyTransition from './TestComponents/MyTransition.vue'
 import CanvasCompositeOperation from './TestComponents/CanvasCompositeOperation.vue'
 import CanvasDrawImage from "./TestComponents/CanvasDrawImage.vue";
 import Throttledebounce from "./TestComponents/Throttledebounce.vue";
+import CanvasTransform from "./TestComponents/CanvasTransform.vue";
+import CanvasPointIn from "./TestComponents/CanvasPointIn.vue";
 function register(app) {
 	app.component('Modal', Modal)
 	app.component('MNavLinks', MNavLinks)
@@ -19,5 +21,7 @@ function register(app) {
 	app.component('CanvasCompositeOperation', CanvasCompositeOperation)
 	app.component("CanvasDrawImage", CanvasDrawImage);
 	app.component("Throttledebounce", Throttledebounce);
+	app.component("CanvasTransform", CanvasTransform);
+	app.component("CanvasPointIn", CanvasPointIn);
 }
 export { register }

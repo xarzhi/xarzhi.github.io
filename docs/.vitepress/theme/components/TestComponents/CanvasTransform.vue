@@ -17,8 +17,8 @@
               >
               <span style="color: #6f42c1">translate</span>
               <span style="color: #6f42c1">(</span>
-              <span style="color: #6f42c1">{{ args.x }}, </span>
-              <span style="color: #6f42c1">{{ args.y }}</span>
+              <span class="variable">{{ args.x }}, </span>
+              <span class="variable">{{ args.y }}</span>
               <span style="color: #6f42c1">)</span>
             </span>
             <span class="line highlighted" v-if="type === 'rotate'">
@@ -29,7 +29,7 @@
               <span style="color: #6f42c1">(</span>
               <span style="color: #6f42c1"
                 >(Math.PI / 180) *
-                <span style="color: #24292e"> {{ args.deg }}</span>
+                <span class="variable"> {{ args.deg }}</span>
               </span>
               <span style="color: #6f42c1">)</span>
             </span>
@@ -40,8 +40,24 @@
               <span style="color: #6f42c1">scale</span>
               <span style="color: #6f42c1">(</span>
               <span style="color: #6f42c1">
-                <span style="color: #24292e"> {{ args.scaleX }}, </span>
-                <span style="color: #24292e"> {{ args.scaleY }}</span>
+                <span class="variable"> {{ args.scaleX }}, </span>
+                <span class="variable"> {{ args.scaleY }}</span>
+              </span>
+              <span style="color: #6f42c1">)</span>
+            </span>
+            <span class="line highlighted" v-if="type === 'transform'">
+              <span style="--shiki-light: #24292e; --shiki-dark: #e1e4e8"
+                >ctx.</span
+              >
+              <span style="color: #6f42c1">transform</span>
+              <span style="color: #6f42c1">(</span>
+              <span style="color: #6f42c1">
+                <span class="variable"> {{ args.scaleX }}, </span>
+                <span class="variable"> {{ args.skewX }}, </span>
+                <span class="variable"> {{ args.skewY }}, </span>
+                <span class="variable"> {{ args.scaleY }}, </span>
+                <span class="variable"> {{ args.x }}, </span>
+                <span class="variable"> {{ args.y }}</span>
               </span>
               <span style="color: #6f42c1">)</span>
             </span>
@@ -50,10 +66,8 @@
                 >ctx.</span
               >
               <span style="color: #6f42c1">fillStyle</span>
-              <span style="--shiki-light: #6f42c1; --shiki-dark: #b392f0">
-                =
-              </span>
-              <span style="color: #24292e">"aqua"</span>
+              <span> = </span>
+              <span class="variable">"aqua"</span>
             </span>
             <span class="line">
               <span style="--shiki-light: #24292e; --shiki-dark: #e1e4e8"
@@ -199,12 +213,18 @@ class Rect {
   draw(ctx) {
     ctx.save();
     ctx.beginPath();
-    ctx.translate(args.x, args.y);
-    ctx.rotate((Math.PI / 180) * args.deg);
+    if (props.type === "translate") {
+      ctx.translate(args.x, args.y);
+    }
+    if (props.type === "rotate") {
+      ctx.rotate((Math.PI / 180) * args.deg);
+    }
     if (props.type === "scale") {
       ctx.translate(100, 100);
     }
-    ctx.scale(args.scaleX, args.scaleY);
+    if (props.type === "scale") {
+      ctx.scale(args.scaleX, args.scaleY);
+    }
     if (props.type === "transform") {
       ctx.transform(
         args.scaleX,
@@ -239,7 +259,6 @@ onMounted(() => {
   if (props.type === "rotate") {
     rect.value.x = 200;
   }
-  console.log(ctx.value);
   rect.value.draw(ctx.value);
 });
 </script>
@@ -283,5 +302,13 @@ canvas {
 }
 .highlighted {
   display: flex;
+}
+.variable {
+  color: #24292e;
+}
+html[class="dark"] {
+  .variable {
+    color: whitesmoke;
+  }
 }
 </style>

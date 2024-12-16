@@ -311,4 +311,7 @@ html[class="dark"] {
     color: whitesmoke;
   }
 }
+.options{
+  width: 400px;
+}
 </style>

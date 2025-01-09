@@ -165,6 +165,16 @@ const sidebar = {
   "/docs/后端/CS/WPF": [
     { text: "WPF基础", items: getItems("/docs/后端/CS/WPF") },
   ],
+  "/docs/后端/CS/Winform": [
+    {
+      text: "Winform基础",
+      items: getItems("/docs/后端/CS/Winform/Winform基础"),
+    },
+    {
+      text: "常用控件",
+      items: getItems("/docs/后端/CS/Winform/常用控件"),
+    },
+  ],
   "/docs/后端/C++/Win32": [
     { text: "Win32", items: getItems("/docs/后端/C++/Win32") },
   ],

@@ -110,6 +110,10 @@ export default [
             link: "/docs/后端/CS/CS基础/CS基础/01.环境配置.md",
           },
           {
+            text: "🍌Winform",
+            link: "/docs/后端/CS/Winform/Winform基础/01.第一个窗口.md",
+          },
+          {
             text: "🍌WPF",
             link: "/docs/后端/CS/WPF/01.环境配置.md",
           },

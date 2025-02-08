@@ -119,6 +119,15 @@ export default [
           },
         ],
       },
+      {
+        text: "Rust",
+        items: [
+          {
+            text: "🍌Rust基础",
+            link: "/docs/后端/Rust/Rust基础/01.环境配置.md",
+          },
+        ],
+      },
     ],
   },
   {

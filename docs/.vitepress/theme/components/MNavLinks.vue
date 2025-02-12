@@ -19,6 +19,7 @@ const formatTitle = computed(() => {
 		<div class="m-nav-links">
 			<MNavLink v-for="item in items" :noIcon="noIcon" v-bind="item" :key="item.text" />
 		</div>
+		<hr>
 	</span>
 </template>
 

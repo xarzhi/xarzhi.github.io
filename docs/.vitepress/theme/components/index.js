@@ -11,7 +11,6 @@ import Throttledebounce from "./TestComponents/Throttledebounce.vue";
 import CanvasTransform from "./TestComponents/CanvasTransform.vue";
 import CanvasPointIn from "./TestComponents/CanvasPointIn.vue";
 import CanvasWatermark from "./TestComponents/CanvasWatermark.vue";
-import NavLink from "./NavLink/NavLink.vue";
 function register(app) {
 	app.component('Modal', Modal)
 	app.component('MNavLinks', MNavLinks)
@@ -26,6 +25,5 @@ function register(app) {
 	app.component("CanvasTransform", CanvasTransform);
 	app.component("CanvasPointIn", CanvasPointIn);
 	app.component("CanvasWatermark", CanvasWatermark);
-	app.component("NavLink", NavLink);
 }
 export { register }

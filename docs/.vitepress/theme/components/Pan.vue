@@ -1,25 +1,21 @@
 <template>
   <div class="tab-pan">
-    <a
+    <div
       class="tab-pan-item"
       v-for="item in PanItems"
       :key="item.title"
       :desc="item.desc"
-      :href="item.link"
-      target="_blank"
-      rel="noreferrer"
+      @click="handleJump(item)"
     >
       <div class="head">
-        <div class="icon" v-if="item.icon && typeof item.icon === 'string'">
-          <img :src="withBase(item.icon)" :alt="item.title" />
-        </div>
-        <div v-else></div>
-        <h6 class="title">{{ item.title }}</h6>
+        <Img :src="item.icon" :alt="item.title" />
+        {{ item.title }}
+        <!-- <h6 class="title">{{ item.title }}</h6> -->
       </div>
       <div class="content">
         {{ item.desc }}
       </div>
-    </a>
+    </div>
   </div>
 </template>
 
@@ -28,6 +24,10 @@ import { computed } from "vue";
 import { withBase } from "vitepress";
 import { slugify } from "@mdit-vue/shared";
 const props = defineProps(["PanItems"]);
+
+const handleJump = (item) => {
+  open(item.link);
+};
 
 // const formatTitle = computed(() => {
 //   if (!props.title) {
@@ -116,21 +116,7 @@ a {
       display: flex;
       align-items: center;
       margin-bottom: 20px;
-      .icon {
-        background-color: #e7e8ec;
-        width: 40px;
-        height: 40px;
-        margin-right: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 6px;
-        overflow: hidden;
-        :deep(img) {
-          border-radius: 4px;
-          pointer-events: none;
-        }
-      }
+
       .title {
         color: var(--vp-c-text-1);
         font-size: 16px;

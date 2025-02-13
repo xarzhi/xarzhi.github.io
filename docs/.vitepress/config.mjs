@@ -21,7 +21,7 @@ export default defineConfig({
 		math: true,
 		// lineNumbers: true,  // 显示行号
 		image: {
-			lazyLoading: true,
+			// lazyLoading: true,  // 图片懒加载
 		},
 		container: {
 			tipLabel: '提示',

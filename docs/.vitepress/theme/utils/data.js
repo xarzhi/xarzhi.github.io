@@ -878,6 +878,24 @@ export const NAV_DATA = [
             desc: "一款程序员解谜游戏",
             icon: "https://nazo.one-story.cn/favicon.ico",
           },
+          {
+            title: "中国象棋在线玩",
+            link: "https://chess.z3web.cn/",
+            desc: "可以和人机对战，也可以开房间与好友在线对局，更有闯关模式、残棋玩法，不用登录，无广告",
+            icon: "https://chess.z3web.cn/favicon48.ico",
+          },
+          {
+            title: "桌游合集",
+            link: "https://game.hullqin.cn/",
+            desc: "桌游合集，包含一些联机网页游戏：卡坦岛、璀璨宝石、飞行棋、UNO、谁是卧底、阿瓦隆、一夜狼、狼人杀、德国心脏病、达芬奇密码、五子棋、围棋、象棋、国际象棋、斗地主、井字棋、炸飞机。公众号：线下聚会游戏。无广告，纯净版，支持在线联机对战。让你聚会时不带任何道具，就能跟朋友一起玩桌游。无需下载，点开即玩！享受纯粹的游戏！",
+            icon: "https://fe-1255520126.file.myqcloud.com/game/icon64-ed8a0a.png",
+          },
+          {
+            title: "鸡乐盒",
+            link: "https://haiyong.site/moyu/jlh/",
+            desc: "想念那个男人了么",
+            icon: "https://haiyong.site/moyu/jlh/favicon.ico",
+          },
         ],
       },
       {

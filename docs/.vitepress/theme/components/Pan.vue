@@ -1,14 +1,9 @@
 <template>
   <div class="tab-pan">
     <template v-for="item in PanItems" :key="item.title">
-      <el-tooltip
-        class="box-item"
-        effect="dark"
-        placement="top"
-        style="max-width: 200px"
-      >
+      <el-tooltip effect="dark" placement="top">
         <template #content>
-          <div style="max-width: 200px">{{ item.desc }}</div>
+          <div style="max-width: 250px">{{ item.desc }}</div>
         </template>
         <div class="tab-pan-item" :desc="item.desc" @click="handleJump(item)">
           <div class="head">
@@ -33,8 +28,6 @@ const props = defineProps(["PanItems"]);
 const handleJump = (item) => {
   open(item.link);
 };
-
-
 </script>
 
 <style lang="scss" scoped>
@@ -61,7 +54,7 @@ a {
     transition: all 0.25s;
     position: relative;
     border: 1px solid var(--vp-c-bg-soft);
-
+  
     .head {
       display: flex;
       align-items: center;

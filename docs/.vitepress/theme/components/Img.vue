@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, defineEmits } from "vue";
+import { ref, onMounted } from "vue";
 const props = defineProps(["src"]);
 const realsrc = ref();
 onMounted(() => {
@@ -22,7 +22,7 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .icon {
-//   background-color: #e7e8ec;
+  //   background-color: #e7e8ec;
   width: 40px;
   height: 40px;
   margin-right: 20px;

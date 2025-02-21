@@ -1,3 +1,13 @@
+.VPMenuLink .VPLink.link span {
+  display: flex;
+  align-items: center;
+  img {
+    width: 20px;
+    height: 20px;
+    margin-right: 3px;
+  }
+}
+
 .m-nav-layout {
   /* 覆盖全局的 vp-layout-max-width（仅当前页面使用） */
   --vp-layout-max-width: 1440px;

@@ -1,6 +1,5 @@
 ---
 layout: doc
-layoutClass: m-nav-layout
 sidebar: false
 prev: false
 next: false

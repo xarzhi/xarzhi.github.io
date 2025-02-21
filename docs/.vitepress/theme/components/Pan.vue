@@ -1,21 +1,26 @@
 <template>
   <div class="tab-pan">
-    <div
-      class="tab-pan-item"
-      v-for="item in PanItems"
-      :key="item.title"
-      :desc="item.desc"
-      @click="handleJump(item)"
-    >
-      <div class="head">
-        <Img :src="item.icon" :alt="item.title" />
-        {{ item.title }}
-        <!-- <h6 class="title">{{ item.title }}</h6> -->
-      </div>
-      <div class="content">
-        {{ item.desc }}
-      </div>
-    </div>
+    <template v-for="item in PanItems" :key="item.title">
+      <el-tooltip
+        class="box-item"
+        effect="dark"
+        placement="top"
+        style="max-width: 200px"
+      >
+        <template #content>
+          <div style="max-width: 200px">{{ item.desc }}</div>
+        </template>
+        <div class="tab-pan-item" :desc="item.desc" @click="handleJump(item)">
+          <div class="head">
+            <Img :src="item.icon" :alt="item.title" />
+            {{ item.title }}
+          </div>
+          <div class="content">
+            {{ item.desc }}
+          </div>
+        </div>
+      </el-tooltip>
+    </template>
   </div>
 </template>
 
@@ -29,24 +34,7 @@ const handleJump = (item) => {
   open(item.link);
 };
 
-// const formatTitle = computed(() => {
-//   if (!props.title) {
-//     return "";
-//   }
-//   return slugify(props.title);
-// });
 
-// const svg = computed(() => {
-//   if (typeof props.icon === "object") return props.icon.svg;
-//   return "";
-// });
-
-// const formatBadge = computed(() => {
-//   if (typeof props.badge === "string") {
-//     return { text: props.badge, type: "info" };
-//   }
-//   return props.badge;
-// });
 </script>
 
 <style lang="scss" scoped>
@@ -73,45 +61,7 @@ a {
     transition: all 0.25s;
     position: relative;
     border: 1px solid var(--vp-c-bg-soft);
-    &::before {
-      content: attr(desc);
-      position: absolute;
-      width: 260px;
-      height: auto;
-      background: var(--tip-bg);
-      color: var(--tip-text);
-      display: none;
-      padding: 5px;
-      box-sizing: border-box;
-      border-radius: 8px;
-      font-size: 14px;
-      top: 0;
-      left: 50%;
-      transform: translate(-50%, calc(-100% - 20px));
-    }
-    &::after {
-      content: "";
-      position: absolute;
-      width: 0;
-      height: 0;
-      top: -3px;
-      border: 10px solid var(--tip-bg);
-      color: var(--tip-text);
-      border-right: 10px solid transparent;
-      border-left: 10px solid transparent;
-      border-bottom: 10px solid transparent;
-      left: 50%;
-      transform: translate(-50%, calc(-100% + 3px));
-      display: none;
-    }
-    &:hover {
-      &::before {
-        display: block;
-      }
-      &::after {
-        display: block;
-      }
-    }
+
     .head {
       display: flex;
       align-items: center;

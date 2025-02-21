@@ -399,6 +399,52 @@ export const NAV_DATA = [
         ],
       },
       {
+        title: "Three.js",
+        items: [
+          {
+            title: "Three.js官网",
+            link: "https://threejs.org/",
+            icon: "https://www.three3d.cn/files/favicon.ico",
+            desc: "学习Three.js，网页3D可视化，内含Three.js教程，api文档，若干个官方示例",
+          },
+          {
+            title: "Three.js国内镜像",
+            link: "https://www.three3d.cn/docs/index.html",
+            icon: "https://www.three3d.cn/files/favicon.ico",
+            desc: "与Three.js官网内容一样，老陈打码创建的国内镜像",
+          },
+          {
+            title: "threehub",
+            link: "http://threehub.cn",
+            icon: "https://threehub.cn/files/site/logo.svg",
+            desc: "内涵若干个Threejs小案例",
+          },
+        ],
+      },
+      {
+        title: "实用组件",
+        items: [
+          {
+            title: "西瓜播放器 xgplayer",
+            link: "https://h5player.bytedance.com/",
+            icon: "https://lf3-static.bytednsdoc.com/obj/eden-cn/nupenuvpxnuvo/xgplayer_doc/favicon.ico",
+            desc: "西瓜视频开源播放器组件，支持播放mp4、流媒体m3u8、flv、hls，包括视频点播和直播",
+          },
+          {
+            title: "wangeditor",
+            link: "https://www.wangeditor.com/",
+            icon: "https://www.wangeditor.com/favicon.ico",
+            desc: "开源 Web 富文本编辑器，开箱即用，配置简单。支持 JS Vue React",
+          },
+          {
+            title: "wangeditor-next",
+            link: "https://wangeditor-next.github.io/docs/",
+            icon: "https://wangeditor-next.github.io/docs/image/logo.png",
+            desc: "继wangeditor停止维护之后，国内能人志士继续维护的版本",
+          },
+        ],
+      },
+      {
         title: "CDN",
         items: [
           {
@@ -912,6 +958,17 @@ export const NAV_DATA = [
             link: "https://sh.pvzhe.com/",
             desc: "本游戏是由B站UP主潜艇伟伟迷发布的基于《植物大战僵尸》制作的同人游戏在原版游戏的基础上，添加了射击玩法、小推车移动植物、植物攻速升级以及植物进化（如“豌豆射手进阶双发豌豆射手”等）相比原版增加了许多特殊玩法，为玩家带来了更新奇的游戏体验。例如，让场上的植物可以“乘坐”小推车移动，更多精彩等你来挑战！",
             icon: "https://www.pvzhe.com/pvzsh-logo.svg",
+          },
+        ],
+      },
+      {
+        title: "游戏下载",
+        items: [
+          {
+            title: "byrutgame",
+            desc: "毛子游戏下载网站，应有尽有，建议搭配一个翻译插件不列",
+            icon: "https://byrutgame.org/favicon.ico",
+            link: "https://byrutgame.org/",
           },
         ],
       },

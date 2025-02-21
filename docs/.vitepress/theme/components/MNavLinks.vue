@@ -7,27 +7,19 @@
     <div class="tab">
       <template v-if="items[0].items">
         <div class="tab-head">
-          <div class="tab-head-box">
-            <!-- activeIndex == index ? '#fff' : '#888 -->
+          <div class="tab-head-box" ref="tabHeadBox">
             <div
-              class="tab-head-item"
               v-for="(item, index) in items"
               :key="item.title"
-              @click="handleClick(item, index)"
-              :style="{
-                color: tabItemColor(index),
-                backgroundColor: tabItemBgColor(index),
+              @click="handleClick(item, index, $event)"
+              :class="{
+                'tab-head-item': true,
+                active: activeIndex === index,
               }"
             >
-              <!-- <h5
-                v-if="item.title"
-                :id="slugify(props.title) + slugify(item.title)"
-                class="title"
-                :class="{ 'no-icon': item.noIcon }"
-              > -->
               {{ item.title }}
-              <!-- </h5> -->
             </div>
+            <div class="slider" ref="slider"></div>
           </div>
         </div>
         <Pan :PanItems="PanItems"></Pan>
@@ -39,7 +31,7 @@
   </span>
 </template>
 <script setup>
-import { computed, ref } from "vue";
+import { computed, ref, nextTick, onMounted } from "vue";
 import { slugify } from "@mdit-vue/shared";
 import { useRoute, useData } from "vitepress";
 import MNavLink from "./MNavLink.vue";
@@ -52,43 +44,57 @@ const formatTitle = computed(() => {
 
 const PanItems = ref([]);
 const activeIndex = ref(0);
+const slider = ref(null);
+const tabHeadBox = ref(null);
 if (props.items[0].items) {
   PanItems.value = props.items[0].items;
 } else {
   PanItems.value = props.items;
 }
 
-const handleClick = (item, index) => {
+const data = useData();
+
+onMounted(() => {
+  const items = tabHeadBox.value?.querySelectorAll(".tab-head-item");
+  // console.log(items.length)
+  if (items) {
+    const [item] = items;
+    slider.value.style.left = item.offsetLeft + "px";
+    slider.value.style.width = item.offsetWidth + "px";
+  }
+});
+const handleClick = (item, index, e) => {
   PanItems.value = item.items;
   activeIndex.value = index;
   location.hash = props.title + "/" + item.title;
-};
-const data = useData();
-
-const tabItemColor = (index) => {
-  const isDark = data.isDark.value;
-  if (isDark) {
-    return activeIndex.value === index ? "#ddd" : "#777";
-  } else {
-    return activeIndex.value === index ? "#fff" : "#888";
-  }
-};
-
-const tabItemBgColor = (index) => {
-  const isDark = data.isDark.value;
-  if (isDark) {
-    return activeIndex.value === index ? "#5f5f5f" : "#333";
-  } else {
-    return activeIndex.value === index ? "#4BC2C5" : "#e0e0e0";
-  }
+  slider.value.style.left = e.target.offsetLeft + "px";
+  slider.value.style.width = e.target.offsetWidth + "px";
 };
 </script>
 
 <style lang="scss" scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 html[class="dark"] {
   .tab-head {
     .tab-head-box {
       background-color: #333;
+      .tab-head-item {
+        color: #777;
+      }
+      .active {
+        color: #ddd;
+      }
+      .slider {
+        background-color: #5f5f5f;
+      }
     }
   }
 }
@@ -106,6 +112,8 @@ html[class="dark"] {
       box-sizing: border-box;
       border-radius: 3px;
       background-color: #e0e0e0;
+      position: relative;
+      z-index: 1;
       .tab-head-item {
         min-width: 80px;
         padding: 0 10px;
@@ -115,9 +123,25 @@ html[class="dark"] {
         text-align: center;
         cursor: pointer;
         border-radius: 3px;
+        color: #777;
+        position: relative;
+        z-index: 1;
+        transition: all 0.3s;
         .title {
           font-weight: normal;
         }
+      }
+      .active {
+        color: #fff;
+      }
+      .slider {
+        position: absolute;
+        width: 100px;
+        height: 25px;
+        background-color: #4bc2c5;
+        z-index: -1;
+        border-radius: 4px;
+        transition: all 0.3s;
       }
       .tab-head-item:last-child {
         margin-right: 0;

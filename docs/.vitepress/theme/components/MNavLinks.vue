@@ -34,7 +34,6 @@
 import { computed, ref, nextTick, onMounted } from "vue";
 import { slugify } from "@mdit-vue/shared";
 import { useRoute, useData } from "vitepress";
-import MNavLink from "./MNavLink.vue";
 import Pan from "./Pan.vue";
 const props = defineProps(["title", "items", "noIcon"]);
 const route = useRoute();

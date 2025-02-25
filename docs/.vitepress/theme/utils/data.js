@@ -270,7 +270,7 @@ export const NAV_DATA = [
         ],
       },
       {
-        title: "工具库",
+        title: "第三方工具库",
         items: [
           {
             title: "Npmjs",
@@ -297,7 +297,7 @@ export const NAV_DATA = [
             icon: "https://www.lodashjs.com/img/favicon.ico",
           },
           {
-            title: "Moment",
+            title: "Moment.js",
             link: "https://moment.nodejs.cn/",
             desc: "在 JavaScript 中解析、校验、操作、显示日期和时间",
             icon: "https://moment.nodejs.cn/static/img/moment-favicon.png",
@@ -321,10 +321,39 @@ export const NAV_DATA = [
             link: "https://picsum.photos/",
           },
           {
-            title: "Autofit",
+            title: "Autofit.js",
             desc: " 迄今为止最易用的自适应工具",
             link: "https://auto-plugin.github.io/index/autofit.js/",
             icon: "https://auto-plugin.github.io/index/autofit.js/logo.png",
+          },
+          {
+            title: "Hotkey.js",
+            desc: "简单的设置快捷键，没有依赖",
+            link: "https://wangchujiang.com/hotkeys-js/",
+          },
+          {
+            title: "VueUse.js",
+            desc: "基础 Vue 组合式工具的集合,200+ 函数供你选择,适用于 Vue 3 和 2,可通过 CDN 使用，无需任何打包器,使用 TypeScript 编写，带有完整的 TS 文档",
+            link: "https://vueuse.nodejs.cn/",
+            icon: "https://vueuse.nodejs.cn/favicon.svg",
+          },
+          {
+            title: "animate.css",
+            link: "https://animate.style/",
+            desc: "一款纯css动画库",
+            icon: "https://animate.style/img/favicon.ico",
+          },
+          {
+            title: "marked.js",
+            link: "https://marked.nodejs.cn/",
+            desc: "用于解析 markdown 的底层 markdown 编译器，无需长时间缓存或阻塞，轻量级，同时实现受支持的风格和规范中的所有 markdown 功能",
+            icon: "https://nodejs.cn/logo/marked.png",
+          },
+          {
+            title: "marked.js",
+            link: "https://highlightjs.org/",
+            desc: "可以自动检测语言的语法高亮插件，可查看中文网https://www.fenxianglu.cn/highlightjs/docs/start/",
+            icon: "https://highlightjs.org/icon.png",
           },
         ],
       },
@@ -340,8 +369,8 @@ export const NAV_DATA = [
           {
             icon: "https://gw.alipayobjects.com/zos/antfincdn/FLrTNDvlna/antv.png",
             title: "AntV",
-            desc: "蚂蚁集团全新一代数据可视化解决方案，致力于提供一套简单方便、专业可靠、无限可能的数据可视化最佳实践。",
-            link: "https://antv.vision/zh/",
+            desc: "蚂蚁集团全新一代数据可视化解决方案，包含统计图表G2，多维表格S2，关系图G6，流程图X6，地图L7，以及移动统计图F2，一共关系图F6，移动地图F7，还有canvas图表引擎：G",
+            link: "https://antv.antgroup.com/",
           },
           {
             icon: "https://d3js.org/logo.png",
@@ -441,6 +470,12 @@ export const NAV_DATA = [
             link: "https://wangeditor-next.github.io/docs/",
             icon: "https://wangeditor-next.github.io/docs/image/logo.png",
             desc: "继wangeditor停止维护之后，国内能人志士继续维护的版本",
+          },
+          {
+            title: "cplayer",
+            link: "https://cplayer.js.org/",
+            icon: "https://wangeditor-next.github.io/docs/image/logo.png",
+            desc: "一款漂亮干净的 HTML5 WEB 音乐播放器",
           },
         ],
       },

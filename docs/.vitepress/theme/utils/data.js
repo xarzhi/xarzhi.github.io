@@ -1030,6 +1030,98 @@ export const NAV_DATA = [
         desc: "阿里云盘 - 你的数字世界",
         icon: "https://img.alicdn.com/imgextra/i1/O1CN01JDQCi21Dc8EfbRwvF_!!6000000000236-73-tps-64-64.ico",
       },
+
+      {
+        title: "夸克云盘",
+        link: "https://pan.quark.cn/",
+        desc: "夸克网盘是夸克推出的一款云服务产品，功能包括云存储、高清看剧、文件在线解压、PDF一键转换等。通过夸克网盘可随时随地管理和使用照片、文档、手机资料，目前支持Android、iOS、PC、iPad。",
+        icon: "https://pan.quark.cn/favicon.ico",
+      },
+      {
+        title: "百度网盘",
+        link: "https://pan.baidu.com/",
+        desc: "阿里云盘 - 你的数字世界",
+        icon: "https://img.alicdn.com/imgextra/i1/O1CN01JDQCi21Dc8EfbRwvF_!!6000000000236-73-tps-64-64.ico",
+      },
+    ],
+  },
+  {
+    title: "音乐",
+    items: [
+      {
+        title: "大厂音乐",
+        items: [
+          {
+            title: "QQ音乐",
+            link: "https://y.qq.com/",
+            desc: "QQ音乐是腾讯公司推出的一款网络音乐服务产品，海量音乐在线试听、新歌热歌在线首发、歌词翻译、手机铃声下载、高品质无损音乐试听、海量无损曲库、正版音乐下载、空间背景音乐设置、MV观看等，是互联网音乐播放和下载的优选。",
+            icon: "https://y.qq.com/favicon.ico",
+          },
+          {
+            title: "网易云音乐",
+            link: "https://music.163.com/",
+            desc: "网易云音乐是一款专注于发现与分享的音乐产品，依托专业音乐人、DJ、好友推荐及社交功能，为用户打造全新的音乐生活。",
+            icon: "https://s1.music.126.net/style/favicon.ico",
+          },
+          {
+            title: "酷狗音乐",
+            link: "https://www.kugou.com/",
+            desc: "酷狗音乐在线正版音乐网站，为您提供酷狗音乐播放器下载 、在线音乐试听下载，提供听书、长音频、频道、听小说和MV播放服务。酷狗音乐，就是歌多！小说相声也很多！场景音乐也很多！",
+            icon: "https://gitee.com/xarzhi/picture/raw/master/img/image-20250227105729175.png",
+          },
+          {
+            title: "酷我音乐",
+            link: "https://kuwo.cn/",
+            desc: "酷我音乐-无损音质正版在线试听网站，酷我音乐为您提供高品质音乐，无损音乐下载，拥有各类音乐榜单，快捷的新歌速递，完善的主题电台，个性化的歌曲推荐，高品质音乐在线听，好音质，用酷我。陪着我，不要停",
+            icon: "https://kuwo.cn/favicon.ico?v=1",
+          },
+        ],
+      },
+      {
+        title: "本地音乐播放器",
+        items: [
+          {
+            title: "Criander Player",
+            link: "https://github.com/Ferry-200/coriander_player",
+            desc: "Windows端本地音乐播放器，使用Material You配色。Dart (Flutter) + Rust (lofty, windows-rs) + C (bass lib) 多语言项目。绝赞开发中。，国内镜像：https://gitee.com/biyanci/coriander_player",
+            icon: "https://gitee.com/xarzhi/picture/raw/master/img/1.ico",
+          },
+          {
+            title: "Salt Player for Window",
+            link: "https://moriafly.com/program/spw",
+            desc: "椒盐音乐播放器，界面优美，使用kotlin开发，即将上架steam",
+            icon: "https://gitee.com/xarzhi/picture/raw/master/img/222.ico",
+          },
+        ],
+      },
+      {
+        title: "音乐论坛",
+        items: [
+          {
+            title: "音乐磁场",
+            link: "https://www.hifini.com/",
+            icon: "https://www.hifini.com/view/img/favicon.ico",
+            desc: "HiFiNi 是一个由音乐爱好者维护的分享平台",
+          },
+          {
+            title: "海水之声",
+            link: "https://www.hszsz.com/",
+            icon: "https://www.hszsz.com/favicon.ico",
+            desc: "海水之声-无损音乐免费下载论坛，极品发烧专辑深度分享网站！",
+          },
+        ],
+      },
+      // {
+      //   title:'音乐下载',
+      //   items:[
+      //     {
+      //       title:'系统音乐网',
+      //       link:'',
+      //       icon:'',
+      //       desc:''
+      //     }
+      //   ]
+      // }
     ],
   },
   {

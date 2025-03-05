@@ -8,6 +8,7 @@
       <template v-if="items[0].items">
         <div class="tab-head">
           <div class="tab-head-box" ref="tabHeadBox">
+            <div class="slider" ref="slider"></div>
             <div
               v-for="(item, index) in items"
               :key="item.title"
@@ -19,7 +20,6 @@
             >
               {{ item.title }}
             </div>
-            <div class="slider" ref="slider"></div>
           </div>
         </div>
         <Pan :PanItems="PanItems"></Pan>
@@ -97,6 +97,7 @@ html[class="dark"] {
     }
   }
 }
+
 .tab {
   display: flex;
   flex-flow: column;
@@ -106,7 +107,7 @@ html[class="dark"] {
     .tab-head-box {
       width: auto;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       padding: 3px;
       box-sizing: border-box;
       border-radius: 3px;
@@ -118,10 +119,10 @@ html[class="dark"] {
         padding: 0 10px;
         height: 25px;
         line-height: 25px;
-        margin-right: 10px;
         text-align: center;
         cursor: pointer;
         border-radius: 3px;
+        margin-right: 10px;
         color: #777;
         position: relative;
         z-index: 1;
@@ -129,7 +130,11 @@ html[class="dark"] {
         .title {
           font-weight: normal;
         }
+        &:last-of-type {
+          margin-right: 0;
+        }
       }
+
       .active {
         color: #fff;
       }

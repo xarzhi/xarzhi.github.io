@@ -90,14 +90,14 @@ const nav = [
         icon: "https://gitee.com/xarzhi/picture/raw/master/img/canva.svg",
       },
       {
-        text: "WebGl",
-        link: "/docs/前端/可视化/WebGL/01.WebGL基础",
-        icon: "",
-      },
-      {
         text: "Threejs",
         link: "/docs/前端/可视化/Three.js/基本使用/01.安装threejs",
         icon: "https://gitee.com/xarzhi/picture/raw/master/img/threejs-light.svg",
+      },
+      {
+        text: "WebGl",
+        link: "/docs/前端/可视化/WebGL/01.WebGL基础",
+        icon: "",
       },
     ],
   },
@@ -107,7 +107,7 @@ const nav = [
       {
         text: "Webpack",
         link: "/docs/前端/Webpack/01.Webpack基础.md",
-        icon: "https://www.webpackjs.com/icon-pwa-512x512.d3dae4189855b3a72ff9.png",
+        icon: "https://gitee.com/xarzhi/picture/raw/master/img/webpack.png",
       },
     ],
   },
@@ -117,7 +117,7 @@ const nav = [
       {
         text: "Node.js",
         link: "/docs/后端/Node.js/01.初识Node.js",
-        icon: "",
+        icon: "https://gitee.com/xarzhi/picture/raw/master/img/nodejs.png",
       },
       {
         text: "C++",
@@ -135,13 +135,13 @@ const nav = [
           {
             text: "Win32 api",
             link: "/docs/后端/C++/Win32/01.基础知识.md",
-            icon: "",
+            icon: "https://gitee.com/xarzhi/picture/raw/master/img/c-plusplus.svg",
           },
 
           {
             text: "WPF",
             link: "/docs/后端/CS/WPF/01.环境配置.md",
-            icon: "",
+            icon: "https://gitee.com/xarzhi/picture/raw/master/img/c-plusplus.svg",
           },
         ],
       },
@@ -156,7 +156,7 @@ const nav = [
           {
             text: "Winform",
             link: "/docs/后端/CS/Winform/Winform基础/01.第一个窗口.md",
-            icon: "",
+            icon: "https://gitee.com/xarzhi/picture/raw/master/img/csharp.svg",
           },
         ],
       },
@@ -184,7 +184,9 @@ const nav = [
 
 function concatenateIconToText(data) {
   data.forEach((item) => {
-    const img = item.icon ? `<img src='${item.icon}'/>` : "";
+    const img = item.icon
+      ? `<img src='${item.icon}' onerror="this.style.display='none'"/>`
+      : "";
     item.text = `${img}${item.text}`;
     if (item.items && item.items.length > 0) {
       concatenateIconToText(item.items);

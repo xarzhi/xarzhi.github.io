@@ -1081,6 +1081,23 @@ export const NAV_DATA = [
         title: "云盘资源",
         items: [
           {
+            title: "云盘资源分享社区",
+            link: "https://www.yunpan1.wang/",
+            icon: "https://www.yunpan1.wang/assets/favicon-tuihvtuf.png",
+            desc: `提供不限于阿里云盘资源夸克网盘资源等的各类网盘资源，影视资源、学习资源、软件资源、动漫资源、游戏资源等分享！，访问失败可以访问以下地址：
+                    https://www.yunpan1.wang/
+                    https://yunpan1.wang/
+                    https://www.yunpan1.xyz/
+                    https://yunpan1.xyz/
+                    https://www.yunpan1.cc/
+                    https://yunpan1.cc/
+                    https://www.yunpan1.co/
+                    https://yunpan1.co/
+                    永久地址发布页：
+                    https://www.kdocs.cn/l/ce6gIRGCAzW3
+                    `,
+          },
+          {
             title: "阿里搜",
             link: "https://aliso.cc/",
             icon: "https://aliso.cc/static/img/logo.png",
@@ -1103,23 +1120,6 @@ export const NAV_DATA = [
             link: "https://fuxipan.com/",
             icon: "https://fuxipan.com/favicon.ico",
             desc: "伏羲盘收集了国内大部分可以搜索网盘资源的搜索引擎网站，包括但不限于百度网盘、阿里云盘、夸克网盘的资源",
-          },
-          {
-            title: "云盘资源分享社区",
-            link: "https://fuxipan.com/",
-            icon: "https://fuxipan.com/favicon.ico",
-            desc: `提供不限于阿里云盘资源夸克网盘资源等的各类网盘资源，影视资源、学习资源、软件资源、动漫资源、游戏资源等分享！，访问失败可以访问以下地址：
-                    https://www.yunpan1.wang/
-                    https://yunpan1.wang/
-                    https://www.yunpan1.xyz/
-                    https://yunpan1.xyz/
-                    https://www.yunpan1.cc/
-                    https://yunpan1.cc/
-                    https://www.yunpan1.co/
-                    https://yunpan1.co/
-                    永久地址发布页：
-                    https://www.kdocs.cn/l/ce6gIRGCAzW3
-                    `,
           },
         ],
       },

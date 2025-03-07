@@ -1005,6 +1005,35 @@ export const NAV_DATA = [
             icon: "https://byrutgame.org/favicon.ico",
             link: "https://byrutgame.org/",
           },
+          {
+            title: "3DM Game",
+            desc: "3DM游戏网为玩家提供最新的游戏新闻、攻略、单机游戏资源、汉化资源、游戏补丁、游戏论坛等，经过多年努力已成为游戏玩家首要选择的游戏资讯、游戏资源网站。",
+            icon: "https://www.3dmgame.com/favicon.ico",
+            link: "https://www.3dmgame.com/",
+          },
+          {
+            title: "游侠网",
+            desc: "游侠网为单机游戏玩家提供最新单机游戏业界动态、国内外单机游戏下载、单机游戏补丁、单机游戏攻略秘籍、单机游戏专题等内容。坚守单机阵地，弘扬单机文化！",
+            icon: "https://www.ali213.net/favicon.ico",
+            link: "https://www.ali213.net/",
+          },
+          {
+            title: "gamer520",
+            desc: "gamer520是原先的switch520，内涵许多单机游戏的下载，永久防迷路：https://sway.cloud.microsoft/1ESaLEE3x47BTgZC",
+            icon: "https://ig.freer520.blog/2023/10/25/d67adcffb89dd.jpg",
+            link: "https://www.gamer520.com",
+          },
+        ],
+      },
+      {
+        title: "游戏论坛",
+        items: [
+          {
+            title: "3DM游戏论坛",
+            desc: "3DMGAME论坛是中国单机游戏论坛，是PCGAME玩家的乐园，为中国单机游戏玩家提供游戏破解、游戏汉化和游戏资讯等内容，欢迎光临3DMGAME论坛获取最新游戏资源。 ",
+            icon: "https://www.3dmgame.com/favicon.ico",
+            link: "https://bbs.3dmgame.com/forum.php",
+          },
         ],
       },
     ],

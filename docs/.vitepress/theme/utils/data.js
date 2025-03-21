@@ -1023,6 +1023,12 @@ export const NAV_DATA = [
             icon: "https://ig.freer520.blog/2023/10/25/d67adcffb89dd.jpg",
             link: "https://www.gamer520.com",
           },
+          {
+            title: "宝儿的steam资源",
+            desc: "宝儿的steam资源zy.cn（免费游戏资源分享下载）",
+            icon: "https://pic1.imgdb.cn/item/67a97baed0e0a243d4fdcc32.png",
+            link: "https://steamzy.cn/",
+          },
         ],
       },
       {

@@ -1105,7 +1105,7 @@ export const NAV_DATA = [
             icon: "https://pan.quark.cn/favicon.ico",
           },
           {
-            title: "百度网盘",
+            title: "傻逼网盘",
             link: "https://pan.baidu.com/",
             desc: "即使你有千兆万兆宽带，或是光纤，不冲会员，下载速度超过1m你是这个👍",
             icon: "https://nd-static.bdstatic.com/m-static/v20-main/favicon-main.ico",

@@ -33,7 +33,6 @@ const textArr = [
 	'看山是山，看山不是山，看山还是山',
 	'十年生死两茫茫，五年生死一茫茫',
 	'去年今日此门中，人面桃花相映红',
-
 ]
 const text = ref('')
 const timer = ref()

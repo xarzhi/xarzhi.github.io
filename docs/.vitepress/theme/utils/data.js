@@ -505,6 +505,51 @@ export const NAV_DATA = [
     ],
   },
   {
+    title: "论坛",
+    items: [
+      {
+        title: "技术论坛",
+        items: [
+          {
+            title: "吾爱破解",
+            link: "https://www.52pojie.cn/",
+            desc: "吾爱破解论坛深耕软件逆向工程与反病毒技术领域，汇聚众多技术爱好者的智慧与经验，共同探索与分享前沿安全技术和防护策略，构建业内最具影响力的技术交流平台。 ",
+            icon: "https://gitee.com/xarzhi/picture/raw/master/img/image-20250213145003474.png",
+          },
+          {
+            title: "精易论坛",
+            link: "https://bbs.125.la/",
+            desc: "专注于易语言的论坛",
+            icon: "https://gitee.com/xarzhi/picture/raw/master/img/image-20250326093454714.png",
+          },
+        ],
+      },
+      {
+        title: "游戏论坛",
+        items: [
+          {
+            title: "3DM游戏论坛",
+            desc: "3DMGAME论坛是中国单机游戏论坛，是PCGAME玩家的乐园，为中国单机游戏玩家提供游戏破解、游戏汉化和游戏资讯等内容，欢迎光临3DMGAME论坛获取最新游戏资源。 ",
+            icon: "https://www.3dmgame.com/favicon.ico",
+            link: "https://bbs.3dmgame.com/forum.php",
+          },
+          {
+            title: "游侠论坛",
+            desc: "游侠NETSHOW论坛,单机游戏,游戏下载,游戏补丁,游戏攻略,心得秘籍,汉化补丁",
+            icon: "https://gitee.com/xarzhi/picture/raw/master/img/th",
+            link: "https://game.ali213.net/",
+          },
+          {
+            title: "caigamer菜玩社区",
+            desc: "菜games,菜玩,菜玩社区,steamtools,steam入库,steam账号分享,游戏分享,游戏下载",
+            icon: "https://www.caigamer.com/cai.png",
+            link: "https://www.caigamer.com/",
+          },
+        ],
+      },
+    ],
+  },
+  {
     title: "AI工具",
     items: [
       {
@@ -868,12 +913,7 @@ export const NAV_DATA = [
         desc: "亿破姐『易破解』网站专注无流氓绿色软件分享、游戏下载、电脑技术、经验教程为一体的站点、安全、纯净、放心、十年磨一剑，不忘初心只为给你最需要的内容。",
         icon: "https://www.ypojie.com/favicon.ico",
       },
-      {
-        title: "吾爱破解",
-        link: "https://www.52pojie.cn/",
-        desc: "吾爱破解论坛深耕软件逆向工程与反病毒技术领域，汇聚众多技术爱好者的智慧与经验，共同探索与分享前沿安全技术和防护策略，构建业内最具影响力的技术交流平台。 ",
-        icon: "https://gitee.com/xarzhi/picture/raw/master/img/image-20250213145003474.png",
-      },
+
       {
         title: "果壳剥壳",
         link: "https://www.ghxi.com/",
@@ -1028,17 +1068,6 @@ export const NAV_DATA = [
             desc: "宝儿的steam资源zy.cn（免费游戏资源分享下载）",
             icon: "https://pic1.imgdb.cn/item/67a97baed0e0a243d4fdcc32.png",
             link: "https://steamzy.cn/",
-          },
-        ],
-      },
-      {
-        title: "游戏论坛",
-        items: [
-          {
-            title: "3DM游戏论坛",
-            desc: "3DMGAME论坛是中国单机游戏论坛，是PCGAME玩家的乐园，为中国单机游戏玩家提供游戏破解、游戏汉化和游戏资讯等内容，欢迎光临3DMGAME论坛获取最新游戏资源。 ",
-            icon: "https://www.3dmgame.com/favicon.ico",
-            link: "https://bbs.3dmgame.com/forum.php",
           },
         ],
       },

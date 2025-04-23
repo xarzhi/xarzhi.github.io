@@ -42,10 +42,90 @@ const sidebar = {
       items: getItems("/docs/前端/前端三剑客/javascript/WebApi"),
     },
   ],
-  "/docs/前端/第三方库/": [
+  "/docs/前端/工具库/": [
     {
-      text: "Gsap",
-      items: getItems("/docs/前端/第三方库/Gsap"),
+      text: "快速开始",
+      items: [
+        {
+          text: "安装",
+          link: "/docs/前端/工具库/Gsap/快速开始/01.安装.md",
+        },
+      ],
+    },
+    {
+      text: "基本",
+      items: [
+        {
+          text: "GSAP对象",
+          collapsed: true,
+          link: "/docs/前端/工具库/Gsap/基础/gsap/start",
+          items: [
+            {
+              text: "属性",
+              collapsed: true,
+              items: getItems("/docs/前端/工具库/Gsap/基础/gsap/properties"),
+            },
+            {
+              text: "方法",
+              collapsed: true,
+              items: getItems("/docs/前端/工具库/Gsap/基础/gsap/methods"),
+            },
+            {
+              text: "内部插件",
+              collapsed: true,
+              items: getItems(
+                "/docs/前端/工具库/Gsap/基础/gsap/internal-plugins"
+              ),
+            },
+          ],
+        },
+        {
+          text: "Tween(补间动画)",
+          collapsed: true,
+          link: "/docs/前端/工具库/Gsap/基础/Tween/start",
+          items: [
+            {
+              text: "属性",
+              collapsed: true,
+              items: getItems("/docs/前端/工具库/Gsap/基础/Tween/properties"),
+            },
+            {
+              text: "方法",
+              collapsed: true,
+              items: getItems("/docs/前端/工具库/Gsap/基础/Tween/methods"),
+            },
+          ],
+        },
+        {
+          text: "Timeline(时间线)",
+          collapsed: true,
+          link: "/docs/前端/工具库/Gsap/基础/Timeline/start",
+          items: [
+            {
+              text: "属性",
+              collapsed: true,
+              items: getItems(
+                "/docs/前端/工具库/Gsap/基础/Timeline/properties"
+              ),
+            },
+            {
+              text: "方法",
+              collapsed: true,
+              items: getItems("/docs/前端/工具库/Gsap/基础/Timeline/methods"),
+            },
+          ],
+        },
+        {
+          text: "CSS",
+          collapsed: false,
+          link: "/docs/前端/工具库/Gsap/基础/Css/start",
+        },
+        {
+          text: "Easing",
+          collapsed: true,
+          items: getItems("/docs/前端/工具库/Gsap/基础/Easing"),
+        },
+      ],
     },
   ],
   "/docs/前端/框架/Vue/Vue2/": [

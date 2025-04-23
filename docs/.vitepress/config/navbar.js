@@ -59,17 +59,6 @@ const nav = [
       },
 
       {
-        text: "第三方库",
-        items: [
-          {
-            text: "Gsap",
-            link: "/docs/前端/第三方库/Gsap/01.基本使用",
-            icon: "https://gitee.com/xarzhi/picture/raw/master/img/gsap.png",
-          },
-        ],
-      },
-
-      {
         text: "小程序",
         link: "/docs/前端/小程序/01.mina.md",
         icon: "https://gitee.com/xarzhi/picture/raw/master/img/uni.png",
@@ -97,7 +86,17 @@ const nav = [
       {
         text: "WebGl",
         link: "/docs/前端/可视化/WebGL/01.WebGL基础",
-        icon: "",
+        icon: "https://gitee.com/xarzhi/picture/raw/master/img/threejs-light.svg",
+      },
+    ],
+  },
+  {
+    text: "工具库",
+    items: [
+      {
+        text: "Gsap",
+        link: "/docs/前端/工具库/Gsap/快速开始/01.安装.md",
+        icon: "https://gitee.com/xarzhi/picture/raw/master/img/gsap.png",
       },
     ],
   },

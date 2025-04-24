@@ -207,3 +207,8 @@ iframe {
   background-color: gray;
   color: #fff;
 }
+
+
+.referer-warning{
+  display: none;
+}

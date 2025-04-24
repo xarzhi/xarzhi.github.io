@@ -42,18 +42,18 @@ const sidebar = {
       items: getItems("/docs/前端/前端三剑客/javascript/WebApi"),
     },
   ],
-  "/docs/前端/工具库/": [
+  "/docs/前端/工具库/Gsap": [
     {
       text: "快速开始",
       items: [
         {
-          text: "安装",
-          link: "/docs/前端/工具库/Gsap/快速开始/01.安装.md",
+          text: "基本使用",
+          items: getItems("/docs/前端/工具库/Gsap/快速开始"),
         },
       ],
     },
     {
-      text: "基本",
+      text: "基本Api",
       items: [
         {
           text: "GSAP对象",

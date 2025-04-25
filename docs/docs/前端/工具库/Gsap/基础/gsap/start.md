@@ -27,9 +27,8 @@
 gsap.to('.box', { rotation: 27, x: 100, duration: 1 })
 ```
 
-<html>
-    <iframe src="https://codepen.io/GreenSock/pen/wvwEOZL" width="100%" height="500" frameborder="0" allowfullscreen></iframe>
-</html>
+
+<iframe src="https://codepen.io/GreenSock/pen/wvwEOZL" width="100%" height="500" frameborder="0" allowfullscreen></iframe>
 
 你可以使用 `delay` 特殊属性进行基本的序列化，但时间轴使得序列化和复杂的编排变得更加容易。
 

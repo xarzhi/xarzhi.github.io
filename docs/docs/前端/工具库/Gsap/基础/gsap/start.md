@@ -1,4 +1,4 @@
-# GSAP中文文档 - GSAP对象
+# GSAP对象
 
 ## GSAP对象
 

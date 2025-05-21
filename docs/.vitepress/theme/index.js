@@ -16,6 +16,7 @@ import "element-plus/theme-chalk/dark/css-vars.css";
 export default {
   extends: DefaultTheme,
   enhanceApp({ app }) {
+    
     // 注册全局组件
     register(app);
     app.component("Layout", Layout);

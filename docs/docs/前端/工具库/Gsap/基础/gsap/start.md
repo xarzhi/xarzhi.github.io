@@ -2,23 +2,19 @@
 
 ## GSAP对象
 
-**`gsap` 对象是访问 GSAP 大部分功能的主要入口。它只是一个通用对象，具有各种方法和属性，用于创建和控制补间动画（Tweens）和时间轴（Timelines），这两个是理解 GSAP 的两个最重要的概念。**
+`gsap` 对象是访问 GSAP 大部分功能的主要入口。**它只是一个通用对象，具有各种方法和属性，用于创建和控制补间动画（Tweens）和时间轴（Timelines）**，这两个是理解 GSAP 的两个最重要的概念。
 
-**快速概览**
 
-要快速了解 `gsap` 对象，可以观看 Snorkl.tv 提供的 “GSAP 3 Express” 课程中的视频 - 这是学习基础知识的最佳方式之一。
 
-要充分利用 GSAP，理解补间动画和时间轴是什么至关重要：
-
-### 什么是补间动画（Tween）？
+### 什么是补间动画（Tween）
 
 补间动画是执行所有动画工作的组件 - 可以将其视为 **高性能属性设置器**。你提供目标（你想要动画化的对象）、持续时间以及你想要动画的任何属性，然后当补间动画的播放头移动到新位置时，它会计算出该点的属性值，并相应地应用它们。
 
 #### 创建补间动画的常用方法：
 
-- gsap.to()
-- gsap.from()
-- gsap.fromTo()
+- [gsap.to()](/docs/前端/工具库/Gsap/基础/gsap/methods/23.to())
+- [gsap.from()](/docs/前端/工具库/Gsap/基础/gsap/methods/07.from())
+- [gsap.fromTo()](/docs/前端/工具库/Gsap/基础/gsap/methods/06.fromTo())
 
 对于简单的动画（没有复杂的序列），以上方法就足够了！例如：
 
@@ -27,14 +23,14 @@
 gsap.to('.box', { rotation: 27, x: 100, duration: 1 })
 ```
 
-
-<iframe src="https://codepen.io/GreenSock/pen/wvwEOZL" width="100%" height="500" frameborder="0" allowfullscreen></iframe>
+<MyIframe height="383" style="width: 100%;" scrolling="no" title="GSAP Basic Tween" src="https://codepen.io/2235762265/embed/PwqYNPN?default-tab=js%2Cresult&theme-id=41164" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true" >
+</MyIframe>
 
 你可以使用 `delay` 特殊属性进行基本的序列化，但时间轴使得序列化和复杂的编排变得更加容易。
 
-### 什么是时间轴（Timeline）？
+### 什么是时间轴（Timeline）
 
-时间轴是 **补间动画的容器**。它是终极的序列化工具，允许你随时定位动画，然后使用诸如 pause()、play()、progress()、reverse()、timeScale() 等方法轻松控制整个序列。
+时间轴是 **补间动画的容器**。它是终极的序列化工具，允许你随时定位动画，然后使用诸如 [pause()](/docs/前端/工具库/Gsap/基础/Tween/methods/10.pause())、[play()](/docs/前端/工具库/Gsap/基础/Tween/methods/12.play())、progress()、reverse()、timeScale() 等方法轻松控制整个序列。
 
 创建任意数量的时间轴。你甚至可以 **嵌套它们**，这对于模块化你的动画代码非常出色！每个动画（补间动画和时间轴）都被放置在父时间轴上（默认是 globalTimeline）。移动时间轴的播放头会级联到其子元素，以便播放头保持对齐。时间轴完全是关于组合事物和协调时间/播放头 - 它实际上从不直接在目标上设置属性（补间动画处理这个）。
 

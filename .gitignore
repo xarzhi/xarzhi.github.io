@@ -9,4 +9,5 @@ cache
 .pnp.cjs
 .pnp.loader.mjs
 package-lock.json
+yarn.lock
 .yarn

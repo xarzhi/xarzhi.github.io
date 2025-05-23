@@ -30,7 +30,7 @@ gsap.to('.box', { rotation: 27, x: 100, duration: 1 })
 
 ### 什么是时间轴（Timeline）
 
-时间轴是 **补间动画的容器**。它是终极的序列化工具，允许你随时定位动画，然后使用诸如 [pause()](/docs/前端/工具库/Gsap/基础/Tween/methods/10.pause())、[play()](/docs/前端/工具库/Gsap/基础/Tween/methods/12.play())、progress()、reverse()、timeScale() 等方法轻松控制整个序列。
+时间轴是 **补间动画的容器**。它是终极的序列化工具，允许你随时定位动画，然后使用诸如 [pause()](/docs/前端/工具库/Gsap/基础/Tween/methods/10.pause())、[play()](/docs/前端/工具库/Gsap/基础/Tween/methods/12.play())、[progress()](/docs/前端/工具库/Gsap/基础/Tween/methods/13.progress())、[reverse()](/docs/前端/工具库/Gsap/基础/Tween/methods/18.reverse())、[timeScale()](/docs/前端/工具库/Gsap/基础/Tween/methods/25.timeScale()) 等方法轻松控制整个序列。
 
 创建任意数量的时间轴。你甚至可以 **嵌套它们**，这对于模块化你的动画代码非常出色！每个动画（补间动画和时间轴）都被放置在父时间轴上（默认是 globalTimeline）。移动时间轴的播放头会级联到其子元素，以便播放头保持对齐。时间轴完全是关于组合事物和协调时间/播放头 - 它实际上从不直接在目标上设置属性（补间动画处理这个）。
 

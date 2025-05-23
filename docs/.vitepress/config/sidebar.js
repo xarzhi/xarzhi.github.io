@@ -127,6 +127,16 @@ const sidebar = {
         },
       ],
     },
+    {
+      text: "插件",
+      items: getItems("/docs/前端/工具库/Gsap/插件"),
+      collapsed: true,
+    },
+    {
+      text: "特征和工具",
+      items: getItems("/docs/前端/工具库/Gsap/特征和工具"),
+      collapsed: true,
+    },
   ],
   "/docs/前端/框架/Vue/Vue2/": [
     { text: "Vue2基础", items: getItems("/docs/前端/框架/Vue/Vue2/Vue2基础") },

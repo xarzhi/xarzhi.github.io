@@ -129,7 +129,9 @@ const sidebar = {
     },
     {
       text: "插件",
-      items: getItems("/docs/前端/工具库/Gsap/插件"),
+      link: "/docs/前端/工具库/Gsap/插件/start",
+
+      items: getItems("/docs/前端/工具库/Gsap/插件/plugins"),
       collapsed: true,
     },
     {

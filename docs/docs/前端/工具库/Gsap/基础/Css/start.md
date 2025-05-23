@@ -255,7 +255,8 @@ GSAP 确实使 `transformOrigin` 在 SVG 元素上跨浏览器一致工作。但
 
 **仅适用于 SVG 元素** 与 `transformOrigin` 完全相同，但它使用 SVG 的全局坐标空间而不是元素的局部坐标空间。这在例如你想让一堆 SVG 元素围绕一个共同点旋转时非常有用。你可以定义一个 `svgOrigin` 或一个 `transformOrigin`，不能同时定义两者（显而易见的原因）。所以如果你想旋转 `svgElement` 就好像它的原点在 SVG 画布的全局坐标 x: 250, y: 100，你可以这样做：`gsap.to(svgElement, {duration: 1, rotation: 270, svgOrigin: "250 100"})`。单位不是必需的。它还在 `data-svg-origin` 属性中记录了值，以便可以重新解析。`svgOrigin` 不支持基于百分比的值。
 
-<iframe src="https://codepen.io/GreenSock/pen/ZYRqRx" width="100%" height="600" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true" ></iframe>
+<MyIframe height="600" style="width: 100%;" scrolling="no" title="svgOrigin demo" src="https://codepen.io/2235762265/embed/azOoYZz?default-tab=&theme-id=41164" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+</MyIframe>
 
 ### smoothOrigin
 
@@ -311,7 +312,11 @@ gsap.to(element, { duration: 2, autoAlpha: 1, delay: 2 })
 
 GSAP 可以在支持它们的浏览器中动画化 CSS 变量。
 
-<iframe src="https://codepen.io/GreenSock/pen/MoeLdj" width="100%" height="400" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true" ></iframe>
+<MyIframe height="300" style="width: 100%;" scrolling="no" title="CSS Variables Demo" src="https://codepen.io/2235762265/embed/jEPNzre?default-tab=result&theme-id=41164" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/2235762265/pen/jEPNzre">
+  CSS Variables Demo</a> by 2235762265 (<a href="https://codepen.io/2235762265">@2235762265</a>)
+  on <a href="https://codepen.io">CodePen</a>.
+</MyIframe>
 
 ### clearProps
 
@@ -338,7 +343,11 @@ gsap.from(element, {
 
 ## 试试你学到的东西！
 
-<iframe src="https://codepen.io/GreenSock/pen/BaGvbXb" width="100%" height="400" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true" ></iframe>
+<MyIframe height="300" style="width: 100%;" scrolling="no" title="starter pen" src="https://codepen.io/2235762265/embed/ZYGzxON?default-tab=result&theme-id=41164" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/2235762265/pen/ZYGzxON">
+  starter pen</a> by 2235762265 (<a href="https://codepen.io/2235762265">@2235762265</a>)
+  on <a href="https://codepen.io">CodePen</a>.
+</MyIframe>
 
 ### 常见问题解答
 

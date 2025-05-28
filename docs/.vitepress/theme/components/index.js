@@ -11,6 +11,7 @@ import Throttledebounce from "./TestComponents/Throttledebounce.vue";
 import CanvasTransform from "./TestComponents/CanvasTransform.vue";
 import CanvasPointIn from "./TestComponents/CanvasPointIn.vue";
 import CanvasWatermark from "./TestComponents/CanvasWatermark.vue";
+import GsapPlugins from "./GsapPlugins.vue";
 import Img from "./Img.vue";
 function register(app) {
 	app.component('Modal', Modal)
@@ -27,5 +28,6 @@ function register(app) {
 	app.component("CanvasPointIn", CanvasPointIn);
 	app.component("CanvasWatermark", CanvasWatermark);
 	app.component("Img", Img);
+	app.component("GsapPlugins", GsapPlugins);
 }
 export { register }

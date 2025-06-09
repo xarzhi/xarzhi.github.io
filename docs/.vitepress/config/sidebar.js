@@ -42,10 +42,102 @@ const sidebar = {
       items: getItems("/docs/前端/前端三剑客/javascript/WebApi"),
     },
   ],
-  "/docs/前端/第三方库/": [
+  "/docs/前端/工具库/Gsap": [
     {
-      text: "Gsap",
-      items: getItems("/docs/前端/第三方库/Gsap"),
+      text: "快速开始",
+      items: [
+        {
+          text: "基本使用",
+          items: getItems("/docs/前端/工具库/Gsap/快速开始"),
+        },
+      ],
+    },
+    {
+      text: "基本Api",
+      items: [
+        {
+          text: "GSAP对象",
+          collapsed: true,
+          link: "/docs/前端/工具库/Gsap/基础/gsap/start",
+          items: [
+            {
+              text: "属性",
+              collapsed: true,
+              items: getItems("/docs/前端/工具库/Gsap/基础/gsap/properties"),
+            },
+            {
+              text: "方法",
+              collapsed: true,
+              items: getItems("/docs/前端/工具库/Gsap/基础/gsap/methods"),
+            },
+            {
+              text: "内部插件",
+              collapsed: true,
+              items: getItems(
+                "/docs/前端/工具库/Gsap/基础/gsap/internal-plugins"
+              ),
+            },
+          ],
+        },
+        {
+          text: "Tween(补间动画)",
+          collapsed: true,
+          link: "/docs/前端/工具库/Gsap/基础/Tween/start",
+          items: [
+            {
+              text: "属性",
+              collapsed: true,
+              items: getItems("/docs/前端/工具库/Gsap/基础/Tween/properties"),
+            },
+            {
+              text: "方法",
+              collapsed: true,
+              items: getItems("/docs/前端/工具库/Gsap/基础/Tween/methods"),
+            },
+          ],
+        },
+        {
+          text: "Timeline(时间线)",
+          collapsed: true,
+          link: "/docs/前端/工具库/Gsap/基础/Timeline/start",
+          items: [
+            {
+              text: "属性",
+              collapsed: true,
+              items: getItems(
+                "/docs/前端/工具库/Gsap/基础/Timeline/properties"
+              ),
+            },
+            {
+              text: "方法",
+              collapsed: true,
+              items: getItems("/docs/前端/工具库/Gsap/基础/Timeline/methods"),
+            },
+          ],
+        },
+        {
+          text: "CSS",
+          collapsed: false,
+          link: "/docs/前端/工具库/Gsap/基础/Css/start",
+        },
+        {
+          text: "Easing",
+          collapsed: true,
+          items: getItems("/docs/前端/工具库/Gsap/基础/Easing"),
+        },
+      ],
+    },
+    {
+      text: "插件",
+      link: "/docs/前端/工具库/Gsap/插件/start",
+
+      items: getItems("/docs/前端/工具库/Gsap/插件/plugins"),
+      collapsed: true,
+    },
+    {
+      text: "特征和工具",
+      items: getItems("/docs/前端/工具库/Gsap/特征和工具"),
+      collapsed: true,
     },
   ],
   "/docs/前端/框架/Vue/Vue2/": [
@@ -164,6 +256,16 @@ const sidebar = {
   ],
   "/docs/后端/CS/WPF": [
     { text: "WPF基础", items: getItems("/docs/后端/CS/WPF") },
+  ],
+  "/docs/后端/CS/Winform": [
+    {
+      text: "Winform基础",
+      items: getItems("/docs/后端/CS/Winform/Winform基础"),
+    },
+    {
+      text: "常用控件",
+      items: getItems("/docs/后端/CS/Winform/常用控件"),
+    },
   ],
   "/docs/后端/C++/Win32": [
     { text: "Win32", items: getItems("/docs/后端/C++/Win32") },

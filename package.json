@@ -35,12 +35,12 @@
 		"markdown-it-mathjax3": "^4.3.2",
 		"medium-zoom": "^1.1.0",
 		"sass": "^1.77.2",
-		"vitepress": "^1.2.0",
+		"vitepress": "^1.6.3",
 		"vue": "^3.4.27"
 	},
 	"dependencies": {
 		"element-plus": "^2.8.6",
-		"gsap": "^3.12.5",
+		"gsap": "^3.13.0",
 		"three": "0.135",
 		"vitepress-markdown-timeline": "^1.2.1"
 	}

@@ -9,7 +9,7 @@
         是否在图形内：{{ isPointInPath ? "是" : "否" }}
       </div>
       <div class="isIN" v-else>
-        是否在图形内：{{ isPointInStroke ? "是" : "否" }}
+        是否在图形边缘上：{{ isPointInStroke ? "是" : "否" }}
       </div>
     </div>
     <canvas ref="canvasRef" @mousemove="handleMouseMove"></canvas>

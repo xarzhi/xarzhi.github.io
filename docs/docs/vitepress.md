@@ -2,7 +2,11 @@
 
 ## 1.什么是Vitepress
 
-[VitePress](https://vitepress.dev/zh/) 是一个静态站点生成器 (SSG)，专为构建快速、以内容为中心的站点而设计。简而言之，VitePress 获取用 Markdown 编写的内容，对其应用主题，并生成可以轻松部署到任何地方的静态 HTML 页面。
+[VitePress](https://vitepress.dev/zh/) 是一个**静态站点生成器** (SSG)，专为构建快速、以内容为中心的站点而设计。
+
+简而言之，VitePress 获取用 Markdown 编写的内容，对其应用主题，并生成可以轻松部署到任何地方的静态 HTML 页面。
+
+应用场景：个人博客、技术文档
 
 ## 2.创建项目
 
@@ -77,24 +81,29 @@ $ bun vitepress init
 将需要回答几个简单的问题：
 
 ```
-┌  Welcome to VitePress!
+┌  Welcome to VitePress!	
 │
-◇  Where should VitePress initialize the config?
+◇  Where should VitePress initialize the config?					配置文件保存文件夹
 │  ./docs
 │
-◇  Site title:
+◇  Site title:														网站标题
 │  My Awesome Project
 │
-◇  Site description:
+◇  Site description:												网站描述
 │  A VitePress Site
 │
-◇  Theme:
+◇  Theme:															选择网站样式主题
 │  ● Default Theme (Out of the box, good-looking docs)
 │  ○ Default Theme + Customization
 │  ○ Custom Theme
+│ 
+◇  Use TypeScript for config and theme files?						是否使用Ts
+│  No
 │
-◇  Add VitePress npm scripts to package.json?
+◇  Add VitePress npm scripts to package.json?						是否在package.json中写入相关指令
 │  Yes
+│
+└  Done! Now run npm run docs:dev and start writing.
 ```
 
 :::tip Vue 作为 peer dependency
@@ -105,12 +114,12 @@ $ bun vitepress init
 
 ```
 .
-├─ docs
-│  ├─ .vitepress
-│  │  └─ config.js
-│  ├─ api-examples.md
-│  ├─ markdown-examples.md
-│  └─ index.md
+├─ docs								配置文件及文档存放目录
+│  ├─ .vitepress					配置文件存档目录
+│  │  └─ config.js					配置文件
+│  ├─ api-examples.md				md文档案例
+│  ├─ markdown-examples.md			md文档案例
+│  └─ index.md						主页配置md文档
 └─ package.json
 ```
 
@@ -421,35 +430,7 @@ cache
 
 
 
-### 4.2 打包
-
-运行打包指令
-
-::: code-group
-
-```sh [npm]
-$ npx run docs:build
-```
-
-```sh [pnpm]
-$ pnpm run docs:build
-```
-
-```sh [yarn]
-$ yarn docs:build
-```
-
-```sh [bun]
-$ bun run docs:build
-```
-
-:::
-
-打包后的内容会出现在`.vitepress/dist`中
-
-
-
-### 4.3 创建github仓库
+### 4.2 创建github仓库
 
 `github`右上角`New repository`创建新仓库
 
@@ -471,7 +452,7 @@ $ bun run docs:build
 
 :::
 
-### 4.4 上传代码
+### 4.3 上传代码
 
 在项目根目录下打开终端，或`git bash`，输入如下指令
 
@@ -486,13 +467,13 @@ git push -u origin main
 
 
 
-### 4.5 设置pages部署形式
+### 4.4 设置pages部署形式
 
 按步骤选择`Setting=>pages=>Deploy from a branch=>GitHub Actions`
 
 ![image-20240522153749206](https://gitee.com/xarzhi/picture/raw/master/img/image-20240522153749206.png)
 
-### 4.6 创建工作流
+### 4.5 创建工作流
 
 #### 4.5.1 github中创建
 
@@ -595,7 +576,7 @@ jobs:
 
 
 
-### 4.7 部署成功
+### 4.6 部署成功
 
 再次进入`Github pages`页面，若部署成功，会显示我们的网站，点进去即可看到
 
@@ -614,3 +595,470 @@ jobs:
 之后进入`Actions`界面，会显示每次的部署记录，若部署失败，可以点击进入查看失败原因
 
 ![image-20240522161824842](https://gitee.com/xarzhi/picture/raw/master/img/image-20240522161824842.png)
+
+
+
+
+
+## 5.公共组件
+
+### 5.1 单独使用
+
+可以在md文件中直接使用一个`script`标签，使用`vue3`的语法导入相应的组件
+
+:::code-group
+
+```markdown [test.md] {1-3,8}
+<script setup>
+import Test from './test.vue'
+</script>
+
+
+# 测试用例
+
+<Test/>
+```
+
+:::
+
+
+
+### 5.2 公共组件
+
+在`.vitepress`文件夹下创建`theme`文件夹，并创建`index.js`文件，写入如下内容
+
+```js {2,8}
+import DefaultTheme from 'vitepress/theme'
+import Circle from "./compnents/Circle.vue";
+
+export default {
+    extends: DefaultTheme,
+    enhanceApp({ app }) {
+        // 注册自定义全局组件
+        app.component("Circle", Circle);
+    }
+}
+```
+
+之后就可以直接在`md`文档中使用组件，使用方式和`vue3`中使用组件方式一样
+
+
+
+## 6.markdown扩展
+
+### 6.1 自定义容器
+
+#### 默认样式
+
+`markdown`输入
+
+```
+::: info
+This is an info box.
+:::
+
+::: tip
+This is a tip.
+:::
+
+::: warning
+This is a warning.
+:::
+
+::: danger
+This is a dangerous warning.
+:::
+
+::: details
+This is a details block.
+:::
+```
+
+`Html`输出
+
+::: info
+This is an info box.
+:::
+
+::: tip
+This is a tip.
+:::
+
+::: warning
+This is a warning.
+:::
+
+::: danger
+This is a dangerous warning.
+:::
+
+::: details
+This is a details block.
+:::
+
+
+
+#### 自定义标题
+
+容器的 `type`之后附加文本来设置自定义标题
+
+`markdown`输入
+
+````
+::: danger STOP
+危险区域，请勿继续
+:::
+
+::: details 点我查看代码
+```js
+console.log('Hello, VitePress!')
+```
+:::
+````
+
+`Html`输出
+
+::: danger STOP
+危险区域，请勿继续
+:::
+
+::: details 点我查看代码
+```js
+console.log('Hello, VitePress!')
+```
+:::
+
+
+
+此外，可以通过在站点配置中添加以下内容来全局设置自定义标题，如果不是用英语书写，这会很有帮助：
+
+:::code-group
+
+```js
+// config.ts
+export default defineConfig({
+  // ...
+  markdown: {
+    container: {
+      tipLabel: '提示',
+      warningLabel: '警告',
+      dangerLabel: '危险',
+      infoLabel: '信息',
+      detailsLabel: '详细信息'
+    }
+  }
+  // ...
+})
+```
+
+:::
+
+
+
+### 6.2 指定行高亮
+
+#### 基本语法
+
+语法如下，也就是通过在`{}`填入相应的行号
+
+````markdown
+```js {4}
+export default {
+  data () {
+    return {
+      msg: 'Highlighted!'
+    }
+  }
+}
+```
+````
+
+效果如下所示
+
+```js {4}
+export default {
+  data () {
+    return {
+      msg: 'Highlighted!'
+    }
+  }
+}
+```
+
+#### 多行高亮
+
+除了单行之外，还可以指定多个单行、多行，或两者均指定：
+
+- 多行：例如 `{5-8}`、`{3-10}`、`{10-17}`
+- 多个单行：例如 `{4,7,9}`
+- 多行与单行：例如 `{4,7-13,16,23-27,40}`
+
+````markdown
+```js{1,4,6-8}
+export default { // Highlighted
+  data () {
+    return {
+      msg: `Highlighted!
+      This line isn't highlighted,
+      but this and the next 2 are.`,
+      motd: 'VitePress is awesome',
+      lorem: 'ipsum'
+    }
+  }
+}
+```
+````
+
+如下所示
+
+```js {1,4,6-8}
+export default { // Highlighted
+  data () {
+    return {
+      msg: `Highlighted!
+      This line isn't highlighted,
+      but this and the next 2 are.`,
+      motd: 'VitePress is awesome',
+      lorem: 'ipsum'
+    }
+  }
+}
+```
+
+#### 通过注释实现
+
+也可以使用 `// [!code highlight]` 注释实现行高亮。
+
+````markdown
+```js
+export default {
+  data () {
+    return {
+      msg: 'Highlighted!' // [!code highlight]
+    }
+  }
+}
+```
+````
+
+效果如下
+
+```js
+export default {
+  data () {
+    return {
+      msg: 'Highlighted!' // [!code highlight]
+    }
+  }
+}
+```
+
+
+
+### 6.3 代码块聚焦
+
+在某一行上添加 `// [!code focus]` 注释将聚焦它并模糊代码的其他部分。
+
+::: raw
+
+```
+```js								// [!code focus]
+export default {					// [!code focus]
+  data () {							// [!code focus]
+    return {						// [!code focus]
+      msg: 'Focused!' 				// // [!code focus] [!code focus]
+    }								// [!code focus]
+  }									// [!code focus]
+}									// [!code focus]
+```									// [!code focus]
+```
+
+:::
+
+
+
+
+
+效果如下
+
+```js
+export default {
+  data () {
+    return {
+      msg: 'Focused!' // [!code focus]
+    }
+  }
+}
+```
+
+
+
+### 6.4 代码块中的颜色差异
+
+在某一行添加 `// [!code --]` 或 `// [!code ++]` 注释将会为该行创建 diff，同时保留代码块的颜色。
+
+```js
+export default {
+  data () {
+    return {
+      msg: 'Removed' // [!code --]
+      msg: 'Added' // [!code ++]
+    }
+  }
+}
+```
+
+
+
+
+
+### 6.5 高亮“错误”和“警告”
+
+在某一行添加 `// [!code warning]` 或 `// [!code error]` 注释将会为该行相应的着色。
+
+```js
+export default {
+  data () {
+    return {
+      msg: 'Error', // [!code error]
+      msg: 'Warning' // [!code warning]
+    }
+  }
+}
+```
+
+
+
+### 6.6 行号
+
+可以通过以下配置为每个代码块启用行号：
+
+:::code-group 
+
+```js [config.js]
+export default {
+  markdown: {
+    lineNumbers: true
+  }
+}
+```
+
+:::
+
+查看 [`markdown` 选项](https://vitepress.dev/zh/reference/site-config#markdown) 获取更多信息。
+
+可以在代码块中添加 `:line-numbers` / `:no-line-numbers` 标记来覆盖在配置中的设置。
+
+还可以通过在 `:line-numbers` 之后添加 `=` 来自定义起始行号，例如 `:line-numbers=2` 表示代码块中的行号从 2 开始。
+
+````md
+
+
+```ts:line-numbers {1}
+// 启用行号
+const line2 = 'This is line 2'
+const line3 = 'This is line 3'
+```
+
+```ts:line-numbers=2 {1}
+// 行号已启用，并从 2 开始
+const line3 = 'This is line 3'
+const line4 = 'This is line 4'
+```
+````
+
+效果如下
+
+```ts {1}
+// 默认禁用行号
+const line2 = 'This is line 2'
+const line3 = 'This is line 3'
+```
+
+```ts:line-numbers {1}
+// 启用行号
+const line2 = 'This is line 2'
+const line3 = 'This is line 3'
+```
+
+```ts:line-numbers=2 {1}
+// 行号已启用，并从 2 开始
+const line3 = 'This is line 3'
+const line4 = 'This is line 4'
+```
+
+
+
+### 6.5 代码组
+
+````md
+::: code-group
+
+```js [config.js]
+/**
+ * @type {import('vitepress').UserConfig}
+ */
+const config = {
+  // ...
+}
+
+export default config
+```
+
+```ts [config.ts]
+import type { UserConfig } from 'vitepress'
+
+const config: UserConfig = {
+  // ...
+}
+
+export default config
+```
+
+:::
+````
+
+效果如下
+
+::: code-group
+
+```js [config.js]
+/**
+ * @type {import('vitepress').UserConfig}
+ */
+const config = {
+  // ...
+}
+
+export default config
+```
+
+```ts [config.ts]
+import type { UserConfig } from 'vitepress'
+
+const config: UserConfig = {
+  // ...
+}
+
+export default config
+```
+
+:::
+
+
+
+
+
+### 6.5 图片懒加载
+
+```js [config.js]
+export default {
+  markdown: {
+    image: {
+      // 默认禁用；设置为 true 可为所有图片启用懒加载。
+      lazyLoading: true
+    }
+  }
+}
+```
+

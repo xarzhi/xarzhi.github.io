@@ -272,7 +272,7 @@ const sidebar = {
   ],
   "/docs/后端/C++/MFC": [
     { text: "MFC基础", items: getItems("/docs/后端/C++/MFC/MFC基础") },
-    { text: "常用控件", items: getItems("/docs/后端/C++/MFC/常用控件") },
+    // { text: "常用控件", items: getItems("/docs/后端/C++/MFC/常用控件") },
 
   ],
   "/docs/前端/小程序/": getItems("/docs/前端/小程序"),

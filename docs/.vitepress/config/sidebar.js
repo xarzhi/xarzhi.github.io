@@ -270,6 +270,11 @@ const sidebar = {
   "/docs/后端/C++/Win32": [
     { text: "Win32", items: getItems("/docs/后端/C++/Win32") },
   ],
+  "/docs/后端/C++/MFC": [
+    { text: "MFC基础", items: getItems("/docs/后端/C++/MFC/MFC基础") },
+    { text: "常用控件", items: getItems("/docs/后端/C++/MFC/常用控件") },
+
+  ],
   "/docs/前端/小程序/": getItems("/docs/前端/小程序"),
   "/docs/后端/Node.js/": getItems("/docs/后端/Node.js/"),
   "/docs/前端/一些问题/": getItems("/docs/前端/一些问题/"),
@@ -287,3 +292,5 @@ for (let key in sidebar) {
   }
 }
 export default sidebar;
+
+// 618c2b2dee0a35552241f42bc47a9a1e

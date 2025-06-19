@@ -136,12 +136,12 @@ const nav = [
             link: "/docs/后端/C++/Win32/01.基础知识.md",
             icon: "https://gitee.com/xarzhi/picture/raw/master/img/c-plusplus.svg",
           },
-
           {
-            text: "WPF",
-            link: "/docs/后端/CS/WPF/01.环境配置.md",
+            text: "MFC",
+            link: "/docs/后端/C++/MFC/MFC基础/01.环境配置.md",
             icon: "https://gitee.com/xarzhi/picture/raw/master/img/c-plusplus.svg",
           },
+         
         ],
       },
       {
@@ -156,6 +156,11 @@ const nav = [
             text: "Winform",
             link: "/docs/后端/CS/Winform/Winform基础/01.第一个窗口.md",
             icon: "https://gitee.com/xarzhi/picture/raw/master/img/csharp.svg",
+          },
+          {
+            text: "WPF",
+            link: "/docs/后端/CS/WPF/01.环境配置.md",
+            icon: "https://gitee.com/xarzhi/picture/raw/master/img/c-plusplus.svg",
           },
         ],
       },

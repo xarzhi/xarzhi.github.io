@@ -160,6 +160,11 @@ const sidebar = {
       items: getItems("/docs/前端/框架/Vue/Vue3/内置组件"),
       collapsed: true,
     },
+    {
+      text: "开发组件库",
+      items: getItems("/docs/前端/框架/Vue/Vue3/开发组件库"),
+      collapsed: true,
+    },
   ],
   "/docs/前端/TypeScript/Ts入门/": [
     { text: "Ts入门", items: getItems("/docs/前端/TypeScript/Ts入门") },
@@ -272,8 +277,8 @@ const sidebar = {
   ],
   "/docs/后端/C++/MFC": [
     { text: "MFC基础", items: getItems("/docs/后端/C++/MFC/MFC基础") },
-    // { text: "常用控件", items: getItems("/docs/后端/C++/MFC/常用控件") },
-
+    { text: "常用控件", items: getItems("/docs/后端/C++/MFC/常用控件") },
+    { text: "常用类", items: getItems("/docs/后端/C++/MFC/常用类") },
   ],
   "/docs/前端/小程序/": getItems("/docs/前端/小程序"),
   "/docs/后端/Node.js/": getItems("/docs/后端/Node.js/"),

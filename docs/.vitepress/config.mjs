@@ -23,17 +23,11 @@ export default defineConfig({
   lastUpdated: true,
   markdown: {
     math: true,
-    // lineNumbers: true,  // 显示行号
+    lineNumbers: true,  // 显示行号
     image: {
       // lazyLoading: true,  // 图片懒加载
     },
-    container: {
-      tipLabel: "提示",
-      warningLabel: "警告",
-      dangerLabel: "危险",
-      infoLabel: "信息",
-      detailsLabel: "详细信息",
-    },
+
     //时间线
     config: (md) => {
       md.use(timeline);

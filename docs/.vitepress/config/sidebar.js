@@ -27,6 +27,8 @@ const sidebar = {
   "/docs/前端/前端三剑客/CSS": [
     { text: "CSS", items: getItems("/docs/前端/前端三剑客/CSS/CSS") },
     { text: "CSS3", items: getItems("/docs/前端/前端三剑客/CSS/CSS3") },
+    { text: "Scss", items: getItems("/docs/前端/前端三剑客/CSS/Scss") },
+    { text: "Less", items: getItems("/docs/前端/前端三剑客/CSS/Less") },
   ],
   "/docs/前端/前端三剑客/javascript/": [
     {

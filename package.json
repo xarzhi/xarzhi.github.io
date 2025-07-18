@@ -38,7 +38,6 @@
 		"vue": "^3.4.27"
 	},
 	"dependencies": {
-		"@vite-pwa/vitepress": "^1.0.0",
 		"element-plus": "^2.8.6",
 		"gsap": "^3.13.0",
 		"three": "0.135",

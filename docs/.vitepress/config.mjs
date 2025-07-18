@@ -2,7 +2,10 @@ import { defineConfig } from "vite";
 import navbar from "./config/navbar";
 import sidebar from "./config/sidebar";
 import timeline from "vitepress-markdown-timeline";
-export default defineConfig({
+
+import { withPwa } from "@vite-pwa/vitepress";
+
+const config = defineConfig({
   base: "/",
   head: [
     [
@@ -23,7 +26,7 @@ export default defineConfig({
   lastUpdated: true,
   markdown: {
     math: true,
-    lineNumbers: true,  // 显示行号
+    lineNumbers: true, // 显示行号
     image: {
       // lazyLoading: true,  // 图片懒加载
     },
@@ -88,3 +91,6 @@ export default defineConfig({
     darkModeSwitchTitle: "切换至浅色模式",
   },
 });
+
+
+export default withPwa(config)

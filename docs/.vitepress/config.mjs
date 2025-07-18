@@ -36,6 +36,60 @@ const config = defineConfig({
       md.use(timeline);
     },
   },
+  pwa: {
+    outDir: ".vitepress/dist",
+    registerType: "autoUpdate",
+    includeManifestIcons: false,
+    manifest: {
+      name: `water's blog`,
+      short_name: "blog",
+      descriptionription: "日志",
+      theme_color: "#ffffff",
+      background_color: "#ffffff",
+      display: "fullscreen",
+      start_url: "/",
+      // icons: [
+      //   {
+      //     src: "icon-192x192.webp",
+      //     sizes: "192x192",
+      //     type: "image/webp",
+      //   },
+      //   {
+      //     src: "icon-512x512.webp",
+      //     sizes: "512x512",
+      //     type: "image/webp",
+      //   },
+      // ],
+    },
+    injectManifest: {
+      injectionPoint: undefined,
+    },
+    workbox: {
+      // 定制缓存策略
+      runtimeCaching: [
+        {
+          // 匹配文章相关的js文件
+          urlPattern: /posts.+\.js$/,
+          handler: "StaleWhileRevalidate",
+          options: {
+            cacheName: "article-content",
+            expiration: {
+              maxEntries: 100, // 最多缓存100篇文章
+              maxAgeSeconds: 7 * 24 * 60 * 60, // 缓存一周
+            },
+          },
+        },
+      ],
+      // 预缓存重要资源
+      globPatterns: ["/", "**/*.{css,ico,webp}", "index.html", "offline.html"],
+      skipWaiting: true,
+      clientsClaim: true,
+    },
+    devOptions: {
+      enabled: false, // 开发环境是否启用
+      type: "module",
+    },
+  },
   themeConfig: {
     nav: navbar,
     sidebar: sidebar,
@@ -92,5 +146,4 @@ const config = defineConfig({
   },
 });
 
-
-export default withPwa(config)
+export default withPwa(config);

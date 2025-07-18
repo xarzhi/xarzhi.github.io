@@ -131,4 +131,4 @@ const config = defineConfig({
   },
 });
 
-export default withPwa(defineConfig);
+export default withPwa(config);

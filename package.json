@@ -40,6 +40,7 @@
 	"dependencies": {
 		"element-plus": "^2.8.6",
 		"gsap": "^3.13.0",
+		"markdown-it-mathjax3": "^4.3.2",
 		"three": "0.135",
 		"vitepress-markdown-timeline": "^1.2.1"
 	}

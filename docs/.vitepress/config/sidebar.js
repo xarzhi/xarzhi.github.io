@@ -286,6 +286,7 @@ const sidebar = {
   "/docs/后端/Node.js/": getItems("/docs/后端/Node.js/"),
   "/docs/前端/一些问题/": getItems("/docs/前端/一些问题/"),
   "/docs/其他问题": getItems("/docs/其他问题"),
+  "/docs/后端/Rust": getItems("/docs/后端/Rust/Rust基础"),
 };
 
 for (let key in sidebar) {

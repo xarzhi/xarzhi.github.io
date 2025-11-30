@@ -169,7 +169,7 @@ const nav = [
         items: [
           {
             text: "Rust基础",
-            link: "/docs/后端/Rust/Rust基础/01.环境配置.md",
+            link: "/docs/后端/Rust/Rust基础/01.环境搭建.md",
             icon: "https://gitee.com/xarzhi/picture/raw/master/img/rust.svg",
           },
         ],

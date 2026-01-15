@@ -286,8 +286,14 @@ const sidebar = {
   "/docs/后端/Node.js/": getItems("/docs/后端/Node.js/"),
   "/docs/前端/一些问题/": getItems("/docs/前端/一些问题/"),
   "/docs/其他问题": getItems("/docs/其他问题"),
-  "/docs/后端/Rust": getItems("/docs/后端/Rust/Rust基础"),
-};
+  "/docs/后端/Rust": [
+
+    { text: "Rust基础", items: getItems("/docs/后端/Rust/Rust基础") },
+    { text: "枚举", link: "/docs/后端/Rust/枚举/index", items: getItems("/docs/后端/Rust/枚举/docs"), collapsed: false },
+    { text: "Trait", items: getItems("/docs/后端/Rust/Trait") },
+    { text: "Rust进阶", items: getItems("/docs/后端/Rust/Rust进阶") },
+  ]
+}
 
 for (let key in sidebar) {
   if (Array.isArray(sidebar[key])) {

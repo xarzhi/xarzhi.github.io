@@ -38,7 +38,7 @@ enum PersonCate {
 
 通过双引号`枚举名::变体`的方式，来访问枚举的变体
 
-```rust {9-11}
+```rust {8-10}
 #[derive(Debug)]
 enum PersonCate {
     Yellow,

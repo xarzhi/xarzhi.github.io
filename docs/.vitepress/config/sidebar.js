@@ -289,7 +289,7 @@ const sidebar = {
   "/docs/后端/Rust": [
 
     { text: "Rust基础", items: getItems("/docs/后端/Rust/Rust基础") },
-    { text: "枚举", link: "/docs/后端/Rust/枚举/index", items: getItems("/docs/后端/Rust/枚举/docs"), collapsed: false },
+    { text: "枚举", link: "/docs/后端/Rust/枚举/index", items: getItems("/docs/后端/Rust/枚举/docs"), collapsed: true },
     { text: "Trait", items: getItems("/docs/后端/Rust/Trait") },
     { text: "Rust进阶", items: getItems("/docs/后端/Rust/Rust进阶") },
   ]

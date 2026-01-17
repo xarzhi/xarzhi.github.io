@@ -5,9 +5,9 @@
 		</div>
 		<div class="content">
 			<div class="title">Fade away</div>
-			<transition name="fade" mode="out-in">
-				<div class="desc">{{ text }}</div>
-			</transition>
+			<Transition name="fade" mode="out-in">
+				<div class="desc" v-if="text" :key="text">{{ text }}</div>
+			</Transition>
 			<div class="btns">
 				<a class="btn1" href="/docs/vitepress">VitePress</a>
 				<a class="btn2" href="/docs/收藏的网站/">网址导航</a>
@@ -69,6 +69,7 @@ onUnmounted(() => {
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+
 	.image {
 		width: 100%;
 		height: 500px;
@@ -76,9 +77,11 @@ onUnmounted(() => {
 		justify-content: center;
 		align-items: center;
 	}
+
 	.content {
 		min-width: 500px;
 		height: 200px;
+
 		.title {
 			background: var(--vp-home-hero-name-background);
 			-webkit-background-clip: text;
@@ -90,6 +93,7 @@ onUnmounted(() => {
 			font-size: 56px;
 			text-align: center;
 		}
+
 		.desc {
 			font-size: 24px;
 			line-height: 36px;
@@ -105,6 +109,7 @@ onUnmounted(() => {
 			margin-top: 30px;
 			overflow: hidden;
 			text-align: center;
+
 			a {
 				width: 106px;
 				border-radius: 8px;
@@ -122,12 +127,14 @@ onUnmounted(() => {
 				justify-content: center;
 				align-items: center;
 			}
+
 			.btn1 {
 				color: var(--vp-button-brand-text);
 				border-color: var(--vp-button-brand-border);
 				background-color: var(--vp-button-brand-bg);
 				margin-right: 100px;
 			}
+
 			.btn2 {
 				border-color: var(--vp-button-alt-border);
 				color: var(--vp-button-alt-text);
@@ -135,5 +142,24 @@ onUnmounted(() => {
 			}
 		}
 	}
+}
+
+
+.fade-leave-active {
+	transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
+	opacity: 1;
+}
+
+.fade-enter-active {
+	transition: all 0.5s ease;
+	opacity: 1;
+}
+
+.fade-enter-from {
+	opacity: 0;
+}
+
+.fade-leave-to {
+	opacity: 0;
 }
 </style>

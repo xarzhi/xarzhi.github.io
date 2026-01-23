@@ -287,11 +287,52 @@ const sidebar = {
   "/docs/前端/一些问题/": getItems("/docs/前端/一些问题/"),
   "/docs/其他问题": getItems("/docs/其他问题"),
   "/docs/后端/Rust": [
-
     { text: "Rust基础", items: getItems("/docs/后端/Rust/Rust基础") },
-    { text: "枚举", link: "/docs/后端/Rust/枚举/index", items: getItems("/docs/后端/Rust/枚举/docs"), collapsed: true },
-    { text: "Trait", items: getItems("/docs/后端/Rust/Trait") },
-    { text: "Rust进阶", items: getItems("/docs/后端/Rust/Rust进阶") },
+    {
+      text: "标量类型",
+      items: [
+        { text: '整型', link: "/docs/后端/Rust/标量类型/整型/index", collapsed: true, },
+        { text: '浮点型', items: getItems("/docs/后端/Rust/标量类型/整型"), collapsed: true, },
+        { text: '布尔型', items: getItems("/docs/后端/Rust/标量类型/整型"), collapsed: true, },
+        { text: '字符型', items: getItems("/docs/后端/Rust/标量类型/整型"), collapsed: true, },
+        { text: 'never', items: getItems("/docs/后端/Rust/标量类型/整型"), collapsed: true, }
+      ]
+    },
+    { text: "深入类型", items: getItems("/docs/后端/Rust/深入类型") },
+    { text: "模式匹配", items: getItems("/docs/后端/Rust/模式匹配") },
+    {
+      text: "复合类型",
+      collapsed: true,
+      items: [
+        { text: '元组', link: "/docs/后端/Rust/复合类型/元组Tuple/index", },
+        { text: '数组', link: "/docs/后端/Rust/复合类型/数组Array/index", },
+        { text: '结构体', link: "/docs/后端/Rust/复合类型/结构体Struct/index", },
+        { text: '枚举', link: "/docs/后端/Rust/复合类型/枚举Enum/index", items: getItems("/docs/后端/Rust/复合类型/枚举Enum/docs"), collapsed: true, },
+        { text: '联合体', link: "/docs/后端/Rust/复合类型/联合体Union/index", },
+        { text: '字符串', link: "/docs/后端/Rust/复合类型/字符串String/index", items: getItems("/docs/后端/Rust/复合类型/字符串String/docs"), collapsed: true, },
+      ]
+    },
+    {
+      text: "集合类型",
+      collapsed: true,
+      items: [
+        { text: 'Vector', items: getItems("/docs/后端/Rust/集合类型/Vector"), collapsed: true, },
+        { text: 'HashMap', items: getItems("/docs/后端/Rust/集合类型/HashMap"), collapsed: true },
+      ]
+    },
+    {
+      text: "Rust进阶",
+      collapsed: true,
+      items: [
+        { text: "泛型", items: getItems("/docs/后端/Rust/Rust进阶/泛型"), collapsed: true, },
+        { text: "所有权", items: getItems("/docs/后端/Rust/Rust进阶/所有权"), collapsed: true, },
+        { text: "Trait", items: getItems("/docs/后端/Rust/Rust进阶/Trait"), collapsed: true, },
+        { text: "生命周期", items: getItems("/docs/后端/Rust/Rust进阶/生命周期"), collapsed: true, },
+        { text: "包和模块", items: getItems("/docs/后端/Rust/Rust进阶/包和模块"), collapsed: true, },
+        { text: "宏", items: getItems("/docs/后端/Rust/Rust进阶/宏"), collapsed: true, },
+        { text: "闭包", items: getItems("/docs/后端/Rust/Rust进阶/闭包"), collapsed: true, },
+      ]
+    },
   ]
 }
 

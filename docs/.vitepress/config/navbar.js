@@ -141,7 +141,7 @@ const nav = [
             link: "/docs/后端/C++/MFC/MFC基础/01.环境配置.md",
             icon: "https://gitee.com/xarzhi/picture/raw/master/img/c-plusplus.svg",
           },
-         
+
         ],
       },
       {
@@ -188,9 +188,7 @@ const nav = [
 
 function concatenateIconToText(data) {
   data.forEach((item) => {
-    const img = item.icon
-      ? `<img src='${item.icon}' onerror="this.style.display='none'"/>`
-      : "";
+    const img = `<img src='${item.icon}' onerror="this.style.display='none'"/> `
     item.text = `${img}${item.text}`;
     if (item.items && item.items.length > 0) {
       concatenateIconToText(item.items);

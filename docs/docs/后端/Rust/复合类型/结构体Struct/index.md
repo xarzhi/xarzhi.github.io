@@ -2,12 +2,59 @@
 
 *`struct`*，或者 *structure*，是一个自定义数据类型，允许你命名和包装多个相关的值，从而形成一个有意义的组合。如果你熟悉一门面向对象语言，*struct* 就像对象中的数据属性。
 
-## 1.定义结构体
+Rust 中的结构体有三种风格：带有命名字段的结构体，元组结构体和单元结构体。
 
-使用`struct`关键字来定义一个结构体，如下所示
+使用`struct`关键字来定义一个结构体
+
+## 1.常规结构体
+
+### 1.1 定义
+
+常规结构体定义如下：
 
 - `struct`关键字后面跟上这个结构体的名字
-- 接着在大括号中使用 `key: value` 键-值对的形式提供字段，其中 key 是字段的名字，value 是需要存储在字段中的数据值
+- 接着在大括号中使用 `key: type` 的形式提供字段，其中 `key` 是字段的名字，`type`是需要存储在字段的类型，多个字段用逗号隔开
+
+```rust
+struct StructName {
+    key1: type1,
+    key2: type2,
+    // ...
+}
+```
+
+常规结构体中可以定义任意类型的数据，包括另一个结构体、枚举
+
+```rust
+enum Permission {
+    Add,
+    Delete,
+    Modify,
+    Search,
+}
+
+struct Address {
+    country: String,
+    route: String,
+}
+
+struct User {
+    username: String,
+    email: String,
+    sign_in_count: u64,
+    active: bool,
+    permission: Permission,
+    address: Address,
+}
+```
+
+
+
+### 1.2 创建实例
+
+想要使用结构体，需要先创建结构体实例，一个结构体可以创建多个实例
+
+创建一个实例需要以结构体的名字开头，接着在大括号中使用 `key: value` 键-值对的形式提供字段，其中 key 是字段的名字，value 是需要存储在字段中的数据值。**实例中字段的顺序不需要和它们在结构体中声明的顺序一致**。
 
 ```rust
 struct User {
@@ -16,20 +63,8 @@ struct User {
     sign_in_count: u64,
     active: bool,
 }
-```
 
-
-
-## 2.使用结构体
-
-### 2.1 创建结构体实例
-
-想要使用结构体，需要先创建结构体实例，一个结构体可以创建多个实例
-
-创建一个实例需要以结构体的名字开头，接着在大括号中使用 `key: value` 键-值对的形式提供字段，其中 key 是字段的名字，value 是需要存储在字段中的数据值。**实例中字段的顺序不需要和它们在结构体中声明的顺序一致**。
-
-```rust
-let user1 = User {
+let user = User {
     email: String::from("someone@example.com"),
     username: String::from("someusername123"),
     active: true,
@@ -37,11 +72,9 @@ let user1 = User {
 };
 ```
 
-结构体的定义就像一个类型的通用模板，而实例则会在这个模板中放入特定数据来创建这个类型的值。
 
 
-
-### 2.2 访问实例成员
+### 1.3 访问实例成员
 
 可以使用`实例.key`来访问结构体实例中的某一项的值
 
@@ -70,13 +103,13 @@ fn main() {
 
 
 
-### 2.3 修改实例成员值
+### 1.4 修改实例成员值
 
 想要实例成员的值可被修改，需要在实例成员时使用`mut`关键字
 
 **注意整个实例必须是可变的**；Rust 并不允许只将某个字段标记为可变。
 
-```rust {15,17}
+```rust {8,15,17}
 struct User {
     username: String,
     email: String,
@@ -102,42 +135,153 @@ fn main() {
 
 
 
-## 3.函数返回结构体
+## 2.元组结构体
 
-同其他任何表达式一样，我们可以在函数体的最后一个表达式中构造一个结构体的新实例，来隐式地返回这个实例。
+### 2.1 定义
 
-```rust {7-14,16-18}
-struct User {
-    username: String,
-    email: String,
-    sign_in_count: u64,
-    active: bool,
-}
-fn build_user(email: String, username: String) -> User {
-    User {
-        email,
-        username,
-        active: true,
-        sign_in_count: 1,
-    }
-}
+元组结构体接收一个元组，内部可以定义若干个类型
+
+```rust
+struct StructName(type1, type2, ......);
+```
+
+
+
+### 2.2 创建实例
+
+元组结构体在创建实例时，需要传入一个元组，内部值要按顺序传入
+
+```rust
+struct Ipv4(i32, i32, i32, i32);
+  
+let op = Ipv4(127, 0, 0, 1);
+```
+
+
+
+### 2.3 访问实例成员
+
+元组结构体像元组一样使用，访问成员需要使用`实例.索引`的语法
+
+```rust
+struct Ipv4(i32, i32, i32, i32);
 fn main() {
-    let email = String::from("123@qq.com");
-    let username = String::from("xarzhi");
-    let user = build_user(email, username);
+    let ip = Ipv4(127, 0, 0, 1);
 
-    
-    println!("{}",user.email);              // "123@qq.com"
-    println!("{}",user.username);           // "xarzhi"
-    println!("{}",user.active);             // true
-    println!("{}",user.sign_in_count);      // 1
+    println!("{}",ip.0);       // 127
+    println!("{}",ip.1);       // 0
+    println!("{}",ip.2);       // 0
+    println!("{}",ip.3);       // 1
+}
+```
+
+
+
+### 2.4 修改成员值
+
+修改元组结构体的值需要使用`实例.索引=new_value`的语法
+
+```rust
+struct Ipv4(i32, i32, i32, i32);
+fn main() {
+    let mut ip = Ipv4(127, 0, 0, 1);
+    ip.0 = 123;
+    println!("{}", ip.0); // 123
+}
+```
+
+
+
+### 2.5 解构
+
+元组结构体可以用如下语法解构
+
+```rust {3}
+struct Ipv4(i32, i32, i32, i32);
+fn main() {
+    let Ipv4(ip1, ip2, ip3, ip4) = Ipv4(127, 0, 0, 1);
+
+    println!("{}", ip1); // 127
+    println!("{}", ip2); // 0
+    println!("{}", ip3); // 0
+    println!("{}", ip4); // 1
 }
 
 ```
 
 
 
-### 3.1 变量与字段同名
+## 3.单元结构体
+
+我们也可以定义一个没有任何字段的结构体！它们被称为 **类单元结构体**（*unit-like structs*）因为它们类似于 `()`，即 unit 类型。类单元结构体常常在你想要在某个类型上实现 trait 但不需要在类型中存储数据的时候发挥作用，trait在后面介绍。
+
+```rust
+struct StructName;struct name;
+```
+
+直接在结构体名后面加一个分号`;`做结尾，就是一个单元结构体。单元结构体往往用于承载一些方法，内部不包含具体类型，在其它面向对象语言中也可以理解为接口类这样的存在。关于类型的方法，后续会进行讲解。
+
+单元结构体有一个特性，就是在`release`版本下全局只保留一个实例。
+
+示例：
+
+```rust
+struct People;
+
+fn main() {
+    let p1 = People;
+    let p2 = People;
+    println!("p1 addr: {:p}", &p1);
+    println!("p2 addr: {:p}", &p2);
+}
+```
+
+以上代码定义了一个`People`单元结构体，随后用这个类型声明了两个实例`p1`和`p2`，最后分别输出两个变量的地址。
+
+在`debug`模式下，`p1`和`p2`的地址是不同的，因为它们确实是不同的变量，逻辑上在内存中占据不同的空间。
+
+`release`模式下，由于这个单元结构体本身其实没有任何内容，它的大小实际为`0`，它的地址也没有什么实际意义。因此`Rust`会把全局所有的`People`都指向同一个实例，从而提高效率。
+
+这与`C++`有一些区别，在`C++`中如果一个结构体内部没有任何内容，那么`C++`会保证给它分配`1 byte`，那么以上的`p1`和`p2`就会拿到不同的地址。
+
+
+
+
+
+## 4.函数中使用结构体
+
+结构体可以作为一个函数的参数，也可以作为返回值来使用
+
+如下面的示例，接收一个结构体，返回一个新的结构体
+
+```rust {7-14,16-18}
+#[derive(Debug)]
+struct User {
+    username: String,
+    email: String,
+}
+fn change_name(user: User, new_name: String) -> User {
+    User {
+        username: new_name,
+        ..user
+    }
+}
+fn main() {
+    let user1 = User {
+        username: String::from("小鹏"),
+        email: String::from("123@qq.com"),
+    };
+
+    let user = change_name(user1, String::from("小朋"));
+
+    println!("{}", user.username); // "小朋"
+    println!("{}", user.email);
+}
+```
+
+
+
+### 4.1 字段初始化简写
 
 当**函数参数名与字段名都完全相同**，我们可以使用 **字段初始化简写语法**（*field init shorthand*）来重写 `build_user`，这样其行为与之前完全相同，不过无需重复 `email` 和 `username` 了
 
@@ -173,7 +317,7 @@ fn main() {
 
 
 
-## 4.从其他实例创建实例
+## 5.从其他实例创建实例
 
 如果已经有一个实例，我们想再创建一个新实例，新实例中的部分成员值和其他实例的值一样，可以直接使用其他实例的值
 
@@ -193,7 +337,9 @@ let mut user2 = User {
 };
 ```
 
-### 4.1 结构体更新语法
+
+
+### 5.1 结构体更新语法
 
 我们可以通过更少的代码来达到相同的效果，`..` 语法指定了剩余未显式设置值的字段应有与给定实例对应字段相同的值。
 
@@ -209,66 +355,11 @@ let user2 = User {
 
 
 
-## 5. 元组结构体
-
-元组结构体有着结构体名称提供的含义，但没有具体的字段名，只有字段的类型。当你想给整个元组取一个名字，并使元组成为与其他元组不同的类型时，元组结构体是很有用的，这时像常规结构体那样为每个字段命名就显得多余和形式化了。
-
-要定义元组结构体，以 `struct` 关键字和结构体名开头并后跟元组中的类型
-
-```rust
-struct Color(i32, i32, i32);
-struct Point(i32, i32, i32);
-
-let black = Color(0, 0, 0);
-let origin = Point(0, 0, 0);
-```
-
-注意 `black` 和 `origin` 值的类型不同，因为它们是不同的元组结构体的实例。
-
-你定义的每一个结构体有其自己的类型，即使结构体中的字段有着相同的类型。
-
-
-
-### 5.1 类单元结构体
-
-我们也可以定义一个没有任何字段的结构体！它们被称为 **类单元结构体**（*unit-like structs*）因为它们类似于 `()`，即 unit 类型。类单元结构体常常在你想要在某个类型上实现 trait 但不需要在类型中存储数据的时候发挥作用，trait在后面介绍。
-
-```rust
-struct name;
-```
-
-直接在结构体名后面加一个分号`;`做结尾，就是一个单元结构体。单元结构体往往用于承载一些方法，内部不包含具体类型，在其它面向对象语言中也可以理解为接口类这样的存在。关于类型的方法，后续会进行讲解。
-
-单元结构体有一个特性，就是在`release`版本下全局只保留一个实例。
-
-示例：
-
-```rust
-struct People;
-
-fn main() {
-    let p1 = People;
-    let p2 = People;
-    println!("p1 addr: {:p}", &p1);
-    println!("p2 addr: {:p}", &p2);
-}
-```
-
-以上代码定义了一个`People`单元结构体，随后用这个类型声明了两个实例`p1`和`p2`，最后分别输出两个变量的地址。
-
-在`debug`模式下，`p1`和`p2`的地址是不同的，因为它们确实是不同的变量，逻辑上在内存中占据不同的空间。
-
-`release`模式下，由于这个单元结构体本身其实没有任何内容，它的大小实际为`0`，它的地址也没有什么实际意义。因此`Rust`会把全局所有的`People`都指向同一个实例，从而提高效率。
-
-这与`C++`有一些区别，在`C++`中如果一个结构体内部没有任何内容，那么`C++`会保证给它分配`1 byte`，那么以上的`p1`和`p2`就会拿到不同的地址。
 
 
 
 
-
-:::tip
-
-**结构体数据的所有权**
+## 7.结构体数据的所有权
 
 在上面 结构体的定义中，我们使用了自身拥有所有权的 `String` 类型而不是 `&str` 字符串 slice 类型。这是一个有意而为之的选择，因为我们想要这个结构体拥有它所有的数据，为此只要整个结构体是有效的话其数据也是有效的。
 
@@ -310,8 +401,6 @@ error[E0106]: missing lifetime specifier
 
 第十章会讲到如何修复这个问题以便在结构体中存储引用，不过现在，我们会使用像 `String` 这类拥有所有权的类型来替代 `&str` 这样的引用以修正这个错误。
 
-:::
-
 
 
 
@@ -335,7 +424,11 @@ fn main() {
 
 这样打印会报错：`error[E0277]: Rectangle doesn't implement std::fmt::Display`
 
-`println!` 宏能处理很多类型的格式，不过，`{}` 默认告诉 `println!` 使用被称为 `Display` 的格式：意在提供给直接终端用户查看的输出。目前为止见过的基本类型都默认实现了 `Display`，因为它就是向用户展示 `1` 或其他任何基本类型的唯一方式。不过对于结构体，`println!` 应该用来输出的格式是不明确的，因为这有更多显示的可能性：是否需要逗号？需要打印出大括号吗？所有字段都应该显示吗？由于这种不确定性，Rust 不会尝试猜测我们的意图，所以结构体并没有提供一个 `Display` 实现。
+`println!` 宏能处理很多类型的格式，不过，`{}` 默认告诉 `println!` 使用被称为 `Display` 的格式：意在提供给直接终端用户查看的输出。
+
+目前为止见过的基本类型都默认实现了 `Display`，因为它就是向用户展示 `1` 或其他任何基本类型的唯一方式。
+
+不过对于结构体，`println!` 应该用来输出的格式是不明确的，Rust 不会尝试猜测我们的意图，所以结构体并没有提供一个 `Display` 实现。
 
 想要打印完整的结构体，需要把 `println!` 宏中的`{}`换成`{:?}`，然后在结构体声明的上面加上`#[derive(Debug)]`注解
 

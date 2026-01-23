@@ -189,7 +189,8 @@ const nav = [
 function concatenateIconToText(data) {
   data.forEach((item) => {
     const img = `<img src='${item.icon}' onerror="this.style.display='none'"/> `
-    item.text = `${img}${item.text}`;
+
+    item.text = `${item.icon ? img : ''}${item.text}`;
     if (item.items && item.items.length > 0) {
       concatenateIconToText(item.items);
     }

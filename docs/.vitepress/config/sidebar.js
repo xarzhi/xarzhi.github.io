@@ -321,7 +321,7 @@ const sidebar = {
         { text: "生命周期", items: getItems("/docs/后端/Rust/Rust进阶/生命周期"), collapsed: true, },
         { text: "包和模块", items: getItems("/docs/后端/Rust/Rust进阶/包和模块"), collapsed: true, },
         { text: "宏", link: "/docs/后端/Rust/Rust进阶/宏/index", collapsed: true, },
-        { text: "闭包", items: getItems("/docs/后端/Rust/Rust进阶/闭包"), collapsed: true, },
+        { text: "闭包和迭代器", items: getItems("/docs/后端/Rust/Rust进阶/闭包和迭代器"), collapsed: true, },
       ]
     },
   ]

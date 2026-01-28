@@ -289,7 +289,7 @@ const sidebar = {
   "/docs/后端/Rust": [
     { text: "Rust基础", items: getItems("/docs/后端/Rust/Rust基础") },
     { text: "标量类型", items: getItems("/docs/后端/Rust/标量类型"), collapsed: true },
-    { text: "深入类型", items: getItems("/docs/后端/Rust/深入类型") },
+    { text: "深入类型", items: getItems("/docs/后端/Rust/深入类型"), collapsed: true, },
     {
       text: "复合类型",
       collapsed: true,
@@ -316,7 +316,7 @@ const sidebar = {
       text: "Rust进阶",
       collapsed: true,
       items: [
-        { text: "泛型", items: getItems("/docs/后端/Rust/Rust进阶/泛型"), collapsed: true, },
+        { text: "泛型", link: "/docs/后端/Rust/Rust进阶/泛型/index", collapsed: true, },
         { text: "Trait", items: getItems("/docs/后端/Rust/Rust进阶/Trait"), collapsed: true, },
         { text: "生命周期", items: getItems("/docs/后端/Rust/Rust进阶/生命周期"), collapsed: true, },
         { text: "包和模块", items: getItems("/docs/后端/Rust/Rust进阶/包和模块"), collapsed: true, },

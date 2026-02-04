@@ -8,7 +8,7 @@ const nav = [
           {
             text: "Html",
             link: "/docs/前端/前端三剑客/Html/01.Html初识",
-            icon: "https://gitee.com/xarzhi/picture/raw/master/img/html5.svg",
+            icon: "/sidebar_icons/html5.svg",
           },
           {
             text: "CSS",

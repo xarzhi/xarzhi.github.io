@@ -13,12 +13,12 @@ const nav = [
           {
             text: "CSS",
             link: "/docs/前端/前端三剑客/CSS/CSS/01.引入css样式表",
-            icon: "https://gitee.com/xarzhi/picture/raw/master/img/css_old.svg",
+            icon: "/sidebar_icons/css_old.svg",
           },
           {
             text: "JavaScript",
             link: "/docs/前端/前端三剑客/javascript/js基础/01.js基础语法",
-            icon: "https://gitee.com/xarzhi/picture/raw/master/img/javascript.svg",
+            icon: "/sidebar_icons/javascript.svg",
           },
         ],
       },
@@ -28,7 +28,7 @@ const nav = [
           {
             text: "Ts入门",
             link: "/docs/前端/TypeScript/Ts入门/01.基本配置",
-            icon: "https://gitee.com/xarzhi/picture/raw/master/img/typescript.svg",
+            icon: "/sidebar_icons/typescript.svg",
           },
         ],
       },
@@ -38,12 +38,12 @@ const nav = [
           {
             text: "Vue2",
             link: "/docs/前端/框架/Vue/Vue2/Vue2基础/01.Vue2基础",
-            icon: "https://cn.vuejs.org/logo.svg",
+            icon: "/sidebar_icons/logo.svg",
           },
           {
             text: "Vue3",
             link: "/docs/前端/框架/Vue/Vue3/Vue3基础/01.Vue3基础",
-            icon: "https://cn.vuejs.org/logo.svg",
+            icon: "/sidebar_icons/logo.svg",
           },
         ],
       },
@@ -53,7 +53,7 @@ const nav = [
           {
             text: "React",
             link: "/docs/前端/框架/React/01.React入门",
-            icon: "https://gitee.com/xarzhi/picture/raw/master/img/react_light.svg",
+            icon: "/sidebar_icons/react_light.svg",
           },
         ],
       },
@@ -61,7 +61,7 @@ const nav = [
       {
         text: "小程序",
         link: "/docs/前端/小程序/01.mina.md",
-        icon: "https://gitee.com/xarzhi/picture/raw/master/img/uni.png",
+        icon: "/sidebar_icons/uni.png",
       },
 
       {
@@ -76,17 +76,17 @@ const nav = [
       {
         text: "Canvas",
         link: "/docs/前端/可视化/Canvas/01.认识Canvas",
-        icon: "https://gitee.com/xarzhi/picture/raw/master/img/canva.svg",
+        icon: "/sidebar_icons/canva.svg",
       },
       {
         text: "Threejs",
         link: "/docs/前端/可视化/Three.js/基本使用/01.安装threejs",
-        icon: "https://gitee.com/xarzhi/picture/raw/master/img/threejs-light.svg",
+        icon: "h/sidebar_icons/threejs-light.svg",
       },
       {
         text: "WebGl",
         link: "/docs/前端/可视化/WebGL/01.WebGL基础",
-        icon: "https://gitee.com/xarzhi/picture/raw/master/img/threejs-light.svg",
+        icon: "/sidebar_icons/threejs-light.svg",
       },
     ],
   },
@@ -96,7 +96,7 @@ const nav = [
       {
         text: "Gsap",
         link: "/docs/前端/工具库/Gsap/快速开始/01.安装.md",
-        icon: "https://gitee.com/xarzhi/picture/raw/master/img/gsap.png",
+        icon: "/sidebar_icons/gsap.png",
       },
     ],
   },
@@ -106,7 +106,7 @@ const nav = [
       {
         text: "Webpack",
         link: "/docs/前端/Webpack/01.Webpack基础.md",
-        icon: "https://gitee.com/xarzhi/picture/raw/master/img/webpack.png",
+        icon: "/sidebar_icons/webpack.png",
       },
     ],
   },
@@ -116,7 +116,7 @@ const nav = [
       {
         text: "Node.js",
         link: "/docs/后端/Node.js/01.初识Node.js",
-        icon: "https://gitee.com/xarzhi/picture/raw/master/img/nodejs.png",
+        icon: "/sidebar_icons/nodejs.png",
       },
       {
         text: "C++",
@@ -124,22 +124,22 @@ const nav = [
           {
             text: "C++基础",
             link: "/docs/后端/C++/C++基础/C++基础/01.环境配置.md",
-            icon: "https://gitee.com/xarzhi/picture/raw/master/img/c-plusplus.svg",
+            icon: "/sidebar_icons/c-plusplus.svg",
           },
           {
             text: "QT",
             link: "/docs/后端/C++/C++基础/01.环境配置.md",
-            icon: "https://gitee.com/xarzhi/picture/raw/master/img/qt.svg",
+            icon: "/sidebar_icons/qt.svg",
           },
           {
             text: "Win32 api",
             link: "/docs/后端/C++/Win32/01.基础知识.md",
-            icon: "https://gitee.com/xarzhi/picture/raw/master/img/c-plusplus.svg",
+            icon: "/sidebar_icons/c-plusplus.svg",
           },
           {
             text: "MFC",
             link: "/docs/后端/C++/MFC/MFC基础/01.环境配置.md",
-            icon: "https://gitee.com/xarzhi/picture/raw/master/img/c-plusplus.svg",
+            icon: "/sidebar_icons/c-plusplus.svg",
           },
 
         ],
@@ -150,17 +150,17 @@ const nav = [
           {
             text: "C#基础",
             link: "/docs/后端/CS/CS基础/CS基础/01.环境配置.md",
-            icon: "https://gitee.com/xarzhi/picture/raw/master/img/csharp.svg",
+            icon: "/sidebar_icons/csharp.svg",
           },
           {
             text: "Winform",
             link: "/docs/后端/CS/Winform/Winform基础/01.第一个窗口.md",
-            icon: "https://gitee.com/xarzhi/picture/raw/master/img/csharp.svg",
+            icon: "/sidebar_icons/csharp.svg",
           },
           {
             text: "WPF",
             link: "/docs/后端/CS/WPF/01.环境配置.md",
-            icon: "https://gitee.com/xarzhi/picture/raw/master/img/c-plusplus.svg",
+            icon: "/sidebar_icons/csharp.svg",
           },
         ],
       },
@@ -170,7 +170,7 @@ const nav = [
           {
             text: "Rust基础",
             link: "/docs/后端/Rust/Rust基础/01.环境搭建.md",
-            icon: "https://gitee.com/xarzhi/picture/raw/master/img/rust.svg",
+            icon: "/sidebar_icons/rust.svg",
           },
         ],
       },

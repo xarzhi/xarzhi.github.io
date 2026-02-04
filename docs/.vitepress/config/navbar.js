@@ -81,7 +81,7 @@ const nav = [
       {
         text: "Threejs",
         link: "/docs/前端/可视化/Three.js/基本使用/01.安装threejs",
-        icon: "h/sidebar_icons/threejs-light.svg",
+        icon: "/sidebar_icons/threejs-light.svg",
       },
       {
         text: "WebGl",
@@ -115,7 +115,7 @@ const nav = [
     items: [
       {
         text: "Node.js",
-        link: "/docs/后端/Node.js/01.初识Node.js",
+        link: "/docs/后端/Node/01.初识Nodejs",
         icon: "/sidebar_icons/nodejs.png",
       },
       {

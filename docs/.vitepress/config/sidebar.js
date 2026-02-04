@@ -283,7 +283,7 @@ const sidebar = {
     { text: "常用类", items: getItems("/docs/后端/C++/MFC/常用类") },
   ],
   "/docs/前端/小程序/": getItems("/docs/前端/小程序"),
-  "/docs/后端/Node.js/": getItems("/docs/后端/Node.js/"),
+  "/docs/后端/Node/": getItems("/docs/后端/Node/"),
   "/docs/前端/一些问题/": getItems("/docs/前端/一些问题/"),
   "/docs/其他问题": getItems("/docs/其他问题"),
   "/docs/后端/Rust": [

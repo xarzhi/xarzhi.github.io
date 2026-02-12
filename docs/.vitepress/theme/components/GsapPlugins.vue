@@ -1,20 +1,11 @@
 <template>
   <div class="plugins">
-    <div
-      class="plugin"
-      v-for="(plugins, pluginsIndex) in pluginList"
-      :key="pluginsIndex"
-      :style="{
-        background: plugins.bgc,
-      }"
-    >
+    <div class="plugin" v-for="(plugins, pluginsIndex) in pluginList" :key="pluginsIndex" :style="{
+      background: plugins.bgc,
+    }">
       <div class="title">{{ plugins.title }}</div>
       <div class="plugin_list">
-        <div
-          class="single_plugin"
-          v-for="(plugin, pluginIndex) in plugins.list"
-          :key="pluginIndex"
-        >
+        <div class="single_plugin" v-for="(plugin, pluginIndex) in plugins.list" :key="pluginIndex">
           <div class="plugin_name">
             <div class="name">
               {{ plugin.name }}
@@ -24,32 +15,16 @@
             </div>
           </div>
           <div class="btns">
-            <button
-              class="cdn"
-              v-if="plugin.cdn"
-              @click="handleClick($event, plugin, 'cdn')"
-            >
+            <button class="cdn" v-if="plugin.cdn" @click="handleClick($event, plugin, 'cdn')">
               CDN
             </button>
-            <button
-              class="cdn"
-              v-if="plugin.npm"
-              @click="handleClick($event, plugin, 'npm')"
-            >
+            <button class="cdn" v-if="plugin.npm" @click="handleClick($event, plugin, 'npm')">
               NPM
             </button>
-            <button
-              class="cdn"
-              v-if="plugin.umd"
-              @click="handleClick($event, plugin, 'umd')"
-            >
+            <button class="cdn" v-if="plugin.umd" @click="handleClick($event, plugin, 'umd')">
               UMD
             </button>
-            <button
-              class="cdn"
-              v-if="plugin.esm"
-              @click="handleClick($event, plugin, 'esm')"
-            >
+            <button class="cdn" v-if="plugin.esm" @click="handleClick($event, plugin, 'esm')">
               ESM
             </button>
           </div>
@@ -62,8 +37,8 @@
 <script setup>
 import { reactive, onMounted } from "vue";
 import gsap from "gsap";
-import { TextPlugin } from "gsap/TextPlugin";
-gsap.registerPlugin(TextPlugin);
+// import { TextPlugin } from "gsap/TextPlugin";
+// gsap.registerPlugin(TextPlugin);
 
 const pluginList = reactive([
   {
@@ -305,6 +280,7 @@ const handleClick = (e, plugin, type) => {
   flex-flow: row wrap;
   justify-content: space-between;
   box-sizing: border-box;
+
   .plugin {
     min-width: 450px;
     flex: 1;
@@ -315,6 +291,7 @@ const handleClick = (e, plugin, type) => {
     display: flex;
     flex-flow: column;
     margin-right: 10px;
+
     .title {
       font-size: 18px;
       text-align: center;
@@ -323,6 +300,7 @@ const handleClick = (e, plugin, type) => {
       line-height: 40px;
       color: #000;
     }
+
     .plugin_list {
       background-color: #0e100f;
       color: #bbbaa1;
@@ -330,20 +308,25 @@ const handleClick = (e, plugin, type) => {
       padding: 20px 10px;
       border-radius: 10px;
       flex: 1;
+
       .single_plugin {
         display: flex;
         padding: 10px 0;
         justify-content: space-between;
         align-items: center;
         line-height: 1;
+
         .name {
           margin-bottom: 2px;
         }
+
         .extra {
           font-size: 14.4px;
         }
+
         .btns {
           display: flex;
+
           button {
             font-size: 12px;
             width: 60px;
@@ -358,6 +341,7 @@ const handleClick = (e, plugin, type) => {
     }
   }
 }
+
 .green {
   background-color: #1fb84b;
 }

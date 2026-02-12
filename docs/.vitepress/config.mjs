@@ -89,6 +89,35 @@ const config = defineConfig({
     lightModeSwitchTitle: "切换至深色模式",
     darkModeSwitchTitle: "切换至浅色模式",
   },
+  vite: {
+    build: {
+      chunkSizeWarningLimit: 1000, // 适当提高阈值
+      rollupOptions: {
+        output: {
+          manualChunks: (id) => {
+            if (id.includes('node_modules')) {
+              if (id.includes('vue') || id.includes('@vue/')) {
+                return 'vue-vendor';
+              }
+              if (id.includes('vitepress')) {
+                return 'vitepress-vendor';
+              }
+              if (id.includes('lodash') || id.includes('lodash-es')) {
+                return 'lodash';
+              }
+              if (id.includes('monaco-editor')) {
+                return 'monaco';
+              }
+              return 'vendor';
+            }
+            if (id.includes('/components/')) {
+              return 'components';
+            }
+          }
+        }
+      }
+    }
+  }
 });
 
 export default config;

@@ -91,7 +91,7 @@ const config = defineConfig({
   },
   vite: {
     build: {
-      chunkSizeWarningLimit: 1000, // 适当提高阈值
+      chunkSizeWarningLimit: 5000, // 适当提高阈值
       rollupOptions: {
         output: {
           manualChunks: (id) => {

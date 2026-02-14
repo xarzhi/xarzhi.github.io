@@ -115,7 +115,7 @@ const nav = [
     items: [
       {
         text: "Node.js",
-        link: "/docs/后端/Node/01.初识Nodejs",
+        link: "/docs/后端/Node/Node基础/01.初识Nodejs",
         icon: "/sidebar_icons/nodejs.png",
       },
       {

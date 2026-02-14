@@ -283,7 +283,11 @@ const sidebar = {
     { text: "常用类", items: getItems("/docs/后端/C++/MFC/常用类") },
   ],
   "/docs/前端/小程序/": getItems("/docs/前端/小程序"),
-  "/docs/后端/Node/": getItems("/docs/后端/Node/"),
+  "/docs/后端/Node/": [
+    { text: "Node基础", items: getItems("/docs/后端/Node/Node基础") },
+    { text: "Express", items: getItems("/docs/后端/Node/Express") },
+    { text: "MySQL", items: getItems("/docs/后端/Node/MySQL") },
+  ],
   "/docs/前端/一些问题/": getItems("/docs/前端/一些问题/"),
   "/docs/其他问题": getItems("/docs/其他问题"),
   "/docs/后端/Rust": [

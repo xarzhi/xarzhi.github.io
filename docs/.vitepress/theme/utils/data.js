@@ -40,6 +40,12 @@ export const NAV_DATA = [
         icon: "https://www.matools.com/static/img/common/matools-favicon.png",
       },
       {
+        title: "cubic-bezier ",
+        desc: "贝塞尔曲线在线制作",
+        link: "https://cubic-bezier.com/",
+        icon: "https://gitee.com/xarzhi/picture/raw/master/img/下载.png",
+      },
+      {
         title: "Gltf-display",
         desc: "在线glTF 3D模型预览工具",
         link: "https://wzdong26.github.io/gltf-display/editor/",
@@ -112,9 +118,9 @@ export const NAV_DATA = [
       },
       {
         title: "MDN",
-        link: "https://www.hello-algo.com/",
+        link: "https://developer.mozilla.org/zh-CN/",
         desc: "Web 开发技术 | MDN",
-        icon: "",
+        icon: "https://developer.mozilla.org/favicon.ico",
       },
       {
         title: "w3school",
@@ -217,8 +223,43 @@ export const NAV_DATA = [
         ],
       },
       {
+        title: '知识学习',
+        items: [
+          {
+            title: "Vue3 One Piece",
+            desc: "包含Vue及React面试题，以及源码讲解",
+            link: "https://vue3js.cn/",
+            icon: "https://gitee.com/xarzhi/picture/raw/master/img/onepiece.png",
+          },
+        ]
+      },
+      {
         title: "UI组件库",
         items: [
+          {
+            title: "MUI",
+            desc: "MUI提供了一套全面的免费UI工具，帮助你更快地发布新功能。可以从 Material UI 开始，我们功能齐全的React组件库，或者将您自己的设计系统带入我们的生产准备组件中。",
+            link: "https://mui.com/",
+            icon: "https://mui.com/static/favicon.ico",
+          },
+          {
+            title: "Vuetify",
+            desc: "Vuetify 是一个无需设计技能的开源 UI 库，拥有精美手工制作的 Vue 组件。",
+            link: "https://vuetifyjs.com/zh-Hans/",
+            icon: "https://vuetifyjs.com/favicon.ico",
+          },
+          {
+            title: "Chakra UI",
+            desc: "用于构建高质量网页应用和设计系统的无障碍React组件",
+            link: "https://chakra-ui.com/",
+            icon: "https://chakra-ui.com/favicon.ico",
+          },
+          {
+            title: "TDesign",
+            desc: "是由腾讯大前端技术委员会发起并创立的腾讯集团内的大前端技术产品联盟。包含Vue、React、Vue Next以及移动端",
+            link: "https://tdesign.tencent.com/",
+            icon: "https://tdesign.tencent.com/favicon.ico",
+          },
           {
             title: "Element",
             desc: "适用于Vue2的pc端ui开发框架",

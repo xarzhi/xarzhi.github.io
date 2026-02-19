@@ -292,11 +292,10 @@ const sidebar = {
   "/docs/其他问题": getItems("/docs/其他问题"),
   "/docs/后端/Rust": [
     { text: "Rust基础", items: getItems("/docs/后端/Rust/Rust基础") },
-    { text: "标量类型", items: getItems("/docs/后端/Rust/标量类型"), collapsed: true },
-    { text: "深入类型", items: getItems("/docs/后端/Rust/深入类型"), collapsed: true, },
+    { text: "标量类型", items: getItems("/docs/后端/Rust/标量类型"), },
+    { text: "深入类型", items: getItems("/docs/后端/Rust/深入类型"), },
     {
       text: "复合类型",
-      collapsed: true,
       items: [
         { text: '元组', link: "/docs/后端/Rust/复合类型/元组Tuple/index", },
         { text: '数组', link: "/docs/后端/Rust/复合类型/数组Array/index", },
@@ -306,19 +305,14 @@ const sidebar = {
         { text: '字符串', link: "/docs/后端/Rust/复合类型/字符串String/index", items: getItems("/docs/后端/Rust/复合类型/字符串String/docs"), collapsed: true, },
       ]
     },
-    { text: "模式匹配", items: getItems("/docs/后端/Rust/模式匹配"), collapsed: true, },
-    { text: "所有权", items: getItems("/docs/后端/Rust/所有权"), collapsed: true, },
+    { text: "模式匹配", items: getItems("/docs/后端/Rust/模式匹配"), },
+    { text: "所有权", items: getItems("/docs/后端/Rust/所有权"), },
     {
       text: "集合类型",
-      collapsed: true,
-      items: [
-        { text: 'Vector', items: getItems("/docs/后端/Rust/集合类型/Vector"), collapsed: true, },
-        { text: 'HashMap', items: getItems("/docs/后端/Rust/集合类型/HashMap"), collapsed: true },
-      ]
+      items: getItems("/docs/后端/Rust/集合类型")
     },
     {
       text: "Rust进阶",
-      collapsed: true,
       items: [
         { text: "泛型", link: "/docs/后端/Rust/Rust进阶/泛型/index", collapsed: true, },
         { text: "Trait", items: getItems("/docs/后端/Rust/Rust进阶/Trait"), collapsed: true, },

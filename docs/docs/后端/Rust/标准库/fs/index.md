@@ -771,7 +771,7 @@ fn main() {
 
 ## 2.结构体
 
-### [FileTImes](./结构体/01.FileTImes.md)
+### [FileTimes](./结构体/01.FileTimes.md)
 
 文件上各种时间戳的表示。
 

@@ -1,25 +1,23 @@
-import { join } from "path";
-import { readdirSync } from "fs";
+import { join } from 'path'
+import { readdirSync } from 'fs'
 
 function isMarkdownFile(fileName) {
-  return !!fileName.match(/.+\.md$/);
+	return !!fileName.match(/.+\.md$/)
 }
 function getItems(url) {
-  const path = join(__dirname, `../../${url}`);
-  return readdirSync(path)
-    .filter((item) => isMarkdownFile(item))
-    .map((fileName) => {
-      if (isMarkdownFile(fileName)) {
-        const text = fileName.match(/^[0-9]{2}(-|.)+/)
-          ? fileName.substring(3)
-          : fileName;
-        const fileData = {
-          text: text.replace(".md", ""),
-          link: `${url}/${fileName}`,
-        };
-        return fileData;
-      }
-    });
+	const path = join(__dirname, `../../${url}`)
+	return readdirSync(path)
+		.filter(item => isMarkdownFile(item))
+		.map(fileName => {
+			if (isMarkdownFile(fileName)) {
+				const text = fileName.match(/^[0-9]{2}(-|.)+/) ? fileName.substring(3) : fileName
+				const fileData = {
+					text: text.replace('.md', ''),
+					link: `${url}/${fileName}`,
+				}
+				return fileData
+			}
+		})
 }
 
 const sidebar = {
@@ -281,11 +279,12 @@ const sidebar = {
 	'/docs/前端/一些问题/': getItems('/docs/前端/一些问题/'),
 	'/docs/其他问题': getItems('/docs/其他问题'),
 	'/docs/后端/Rust': [
-		{ text: 'Rust基础', items: getItems('/docs/后端/Rust/Rust基础') },
-		{ text: '标量类型', items: getItems('/docs/后端/Rust/标量类型') },
-		{ text: '深入类型', items: getItems('/docs/后端/Rust/深入类型') },
+		{ text: 'Rust基础', items: getItems('/docs/后端/Rust/Rust基础'), collapsed: true },
+		{ text: '标量类型', items: getItems('/docs/后端/Rust/标量类型'), collapsed: true },
+		{ text: '深入类型', items: getItems('/docs/后端/Rust/深入类型'), collapsed: true },
 		{
 			text: '复合类型',
+			collapsed: true,
 			items: [
 				{ text: '元组', link: '/docs/后端/Rust/复合类型/元组Tuple/index' },
 				{ text: '数组', link: '/docs/后端/Rust/复合类型/数组Array/index' },
@@ -305,14 +304,20 @@ const sidebar = {
 				},
 			],
 		},
-		{ text: '模式匹配', items: getItems('/docs/后端/Rust/模式匹配') },
-		{ text: '所有权', items: getItems('/docs/后端/Rust/所有权') },
+		{ text: '模式匹配', link: '/docs/后端/Rust/模式匹配/index.md' },
+		{
+			text: '所有权',
+			items: getItems('/docs/后端/Rust/所有权'),
+			collapsed: true,
+		},
 		{
 			text: '集合类型',
 			items: getItems('/docs/后端/Rust/集合类型'),
+			collapsed: true,
 		},
 		{
 			text: 'Rust进阶',
+			collapsed: true,
 			items: [
 				{ text: '泛型', link: '/docs/后端/Rust/Rust进阶/泛型/index', collapsed: true },
 				{ text: 'Trait', items: getItems('/docs/后端/Rust/Rust进阶/Trait'), collapsed: true },
@@ -324,12 +329,19 @@ const sidebar = {
 		},
 		{
 			text: '标准库',
+			collapsed: true,
 			items: [
 				{
 					text: 'fs',
 					link: '/docs/后端/Rust/标准库/fs',
 					collapsed: true,
-					items: getItems('/docs/后端/Rust/标准库/fs/结构体'),
+					items: [
+						{
+							text: '结构体',
+							collapsed: true,
+							items: getItems('/docs/后端/Rust/标准库/fs/结构体'),
+						},
+					],
 				},
 				{
 					text: 'io',
@@ -361,13 +373,13 @@ const sidebar = {
 }
 
 for (let key in sidebar) {
-  if (Array.isArray(sidebar[key])) {
-    sidebar[key] = sidebar[key].map((item) => {
-      return {
-        ...item,
-        collapsed: item.collapsed || false,
-      };
-    });
-  }
+	if (Array.isArray(sidebar[key])) {
+		sidebar[key] = sidebar[key].map(item => {
+			return {
+				...item,
+				collapsed: item.collapsed || false,
+			}
+		})
+	}
 }
-export default sidebar;
+export default sidebar

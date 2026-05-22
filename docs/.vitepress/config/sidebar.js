@@ -347,7 +347,18 @@ const sidebar = {
 					text: 'io',
 					link: '/docs/后端/Rust/标准库/io',
 					collapsed: true,
-					items: getItems('/docs/后端/Rust/标准库/io/结构体'),
+					items: [
+						{
+							text: 'Structs',
+							collapsed: true,
+							items: getItems('/docs/后端/Rust/标准库/io/Structs'),
+						},
+						{
+							text: 'Traits',
+							collapsed: true,
+							items: getItems('/docs/后端/Rust/标准库/io/Traits'),
+						},
+					],
 				},
 				{
 					text: 'time',

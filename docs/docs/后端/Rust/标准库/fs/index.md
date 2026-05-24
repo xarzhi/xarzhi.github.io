@@ -251,7 +251,7 @@ pub fn metadata<P: AsRef<Path>>(path: P) -> Result<Metadata>
 
 * from：文件路径
 
-返回值：返回一个元信息[`Metadata`](./结构体/06.Metadata.md)
+返回值：返回一个元信息[`Metadata`](./Structs/06.Metadata.md)
 
 ```rust
 use std::fs;
@@ -307,7 +307,7 @@ pub fn read_dir<P: AsRef<Path>>(path: P) -> Result<ReadDir>
 
 **返回值**：返回一个`Result<ReadDir>`
 
-* 其中[`ReadDir`](./结构体/09.ReadDir.md)为读取目录中条目的迭代器，遍历迭代器中的每一项为`io::Result<DirEntry>` 实例。 通过 [`DirEntry`](./结构体/03.DirEntry.md)，可以了解类似条目路径以及可能的其他元数据的信息。
+* 其中[`ReadDir`](./Structs/09.ReadDir.md)为读取目录中条目的迭代器，遍历迭代器中的每一项为`io::Result<DirEntry>` 实例。 通过 [`DirEntry`](./Structs/03.DirEntry.md)，可以了解类似条目路径以及可能的其他元数据的信息。
 
 创建一个文件夹，里面放俩文件
 
@@ -729,7 +729,7 @@ pub fn symlink_metadata<P: AsRef<Path>>(path: P) -> Result<Metadata>
 
 * **path**：源文件路径
 
-**返回值**：如创建成功则返回[Metadata](./结构体/06.Metadata.md)，否则返回相应的失败信息
+**返回值**：如创建成功则返回[Metadata](./Structs/06.Metadata.md)，否则返回相应的失败信息
 
 ```rust
 use std::fs;

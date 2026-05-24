@@ -121,6 +121,8 @@ fn main() -> io::Result<()> {
 }
 ```
 
+
+
 :::tip
 
 该函数不提供有关是否阻塞等待数据的任何保证，但是如果对象需要阻塞读取而不能阻塞，则通常会通过 [`Err`](https://www.rustwiki.org.cn/zh-CN/std/result/enum.Result.html#variant.Err) 返回值来发出信号。

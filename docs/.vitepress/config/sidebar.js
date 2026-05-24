@@ -337,9 +337,9 @@ const sidebar = {
 					collapsed: true,
 					items: [
 						{
-							text: '结构体',
+							text: 'Structs',
 							collapsed: true,
-							items: getItems('/docs/后端/Rust/标准库/fs/结构体'),
+							items: getItems('/docs/后端/Rust/标准库/fs/Structs'),
 						},
 					],
 				},
@@ -348,6 +348,11 @@ const sidebar = {
 					link: '/docs/后端/Rust/标准库/io',
 					collapsed: true,
 					items: [
+						{
+							text: 'Functions',
+							collapsed: true,
+							link: '/docs/后端/Rust/标准库/io/Functions',
+						},
 						{
 							text: 'Structs',
 							collapsed: true,
@@ -358,26 +363,41 @@ const sidebar = {
 							collapsed: true,
 							items: getItems('/docs/后端/Rust/标准库/io/Traits'),
 						},
+						{
+							text: 'Modules',
+							collapsed: true,
+							items: getItems('/docs/后端/Rust/标准库/io/Modules'),
+						},
+						{
+							text: 'Enums',
+							collapsed: true,
+							items: getItems('/docs/后端/Rust/标准库/io/Enums'),
+						},
+						{
+							text: 'TypeDefinitions',
+							collapsed: true,
+							items: getItems('/docs/后端/Rust/标准库/io/TypeDefinitions'),
+						},
 					],
 				},
-				{
-					text: 'time',
-					link: '/docs/后端/Rust/标准库/time',
-					collapsed: true,
-					items: getItems('/docs/后端/Rust/标准库/time/结构体'),
-				},
-				{
-					text: 'path',
-					link: '/docs/后端/Rust/标准库/path',
-					collapsed: true,
-					items: getItems('/docs/后端/Rust/标准库/path/结构体'),
-				},
-				{
-					text: 'os',
-					link: '/docs/后端/Rust/标准库/os',
-					collapsed: true,
-					items: getItems('/docs/后端/Rust/标准库/os/结构体'),
-				},
+				// {
+				// 	text: 'time',
+				// 	link: '/docs/后端/Rust/标准库/time',
+				// 	collapsed: true,
+				// 	items: getItems('/docs/后端/Rust/标准库/time/结构体'),
+				// },
+				// {
+				// 	text: 'path',
+				// 	link: '/docs/后端/Rust/标准库/path',
+				// 	collapsed: true,
+				// 	items: getItems('/docs/后端/Rust/标准库/path/结构体'),
+				// },
+				// {
+				// 	text: 'os',
+				// 	link: '/docs/后端/Rust/标准库/os',
+				// 	collapsed: true,
+				// 	items: getItems('/docs/后端/Rust/标准库/os/结构体'),
+				// },
 			],
 		},
 	],

@@ -752,38 +752,38 @@ fn main() {
 
 ## 2.结构体
 
-### [FileTimes](./结构体/01.FileTimes.md)
+### [FileTimes](./Structs/01.FileTimes.md)
 
 文件上各种时间戳的表示。
 
-### [DirBuilder](./结构体/02.DirBuilder.md)
+### [DirBuilder](./Structs/02.DirBuilder.md)
 
 用于以各种方式创建目录的构建器。
 
-### [DirEntry](./结构体/03.DirEntry.md)
+### [DirEntry](./Structs/03.DirEntry.md)
 
 ReadDir迭代器返回的条目
 
-### [File](./结构体/04.File.md)
+### [File](./Structs/04.File.md)
 
 提供对文件系统上打开文件的访问权限的对象。
 
-### [FileType](./结构体/05.FileType.md)
+### [FileType](./Structs/05.FileType.md)
 
 表示文件类型的结构体，每个文件类型都有访问器。通过Metadata：：file\_type方法返回。
 
-### [Metadata](./结构体/06.Metadata.md)
+### [Metadata](./Structs/06.Metadata.md)
 
 有关文件的元数据信息。
 
-### [OpenOptions](./结构体/07.OpenOptions.md)
+### [OpenOptions](./Structs/07.OpenOptions.md)
 
 可用于配置文件打开方式的选项和标志。
 
-### [Permissions](./结构体/08.Permissions.md)
+### [Permissions](./Structs/08.Permissions.md)
 
 表示文件上的各种权限。
 
-### [ReadDir](./结构体/09.ReadDir.md)
+### [ReadDir](./Structs/09.ReadDir.md)
 
 遍历目录中的条目。

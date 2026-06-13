@@ -21,8 +21,6 @@ pub trait BufRead: Read {
 }
 ```
 
-
-
 示例
 
 锁定的标准输入实现 `BufRead`：
@@ -37,7 +35,7 @@ for line in stdin.lock().lines() {
 }
 ```
 
-如果您具有实现 [`Read`](https://www.rustwiki.org.cn/zh-CN/std/io/trait.Read.html) 的功能，则可以使用 [`BufReader` type](https://www.rustwiki.org.cn/zh-CN/std/io/struct.BufReader.html) 将其转换为 `BufRead`。
+如果您具有实现 [`Read`](https://www.rustwiki.org.cn/zh-CN/std/io/trait.Read.html) 的功能，则可以使用 [`BufReader`](https://www.rustwiki.org.cn/zh-CN/std/io/struct.BufReader.html) [type](https://www.rustwiki.org.cn/zh-CN/std/io/struct.BufReader.html) 将其转换为 `BufRead`。
 
 例如，[`File`](https://www.rustwiki.org.cn/zh-CN/std/fs/struct.File.html) 实现 [`Read`](https://www.rustwiki.org.cn/zh-CN/std/io/trait.Read.html)，但不实现 `BufRead`。 [`BufReader`](https://www.rustwiki.org.cn/zh-CN/std/io/struct.BufReader.html) 来救援！
 
@@ -58,13 +56,9 @@ fn main() -> io::Result<()> {
 }
 ```
 
-
-
-
-
 ## Required Methods
 
-### fill_buf
+### fill\_buf
 
 返回内部缓冲区的内容，如果内部缓冲区为空，则使用内部 reader 中的更多数据填充内部缓冲区。
 
@@ -103,8 +97,6 @@ fn main() {
 
 :::
 
-
-
 ### consume
 
 告诉此缓冲区 `amt` 字节已从缓冲区中消耗掉，因此在调用 `read` 时不再应返回它们。
@@ -117,7 +109,7 @@ fn consume(&mut self, amt: usize)
 
 **参数**：
 
-- **amt**：需要删除掉的字节数
+* **amt**：需要删除掉的字节数
 
 ```rust
 use std::io;
@@ -148,11 +140,9 @@ stdin.consume(length);
 
 :::
 
-
-
 ## Provided Methods
 
-### has_data_left
+### has\_data\_left
 
 检查底层 `Read` 是否有任何数据可供读取。
 
@@ -182,9 +172,7 @@ while stdin.has_data_left().unwrap() {
 }
 ```
 
-
-
-### read_until
+### read\_until
 
 将读取的内容读取一个buf，一直读到某个“分隔字节”（通常是 `\n`）或者EOF为止
 
@@ -196,23 +184,22 @@ fn read_until(&mut self, byte: u8, buf: &mut Vec<u8>) -> Result<usize>
 
 **参数**：
 
-- **byte**：分隔符（如 b'\n'）
-- **buf**：用来存放读到的数据
+* **byte**：分隔符（如 b'\n'）
+
+* **buf**：用来存放读到的数据
 
 **返回值**：返回本次读到的字节数
 
-
-
 有这么一个文件
 
-```txt [test.txt]
+```txt
 hello
 world
 ```
 
 先读取到第一个换行符结束
 
-```rust {9}
+```rust
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
@@ -229,7 +216,7 @@ fn main() {
 
 也可以指定其他的字符作为结束符
 
-```rust {9}
+```rust
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
@@ -253,9 +240,7 @@ fn main() {
 
 :::
 
-
-
-### read_line
+### read\_line
 
 从流里读一整行文本（UTF‑8），并追加到 `String`里
 
@@ -267,13 +252,13 @@ fn read_line(&mut self, buf: &mut String) -> Result<usize>
 
 **参数**：
 
-- **buf**：用来存放读到的数据的`String`
+* **buf**：用来存放读到的数据的`String`
 
 **返回值**：返回本次读到的字节数
 
 有这么一个文件
 
-```txt [test.txt]
+```txt
 缓缓飘落的枫叶像思念
 为何挽回要赶在冬天来之前
 ```
@@ -296,8 +281,6 @@ fn main() {
 }
 ```
 
-
-
 ### split
 
 将读取的内容按照指定的分隔符分割成若干段，并返回一个迭代器
@@ -310,13 +293,13 @@ where
 
 **参数**：
 
-- **byte**：指定的分隔符
+* **byte**：指定的分隔符
 
 **返回值**：返回**迭代器**，每一项都是`io::Result<Vec<u8>>`，不包含分隔符
 
 有这么一个文件
 
-```txt [test.txt]
+```txt
 apple,banana,orange
 ```
 
@@ -343,10 +326,6 @@ fn main() {
 */
 ```
 
-
-
-
-
 ### lines
 
 按行读取文本文件，自动处理 `\n`/ `\r\n`，返回迭代器，每一项都是一行，且为`io::Result<String>`
@@ -361,7 +340,7 @@ where
 
 有这么一个文件
 
-```txt [test.txt]
+```txt
 一天一天贴近你的心
 你开心
 我关心
@@ -383,23 +362,19 @@ fn main() {
 }
 ```
 
-
-
-
-
 ## Implementors
 
-### impl BufRead for &[u8]
+### impl BufRead for &\[u8]
 
 ### impl BufRead for Empty
 
-### impl BufRead for StdinLock<'_>
+### impl BufRead for StdinLock<'\_>
 
-### impl<B: BufRead + ?Sized> BufRead for &mut B
+### impl\<B: BufRead + ?Sized> BufRead for \&mut B
 
-### impl<B: BufRead + ?Sized> BufRead for Box\<B>
+### impl\<B: BufRead + ?Sized> BufRead for Box\<B>
 
-### impl<R: Read> BufRead for BufReader\<R>
+### impl\<R: Read> BufRead for BufReader\<R>
 
 ### impl\<T> BufRead for Cursor\<T>
 
@@ -409,7 +384,6 @@ where
   T: AsRef<[u8]>,
 ```
 
-### impl<T: BufRead> BufRead for Take\<T>
+### impl\<T: BufRead> BufRead for Take\<T>
 
-### impl<T: BufRead, U: BufRead> BufRead for Chain<T, U>
-
+### impl\<T: BufRead, U: BufRead> BufRead for Chain\<T, U>

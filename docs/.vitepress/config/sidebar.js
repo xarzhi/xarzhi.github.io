@@ -278,128 +278,149 @@ const sidebar = {
 	],
 	'/docs/前端/一些问题/': getItems('/docs/前端/一些问题/'),
 	'/docs/其他问题': getItems('/docs/其他问题'),
-	'/docs/后端/Rust': [
-		{ text: 'Rust基础', items: getItems('/docs/后端/Rust/Rust基础'), collapsed: true },
-		{ text: '标量类型', items: getItems('/docs/后端/Rust/标量类型'), collapsed: true },
-		{ text: '深入类型', items: getItems('/docs/后端/Rust/深入类型'), collapsed: true },
+	'/docs/后端/Rust/Rust教程': [
+		{ text: 'Rust基础', items: getItems('/docs/后端/Rust/Rust教程/Rust基础'), collapsed: true },
+		{ text: '标量类型', items: getItems('/docs/后端/Rust/Rust教程/标量类型'), collapsed: true },
+		{ text: '深入类型', items: getItems('/docs/后端/Rust/Rust教程/深入类型'), collapsed: true },
 		{
 			text: '复合类型',
 			collapsed: true,
 			items: [
-				{ text: '元组', link: '/docs/后端/Rust/复合类型/元组Tuple/index' },
-				{ text: '数组', link: '/docs/后端/Rust/复合类型/数组Array/index' },
-				{ text: '结构体', link: '/docs/后端/Rust/复合类型/结构体Struct/index' },
+				{ text: '元组', link: '/docs/后端/Rust/Rust教程/Rust基础/复合类型/元组Tuple/index' },
+				{ text: '数组', link: '/docs/后端/Rust/Rust教程/复合类型/数组Array/index' },
+				{ text: '结构体', link: '/docs/后端/Rust/Rust教程/复合类型/结构体Struct/index' },
 				{
 					text: '枚举',
-					link: '/docs/后端/Rust/复合类型/枚举Enum/index',
-					items: getItems('/docs/后端/Rust/复合类型/枚举Enum/docs'),
+					link: '/docs/后端/Rust/Rust教程/复合类型/枚举Enum/index',
+					items: getItems('/docs/后端/Rust/Rust教程/复合类型/枚举Enum/docs'),
 					collapsed: true,
 				},
-				{ text: '联合体', link: '/docs/后端/Rust/复合类型/联合体Union/index' },
+				{ text: '联合体', link: '/docs/后端/Rust/Rust教程/复合类型/联合体Union/index' },
 				{
 					text: '字符串',
-					link: '/docs/后端/Rust/复合类型/字符串String/index',
-					items: getItems('/docs/后端/Rust/复合类型/字符串String/docs'),
+					link: '/docs/后端/Rust/Rust教程/复合类型/字符串String/index',
+					items: getItems('/docs/后端/Rust/Rust教程/复合类型/字符串String/docs'),
 					collapsed: true,
 				},
 			],
 		},
-		{ text: '模式匹配', link: '/docs/后端/Rust/模式匹配/index.md' },
+		{ text: '模式匹配', link: '/docs/后端/Rust/Rust教程/模式匹配/index.md' },
 		{
 			text: '所有权',
-			items: getItems('/docs/后端/Rust/所有权'),
+			items: getItems('/docs/后端/Rust/Rust教程/所有权'),
 			collapsed: true,
 		},
 		{
 			text: '集合类型',
-			items: getItems('/docs/后端/Rust/集合类型'),
+			items: getItems('/docs/后端/Rust/Rust教程/集合类型'),
 			collapsed: true,
 		},
 		{
 			text: 'Rust进阶',
 			collapsed: true,
 			items: [
-				{ text: '泛型', link: '/docs/后端/Rust/Rust进阶/泛型/index', collapsed: true },
-				{ text: 'Trait', items: getItems('/docs/后端/Rust/Rust进阶/Trait'), collapsed: true },
-				{ text: '生命周期', items: getItems('/docs/后端/Rust/Rust进阶/生命周期'), collapsed: true },
-				{ text: '包和模块', items: getItems('/docs/后端/Rust/Rust进阶/包和模块'), collapsed: true },
-				{ text: '宏', link: '/docs/后端/Rust/Rust进阶/宏/index', collapsed: true },
-				{ text: '闭包和迭代器', items: getItems('/docs/后端/Rust/Rust进阶/闭包和迭代器'), collapsed: true },
+				{ text: '泛型', link: '/docs/后端/Rust/Rust教程/Rust进阶/泛型/index', collapsed: true },
+				{ text: 'Trait', items: getItems('/docs/后端/Rust/Rust教程/Rust进阶/Trait'), collapsed: true },
+				{ text: '生命周期', items: getItems('/docs/后端/Rust/Rust教程/Rust进阶/生命周期'), collapsed: true },
+				{ text: '包和模块', items: getItems('/docs/后端/Rust/Rust教程/Rust进阶/包和模块'), collapsed: true },
+				{ text: '宏', link: '/docs/后端/Rust/Rust教程/Rust进阶/宏/index', collapsed: true },
+				{
+					text: '闭包和迭代器',
+					items: getItems('/docs/后端/Rust/Rust教程/Rust进阶/闭包和迭代器'),
+					collapsed: true,
+				},
 			],
 		},
+	],
+	'/docs/后端/Rust/标准库': [
 		{
-			text: '标准库',
+			text: 'prelude',
+			link: '/docs/后端/Rust/标准库/prelude',
+		},
+		{
+			text: 'option',
+			link: '/docs/后端/Rust/标准库/option/index.md',
 			collapsed: true,
 			items: [
 				{
-					text: 'fs',
-					link: '/docs/后端/Rust/标准库/fs',
+					text: 'Structs',
 					collapsed: true,
-					items: [
-						{
-							text: 'Structs',
-							collapsed: true,
-							items: getItems('/docs/后端/Rust/标准库/fs/Structs'),
-						},
-					],
+					items: getItems('/docs/后端/Rust/标准库/option/Structs'),
 				},
 				{
-					text: 'io',
-					link: '/docs/后端/Rust/标准库/io',
+					text: 'Enums',
 					collapsed: true,
-					items: [
-						{
-							text: 'Functions',
-							collapsed: true,
-							link: '/docs/后端/Rust/标准库/io/Functions',
-						},
-						{
-							text: 'Structs',
-							collapsed: true,
-							items: getItems('/docs/后端/Rust/标准库/io/Structs'),
-						},
-						{
-							text: 'Traits',
-							collapsed: true,
-							items: getItems('/docs/后端/Rust/标准库/io/Traits'),
-						},
-						{
-							text: 'Modules',
-							collapsed: true,
-							items: getItems('/docs/后端/Rust/标准库/io/Modules'),
-						},
-						{
-							text: 'Enums',
-							collapsed: true,
-							items: getItems('/docs/后端/Rust/标准库/io/Enums'),
-						},
-						{
-							text: 'TypeDefinitions',
-							collapsed: true,
-							items: getItems('/docs/后端/Rust/标准库/io/TypeDefinitions'),
-						},
-					],
+					items: getItems('/docs/后端/Rust/标准库/option/Enums'),
 				},
-				// {
-				// 	text: 'time',
-				// 	link: '/docs/后端/Rust/标准库/time',
-				// 	collapsed: true,
-				// 	items: getItems('/docs/后端/Rust/标准库/time/结构体'),
-				// },
-				// {
-				// 	text: 'path',
-				// 	link: '/docs/后端/Rust/标准库/path',
-				// 	collapsed: true,
-				// 	items: getItems('/docs/后端/Rust/标准库/path/结构体'),
-				// },
-				// {
-				// 	text: 'os',
-				// 	link: '/docs/后端/Rust/标准库/os',
-				// 	collapsed: true,
-				// 	items: getItems('/docs/后端/Rust/标准库/os/结构体'),
-				// },
 			],
 		},
+		{
+			text: 'fs',
+			link: '/docs/后端/Rust/标准库/fs/index.md',
+			collapsed: true,
+			items: [
+				{
+					text: 'Structs',
+					collapsed: true,
+					items: getItems('/docs/后端/Rust/标准库/fs/Structs'),
+				},
+			],
+		},
+		{
+			text: 'io',
+			link: '/docs/后端/Rust/标准库/io/index.md',
+			collapsed: true,
+			items: [
+				{
+					text: 'Functions',
+					collapsed: true,
+					link: '/docs/后端/Rust/标准库/io/Functions',
+				},
+				{
+					text: 'Structs',
+					collapsed: true,
+					items: getItems('/docs/后端/Rust/标准库/io/Structs'),
+				},
+				{
+					text: 'Traits',
+					collapsed: true,
+					items: getItems('/docs/后端/Rust/标准库/io/Traits'),
+				},
+				{
+					text: 'Modules',
+					collapsed: true,
+					items: getItems('/docs/后端/Rust/标准库/io/Modules'),
+				},
+				{
+					text: 'Enums',
+					collapsed: true,
+					items: getItems('/docs/后端/Rust/标准库/io/Enums'),
+				},
+				{
+					text: 'TypeDefinitions',
+					collapsed: true,
+					items: getItems('/docs/后端/Rust/标准库/io/TypeDefinitions'),
+				},
+			],
+		},
+		// 		// {
+		// 		// 	text: 'time',
+		// 		// 	link: '/docs/后端/Rust/Rust教程/标准库/time',
+		// 		// 	collapsed: true,
+		// 		// 	items: getItems('/docs/后端/Rust/Rust教程/标准库/time/结构体'),
+		// 		// },
+		// 		// {
+		// 		// 	text: 'path',
+		// 		// 	link: '/docs/后端/Rust/Rust教程/标准库/path',
+		// 		// 	collapsed: true,
+		// 		// 	items: getItems('/docs/后端/Rust/Rust教程/标准库/path/结构体'),
+		// 		// },
+		// 		// {
+		// 		// 	text: 'os',
+		// 		// 	link: '/docs/后端/Rust/Rust教程/标准库/os',
+		// 		// 	collapsed: true,
+		// 		// 	items: getItems('/docs/后端/Rust/Rust教程/标准库/os/结构体'),
+		// 		// },
 	],
 }
 

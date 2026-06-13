@@ -1,251 +1,41 @@
-# Option
+# Enum std::option::Option
 
-`Option<T>`是一个特殊的枚举，用来表示一个值可能有值，也可能为**空**
-
-在其他的语言中，往往都会有一个`null`关键字，用来表明当前变量的值为空，但在rust中需要使用`Option<T>`来表示空值
-
-下面是`Option`在标准库中的定义
+一个枚举类型，用来表示一个变量可能有值，也可能没值，用来实现其他语言的`null`
 
 ```rust
 pub enum Option<T> {
-    Some(T),
     None,
+    Some(T),
 }
 ```
 
-泛型参数：
 
-- **T**：当值不为空时，被存储的值的类型，可以是任意类型
-
-变体：
-
-- **Some(T)**：当有值时，值被包含在这个Some里
-- **None**：用来表示空值
-
-
-
-`Option`有以下用途：
-
-- 初始值
-- 未在整个输入范围内定义的函数的返回值 (部分函数)
-- 返回值，用于报告否则将报告简单错误的错误，其中错误返回 [`None`](https://www.rustwiki.org.cn/zh-CN/std/option/enum.Option.html#variant.None)
-- 可选的结构体字段
-- 可借用或 “taken” 的结构体字段
-- 可选的函数参数
-- 可空指针
-- 从困难的情况中交换东西
 
 :::tip
 
-`Option<T>`在标准库的位置为` std::option::Option`
-
-`Option<T>`在使用时不需要手动导入，`rust`已经自动导入了
+`Option`、`Some(T)`、`None`被放在`std`的`prelude`中
 
 :::
 
 
 
-## 1.基本使用
+## Variants
 
-`Option<T>` 枚举是如此有用以至于它被包含在了 [`prelude`](https://course.rs/appendix/prelude.html)（**prelude 属于 Rust 标准库，Rust 会将最常用的类型、函数等提前引入其中，省得我们再手动引入**）之中，你不需要将其显式引入作用域。
+### None
 
-另外，它的成员 `Some` 和 `None` 也是如此，无需使用 `Option::` 前缀就可直接使用 `Some` 和 `None`。
+代表没有值
 
-比如下面一段代码
 
-```rust
-let maybe_number: Option<i32> = Option::Some(5);
-let absent: Option<i32> = Option::None;
-```
 
-完全可以去掉`Option::`，然后使用下面的方式
+### Some(T)
 
-```rust
-let maybe_number: Option<i32> = Some(5);
-let absent: Option<i32> = None;
-```
+代表有值，并且类型为T
 
+**T**：当值不为空时，被存储的值的类型，可以是任意类型
 
 
 
-
-:::warning 注意
-
-1.当使用`Some(T)`时，因为`Some`肯定是有值的，所以即使不显示声明类型，rust也会自动推导`T`的类型
-
-如果使用 `None` 而不是 `Some`，需要告诉 Rust `Option<T>` 是什么类型的，因为编译器只通过 `None` 值无法推断出 `Some` 成员保存的值的类型。
-
-```rust
-let some_number = Some(5);
-let some_string = Some("a string");
-
-let absent_number: Option<i32> = None;
-```
-
-
-
-2.`Some(T)`和`T`并不是一样的，两种类型不能混为一谈，比如下面这段代码
-
-```rust
-let x: i8 = 5;
-let y: Option<i8> = Some(5);
-
-let sum = x + y;
-```
-
-由于类型不同，所以不能相加，从而会报错
-
-:::
-
-
-
-## 2.模式匹配
-
-`Option<T>`既然是个枚举，那么就可以使用`match`进行模式匹配
-
-```rust
-let num = Some(66);
-match num {
-    Some(value) => println!("{}", value),
-    None => (),
-}
-```
-
-当匹配到`Some`时，被匹配的变量的值就会赋值给`Some()`的参数，在`Some`后的`{}`块中就可以使用这个变量的值
-
-
-
-### 2.1 作为函数返回值
-
-`Option<T>`通常作为函数的返回值
-
-```rust
-fn plus_one(x: Option<i32>) -> Option<i32> {
-    match x {
-        None => None,
-        Some(i) => Some(i + 1),
-    }
-}
-
-fn main() {
-    let five = Some(5);
-    let six: Option<i32> = plus_one(five);
-    let none = plus_one(None);
-
-    println!("{:?}", six);          // Some(6)
-    println!("{:?}", none);         // None
-
-}
-```
-
-
-
-### 2.2 给外面变量赋值
-
-`Some(T)`毕竟不能跟别的类型一块运算，但是可以通过`match`修改外部变量的值，从而进一步运算
-
-```rust
-let age = Some(19);
-
-let is_adult = match age {
-    Some(value) => {
-        if value>=18 {true} else{false}
-    }
-    None => false,
-};
-
-println!("{}", is_adult); // true
-```
-
-想取出`Some(T)`的值，也可以使用`Option<T>`的`unwrap()`方法，后面会有介绍
-
-
-
-### 2.3 if let
-
-`if let`是`match`的一个语法糖，常用于简化`Option`和`Result`的`match`语句先看如下代码
-
-```rust
-let num = Some(66);
-match num {
-    Some(value) => println!("{}", value),
-    None => (),
-}
-```
-
-在很多时候如上面这样，我们只会关心当Option为Some时的情况，而None则一笔带过
-
-`if let`可以让我们直接处理Some的情况，而不管None的情况，语法如下
-
-```rust
-let num=Some(123);
-
-if let Some(value) = num {
-    println!("{}", value);		// 123
-}
-```
-
-`Some(value) = num` 意思是判断变量`num`是否是一个`Some`，如果是`Some`，就把`num`的值赋值给`value`，可以在后面的语句块中访问这个value
-
-
-
-### 2.4 ?运算符
-
-?运算符是一个错误传播运算符，它用于简化错误处理。
-
-当一个返回`Option`的函数（暂称`fn1`）中使用了另一个返回`Option`的函数（暂称`fn2`），使用`?`运算符可以减少`match`语句的使用
-
-- 如果`fn2`返回的结果是Some，?会直接解包出内部的值，并继续执行
-- 如果`fn2`返回的结果是None，?会直接将整个函数返回None
-
-当表达式返回Some时
-
-```rust
-fn fn1() -> Option<bool> {
-    return Some(true);
-}
-
-fn fn2() -> Option<bool> {
-    let is_true = fn1()?;
-    println!("{}",is_true);     // true
-
-    if is_true { Some(true) } else { Some(false) }
-}
-
-fn main() {
-    let res = fn2();
-    println!("{:?}", res) // Some(true)
-}
-```
-
-当表达式返回None时
-
-```rust
-fn fn1() -> Option<bool> {
-    return None;
-}
-
-fn fn2() -> Option<bool> {
-    let is_true = fn1()?;   // 直接返回None，后面代码不会执行
-    println!("{}", is_true); 
-
-    if is_true { Some(true) } else { Some(false) }
-}
-
-fn main() {
-    let res = fn2();
-    println!("{:?}", res) // Some(true)
-}
-
-```
-
-
-
-除了`if let`，还有别的一些类似的语法糖，在模式匹配中有详细讲解
-
-## 3.方法
-
-以下是`Option<T>`中的方法
+## Implementations
 
 ### impl\<T> Option\<T>
 
@@ -411,7 +201,7 @@ pub const fn as_ref(&self) -> Option<&T> {
 
 #### as_mut
 
-用于从 `Option<T>`创建一个对内部值的**可变引用** `Option<&mut T>`，
+创建 `Option<T>`内部值的**可变引用** `Option<&mut T>`，
 
 
 
@@ -2408,56 +2198,104 @@ pub const fn flatten(self) -> Option<T> {
 
 
 
-## 4.特征Trait实现
+## Trait Implementations
 
-### Clone
-
-### Debug
-
-### Default
-
-### From
-
-Option一共实现了三种From的trait：
-
-#### From\<T>
+### impl\<T> Clone for Option\<T>
 
 ```rust
-#[stable(since = "1.12.0", feature = "option_from")]
-impl<T> From<T> for Option<T> {
-    fn from(val: T) -> Option<T> {
-        Some(val)
-    }
-}
-```
-
-根据from的参数创建一个Some
-
-```rust
-let o: Option<u8> = Option::from(67);
-
-println!("{:?}", o) // Some(67)
+impl<T> Clone for Option<T>
+where
+  T: Clone,
 ```
 
 
 
-#### From<&'a Option\<T>>
+#### clone
+
+返回值的副本。
 
 ```rust
-#[stable(feature = "option_ref_from_ref_option", since = "1.30.0")]
-impl<'a, T> From<&'a Option<T>> for Option<&'a T> {
-    fn from(o: &'a Option<T>) -> Option<&'a T> {
-        o.as_ref()
-    }
-}
+fn clone(&self) -> Option<T>
 ```
+
+
+
+
+
+#### clone_from
+
+从 `source`执行复制分配。
+
+```rust
+fn clone_from(&mut self, source: &Option<T>)
+```
+
+
+
+### impl\<T> Debug for Option\<T>
+
+```rust
+impl<T> Debug for Option<T>
+where
+  T: Debug,
+```
+
+
+
+#### fmt
+
+使用给定的格式化程序格式化该值。
+
+```rust
+fn fmt(&self, f: &mut Formatter<'_>) -> Result<(), Error>
+```
+
+
+
+### impl\<T> Default for Option\<T>
+
+#### default
+
+返回 `Option`的默认值 `None`。
+
+```rust
+fn default() -> Option<T>
+```
+
+示例
+
+```rust
+let opt: Option<u32> = Option::default();
+
+assert!(opt.is_none());
+```
+
+
+
+
+
+
+
+### impl<'a, T> From<&'a Option\<T>> for Option<&'a T>
+
+#### from
 
 从 `&Option<T>` 转换为 `Option<&T>`。
 
 ```rust
-let s: Option<String> = Some(String::from("Hello, Rustaceans!"));
+fn from(o: &'a Option<T>) -> Option<&'a T>
+```
 
+
+
+示例
+
+将 `Option<String>` 转换为 `Option<usize>`，保留原始值。 `map` 方法按值取 `self` 参数，消耗原始值，因此该技术使用 from 首先将 `Option` 用于对原始值内部值的引用。
+
+```rust
+let s: Option<String> = Some(String::from("Hello, Rustaceans!"));
 let o: Option<usize> = Option::from(&s).map(|ss: &String| ss.len());
+
 
 println!("Can still print s: {s:?}");
 
@@ -2466,26 +2304,28 @@ assert_eq!(o, Some(18));
 
 
 
-#### From<&'a mut Option\<T>>
 
-```rust
-#[stable(feature = "option_ref_from_ref_option", since = "1.30.0")]
-impl<'a, T> From<&'a mut Option<T>> for Option<&'a mut T> {
-    fn from(o: &'a mut Option<T>) -> Option<&'a mut T> {
-        o.as_mut()
-    }
-}
-```
+
+### impl<'a, T> From<&'a mut Option\<T>> for Option<&'a mut T>
+
+#### from
 
 从 `&mut Option<T>` 转换为 `Option<&mut T>`
 
 ```rust
+fn from(o: &'a mut Option<T>) -> Option<&'a mut T>
+```
+
+示例
+
+```rust
 let mut s = Some(String::from("Hello"));
+
 let o: Option<&mut String> = Option::from(&mut s);
 
 match o {
-    Some(t) => *t = String::from("Hello, Rustaceans!"),
-    None => (),
+  Some(t) => *t = String::from("Hello, Rustaceans!"),
+  None => (),
 }
 
 assert_eq!(s, Some(String::from("Hello, Rustaceans!")));
@@ -2495,6 +2335,126 @@ assert_eq!(s, Some(String::from("Hello, Rustaceans!")));
 
 
 
+### impl\<T> From\<T> for Option\<T>
+
+#### from
+
+将 `val` 移动到新的 `Some` 中。
+
+```rust
+fn from(val: T) -> Option<T>
+```
+
+示例
+
+```rust
+let o: Option<u8> = Option::from(67);
+
+assert_eq!(Some(67), o);
+```
+
+
+
+### impl<A, V> FromIterator<Option\<A>> for Option\<V>
+
+```rust
+impl<A, V> FromIterator<Option<A>> for Option<V>
+where
+  V: FromIterator<A>,
+```
+
+
+
+#### from_iter
+
+接受 `Iterator` 中的每个元素：如果为 `None`，则不再获取其他元素，并返回 `None`。 如果没有出现 `None`，则返回一个 V 类型的容器，其中包含每个 `Option` 的值。
+
+```rust
+fn from_iter<I>(iter: I) -> Option<V>
+where
+  I: IntoIterator<Item = Option<A>>,
+```
+
+示例
+
+这是一个使 vector 中的每个整数递增的示例。 当计算将导致溢出时，我们使用 add 的检查变体返回 None。
+
+```rust
+let items = vec![0_u16, 1, 2];
+
+let res: Option<Vec<u16>> = items
+  .iter()
+  .map(|x| x.checked_add(1))
+  .collect();
+
+assert_eq!(res, Some(vec![1, 2, 3]));
+```
+
+
+
+尝试从另一个整数列表中减去一个，这次检查下溢：
+
+```rust
+let items = vec![2_u16, 1, 0];
+
+let res: Option<Vec<u16>> = items
+  .iter()
+  .map(|x| x.checked_sub(1))
+  .collect();
+
+assert_eq!(res, None);
+```
+
+由于最后一个元素为零，因此会下溢。因此，结果值为 None。
+
+
+
+这是前一个示例的变体，显示在第一个 None 之后不再从 iter 提取其他元素。
+
+```rust
+let items = vec![3_u16, 2, 1, 10];
+
+let mut shared = 0;
+
+let res: Option<Vec<u16>> = items
+  .iter()
+  .map(|x| { shared += x; x.checked_sub(2) })
+  .collect();
+
+
+assert_eq!(res, None);
+assert_eq!(shared, 6);
+```
+
+由于第三个元素引起下溢，因此不再使用其他元素，因此 shared 的最终值为 6 (= 3 + 2 + 1)，而不是 16。
+
+
+
+
+
+### impl\<T> FromResidual<<Option\<T> as Try>::Residual> for Option\<T>
+
+#### from_residual
+
+```rust
+fn from_residual(residual: Option<Infallible>) -> Option<T>
+```
+
+从兼容的 `Residual` 类型构造类型。
+
+
+
+### impl\<T> FromResidual<Yeet<()>> for Option\<T>
+
+
+
+#### from_residual
+
+从兼容的 Residual 类型构造类型。`nightly-only`
+
+```rust
+fn from_residual(_: Yeet<()>) -> Option<T>
+```
 
 
 
@@ -2502,6 +2462,596 @@ assert_eq!(s, Some(String::from("Hello, Rustaceans!")));
 
 
 
+### impl\<T> Hash for Option\<T>
+
+```rust
+impl<T> Hash for Option<T>
+where
+  T: Hash,
+```
 
 
+
+#### hash
+
+将该值输入给定的 `Hasher`。
+
+```rust
+fn hash<__H>(&self, state: &mut __H)
+where
+  __H: Hasher,
+```
+
+
+
+#### hash_slice
+
+将这种类型的切片送入给定的 `Hasher` 中。
+
+```rust
+fn hash_slice<H>(data: &[Self], state: &mut H)
+where
+  H: Hasher,
+  Self: Sized,
+```
+
+
+
+### impl<'a, T> IntoIterator for &'a Option\<T>
+
+#### Item
+
+被迭代的元素的类型。
+
+```rust
+type Item = &'a T
+```
+
+
+
+#### IntoIter
+
+我们将其变成哪种迭代器？
+
+```rust
+type IntoIter = Iter<'a, T>
+```
+
+
+
+#### into_iter
+
+从一个值创建一个迭代器。
+
+```rust
+fn into_iter(self) -> Iter<'a, T> 
+```
+
+
+
+
+
+### impl<'a, T> IntoIterator for &'a mut Option\<T>
+
+#### Item
+
+被迭代的元素的类型。
+
+```rust
+type Item = &'a mut T
+```
+
+
+
+#### IntoIter
+
+我们将其变成哪种迭代器？
+
+```rust
+type IntoIter = IterMut<'a, T>
+```
+
+
+
+#### into_iter
+
+从一个值创建一个迭代器。
+
+```rust
+fn into_iter(self) -> IterMut<'a, T> 
+```
+
+
+
+### impl\<T> IntoIterator for Option\<T>
+
+#### into_iter
+
+返回可能包含的值上的消耗迭代器。
+
+```rust
+fn into_iter(self) -> IntoIter<T> 
+```
+
+
+
+示例
+
+```rust
+let x = Some("string");
+let v: Vec<&str> = x.into_iter().collect();
+assert_eq!(v, ["string"]);
+
+
+
+let x = None;
+let v: Vec<&str> = x.into_iter().collect();
+assert!(v.is_empty());
+```
+
+
+
+#### Item 
+
+被迭代的元素的类型。
+
+```rust
+type Item = T
+```
+
+
+
+#### IntoIter 
+
+我们将其变成哪种迭代器？
+
+```rust
+type IntoIter = IntoIter<T>
+```
+
+
+
+### impl\<T> Ord for Option\<T>
+
+```rust
+impl<T> Ord for Option<T>
+where
+  T: Ord,
+```
+
+
+
+#### cmp
+
+此方法返回 `self` 和 `other` 之间的 `Ordering`。
+
+```rust
+fn cmp(&self, other: &Option<T>) -> Ordering
+```
+
+
+
+#### max
+
+比较并返回两个值中的最大值。
+
+```rust
+fn max(self, other: Self) -> Self
+where
+  Self: Sized,
+```
+
+
+
+#### min
+
+比较并返回两个值中的最小值。
+
+```rust
+fn min(self, other: Self) -> Self
+where
+  Self: Sized,
+```
+
+
+
+#### clamp
+
+将值限制在某个时间间隔内。
+
+```rust
+fn clamp(self, min: Self, max: Self) -> Self
+where
+  Self: Sized + PartialOrd<Self>,
+```
+
+
+
+### impl\<T> PartialEq<Option\<T>> for Option\<T>
+
+```rust
+impl<T> PartialEq<Option<T>> for Option<T>
+where
+  T: PartialEq<T>,
+```
+
+
+
+#### eq
+
+此方法测试 `self` 和 `other` 值是否相等，并由 `==` 使用。
+
+```rust
+fn eq(&self, other: &Option<T>) -> bool
+```
+
+
+
+#### ne
+
+此方法测试 `!=`。 默认实现几乎总是足够的，并且不应在没有充分理由的情况下被覆盖。
+
+```rust
+fn ne(&self, other: &Rhs) -> bool
+```
+
+
+
+
+
+### impl\<T> PartialOrd<Option\<T>> for Option\<T>
+
+```rust
+impl<T> PartialOrd<Option<T>> for Option<T>
+where
+  T: PartialOrd<T>,
+```
+
+
+
+#### partial_cmp
+
+如果存在，则此方法返回 self 和 other 值之间的顺序。
+
+```rust
+fn partial_cmp(&self, other: &Option<T>) -> Option<Ordering>
+```
+
+
+
+#### lt
+
+此方法测试的内容少于 (对于 `self` 和 `other`)，并且由 `<` 操作员使用。
+
+```rust
+fn lt(&self, other: &Rhs) -> bool
+```
+
+
+
+#### le
+
+此方法测试小于或等于 (对于 self 和 other)，并且由 `<=` 运算符使用。
+
+```rust
+fn le(&self, other: &Rhs) -> bool
+```
+
+
+
+#### gt
+
+此方法测试大于 (对于 `self` 和 `other`)，并且由 `>` 操作员使用。
+
+```rust
+fn gt(&self, other: &Rhs) -> bool
+```
+
+
+
+#### ge
+
+此方法测试是否大于或等于 (对于 `self` 和 `other`)，并且由 `>=` 运算符使用。
+
+```rust
+fn ge(&self, other: &Rhs) -> bool
+```
+
+
+
+### impl<T, U> Product<Option\<U>> for Option\<T>
+
+```rust
+impl<T, U> Product<Option<U>> for Option<T>
+where
+  T: Product<U>,
+```
+
+
+
+#### product
+
+接受 Iterator 中的每个元素：如果它是 None，则不再获取其他元素，并返回 None。 如果没有发生 None，则返回所有元素的乘积。
+
+```rust
+fn product<I>(iter: I) -> Option<T>
+where
+  I: Iterator<Item = Option<U>>,
+```
+
+
+
+示例
+
+这会将字符串 `vector` 中的每个数字相乘，如果无法解析字符串，则操作返回 `None`:
+
+```rust
+let nums = vec!["5", "10", "1", "2"];
+let total: Option<usize> = nums.iter().map(|w| w.parse::<usize>().ok()).product();
+
+assert_eq!(total, Some(100));
+
+let nums = vec!["5", "10", "one", "2"];
+let total: Option<usize> = nums.iter().map(|w| w.parse::<usize>().ok()).product();
+
+assert_eq!(total, None);
+```
+
+
+
+
+
+### impl\<T> Residual\<T> for Option\<Infallible>
+
+#### TryType
+
+此元函数的 `return` 类型。`nightly-only`
+
+```rust
+type TryType = Option<T>
+```
+
+
+
+### impl<T, U> Sum<Option\<U>> for Option\<T>
+
+```rust
+impl<T, U> Sum<Option<U>> for Option<T>
+where
+  T: Sum<U>,
+```
+
+
+
+#### sum
+
+接受 Iterator 中的每个元素：如果它是 None，则不再获取其他元素，并返回 None。 如果没有发生 None，则返回所有元素的总和。
+
+```rust
+fn sum<I>(iter: I) -> Option<T>
+where
+  I: Iterator<Item = Option<U>>,
+```
+
+
+
+
+
+示例
+
+这总结了字符 `‘a’` 在字符串 `vector` 中的位置，如果单词没有字符 `‘a’`，则该操作返回 `None`：
+
+```rust
+let words = vec!["have", "a", "great", "day"];
+
+let total: Option<usize> = words.iter().map(|w| w.find('a')).sum();
+
+assert_eq!(total, Some(5));
+
+let words = vec!["have", "a", "good", "day"];
+
+let total: Option<usize> = words.iter().map(|w| w.find('a')).sum();
+
+assert_eq!(total, None);
+```
+
+
+
+### impl\<T> Try for Option\<T>
+
+#### Output
+
+当不短路时，? 产生的值的类型。`nightly-only`
+
+```rust
+type Output = T
+```
+
+
+
+#### Residual 
+
+短路时作为 ? 的一部分传递给 `FromResidual::from_residual` 的值的类型。`nightly-only`
+
+```rust
+type Residual = Option<Infallible>
+```
+
+
+
+#### from_output
+
+从它的 Output 类型构造类型。`nightly-only`
+
+```rust
+fn from_output(output: <Option<T> as Try>::Output) -> Option<T>
+```
+
+
+
+#### branch
+
+在 `?` 来决定操作符是应该生成一个值 (因为它返回了 `ControlFlow::Continue`)，还是将一个值传播回调用者 (因为它返回了 `ControlFlow::Break`)。`nightly-only`
+
+```rust
+fn branch(
+  self
+) -> ControlFlow<<Option<T> as Try>::Residual, <Option<T> as Try>::Output>
+```
+
+
+
+
+
+### impl\<T> Copy for Option\<T>
+
+```rust
+impl<T> Copy for Option<T>
+where
+  T: Copy,
+```
+
+
+
+### impl\<T> Eq for Option\<T>
+
+```rust
+impl<T> Eq for Option<T>
+where
+  T: Eq,
+```
+
+### impl\<T> StructuralEq for Option\<T>
+
+### impl\<T> StructuralPartialEq for Option\<T>
+
+
+
+## Auto Trait Implementations
+
+### impl\<T> RefUnwindSafe for Option\<T>
+
+```rust
+impl<T> RefUnwindSafe for Option<T>
+where
+  T: RefUnwindSafe,
+```
+
+
+
+### impl\<T> Send for Option\<T>
+
+```rust
+impl<T> Send for Option<T>
+where
+  T: Send,
+```
+
+
+
+### impl\<T> Sync for Option\<T>
+
+```rust
+impl<T> Sync for Option<T>
+where
+  T: Sync,
+```
+
+
+
+### impl\<T> Unpin for Option\<T>
+
+```rust
+impl<T> Unpin for Option<T>
+where
+  T: Unpin,
+```
+
+
+
+### impl\<T> UnwindSafe for Option\<T>
+
+```rust
+impl<T> UnwindSafe for Option<T>
+where
+  T: UnwindSafe,
+```
+
+## Blanket Implementations
+
+
+
+### impl\<T> Any for T
+
+```rust
+impl<T> Any for T
+where
+  T: 'static + ?Sized,
+```
+
+
+
+### impl\<T> Borrow\<T> for T
+
+```rust
+impl<T> Borrow<T> for T
+where
+  T: ?Sized,
+```
+
+
+
+### impl\<T> BorrowMut\<T> for T
+
+```rust
+impl<T> BorrowMut<T> for T
+where
+  T: ?Sized,
+```
+
+
+
+### impl\<T> From<!> for T
+
+### impl\<T> From\<T> for T
+
+
+
+### impl<T, U> Into\<U> for T
+
+```rust
+impl<T, U> Into<U> for T
+where
+  U: From<T>,
+```
+
+
+
+### impl\<T> ToOwned for T
+
+```rust
+impl<T> ToOwned for T
+where
+  T: Clone,
+```
+
+
+
+### impl<T, U> TryFrom\<U> for T
+
+```rust
+impl<T, U> TryFrom<U> for T
+where
+  U: Into<T>,
+```
+
+
+
+### impl<T, U> TryInto\<U> for T
+
+```rust
+impl<T, U> TryInto<U> for T
+where
+  U: TryFrom<T>,
+```
 

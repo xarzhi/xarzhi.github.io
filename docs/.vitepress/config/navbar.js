@@ -38,12 +38,12 @@ const nav = [
 					{
 						text: 'Vue2',
 						link: '/docs/前端/框架/Vue/Vue2/Vue2基础/01.Vue2基础',
-						icon: '/sidebar_icons/logo.svg',
+						icon: '/sidebar_icons/vue.svg',
 					},
 					{
 						text: 'Vue3',
 						link: '/docs/前端/框架/Vue/Vue3/Vue3基础/01.Vue3基础',
-						icon: '/sidebar_icons/logo.svg',
+						icon: '/sidebar_icons/vue.svg',
 					},
 				],
 			},
@@ -165,8 +165,33 @@ const nav = [
 			},
 			{
 				text: 'Rust',
-				link: '/docs/后端/Rust/Rust基础/01.环境搭建.md',
-				icon: '/sidebar_icons/rust.svg',
+				items: [
+					{
+						text: 'Rust教程',
+						link: '/docs/后端/Rust/Rust教程/Rust基础/01.环境搭建.md',
+						icon: '/sidebar_icons/rust.svg',
+					},
+					{
+						text: '标准库std',
+						link: '/docs/后端/Rust/标准库/index.md',
+						icon: '/sidebar_icons/rust.svg',
+					},
+					// {
+					// 	text: 'Tauri',
+					// 	link: '/docs/后端/Rust/Rust基础/01.环境搭建.md',
+					// 	icon: '/sidebar_icons/tauri.png',
+					// },
+					// {
+					// 	text: 'Slint',
+					// 	link: '/docs/后端/Rust/Rust基础/01.环境搭建.md',
+					// 	icon: '/sidebar_icons/slint.svg',
+					// },
+					// {
+					// 	text: 'Gpui',
+					// 	link: '/docs/后端/Rust/Rust基础/01.环境搭建.md',
+					// 	icon: '/sidebar_icons/gpui.svg',
+					// },
+				],
 			},
 		],
 	},

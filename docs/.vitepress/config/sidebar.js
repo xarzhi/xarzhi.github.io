@@ -292,7 +292,6 @@ const sidebar = {
 				{
 					text: '枚举',
 					link: '/docs/后端/Rust/Rust教程/复合类型/枚举Enum/index',
-					items: getItems('/docs/后端/Rust/Rust教程/复合类型/枚举Enum/docs'),
 					collapsed: true,
 				},
 				{ text: '联合体', link: '/docs/后端/Rust/Rust教程/复合类型/联合体Union/index' },
@@ -351,6 +350,23 @@ const sidebar = {
 					text: 'Enums',
 					collapsed: true,
 					items: getItems('/docs/后端/Rust/标准库/option/Enums'),
+				},
+			],
+		},
+		{
+			text: 'result',
+			link: '/docs/后端/Rust/标准库/result/index.md',
+			collapsed: true,
+			items: [
+				{
+					text: 'Structs',
+					collapsed: true,
+					items: getItems('/docs/后端/Rust/标准库/result/Structs'),
+				},
+				{
+					text: 'Enums',
+					collapsed: true,
+					items: getItems('/docs/后端/Rust/标准库/result/Enums'),
 				},
 			],
 		},

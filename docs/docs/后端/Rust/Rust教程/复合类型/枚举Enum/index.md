@@ -193,8 +193,6 @@ fn main() {
 
 
 
-
-
 ## 6.模式匹配
 
 使用`match`对`enum`进行模式匹配，匹配到相应的变体，可以进行一些操作
@@ -220,6 +218,240 @@ fn main() {
     println!("{}", is_yellow);		// true
 }
 
+```
+
+
+
+## 7.Option\<T>
+
+[`Option<T>`](../../../标准库/option/index)是Rust标准库中一个特殊的枚举，位于`std::option::Option`，用来**表示一个变量可能有值，也可能为空**
+
+这像是其他语言中的`null`
+
+```rust
+pub enum Option<T> {
+    None,
+    Some(T),
+}
+```
+
+- **None**：表示没有值，为空
+- **Some(T)**：表示有值，值包含在`Some`中，类型为`T`
+
+:::tip
+
+`Option`和其变体`Some(T)`，`None`均被包含在了`std::prelude`中，所以在使用时，不需要显示导入
+
+:::
+
+一个简单的使用
+
+```rust
+fn main() {
+    let o = Some(123);
+    let null: Option<i32> = None;
+
+    println!("{:?}", o);			// Some(123)
+    println!("{:?}", null);			// None
+}
+```
+
+可以看到，直接使用变量，得到的是[`Option<T>`](../../../标准库/option/index)中的其中一个变体
+
+若想拿到Some中的值，需要使用[`Option<T>`](../../../标准库/option/Enums/Option#Implementations)中的方法，比如[`unwrap`](../../../标准库/option/Enums/Option#unwrap)
+
+```rust
+fn main() {
+    let o = Some(123);
+
+    println!("{:?}", o.unwrap());			// 123
+}
+```
+
+
+
+### 7.1 模式匹配
+
+在开发中经常会用模式匹配来处理`Option`的值
+
+```rust
+fn get_value(num: i32) -> Option<i32> {
+    if num > 10 { Some(num) } else { None }
+}
+
+fn main() {
+    let o = get_value(15);
+
+    match o {
+        Some(value) => println!("{}", value),
+        None => println!("no value"),
+    }  // 15
+
+
+    let n = get_value(8);
+
+    match n {
+        Some(value) => println!("{}", value),
+        None => println!("no value"),
+    }  // "no value"
+}
+```
+
+
+
+使用`if let`语法糖
+
+```rust
+fn get_value(num: i32) -> Option<i32> {
+    if num > 10 { Some(num) } else { None }
+}
+
+fn main() {
+    let o = get_value(15);
+
+    if let Some(value) = o {
+        println!("{}", value); // 15
+    }
+
+    let n = get_value(8);
+    if let None = n {
+        println!("no value"); // "no value"
+    }
+}
+```
+
+
+
+
+
+
+
+## 8.Result<T, E>
+
+[`Result<T, E>`](../../../标准库/result/index)是Rust标准库中一个特殊的枚举，位于`std::result::Result`，用来**表示一个结果可能有值，也可能为一个错误**
+
+通常用在io操作中
+
+```rust
+enum Result<T, E> {
+   Ok(T),
+   Err(E),
+}
+```
+
+- **Ok(T)**：表示结果是成功的，值包含在`Ok`中，值类型为`T`
+- **Err(E)**：表示结果是失败的的，错误的信息包含在`Err`中，错误的类型为`E`
+
+:::tip
+
+`Result`和其变体`Ok(T)`，`Err(E)`均被包含在了`std::prelude`中，所以在使用时，不需要显示导入
+
+:::
+
+一个简单的使用
+
+```rust
+fn get_result(num: i32) -> Result<i32, String> {
+    if num > 10 {
+        Ok(num)
+    } else {
+        Err(String::from("the num is less than 10"))
+    }
+}
+
+fn main() {
+    let res1 = get_result(8);
+    let res2 = get_result(50);
+
+    println!("{:?}", res1);	// Err("the num is less than 10")
+    println!("{:?}", res2); // Ok(50)
+}
+
+```
+
+可以看到，直接使用变量，得到的是[`Result<T, E>`](../../../标准库/result/index)中的其中一个变体
+
+若想拿到`Ok`中的值，需要使用[`Result<T, E>`](../../../标准库/result/Enums/Result#Implementations)中的方法，比如[`unwrap`](../../../标准库/result/Enums/Result#unwrap)和[`unwrap_err`](../../../标准库/result/Enums/Result#unwrap)
+
+```rust
+fn get_result(num: i32) -> Result<i32, String> {
+    if num > 10 {
+        Ok(num)
+    } else {
+        Err(String::from("the num is less than 10"))
+    }
+}
+
+fn main() {
+    let res1 = get_result(8);
+    let res2 = get_result(50);
+
+    println!("{:?}", res1.unwrap_err());	// "the num is less than 10"
+    println!("{:?}", res2.unwrap()); 	// 50
+}
+
+```
+
+
+
+### 8.1 模式匹配
+
+在开发中经常会用模式匹配来处理`Result`的值
+
+```rust
+fn get_result(num: i32) -> Result<i32, String> {
+    if num > 10 {
+        Ok(num)
+    } else {
+        Err(String::from("the num is less than 10"))
+    }
+}
+
+fn main() {
+    let res = get_result(15);
+
+    match res {
+        Ok(value) => println!("{:#?}", value),		 // 15
+        Err(err) => println!("{:#?}", err),
+    }  
+
+
+    let res = get_result(5);
+
+    match res {
+        Ok(value) => println!("{:#?}", value),		
+        Err(err) => println!("{:#?}", err),		// "the num is less than 10"
+    }
+}
+
+```
+
+
+
+使用`if let`语法糖
+
+```rust
+fn get_result(num: i32) -> Result<i32, String> {
+    if num > 10 {
+        Ok(num)
+    } else {
+        Err(String::from("the num is less than 10"))
+    }
+}
+
+fn main() {
+    let res = get_result(15);
+
+    if let Ok(value) = res {
+        println!("{:#?}", value) // 15
+    }
+
+    let res = get_result(5);
+
+    if let Err(err) = res {
+        println!("{:#?}", err) // "the num is less than 10"
+    }
+}
 ```
 
 

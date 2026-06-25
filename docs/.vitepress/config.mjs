@@ -19,6 +19,7 @@ const config = defineConfig({
 	css: {
 		preprocessorOptions: {
 			scss: {
+				api: 'modern-comliler',
 				silenceDeprecations: ['legacy-js-api'],
 			},
 		},

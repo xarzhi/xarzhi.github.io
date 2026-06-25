@@ -279,14 +279,13 @@ const sidebar = {
 	'/docs/前端/一些问题/': getItems('/docs/前端/一些问题/'),
 	'/docs/其他问题': getItems('/docs/其他问题'),
 	'/docs/后端/Rust/Rust教程': [
-		{ text: 'Rust基础', items: getItems('/docs/后端/Rust/Rust教程/Rust基础'), collapsed: true },
-		{ text: '标量类型', items: getItems('/docs/后端/Rust/Rust教程/标量类型'), collapsed: true },
-		{ text: '深入类型', items: getItems('/docs/后端/Rust/Rust教程/深入类型'), collapsed: true },
+		{ text: 'Rust基础', items: getItems('/docs/后端/Rust/Rust教程/Rust基础'), },
+		{ text: '标量类型', items: getItems('/docs/后端/Rust/Rust教程/标量类型'),  },
+		{ text: '深入类型', items: getItems('/docs/后端/Rust/Rust教程/深入类型'), },
 		{
 			text: '复合类型',
-			collapsed: true,
 			items: [
-				{ text: '元组', link: '/docs/后端/Rust/Rust教程/Rust基础/复合类型/元组Tuple/index' },
+				{ text: '元组', link: '/docs/后端/Rust/Rust教程/复合类型/元组Tuple/index' },
 				{ text: '数组', link: '/docs/后端/Rust/Rust教程/复合类型/数组Array/index' },
 				{ text: '结构体', link: '/docs/后端/Rust/Rust教程/复合类型/结构体Struct/index' },
 				{
@@ -307,16 +306,13 @@ const sidebar = {
 		{
 			text: '所有权',
 			items: getItems('/docs/后端/Rust/Rust教程/所有权'),
-			collapsed: true,
 		},
 		{
 			text: '集合类型',
 			items: getItems('/docs/后端/Rust/Rust教程/集合类型'),
-			collapsed: true,
 		},
 		{
 			text: 'Rust进阶',
-			collapsed: true,
 			items: [
 				{ text: '泛型', link: '/docs/后端/Rust/Rust教程/Rust进阶/泛型/index', collapsed: true },
 				{ text: 'Trait', items: getItems('/docs/后端/Rust/Rust教程/Rust进阶/Trait'), collapsed: true },

@@ -561,7 +561,7 @@ match name_of_biggest_animal {
 }
 ```
 
-1. 这对于任何其他 ABI 仍然适用: `extern "abi" fn` (例如，`extern "system" fn`) [↩](https://www.rustwiki.org.cn/zh-CN/std/option/index.html#fnref1)
+1. 这对于任何其他 ABI 仍然适用: `extern "abi" fn` (例如，`extern "system" fn`)
 
 
 
@@ -577,4 +577,4 @@ match name_of_biggest_animal {
 
 ## 9.Enums
 
-- [Option](https://www.rustwiki.org.cn/zh-CN/std/option/enum.Option.html)：`Option` 类型。有关更多信息，请参见 [模块级文档](https://www.rustwiki.org.cn/zh-CN/std/option/index.html)。
+- [Option](./Enums/Option)：`Option` 类型。有关更多信息，请参见 [模块级文档](https://www.rustwiki.org.cn/zh-CN/std/option/index.html)。

@@ -568,78 +568,385 @@ let mut zipped = a
 
 ### intersperse
 
+`nightly-only`
+
+创建一个新的迭代器，在每个元素之间插一个「固定的值」
+
 ```rust
 fn intersperse(self, separator: Self::Item) -> Intersperse<Self> 
-    where Self: Sized,
-       Self::Item: Clone
+where
+    Self: Sized,
+    Self::Item: Clone,
 ```
+
+ **参数**：
+
+- **separator**：每个元素中间插入的分隔符
+
+**返回值**：返回一个`Intersperse`迭代器
+
+```rust
+#![feature(iter_intersperse)]
+
+let mut a = [0, 1, 2].iter().intersperse(&100);
+assert_eq!(a.next(), Some(&0));   // `a` 中的第一个元素。
+assert_eq!(a.next(), Some(&100)); // 分隔符。
+assert_eq!(a.next(), Some(&1));   // `a` 中的下一个元素。
+assert_eq!(a.next(), Some(&100)); // 分隔符。
+assert_eq!(a.next(), Some(&2));   // `a` 中的最后一个元素。
+assert_eq!(a.next(), None);       // 迭代器完成。
+```
+
+`intersperse` 对于使用公共元素连接迭代器的项非常有用：
+
+```rust
+#![feature(iter_intersperse)]
+
+let hello = ["Hello", "World", "!"].iter().copied().intersperse(" ").collect::<String>();
+assert_eq!(hello, "Hello World !");
+```
+
+
 
 
 
 ### intersperse_with
 
+`nightly-only`
+
+创建一个新的迭代器，在每个元素之间插一个「动态算出来的值」
+
 ```rust
 fn intersperse_with<G>(self, separator: G) -> IntersperseWith<Self, G> 
-    where Self: Sized,
-       G: FnMut() -> Self::Item
+where
+    Self: Sized,
+    G: FnMut() -> Self::Item,
 ```
+
+ **参数**：
+
+- **separator**：该函数的返回值作为每个元素中间插入的分隔符
+
+**返回值**：返回一个`IntersperseWith`迭代器
+
+```rust
+#![feature(iter_intersperse)]
+
+#[derive(PartialEq, Debug)]
+struct NotClone(usize);
+
+let v = [NotClone(0), NotClone(1), NotClone(2)];
+let mut it = v.into_iter().intersperse_with(|| NotClone(99));
+
+assert_eq!(it.next(), Some(NotClone(0)));  // `v` 中的第一个元素。
+assert_eq!(it.next(), Some(NotClone(99))); // 分隔符。
+assert_eq!(it.next(), Some(NotClone(1)));  // `v` 中的下一个元素。
+assert_eq!(it.next(), Some(NotClone(99))); // 分隔符。
+assert_eq!(it.next(), Some(NotClone(2)));  // `v` 的最后一个元素。
+assert_eq!(it.next(), None);               // 迭代器完成。
+```
+
+`intersperse_with` 可用于需要计算分隔符的情况：
+
+```rust
+#![feature(iter_intersperse)]
+
+let src = ["Hello", "to", "all", "people", "!!"].iter().copied();
+
+// 闭包可变地借用其上下文以生成项。
+let mut happy_emojis = [" ❤️ ", " 😀 "].iter().copied();
+let separator = || happy_emojis.next().unwrap_or(" 🦀 ");
+
+let result = src.intersperse_with(separator).collect::<String>();
+assert_eq!(result, "Hello ❤️ to 😀 all 🦀 people 🦀 !!");
+```
+
+
 
 
 
 ### map
 
+在闭包函数中将迭代项处理后并返回，最后返回处理后的新迭代器
+
+和`js`中的`arr.map()`差不多
+
 ```rust
-fn map<B, F>(self, f: F) -> Map<Self, F> 
-  where Self: Sized,
-    F: FnMut(Self::Item) -> B
+fn map<B, F>(self, f: F) -> Map<Self, F>
+where
+    Self: Sized,
+    F: FnMut(Self::Item) -> B,
+```
+
+ **参数**：
+
+- **f**：迭代项处理函数，该函数的参数为当前迭代项，该函数的返回值会放入新的迭代器中
+
+**返回值**：返回一个`Map`迭代器
+
+```rust
+// 把每个元素*2
+fn main() {
+    let a = [1, 2, 3, 4, 5];
+    let iter = a.iter().map(|item| item * 2);
+
+    for item in iter {
+        println!("{:?}", item);
+    }
+    /*
+       2
+       4
+       6
+       8
+       10
+    */
+
+}
+```
+
+如果您正在做某种副作用，请首选 `for` 而不是 `map()`：
+
+```rust
+// 不要这样做：
+(0..5).map(|x| println!("{x}"));
+
+// 它甚至不会执行，因为它很懒。Rust 会就此警告您。
+
+// 而是用于：
+for x in 0..5 {
+    println!("{x}");
+}
 ```
 
 
 
 ### for_each
 
+相当于for循环的语法糖
+
+遍历一个迭代器
+
 ```rust
 fn for_each<F>(self, f: F)
-    where Self: Sized,
-       F: FnMut(Self::Item)
+where
+    Self: Sized,
+    F: FnMut(Self::Item),
 ```
+
+ **参数**：
+
+- **f**：迭代项处理函数，该函数的参数为当前迭代项
+
+```rust
+fn main() {
+    let a = [1, 2, 3, 4, 5];
+    a.iter().for_each(|item| {
+        println!("{:?}", item);
+    });
+
+    /*
+       1
+       2
+       3
+       4
+       5
+    */
+}
+```
+
+如果想改变原数组中的内容
+
+```rust
+fn main() {
+    let mut a = [1, 2, 3, 4, 5];
+
+    a.iter_mut().for_each(|item| {
+        *item += 1;
+    });
+
+    println!("{:?}", a); // [2, 3, 4, 5, 6]
+}
+```
+
+
+
+
 
 
 
 ### filter
 
+创建一个新迭代器，根据谓词函数，过滤掉不符合条件的项
+
 ```rust
 fn filter<P>(self, predicate: P) -> Filter<Self, P> 
-    where Self: Sized,
-       P: FnMut(&Self::Item) -> bool
+where
+    Self: Sized,
+    P: FnMut(&Self::Item) -> bool,
 ```
+
+ **参数**：
+
+- **f**：谓词函数，必须返回一个`bool`值，新的迭代器中不包含返回`false`的项
+
+**返回值**：返回一个`Filter`迭代器
+
+```rust
+fn main() {
+    let a = [1, 2, 3, 4, 5];
+
+    let filter_iter = a.iter().filter(|&&item| item > 2);
+
+    for item in filter_iter {
+        println!("{:#?}", item);
+		/*
+			3
+			4
+			5
+		 */
+    }
+}
+```
+
+注意到上面闭包函数使用的是双引用`&&item`
+
+因为传递给 `filter()` 的闭包需要用一个引用，并且许多迭代器迭代引用，所以这可能导致混乱的情况，其中闭包的类型是双引用
+
+除了上面的写法，也可以使用双重解引用
+
+```rust
+let a = [0, 1, 2];
+
+let mut iter = a.iter().filter(|x| **x > 1); // 需要两个 *s!
+
+assert_eq!(iter.next(), Some(&2));
+assert_eq!(iter.next(), None);
+```
+
+或者一半一半，挺搞笑的
+
+```rust
+let a = [0, 1, 2];
+
+let mut iter = a.iter().filter(|&x| *x > 1); // both & and *
+
+assert_eq!(iter.next(), Some(&2));
+assert_eq!(iter.next(), None);
+```
+
+请注意，`iter.filter(f).next()` 等效于 `iter.find(f)`。
+
+
 
 
 
 ### filter_map
 
+创建一个同时过滤和映射的迭代器，相当于`filter`和`map`的合体
+
+返回的迭代器只产生 `value`，而提供的闭包会返回 `Some(value)`。
+
 ```rust
-fn filter_map<B, F>(self, f: F) -> FilterMap<Self, F> 
-    where Self: Sized,
-       F: FnMut(Self::Item) -> Option<B>
+fn filter_map<B, F>(self, f: F) -> FilterMap<Self, F>
+where
+    Self: Sized,
+    F: FnMut(Self::Item) -> Option<B>,
 ```
+
+ **参数**：
+
+- **f**：处理迭代项的闭包函数，在此函数中可以对迭代项的值进行更改（map特性），此函数返回一个`Option`，`Some`会被保留，`None`会被过滤（`filter`特性）
+
+**返回值**：返回一个`FilterMap`迭代器
+
+```rust
+fn main() {
+    let v = [1, 2, 3, 4, 5];
+    let iter = v.iter();
+	// 过滤v中的偶数，并返回过滤出来的偶数的一半
+    let res = iter.filter_map(|&item| if item % 2 == 0 { Some(item / 2) } else { None });
+
+    for item in res {
+        println!("{:#?}", item);
+        /*
+           1
+           2
+        */
+    }
+}
+```
+
+转换成`filter`和`map`
+
+```rust
+fn main() {
+    let v = [1, 2, 3, 4, 5];
+    let iter = v.iter();
+
+    let res = iter.filter(|&&item| item % 2 == 0).map(|item| item / 2);
+
+    for item in res {
+        println!("{:#?}", item);
+        /*
+           1
+           2
+        */
+    }
+}
+```
+
+
 
 
 
 ### enumerate
 
+创建一个迭代器，每个迭代项为一个元组，包含当前迭代项的索引和值
+
 ```rust
-fn enumerate(self) -> Enumerate<Self> 
-    where Self: Sized
+fn enumerate(self) -> Enumerate<Self>
+where
+    Self: Sized,
 ```
+
+**返回值**：返回一个`Enumerate`迭代器，当前迭代项为一个元组
+
+- 第一个元素为当前迭代的索引
+- 第二个元素为当前迭代项的值
+
+```rust
+fn main() {
+    let v = [1, 2, 3];
+    let iter = v.iter().enumerate();
+
+    for (index, item) in iter {
+        println!("{:?},{:?}", index, item);
+        /*
+           0,1
+           1,2
+           2,3
+        */
+    }
+}
+
+```
+
+:::tip
+
+如果要返回的索引将溢出 `usize`，则返回的迭代器可能为 panic。
+
+:::
+
+
 
 
 
 ### peekable
 
 ```rust
-fn peekable(self) -> Peekable<Self> 
-    where Self: Sized
+n peekable(self) -> Peekable<Self> ⓘ
+where
+    Self: Sized,
 ```
 
 
@@ -647,9 +954,10 @@ fn peekable(self) -> Peekable<Self>
 ### skip_while
 
 ```rust
-fn skip_while<P>(self, predicate: P) -> SkipWhile<Self, P> 
-    where Self: Sized,
-       P: FnMut(&Self::Item) -> bool
+fn skip_while<P>(self, predicate: P) -> SkipWhile<Self, P>
+where
+    Self: Sized,
+    P: FnMut(&Self::Item) -> bool,
 ```
 
 
@@ -1240,4 +1548,1298 @@ fn is_sorted_by_key<F, K>(self, f: F) -> bool
         F: FnMut(Self::Item) -> K,
         K: PartialOrd<K>
 ```
+
+
+
+
+
+## Implementors
+
+
+
+### impl Iterator for std::ascii::EscapeDefault
+
+type Item = u8
+
+
+
+### impl Iterator for std::char::EscapeDebug
+
+
+
+### impl Iterator for std::char::EscapeDefault
+
+
+
+### impl Iterator for std::char::EscapeUnicode
+
+
+
+### impl Iterator for ToLowercase
+
+
+
+### impl Iterator for ToUppercase
+
+
+
+### impl Iterator for Args
+
+
+
+### impl Iterator for ArgsOs
+
+
+
+### impl Iterator for Vars
+
+
+
+### impl Iterator for VarsOs
+
+
+
+### impl Iterator for ReadDir
+
+
+
+### impl Iterator for IntoIncoming
+
+
+
+### impl Iterator for std::str::Bytes<'_>
+
+
+
+### impl Iterator for std::string::Drain<'_>
+
+
+
+### impl<'a> Iterator for <'a>
+
+
+
+### impl<'a> Iterator for SplitPaths<'a>
+
+
+
+### impl<'a> Iterator for std::net::Incoming<'a>
+
+
+
+### impl<'a> Iterator for std::os::unix::net::Incoming<'a>
+
+`Available on Unix only.`
+
+
+
+### impl<'a> Iterator for Messages<'a>
+
+`Available on (Android or Linux) and Unix only.`
+
+
+
+### impl<'a> Iterator for ScmCredentials<'a>
+
+`Available on (Android or Linux) and Unix only.`
+
+### impl<'a> Iterator for ScmRights<'a>
+
+`Available on (Android or Linux) and Unix only.`
+
+
+
+### impl<'a> Iterator for EncodeWide<'a>
+
+
+
+### impl<'a> Iterator for Ancestors<'a>
+
+
+
+### impl<'a> Iterator for Components<'a>
+
+
+
+### impl<'a> Iterator for std::path::Iter<'a>
+
+
+
+### impl<'a> Iterator for CommandArgs<'a>
+
+
+
+### impl<'a> Iterator for CommandEnvs<'a>
+
+
+
+### impl<'a> Iterator for EscapeAscii<'a>
+
+
+
+### impl<'a> Iterator for CharIndices<'a>
+
+
+
+### impl<'a> Iterator for Chars<'a>
+
+
+
+### impl<'a> Iterator for EncodeUtf16<'a>
+
+
+
+### impl<'a> Iterator for std::str::EscapeDebug<'a>
+
+
+
+### impl<'a> Iterator for std::str::EscapeDefault<'a>
+
+
+
+### impl<'a> Iterator for std::str::EscapeUnicode<'a>
+
+
+
+### impl<'a> Iterator for std::str::Lines<'a>
+
+
+
+### impl<'a> Iterator for LinesAny<'a>
+
+
+
+### impl<'a> Iterator for SplitAsciiWhitespace<'a>
+
+
+
+### impl<'a> Iterator for SplitWhitespace<'a>
+
+
+
+### impl<'a> Iterator for Utf8Chunks<'a>
+
+
+
+### impl<'a, A> Iterator for std::option::Iter<'a, A>
+
+
+
+### impl<'a, A> Iterator for std::option::IterMut<'a, A>
+
+
+
+### impl<'a, I, T> Iterator for Cloned\<I>
+
+```rust
+impl<'a, I, T> Iterator for Cloned<I>
+where
+  T: 'a + Clone,
+  I: Iterator<Item = &'a T>,
+```
+
+
+
+### impl<'a, I, T> Iterator for Copied\<I>
+
+```rust
+impl<'a, I, T> Iterator for Copied<I>
+where
+  T: 'a + Copy,
+  I: Iterator<Item = &'a T>,
+```
+
+### impl<'a, K> Iterator for std::collections::hash_set::Drain<'a, K>
+
+
+
+### impl<'a, K> Iterator for std::collections::hash_set::Iter<'a, K>
+
+
+
+### impl<'a, K, V> Iterator for std::collections::btree_map::Iter<'a, K, V>
+
+```rust
+impl<'a, K, V> Iterator for std::collections::btree_map::Iter<'a, K, V>
+where
+  K: 'a,
+  V: 'a,
+```
+
+### impl<'a, K, V> Iterator for std::collections::btree_map::IterMut<'a, K, V>
+
+
+
+### impl<'a, K, V> Iterator for std::collections::btree_map::Keys<'a, K, V>
+
+
+
+### impl<'a, K, V> Iterator for std::collections::btree_map::Range<'a, K, V>
+
+
+
+### impl<'a, K, V> Iterator for RangeMut<'a, K, V>
+
+
+
+### impl<'a, K, V> Iterator for std::collections::btree_map::Values<'a, K, V>
+
+
+
+### impl<'a, K, V> Iterator for std::collections::btree_map::ValuesMut<'a, K, V>
+
+
+
+### impl<'a, K, V> Iterator for std::collections::hash_map::Drain<'a, K, V>
+
+
+
+### impl<'a, K, V> Iterator for std::collections::hash_map::Iter<'a, K, V>
+
+
+
+### impl<'a, K, V> Iterator for std::collections::hash_map::IterMut<'a, K, V>
+
+
+
+### impl<'a, K, V> Iterator for std::collections::hash_map::Keys<'a, K, V>
+
+
+
+### impl<'a, K, V> Iterator for std::collections::hash_map::Values<'a, K, V>
+
+
+
+### impl<'a, K, V> Iterator for std::collections::hash_map::ValuesMut<'a, K, V>
+
+
+
+### impl<'a, P> Iterator for MatchIndices<'a, P>
+
+```rust
+impl<'a, P> Iterator for MatchIndices<'a, P>
+where
+  P: Pattern<'a>,
+```
+
+
+
+### impl<'a, P> Iterator for Matches<'a, P>
+
+```rust
+impl<'a, P> Iterator for Matches<'a, P>
+where
+  P: Pattern<'a>,
+```
+
+
+
+### impl<'a, P> Iterator for RMatchIndices<'a, P>
+
+```rust
+impl<'a, P> Iterator for RMatchIndices<'a, P>
+where
+  P: Pattern<'a>,
+  <P as Pattern<'a>>::Searcher: ReverseSearcher<'a>,
+```
+
+
+
+### impl<'a, P> Iterator for RMatches<'a, P>
+
+```rust
+impl<'a, P> Iterator for RMatches<'a, P>
+where
+  P: Pattern<'a>,
+  <P as Pattern<'a>>::Searcher: ReverseSearcher<'a>,
+```
+
+
+
+### impl<'a, P> Iterator for std::str::RSplit<'a, P>
+
+```rust
+impl<'a, P> Iterator for std::str::RSplit<'a, P>
+where
+  P: Pattern<'a>,
+  <P as Pattern<'a>>::Searcher: ReverseSearcher<'a>,
+```
+
+
+
+### impl<'a, P> Iterator for std::str::RSplitN<'a, P>
+
+```rust
+impl<'a, P> Iterator for std::str::RSplitN<'a, P>
+where
+  P: Pattern<'a>,
+  <P as Pattern<'a>>::Searcher: ReverseSearcher<'a>,
+```
+
+
+
+### impl<'a, P> Iterator for RSplitTerminator<'a, P>
+
+```rust
+impl<'a, P> Iterator for RSplitTerminator<'a, P>
+where
+  P: Pattern<'a>,
+  <P as Pattern<'a>>::Searcher: ReverseSearcher<'a>,
+```
+
+
+
+### impl<'a, P> Iterator for std::str::Split<'a, P>
+
+```rust
+impl<'a, P> Iterator for std::str::Split<'a, P>
+where
+  P: Pattern<'a>,
+```
+
+
+
+### impl<'a, P> Iterator for std::str::SplitInclusive<'a, P>
+
+```rust
+impl<'a, P> Iterator for std::str::SplitInclusive<'a, P>
+where
+  P: Pattern<'a>,
+```
+
+
+
+### impl<'a, P> Iterator for std::str::SplitN<'a, P>
+
+```rust
+impl<'a, P> Iterator for std::str::SplitN<'a, P>
+where
+  P: Pattern<'a>,
+```
+
+
+
+### impl<'a, P> Iterator for SplitTerminator<'a, P>
+
+```rust
+impl<'a, P> Iterator for SplitTerminator<'a, P>
+where
+  P: Pattern<'a>,
+```
+
+### impl<'a, T> Iterator for std::collections::binary_heap::Iter<'a, T>
+
+
+
+### impl<'a, T> Iterator for std::collections::btree_set::Iter<'a, T>
+
+
+
+### impl<'a, T> Iterator for std::collections::btree_set::Range<'a, T>
+
+
+
+### impl<'a, T> Iterator for std::collections::btree_set::SymmetricDifference<'a, T>
+
+```rust
+impl<'a, T> Iterator for std::collections::btree_set::SymmetricDifference<'a, T>
+where
+  T: Ord,
+```
+
+
+
+### impl<'a, T> Iterator for std::collections::btree_set::Union<'a, T>
+
+```rust
+impl<'a, T> Iterator for std::collections::btree_set::Union<'a, T>
+where
+  T: Ord,
+```
+
+### impl<'a, T> Iterator for std::collections::linked_list::Iter<'a, T>
+
+
+
+### impl<'a, T> Iterator for std::collections::linked_list::IterMut<'a, T>
+
+
+
+### impl<'a, T> Iterator for std::collections::vec_deque::Iter<'a, T>
+
+
+
+### impl<'a, T> Iterator for std::collections::vec_deque::IterMut<'a, T>
+
+
+
+### impl<'a, T> Iterator for std::result::Iter<'a, T>
+
+
+
+### impl<'a, T> Iterator for std::result::IterMut<'a, T>
+
+
+
+### impl<'a, T> Iterator for Chunks<'a, T>
+
+
+
+### impl<'a, T> Iterator for ChunksExact<'a, T>
+
+
+
+### impl<'a, T> Iterator for ChunksExactMut<'a, T>
+
+
+
+### impl<'a, T> Iterator for ChunksMut<'a, T>
+
+
+
+### impl<'a, T> Iterator for std::slice::Iter<'a, T>
+
+
+
+### impl<'a, T> Iterator for std::slice::IterMut<'a, T>
+
+
+
+### impl<'a, T> Iterator for RChunks<'a, T>
+
+
+
+### impl<'a, T> Iterator for RChunksExact<'a, T>
+
+
+
+### impl<'a, T> Iterator for RChunksExactMut<'a, T>
+
+
+
+### impl<'a, T> Iterator for RChunksMut<'a, T>
+
+
+
+### impl<'a, T> Iterator for Windows<'a, T>
+
+
+
+### impl<'a, T> Iterator for std::sync::mpsc::Iter<'a, T>
+
+
+
+### impl<'a, T> Iterator for TryIter<'a, T>
+
+
+
+### impl<'a, T, A> Iterator for std::collections::btree_set::Difference<'a, T, A>
+
+```rust
+impl<'a, T, A> Iterator for std::collections::btree_set::Difference<'a, T, A>
+where
+  T: Ord,
+  A: Allocator + Clone,
+```
+
+
+
+### impl<'a, T, A> Iterator for std::collections::btree_set::Intersection<'a, T, A>
+
+```rust
+impl<'a, T, A> Iterator for std::collections::btree_set::Intersection<'a, T, A>
+where
+  T: Ord,
+  A: Allocator + Clone,
+```
+
+
+
+### impl<'a, T, F, A> Iterator for std::collections::btree_set::DrainFilter<'_, T, F, A>
+
+```rust
+impl<'a, T, F, A> Iterator for std::collections::btree_set::DrainFilter<'_, T, F, A>
+where
+  A: Allocator + Clone,
+  F: 'a + FnMut(&T) -> bool,
+```
+
+
+
+### impl<'a, T, P> Iterator for GroupBy<'a, T, P>
+
+```rust
+impl<'a, T, P> Iterator for GroupBy<'a, T, P>
+where
+  T: 'a,
+  P: FnMut(&T, &T) -> bool,
+```
+
+
+
+### impl<'a, T, P> Iterator for GroupByMut<'a, T, P>
+
+```rust
+impl<'a, T, P> Iterator for GroupByMut<'a, T, P>
+where
+  T: 'a,
+  P: FnMut(&T, &T) -> bool,
+```
+
+
+
+### impl<'a, T, P> Iterator for std::slice::RSplit<'a, T, P>
+
+```rust
+impl<'a, T, P> Iterator for std::slice::RSplit<'a, T, P>
+where
+  P: FnMut(&T) -> bool,
+```
+
+
+
+### impl<'a, T, P> Iterator for RSplitMut<'a, T, P>
+
+```rust
+impl<'a, T, P> Iterator for RSplitMut<'a, T, P>
+where
+  P: FnMut(&T) -> bool,
+```
+
+
+
+### impl<'a, T, P> Iterator for std::slice::RSplitN<'a, T, P>
+
+```rust
+impl<'a, T, P> Iterator for std::slice::RSplitN<'a, T, P>
+where
+  P: FnMut(&T) -> bool,
+```
+
+
+
+### impl<'a, T, P> Iterator for RSplitNMut<'a, T, P>
+
+```rust
+impl<'a, T, P> Iterator for RSplitNMut<'a, T, P>
+where
+  P: FnMut(&T) -> bool,
+```
+
+
+
+### impl<'a, T, P> Iterator for std::slice::Split<'a, T, P>
+
+```rust
+impl<'a, T, P> Iterator for std::slice::Split<'a, T, P>
+where
+  P: FnMut(&T) -> bool,
+```
+
+
+
+### impl<'a, T, P> Iterator for std::slice::SplitInclusive<'a, T, P>
+
+```rust
+impl<'a, T, P> Iterator for std::slice::SplitInclusive<'a, T, P>
+where
+  P: FnMut(&T) -> bool,
+```
+
+
+
+### impl<'a, T, P> Iterator for SplitInclusiveMut<'a, T, P>
+
+```rust
+impl<'a, T, P> Iterator for SplitInclusiveMut<'a, T, P>
+where
+  P: FnMut(&T) -> bool,
+```
+
+
+
+### impl<'a, T, P> Iterator for SplitMut<'a, T, P>
+
+```rust
+impl<'a, T, P> Iterator for SplitMut<'a, T, P>
+where
+  P: FnMut(&T) -> bool,
+```
+
+
+
+### impl<'a, T, P> Iterator for std::slice::SplitN<'a, T, P>
+
+```rust
+impl<'a, T, P> Iterator for std::slice::SplitN<'a, T, P>
+where
+  P: FnMut(&T) -> bool,
+```
+
+
+
+### impl<'a, T, P> Iterator for SplitNMut<'a, T, P>
+
+```rust
+impl<'a, T, P> Iterator for SplitNMut<'a, T, P>
+where
+  P: FnMut(&T) -> bool,
+```
+
+
+
+### impl<'a, T, S> Iterator for std::collections::hash_set::Difference<'a, T, S>
+
+```rust
+impl<'a, T, S> Iterator for std::collections::hash_set::Difference<'a, T, S>
+where
+  T: Eq + Hash,
+  S: BuildHasher,
+```
+
+
+
+### impl<'a, T, S> Iterator for std::collections::hash_set::Intersection<'a, T, S>
+
+```rust
+impl<'a, T, S> Iterator for std::collections::hash_set::Intersection<'a, T, S>
+where
+  T: Eq + Hash,
+  S: BuildHasher,
+```
+
+
+
+### impl<'a, T, S> Iterator for std::collections::hash_set::SymmetricDifference<'a, T, S>
+
+```rust
+impl<'a, T, S> Iterator for std::collections::hash_set::SymmetricDifference<'a, T, S>
+where
+  T: Eq + Hash,
+  S: BuildHasher,
+```
+
+
+
+### impl<'a, T, S> Iterator for std::collections::hash_set::Union<'a, T, S>
+
+```rust
+impl<'a, T, S> Iterator for std::collections::hash_set::Union<'a, T, S>
+where
+  T: Eq + Hash,
+  S: BuildHasher,
+```
+
+### impl<'a, T, const N: usize> Iterator for std::slice::ArrayChunks<'a, T, N>
+
+
+
+### impl<'a, T, const N: usize> Iterator for ArrayChunksMut<'a, T, N>
+
+
+
+### impl<'a, T, const N: usize> Iterator for ArrayWindows<'a, T, N>
+
+
+
+### impl\<A> Iterator for std::ops::Range\<A>
+
+```rust
+impl<A> Iterator for std::ops::Range<A>
+where
+  A: Step,
+```
+
+
+
+### impl\<A> Iterator for RangeFrom\<A>
+
+```rust
+impl<A> Iterator for RangeFrom<A>
+where
+  A: Step,
+```
+
+
+
+### impl\<A> Iterator for RangeInclusive\<A>
+
+```rust
+impl<A> Iterator for RangeInclusive<A>
+where
+  A: Step,
+```
+
+
+
+### impl\<A> Iterator for std::option::IntoIter\<A>
+
+
+
+### impl\<A> Iterator for Repeat\<A>
+
+```rust
+impl<A> Iterator for Repeat<A>
+where
+  A: Clone,
+```
+
+
+
+### impl<A, B> Iterator for Chain<A, B>
+
+```rust
+impl<A, B> Iterator for Chain<A, B>
+where
+  A: Iterator,
+  B: Iterator<Item = <A as Iterator>::Item>,
+```
+
+
+
+### impl<A, B> Iterator for Zip<A, B>
+
+```rust
+impl<A, B> Iterator for Zip<A, B>
+where
+  A: Iterator,
+  B: Iterator,
+```
+
+
+
+### impl<A, F> Iterator for OnceWith\<F>
+
+```rust
+impl<A, F> Iterator for OnceWith<F>
+where
+  F: FnOnce() -> A,
+```
+
+
+
+### impl<A, F> Iterator for RepeatWith\<F>
+
+```rust
+impl<A, F> Iterator for RepeatWith<F>
+where
+  F: FnMut() -> A,
+```
+
+
+
+### impl<B, I, F> Iterator for FilterMap<I, F>
+
+```rust
+impl<B, I, F> Iterator for FilterMap<I, F>
+where
+  I: Iterator,
+  F: FnMut(<I as Iterator>::Item) -> Option<B>,
+```
+
+
+
+### impl<B, I, F> Iterator for Map<I, F>
+
+```rust
+impl<B, I, F> Iterator for Map<I, F>
+where
+  I: Iterator,
+  F: FnMut(<I as Iterator>::Item) -> B,
+```
+
+
+
+### impl<B, I, P> Iterator for MapWhile<I, P>
+
+```rust
+impl<B, I, P> Iterator for MapWhile<I, P>
+where
+  I: Iterator,
+  P: FnMut(<I as Iterator>::Item) -> Option<B>,
+```
+
+
+
+### impl<B, I, St, F> Iterator for Scan<I, St, F>
+
+```rust
+impl<B, I, St, F> Iterator for Scan<I, St, F>
+where
+  I: Iterator,
+  F: FnMut(&mut St, <I as Iterator>::Item) -> Option<B>,
+```
+
+### impl<B: BufRead> Iterator for std::io::Lines\<B>
+
+
+
+### impl<B: BufRead> Iterator for std::io::Split\<B>
+
+
+
+### impl\<I> Iterator for &mut I
+
+```rust
+impl<I> Iterator for &mut I
+where
+  I: Iterator + ?Sized,
+```
+
+
+
+### impl\<I> Iterator for DecodeUtf16\<I>
+
+```rust
+impl<I> Iterator for DecodeUtf16<I>
+where
+  I: Iterator<Item = u16>,
+```
+
+
+
+### impl\<I> Iterator for ByRefSized<'_, I>
+
+```rust
+impl<I> Iterator for ByRefSized<'_, I>
+where
+  I: Iterator,
+```
+
+
+
+### impl\<I> Iterator for Cycle\<I>
+
+```rust
+impl<I> Iterator for Cycle<I>
+where
+  I: Clone + Iterator,
+```
+
+
+
+### impl\<I> Iterator for Enumerate\<I>
+
+```rust
+impl<I> Iterator for Enumerate<I>
+where
+  I: Iterator,
+```
+
+
+
+### impl\<I> Iterator for Fuse\<I>
+
+```rust
+impl<I> Iterator for Fuse<I>
+where
+  I: Iterator,
+```
+
+
+
+### impl\<I> Iterator for Intersperse\<I>
+
+```rust
+impl<I> Iterator for Intersperse<I>
+where
+  I: Iterator,
+  <I as Iterator>::Item: Clone,
+```
+
+
+
+
+
+### impl\<I> Iterator for Peekable\<I>
+
+```rust
+impl<I> Iterator for Peekable<I>
+where
+  I: Iterator,
+```
+
+
+
+### impl\<I> Iterator for Rev\<I>
+
+```rust
+impl<I> Iterator for Rev<I>
+where
+  I: DoubleEndedIterator,
+```
+
+
+
+### impl\<I> Iterator for Skip\<I>
+
+```rust
+impl<I> Iterator for Skip<I>
+where
+  I: Iterator,
+```
+
+
+
+### impl\<I> Iterator for StepBy\<I>
+
+```rust
+impl<I> Iterator for StepBy<I>
+where
+  I: Iterator,
+```
+
+
+
+### impl\<I> Iterator for Take\<I>
+
+```rust
+impl<I> Iterator for Take<I>
+where
+  I: Iterator,
+```
+
+
+
+### impl<I, A> Iterator for Box<I, A>
+
+```rust
+impl<I, A> Iterator for Box<I, A>
+where
+  I: Iterator + ?Sized,
+  A: Allocator,
+```
+
+
+
+### impl<I, A> Iterator for Splice<'_, I, A>
+
+```rust
+impl<I, A> Iterator for Splice<'_, I, A>
+where
+  I: Iterator,
+  A: Allocator,
+```
+
+
+
+### impl<I, F> Iterator for Inspect<I, F>
+
+```rust
+impl<I, F> Iterator for Inspect<I, F>
+where
+  I: Iterator,
+  F: FnMut(&<I as Iterator>::Item),
+```
+
+
+
+### impl<I, G> Iterator for IntersperseWith<I, G>
+
+```rust
+impl<I, G> Iterator for IntersperseWith<I, G>
+where
+  I: Iterator,
+  G: FnMut() -> <I as Iterator>::Item,
+```
+
+
+
+### impl<I, P> Iterator for Filter<I, P>
+
+```rust
+impl<I, P> Iterator for Filter<I, P>
+where
+  I: Iterator,
+  P: FnMut(&<I as Iterator>::Item) -> bool,
+```
+
+
+
+### impl<I, P> Iterator for SkipWhile<I, P>
+
+```rust
+impl<I, P> Iterator for SkipWhile<I, P>
+where
+  I: Iterator,
+  P: FnMut(&<I as Iterator>::Item) -> bool,
+```
+
+
+
+### impl<I, P> Iterator for TakeWhile<I, P>
+
+```rust
+impl<I, P> Iterator for TakeWhile<I, P>
+where
+  I: Iterator,
+  P: FnMut(&<I as Iterator>::Item) -> bool,
+```
+
+
+
+### impl<I, U> Iterator for Flatten\<I>
+
+```rust
+impl<I, U> Iterator for Flatten<I>
+where
+  I: Iterator,
+  <I as Iterator>::Item: IntoIterator<IntoIter = U, Item = <U as Iterator>::Item>,
+  U: Iterator,
+```
+
+
+
+### impl<I, U, F> Iterator for FlatMap<I, U, F>
+
+```rust
+impl<I, U, F> Iterator for FlatMap<I, U, F>
+where
+  I: Iterator,
+  U: IntoIterator,
+  F: FnMut(<I as Iterator>::Item) -> 
+```
+
+
+
+### impl<I, const N: usize> Iterator for std::iter::ArrayChunks<I, N>
+
+```rust
+impl<I, const N: usize> Iterator for std::iter::ArrayChunks<I, N>
+where
+  I: Iterator,
+```
+
+### impl\<K> Iterator for std::collections::hash_set::IntoIter\<K>
+
+
+
+### impl<K, F> Iterator for std::collections::hash_set::DrainFilter<'_, K, F>
+
+```rust
+impl<K, F> Iterator for std::collections::hash_set::DrainFilter<'_, K, F>
+where
+  F: FnMut(&K) -> bool,
+```
+
+
+
+### impl<K, V> Iterator for std::collections::hash_map::IntoIter<K, V>
+
+
+
+### impl<K, V> Iterator for std::collections::hash_map::IntoKeys<K, V>
+
+
+
+### impl<K, V> Iterator for std::collections::hash_map::IntoValues<K, V>
+
+
+
+### impl<K, V, A> Iterator for std::collections::btree_map::IntoIter<K, V, A>
+
+```rust
+impl<K, V, A> Iterator for std::collections::btree_map::IntoIter<K, V, A>
+where
+  A: Allocator + Clone,
+```
+
+
+
+### impl<K, V, A> Iterator for std::collections::btree_map::IntoKeys<K, V, A>
+
+```rust
+impl<K, V, A> Iterator for std::collections::btree_map::IntoKeys<K, V, A>
+where
+  A: Allocator + Clone,
+```
+
+
+
+### impl<K, V, A> Iterator for std::collections::btree_map::IntoValues<K, V, A>
+
+```rust
+impl<K, V, A> Iterator for std::collections::btree_map::IntoValues<K, V, A>
+where
+  A: Allocator + Clone,
+```
+
+
+
+### impl<K, V, F> Iterator for std::collections::hash_map::DrainFilter<'_, K, V, F>
+
+```rust
+impl<K, V, F> Iterator for std::collections::hash_map::DrainFilter<'_, K, V, F>
+where
+  F: FnMut(&K, &mut V) -> bool,
+```
+
+
+
+### impl<K, V, F, A> Iterator for std::collections::btree_map::DrainFilter<'_, K, V, F, A>
+
+```rust
+impl<K, V, F, A> Iterator for std::collections::btree_map::DrainFilter<'_, K, V, F, A>
+where
+  A: Allocator + Clone,
+  F: FnMut(&K, &mut V) -> bool,
+```
+
+
+
+### impl<R: Read> Iterator for std::io::Bytes\<R>
+
+
+
+### impl\<T> Iterator for std::collections::binary_heap::Drain<'_, T>
+
+
+
+### impl\<T> Iterator for DrainSorted<'_, T>
+
+```rust
+impl<T> Iterator for DrainSorted<'_, T>
+where
+  T: Ord,
+```
+
+
+
+### impl\<T> Iterator for std::collections::binary_heap::IntoIter\<T>
+
+
+
+### impl\<T> Iterator for IntoIterSorted\<T>
+
+```rust
+impl<T> Iterator for IntoIterSorted<T>
+where
+  T: Ord,
+```
+
+
+
+### impl\<T> Iterator for std::result::IntoIter\<T>
+
+
+
+### impl\<T> Iterator for std::sync::mpsc::IntoIter\<T>
+
+
+
+### impl\<T> Iterator for Empty\<T>
+
+
+
+### impl\<T> Iterator for Once\<T>
+
+
+
+### impl<T, A> Iterator for std::collections::btree_set::IntoIter<T, A>
+
+```rust
+impl<T, A> Iterator for std::collections::btree_set::IntoIter<T, A>
+where
+  A: Allocator + Clone,
+```
+
+
+
+### impl<T, A> Iterator for std::collections::linked_list::IntoIter<T, A>
+
+```rust
+impl<T, A> Iterator for std::collections::linked_list::IntoIter<T, A>
+where
+  A: Allocator,
+```
+
+
+
+### impl<T, A> Iterator for std::collections::vec_deque::Drain<'_, T, A>
+
+```rust
+impl<T, A> Iterator for std::collections::vec_deque::Drain<'_, T, A>
+where
+  A: Allocator,
+```
+
+
+
+### impl<T, A> Iterator for std::collections::vec_deque::IntoIter<T, A>
+
+```rust
+impl<T, A> Iterator for std::collections::vec_deque::IntoIter<T, A>
+where
+  A: Allocator,
+```
+
+
+
+### impl<T, A> Iterator for std::vec::Drain<'_, T, A>
+
+```rust
+impl<T, A> Iterator for std::vec::Drain<'_, T, A>
+where
+  A: Allocator,
+```
+
+
+
+### impl<T, A> Iterator for std::vec::IntoIter<T, A>
+
+```rust
+impl<T, A> Iterator for std::vec::IntoIter<T, A>
+where
+  A: Allocator,
+```
+
+
+
+### impl<T, F> Iterator for FromFn\<F>
+
+```rust
+impl<T, F> Iterator for FromFn<F>
+where
+  F: FnMut() -> Option<T>,
+```
+
+
+
+### impl<T, F> Iterator for Successors<T, F>
+
+```rust
+impl<T, F> Iterator for Successors<T, F>
+where
+  F: FnMut(&T) -> Option<T>,
+```
+
+
+
+### impl<T, F, A> Iterator for std::collections::linked_list::DrainFilter<'_, T, F, A>
+
+```rust
+impl<T, F, A> Iterator for std::collections::linked_list::DrainFilter<'_, T, F, A>
+where
+  A: Allocator,
+  F: FnMut(&mut T) -> bool,
+```
+
+
+
+### impl<T, F, A> Iterator for std::vec::DrainFilter<'_, T, F, A>
+
+```rust
+impl<T, F, A> Iterator for std::vec::DrainFilter<'_, T, F, A>
+where
+  A: Allocator,
+  F: FnMut(&mut T) -> bool,
+```
+
+### impl<T, const N: usize> Iterator for std::array::IntoIter<T, N>
+
+
+
+### impl Iterator for IntoIter 
+
+
 

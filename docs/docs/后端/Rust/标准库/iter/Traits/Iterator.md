@@ -566,6 +566,21 @@ let mut zipped = a
 
 
 
+
+
+### unzip
+
+```rust
+fn unzip<A, B, FromA, FromB>(self) -> (FromA, FromB)
+    where FromA: Default + Extend<A>,
+       FromB: Default + Extend<B>,
+       Self: Sized + Iterator<Item = (A, B)>
+```
+
+
+
+
+
 ### intersperse
 
 `nightly-only`
@@ -717,6 +732,20 @@ for x in 0..5 {
     println!("{x}");
 }
 ```
+
+
+
+### map_while
+
+```rust
+fn map_while<B, P>(self, predicate: P) -> MapWhile<Self, P> 
+    where Self: Sized,
+       P: FnMut(Self::Item) -> Option<B>
+```
+
+
+
+
 
 
 
@@ -943,41 +972,65 @@ fn main() {
 
 ### peekable
 
+”跳屁壳儿“
+
+创建一个迭代器，它可以使用 [`Peekable::peek`](https://www.rustwiki.org.cn/zh-CN/std/iter/struct.Peekable.html#method.peek) 和 [`Peekable::peek_mut`](https://www.rustwiki.org.cn/zh-CN/std/iter/struct.Peekable.html#method.peek_mut) 方法查看迭代器的下一个元素而不消耗它
+
+迭代器并不会前进，调用`next`方法还是正常的顺序
+
 ```rust
-n peekable(self) -> Peekable<Self> ⓘ
+fn peekable(self) -> Peekable<Self> 
 where
     Self: Sized,
 ```
 
-
-
-### skip_while
+**返回值**：返回一个`Peekable`迭代器，允许调用`Peekable`中的`peek`和`peek_mut`方法看一眼下一个迭代项的值，而不推进迭代器
 
 ```rust
-fn skip_while<P>(self, predicate: P) -> SkipWhile<Self, P>
-where
-    Self: Sized,
-    P: FnMut(&Self::Item) -> bool,
+fn main() {
+    let v = [1, 2, 3];
+    let mut iter = v.iter().peekable();
+
+    println!("{:?}", iter.peek());  // Some(1)
+    println!("{:?}", iter.next());  // Some(1)
+}
 ```
 
-
-
-### take_while
+可以peek多次，依然不影响迭代器本身的位置
 
 ```rust
-fn take_while<P>(self, predicate: P) -> TakeWhile<Self, P> 
-    where Self: Sized,
-       P: FnMut(&Self::Item) -> bool
+fn main() {
+    let v = [1, 2, 3];
+    let mut iter = v.iter().peekable();
+
+    println!("{:?}", iter.peek());  // Some(1)
+    println!("{:?}", iter.peek());  // Some(1)
+    println!("{:?}", iter.peek());  // Some(1)
+
+    println!("{:?}", iter.next());  // Some(1)
+}
 ```
 
-
-
-### map_while
+使用`peek_mut`在不推进迭代器的情况下改变下一个项：
 
 ```rust
-fn map_while<B, P>(self, predicate: P) -> MapWhile<Self, P> 
-    where Self: Sized,
-       P: FnMut(Self::Item) -> Option<B>
+let xs = [1, 2, 3];
+
+let mut iter = xs.iter().peekable();
+
+// `peek_mut()` 让我们看到了 future
+assert_eq!(iter.peek_mut(), Some(&mut &1));
+assert_eq!(iter.peek_mut(), Some(&mut &1));
+assert_eq!(iter.next(), Some(&1));
+
+if let Some(mut p) = iter.peek_mut() {
+    assert_eq!(*p, &2);
+    // 将一个值放入迭代器
+    *p = &1000;
+}
+
+// 随着迭代器的继续，该值重新出现
+assert_eq!(iter.collect::<Vec<_>>(), vec![&1000, &3]);
 ```
 
 
@@ -991,12 +1044,86 @@ fn skip(self, n: usize) -> Skip<Self>
 
 
 
+
+
+### skip_while
+
+创建一个迭代器，该迭代器基于谓词`skip`（跳过）元素。
+
+只要条件为 `true`，就一直跳过
+
+一旦遇到第一个 `false`，立刻停止跳过，并把后面所有元素原样返回
+
+```rust
+fn skip_while<P>(self, predicate: P) -> SkipWhile<Self, P>
+where
+    Self: Sized,
+    P: FnMut(&Self::Item) -> bool,
+```
+
+ **参数**：
+
+- **predicate**：谓词函数，迭代器根据此函数的返回值跳过元素
+
+**返回值**：返回一个`SkipWhile`迭代器
+
+```rust
+fn main() {
+    let v = [1, 2, 3, 4, 5];
+    let iter = v.iter();
+
+    let res = iter.skip_while(|item| **item < 3);
+    for item in res {
+        println!("{:?}", item);
+    }
+    /*
+    	3
+    	4
+    	5
+    */
+}
+```
+
+因为传递给 `skip_while()` 的闭包需要一个引用，并且许多迭代器都在引用上进行迭代，所以这会导致一种可能令人困惑的情况，其中闭包参数的类型是双引用：
+
+```rust
+let a = [-1, 0, 1];
+
+let mut iter = a.iter().skip_while(|x| **x < 0); // 需要两个 *s!
+// 或者
+// let mut iter = a.iter().skip_while(|&&x| x < 0); // 需要两个 &!
+// 或者
+// let mut iter = a.iter().skip_while(|&x| *x < 0); // 一半一半
+
+assert_eq!(iter.next(), Some(&0));
+assert_eq!(iter.next(), Some(&1));
+assert_eq!(iter.next(), None);
+```
+
+
+
 ### take
 
 ```rust
 fn take(self, n: usize) -> Take<Self> 
     where Self: Sized
 ```
+
+
+
+
+
+### take_while
+
+```rust
+fn take_while<P>(self, predicate: P) -> TakeWhile<Self, P> 
+    where Self: Sized,
+       P: FnMut(&Self::Item) -> bool
+```
+
+
+
+
 
 
 
@@ -1127,6 +1254,18 @@ fn is_partitioned<P>(self, predicate: P) -> bool
 
 
 
+### fold
+
+```rust
+fn fold<B, F>(self, init: B, f: F) -> B
+    where Self: Sized,
+       F: FnMut(B, Self::Item) -> B
+```
+
+
+
+
+
 ### try_fold
 
 ```rust
@@ -1148,14 +1287,6 @@ fn try_for_each<F, R>(&mut self, f: F) -> R
 ```
 
 
-
-### fold
-
-```rust
-fn fold<B, F>(self, init: B, f: F) -> B
-    where Self: Sized,
-       F: FnMut(B, Self::Item) -> B
-```
 
 
 
@@ -1329,15 +1460,6 @@ fn rev(self) -> Rev<Self>
 ```
 
 
-
-### unzip
-
-```rust
-fn unzip<A, B, FromA, FromB>(self) -> (FromA, FromB)
-    where FromA: Default + Extend<A>,
-       FromB: Default + Extend<B>,
-       Self: Sized + Iterator<Item = (A, B)>
-```
 
 
 

@@ -147,7 +147,7 @@ I/O 的常见类型，包括 [files](https://www.rustwiki.org.cn/zh-CN/std/fs/st
 - [net](https://www.rustwiki.org.cn/zh-CN/std/net/index.html)：TCP/UDP 通信的网络原语。
 - [num](https://www.rustwiki.org.cn/zh-CN/std/num/index.html)：数字的附加功能。
 - [ops](https://www.rustwiki.org.cn/zh-CN/std/ops/index.html)：可重载的运算符。
-- [option](./option/index)：可选值。
+- [option](./Modules/option/index)：可选值。
 - [os](https://www.rustwiki.org.cn/zh-CN/std/os/index.html)：特定于操作系统的功能。
 - [panic](https://www.rustwiki.org.cn/zh-CN/std/panic/index.html)：标准库中的 Panic 支持。
 - [path](https://www.rustwiki.org.cn/zh-CN/std/path/index.html)：跨平台路径操作。

@@ -3,7 +3,7 @@ import './style/index.css'
 import './style/home.scss'
 import './style/nav.scss'
 import './style/blur.css'
-import mouseClick from './utils/mouse-click-particles'
+// import mouseClick from './utils/mouse-click-particles'
 import mediumZoom from 'medium-zoom'
 import { onMounted, watch, nextTick } from 'vue'
 import { useRoute, useData, useRouter } from 'vitepress'
@@ -13,6 +13,8 @@ import Layout from './Layout.vue'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
+import useClickParticles from './hooks/useClickParticles.js'
+
 export default {
 	extends: DefaultTheme,
 	enhanceApp({ app }) {
@@ -33,17 +35,18 @@ export default {
 	setup() {
 		const route = useRoute()
 		const router = useRouter()
-		const initZoom = () => {
+		const clickParticles = useClickParticles()
+		window.addEventListener('error', e => {
+			console.log(e)
+		})
+		onMounted(() => {
 			mediumZoom('.main img,div:not(a) > img', {
 				background: 'rgba(0, 0, 0, 0.6)',
 			})
-		}
-
-		onMounted(() => {
-			initZoom()
-			if (document) mouseClick(document)
+			clickParticles.createCanvas()
+			if (window) window.$app = app
 		})
-		window.$app = app
+
 		watch(
 			() => route.path,
 			() =>

@@ -18,6 +18,10 @@ const config = defineConfig({
 	],
 	css: {
 		preprocessorOptions: {
+			sass: {
+				api: 'modern-comliler',
+				silenceDeprecations: ['legacy-js-api'],
+			},
 			scss: {
 				api: 'modern-comliler',
 				silenceDeprecations: ['legacy-js-api'],

@@ -224,7 +224,7 @@ fn main() {
 
 ## 7.Option\<T>
 
-[`Option<T>`](../../../标准库/option/index)是Rust标准库中一个特殊的枚举，位于`std::option::Option`，用来**表示一个变量可能有值，也可能为空**
+[`Option<T>`](../../../标准库/Modules/option/index)是Rust标准库中一个特殊的枚举，位于`std::option::Option`，用来**表示一个变量可能有值，也可能为空**
 
 这像是其他语言中的`null`
 
@@ -256,9 +256,9 @@ fn main() {
 }
 ```
 
-可以看到，直接使用变量，得到的是[`Option<T>`](../../../标准库/option/index)中的其中一个变体
+可以看到，直接使用变量，得到的是[`Option<T>`](../../../标准库/Modules/option/index)中的其中一个变体
 
-若想拿到Some中的值，需要使用[`Option<T>`](../../../标准库/option/Enums/Option#Implementations)中的方法，比如[`unwrap`](../../../标准库/option/Enums/Option#unwrap)
+若想拿到Some中的值，需要使用[`Option<T>`](../../../标准库/Modules/option/Enums/Option#Implementations)中的方法，比如[`unwrap`](../../../标准库/Modules/option/Enums/Option#unwrap)
 
 ```rust
 fn main() {
@@ -328,7 +328,7 @@ fn main() {
 
 ## 8.Result<T, E>
 
-[`Result<T, E>`](../../../标准库/result/index)是Rust标准库中一个特殊的枚举，位于`std::result::Result`，用来**表示一个结果可能有值，也可能为一个错误**
+[`Result<T, E>`](../../../标准库/Modules/result/index)是Rust标准库中一个特殊的枚举，位于`std::result::Result`，用来**表示一个结果可能有值，也可能为一个错误**
 
 通常用在io操作中
 
@@ -369,9 +369,9 @@ fn main() {
 
 ```
 
-可以看到，直接使用变量，得到的是[`Result<T, E>`](../../../标准库/result/index)中的其中一个变体
+可以看到，直接使用变量，得到的是[`Result<T, E>`](../../../标准库/Modules/result/index)中的其中一个变体
 
-若想拿到`Ok`中的值，需要使用[`Result<T, E>`](../../../标准库/result/Enums/Result#Implementations)中的方法，比如[`unwrap`](../../../标准库/result/Enums/Result#unwrap)和[`unwrap_err`](../../../标准库/result/Enums/Result#unwrap)
+若想拿到`Ok`中的值，需要使用[`Result<T, E>`](../../../标准库/Modules/result/Enums/Result#Implementations)中的方法，比如[`unwrap`](../../../标准库/Modules/result/Enums/Result#unwrap)和[`unwrap_err`](../../../标准库/Modules/result/Enums/Result#unwrap)
 
 ```rust
 fn get_result(num: i32) -> Result<i32, String> {

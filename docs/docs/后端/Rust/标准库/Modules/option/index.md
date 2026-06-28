@@ -25,7 +25,7 @@
 
 ## 1.基本使用
 
-`Option<T>` 枚举是如此有用以至于它被包含在了 [`prelude`](https://course.rs/appendix/prelude.html)（**prelude 属于 Rust 标准库，Rust 会将最常用的类型、函数等提前引入其中，省得我们再手动引入**）之中，你不需要将其显式引入作用域。
+`Option<T>` 枚举是如此有用以至于它被包含在了 [`prelude`](../prelude)（**prelude 属于 Rust 标准库，Rust 会将最常用的类型、函数等提前引入其中，省得我们再手动引入**）之中，你不需要将其显式引入作用域。
 
 另外，它的成员 `Some` 和 `None` 也是如此，无需使用 `Option::` 前缀就可直接使用 `Some` 和 `None`。
 

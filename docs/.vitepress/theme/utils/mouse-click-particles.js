@@ -1,6 +1,7 @@
 import anime from 'animejs'
 
 const mouseClick = document => {
+	if (!document || !windows) return
 	var canvas = document.createElement('canvas')
 	const canStyle = {
 		position: 'fixed',
@@ -20,8 +21,8 @@ const mouseClick = document => {
 	document.body.append(canvas)
 
 	function updateCoords(e) {
-		;(pointerX = (e.clientX || e.touches[0].clientX) - canvasEl.getBoundingClientRect().left),
-			(pointerY = e.clientY || e.touches[0].clientY - canvasEl.getBoundingClientRect().top)
+		;((pointerX = (e.clientX || e.touches[0].clientX) - canvasEl.getBoundingClientRect().left),
+			(pointerY = e.clientY || e.touches[0].clientY - canvasEl.getBoundingClientRect().top))
 	}
 
 	function setParticuleDirection(e) {
@@ -43,7 +44,10 @@ const mouseClick = document => {
 			(a.radius = anime.random(4, 8)),
 			(a.endPos = setParticuleDirection(a)),
 			(a.draw = function () {
-				ctx.beginPath(), ctx.arc(a.x, a.y, a.radius, 0, 2 * Math.PI, !0), (ctx.fillStyle = a.color), ctx.fill()
+				;(ctx.beginPath(),
+					ctx.arc(a.x, a.y, a.radius, 0, 2 * Math.PI, !0),
+					(ctx.fillStyle = a.color),
+					ctx.fill())
 			}),
 			a
 		)
@@ -59,13 +63,13 @@ const mouseClick = document => {
 			(a.alpha = 0.5),
 			(a.lineWidth = 6),
 			(a.draw = function () {
-				;(ctx.globalAlpha = a.alpha),
+				;((ctx.globalAlpha = a.alpha),
 					ctx.beginPath(),
 					ctx.arc(a.x, a.y, a.radius, 0, 2 * Math.PI, !0),
 					(ctx.lineWidth = a.lineWidth),
 					(ctx.strokeStyle = a.color),
 					ctx.stroke(),
-					(ctx.globalAlpha = 1)
+					(ctx.globalAlpha = 1))
 			}),
 			a
 		)
@@ -113,11 +117,11 @@ const mouseClick = document => {
 			tap = 'mousedown',
 			colors = ['#FF1461', '#18FF92', '#5A87FF', '#FBF38C'],
 			setCanvasSize = debounce(function () {
-				;(canvasEl.width = 2 * window.innerWidth),
+				;((canvasEl.width = 2 * window.innerWidth),
 					(canvasEl.height = 2 * window.innerHeight),
 					(canvasEl.style.width = window.innerWidth + 'px'),
 					(canvasEl.style.height = window.innerHeight + 'px'),
-					canvasEl.getContext('2d').scale(2, 2)
+					canvasEl.getContext('2d').scale(2, 2))
 			}, 500),
 			render = anime({
 				duration: 1 / 0,
@@ -125,7 +129,7 @@ const mouseClick = document => {
 					ctx.clearRect(0, 0, canvasEl.width, canvasEl.height)
 				},
 			})
-		document.addEventListener(
+		;(document.addEventListener(
 			tap,
 			function (e) {
 				'sidebar' !== e.target.id &&
@@ -137,7 +141,7 @@ const mouseClick = document => {
 			!1
 		),
 			setCanvasSize(),
-			window.addEventListener('resize', setCanvasSize, !1)
+			window.addEventListener('resize', setCanvasSize, !1))
 	}
 }
 export default mouseClick

@@ -1588,7 +1588,7 @@ rollup@^4.20.0:
     "@rollup/rollup-win32-x64-msvc" "4.62.0"
     fsevents "~2.3.2"
 
-sass@^1.77.2:
+sass@^1.101.0:
   version "1.101.0"
   resolved "https://registry.npmmirror.com/sass/-/sass-1.101.0.tgz#c2db5bbf2f956be7277f6223b899d0d4be3c899b"
   integrity sha512-OL3GoQyoUdDt843DpVmDO6y2k1sc5IhUDSpu8XucEI+35neq5QivZ1iuegnpraEVTJXlQGK1gl27zKcTLEPbQw==

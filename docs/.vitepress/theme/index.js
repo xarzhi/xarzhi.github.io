@@ -31,7 +31,6 @@ export default {
 		return h(Layout, props)
 	},
 	setup() {
-		if (document) mouseClick(document)
 		const route = useRoute()
 		const router = useRouter()
 		const initZoom = () => {
@@ -42,6 +41,7 @@ export default {
 
 		onMounted(() => {
 			initZoom()
+			if (document) mouseClick(document)
 		})
 		window.$app = app
 		watch(

@@ -243,6 +243,7 @@ const sidebar = {
 		},
 	],
 	'/docs/后端/C++/C++基础': [
+		{ text: '环境配置', items: getItems('/docs/后端/C++/C++基础/环境配置') },
 		{ text: 'C++基础', items: getItems('/docs/后端/C++/C++基础/C++基础') },
 		{ text: 'C++进阶', items: getItems('/docs/后端/C++/C++基础/C++进阶') },
 		{ text: '面向对象', items: getItems('/docs/后端/C++/C++基础/面向对象') },

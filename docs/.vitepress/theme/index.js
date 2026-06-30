@@ -36,13 +36,14 @@ export default {
 		const route = useRoute()
 		const router = useRouter()
 		const clickParticles = useClickParticles()
-		window.addEventListener('error', e => {
-			console.log(e)
-		})
-		onMounted(() => {
+
+		const initZoom = () => {
 			mediumZoom('.main img,div:not(a) > img', {
 				background: 'rgba(0, 0, 0, 0.6)',
 			})
+		}
+		onMounted(() => {
+			initZoom()
 			clickParticles.createCanvas()
 			if (window) window.$app = app
 		})

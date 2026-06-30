@@ -123,14 +123,15 @@ const nav = [
 				items: [
 					{
 						text: 'C++基础',
-						link: '/docs/后端/C++/C++基础/C++基础/01.环境配置.md',
+						// link: '/docs/后端/C++/C++基础/C++基础/01.环境配置.md',
+						link: '/docs/后端/C++/C++基础/环境配置/01.VS环境配置.md',
 						icon: '/sidebar_icons/c-plusplus.svg',
 					},
-					{
-						text: 'QT',
-						link: '/docs/后端/C++/C++基础/01.环境配置.md',
-						icon: '/sidebar_icons/qt.svg',
-					},
+					// {
+					// 	text: 'QT',
+					// 	link: '/docs/后端/C++/C++基础/01.环境配置.md',
+					// 	icon: '/sidebar_icons/qt.svg',
+					// },
 					{
 						text: 'Win32 api',
 						link: '/docs/后端/C++/Win32/01.基础知识.md',

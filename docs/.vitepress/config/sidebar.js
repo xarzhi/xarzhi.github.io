@@ -280,30 +280,37 @@ const sidebar = {
 	'/docs/前端/一些问题/': getItems('/docs/前端/一些问题/'),
 	'/docs/其他问题': getItems('/docs/其他问题'),
 	'/docs/后端/Rust/Rust教程': [
-		{ text: 'Rust基础', items: getItems('/docs/后端/Rust/Rust教程/Rust基础') },
-		{ text: '标量类型', items: getItems('/docs/后端/Rust/Rust教程/标量类型') },
-		{ text: '深入类型', items: getItems('/docs/后端/Rust/Rust教程/深入类型') },
 		{
-			text: '复合类型',
+			text: 'Rust基础',
 			items: [
-				{ text: '元组', link: '/docs/后端/Rust/Rust教程/复合类型/元组Tuple/index' },
-				{ text: '数组', link: '/docs/后端/Rust/Rust教程/复合类型/数组Array/index' },
-				{ text: '结构体', link: '/docs/后端/Rust/Rust教程/复合类型/结构体Struct/index' },
+				...getItems('/docs/后端/Rust/Rust教程/Rust基础'),
+				{ text: '标量类型', items: getItems('/docs/后端/Rust/Rust教程/Rust基础/标量类型'), collapsed: true },
 				{
-					text: '枚举',
-					link: '/docs/后端/Rust/Rust教程/复合类型/枚举Enum/index',
+					text: '复合类型',
 					collapsed: true,
+					items: [
+						{ text: '元组', link: '/docs/后端/Rust/Rust教程/Rust基础/复合类型/元组Tuple/index' },
+						{ text: '数组', link: '/docs/后端/Rust/Rust教程/Rust基础/复合类型/数组Array/index' },
+						{ text: '结构体', link: '/docs/后端/Rust/Rust教程/Rust基础/复合类型/结构体Struct/index' },
+						{
+							text: '枚举',
+							link: '/docs/后端/Rust/Rust教程/Rust基础/复合类型/枚举Enum/index',
+							collapsed: true,
+						},
+						{ text: '联合体', link: '/docs/后端/Rust/Rust教程/Rust基础/复合类型/联合体Union/index' },
+						{
+							text: '字符串',
+							link: '/docs/后端/Rust/Rust教程/Rust基础/复合类型/字符串String/index',
+							items: getItems('/docs/后端/Rust/Rust教程/Rust基础/复合类型/字符串String/docs'),
+							collapsed: true,
+						},
+					],
 				},
-				{ text: '联合体', link: '/docs/后端/Rust/Rust教程/复合类型/联合体Union/index' },
-				{
-					text: '字符串',
-					link: '/docs/后端/Rust/Rust教程/复合类型/字符串String/index',
-					items: getItems('/docs/后端/Rust/Rust教程/复合类型/字符串String/docs'),
-					collapsed: true,
-				},
+				{ text: '模式匹配', link: '/docs/后端/Rust/Rust教程/Rust基础/模式匹配/index.md' },
 			],
 		},
-		{ text: '模式匹配', link: '/docs/后端/Rust/Rust教程/模式匹配/index.md' },
+		{ text: '深入类型', items: getItems('/docs/后端/Rust/Rust教程/深入类型') },
+
 		{
 			text: '所有权',
 			items: getItems('/docs/后端/Rust/Rust教程/所有权'),

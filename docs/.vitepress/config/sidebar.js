@@ -292,11 +292,7 @@ const sidebar = {
 						{ text: '元组', link: '/docs/后端/Rust/Rust教程/Rust基础/复合类型/元组Tuple/index' },
 						{ text: '数组', link: '/docs/后端/Rust/Rust教程/Rust基础/复合类型/数组Array/index' },
 						{ text: '结构体', link: '/docs/后端/Rust/Rust教程/Rust基础/复合类型/结构体Struct/index' },
-						{
-							text: '枚举',
-							link: '/docs/后端/Rust/Rust教程/Rust基础/复合类型/枚举Enum/index',
-							collapsed: true,
-						},
+						{ text: '枚举', link: '/docs/后端/Rust/Rust教程/Rust基础/复合类型/枚举Enum/index' },
 						{ text: '联合体', link: '/docs/后端/Rust/Rust教程/Rust基础/复合类型/联合体Union/index' },
 						{
 							text: '字符串',
@@ -310,15 +306,8 @@ const sidebar = {
 			],
 		},
 		{ text: '深入类型', items: getItems('/docs/后端/Rust/Rust教程/深入类型') },
-
-		{
-			text: '所有权',
-			items: getItems('/docs/后端/Rust/Rust教程/所有权'),
-		},
-		{
-			text: '集合类型',
-			items: getItems('/docs/后端/Rust/Rust教程/集合类型'),
-		},
+		{ text: '所有权', items: getItems('/docs/后端/Rust/Rust教程/所有权') },
+		{ text: '集合类型', items: getItems('/docs/后端/Rust/Rust教程/集合类型') },
 		{
 			text: 'Rust进阶',
 			items: [
@@ -333,6 +322,12 @@ const sidebar = {
 					collapsed: true,
 				},
 			],
+		},
+		{
+			text: '使用Cargo',
+			link: '/docs/后端/Rust/Rust教程/使用Cargo/Cargo基础',
+			items: getItems('/docs/后端/Rust/Rust教程/使用Cargo/Cargo进阶'),
+			collapsed: true,
 		},
 	],
 	'/docs/后端/Rust/标准库': [

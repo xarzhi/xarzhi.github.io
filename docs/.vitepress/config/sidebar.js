@@ -303,6 +303,7 @@ const sidebar = {
 					],
 				},
 				{ text: '模式匹配', link: '/docs/后端/Rust/Rust教程/Rust基础/模式匹配/index.md' },
+				{ text: '解构赋值', link: '/docs/后端/Rust/Rust教程/Rust基础/解构赋值/index.md' },
 			],
 		},
 		{ text: '深入类型', items: getItems('/docs/后端/Rust/Rust教程/深入类型') },

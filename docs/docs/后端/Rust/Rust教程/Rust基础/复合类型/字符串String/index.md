@@ -2,8 +2,8 @@
 
 `Rust`的字符串分为两种，
 
-- **str**：原始字符串，也成为**字符串切片**
-- **String**：类型是最常见的字符串类型，拥有对该字符串内容的所有权。它与其借用的对应物，原始的 [`str`](https://www.rustwiki.org.cn/zh-CN/std/primitive.str.html) 有着密切的关系。
+- **str**：原始字符串，也成为**字符串切片**，它通常以**引用**的方式出现，属于**基本数据类型**
+- **String**：类型是最常见的字符串类型，拥有对该字符串内容的所有权。属于**复合数据类型**
 
 不论哪一种，内部存储的都是`utf8`编码序列，也就是说**每个字符的大小是不定的**。
 
@@ -11,12 +11,15 @@
 
 ![在这里插入图片描述](https://gitee.com/xarzhi/picture/raw/master/img/4d51526c9e184d5d9489adea2bbacb80.png)
 
+
+
 ## 1.定义字符串
 
 字符串切片可以直接使用`""`包含一个字符串
 
 ```rust
-let s = "你好";
+let s: &str = "Hello";
+// let s: str = "Hello"; // 错误！不能直接使用 str
 ```
 
 而`String`需要使用`String::from()`方法来定义
@@ -41,20 +44,42 @@ let s: &str = "你好";
 
 ## 2.String 与 &str 的转换
 
-通过以下两个方式可以把`&str`转换为`String`
+### 2.1 &str转String
+
+1. 使用关联函数`String::from`
+2. 使用&str的`to_string()`方法
 
 ```rust
+// 直接从&str创建一个String
 let s:String = String::from("hello,world")
+
+// String::from()接收一个&str
+let str = "123456";
+let s = String::from(str);
+
+// 使用&str的to_string()方法
 let s1:String = "hello,world".to_string()
 ```
 
-把`String`中转换为`&str`，可以使用如下方式
+
+
+### 2.2 String转&str
+
+1. 使用`String`的`as_str()`方法
+2. 使用引用加显式类型标注
+3. 使用切片
 
 ```rust
 let s = String::from("hello,world!");
-let s1 = &s[..];
-let s2 = &s[0..s.len()];
-let s3 = s.as_str();
+
+let s1 = s.as_str();   // as_str()方法
+
+let s1: &str = &s;   // 引用加显式类型标注
+
+
+// 使用切片
+let s2 = &s[..];
+let s3 = &s[0..s.len()];
 ```
 
 
@@ -99,7 +124,7 @@ let s = "玩偶姐姐";
 println!("{}", &s[0..3])        // 玩
 ```
 
-因为大部分汉字再`UTF-8`中长度为3个字节，所以通过区间`[0..3)`就可以取到第一个字符
+因为大部分汉字在`UTF-8`中长度为3个字节，所以通过区间`[0..3)`就可以取到第一个字符
 
 假如还是取区间`[0..1)`，那么就会报错
 
@@ -121,7 +146,7 @@ let s2 = &s[0..s.len()];
 
 可以使用`+`操作符进行字符串拼接
 
-但是要注意，第一个字符串往后的字符串，都要使用引用的形式
+但是要注意，**第一个字符串往后的字符串，都要使用引用的形式**
 
 ```rust
 fn main() {

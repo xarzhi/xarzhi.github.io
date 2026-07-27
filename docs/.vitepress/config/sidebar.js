@@ -294,12 +294,7 @@ const sidebar = {
 						{ text: '结构体', link: '/docs/后端/Rust/Rust教程/Rust基础/复合类型/结构体Struct/index' },
 						{ text: '枚举', link: '/docs/后端/Rust/Rust教程/Rust基础/复合类型/枚举Enum/index' },
 						{ text: '联合体', link: '/docs/后端/Rust/Rust教程/Rust基础/复合类型/联合体Union/index' },
-						{
-							text: '字符串',
-							link: '/docs/后端/Rust/Rust教程/Rust基础/复合类型/字符串String/index',
-							items: getItems('/docs/后端/Rust/Rust教程/Rust基础/复合类型/字符串String/docs'),
-							collapsed: true,
-						},
+						{ text: '字符串', link: '/docs/后端/Rust/Rust教程/Rust基础/复合类型/字符串String/index' },
 					],
 				},
 				{ text: '模式匹配', link: '/docs/后端/Rust/Rust教程/Rust基础/模式匹配/index.md' },
@@ -444,6 +439,28 @@ const sidebar = {
 						},
 					],
 				},
+				{
+					text: 'String',
+					link: '/docs/后端/Rust/标准库/Modules/string/index.md',
+					collapsed: true,
+					items: [
+						{
+							text: 'ParseError',
+							collapsed: true,
+							link: '/docs/后端/Rust/标准库/Modules/iter/ParseError',
+						},
+						{ 
+							text: 'Structs',
+							collapsed: true,
+							items: getItems('/docs/后端/Rust/标准库/Modules/string/Structs'),
+						},
+						{
+							text: 'Traits',
+							collapsed: true,
+							items: getItems('/docs/后端/Rust/标准库/Modules/string/Traits'),
+						},
+					],
+				},
 				// 		// {
 				// 		// 	text: 'time',
 				// 		// 	link: '/docs/后端/Rust/Rust教程/标准库/Modules/time',
@@ -462,6 +479,15 @@ const sidebar = {
 				// 		// 	collapsed: true,
 				// 		// 	items: getItems('/docs/后端/Rust/Rust教程/标准库/Modules/os/结构体'),
 				// 		// },
+			],
+		},
+		{
+			text: 'Primary Types',
+			items: [
+				{
+					text: 'str',
+					link: '/docs/后端/Rust/标准库/PrimaryTypes/str',
+				},
 			],
 		},
 	],

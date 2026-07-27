@@ -73,19 +73,15 @@ let arr = [202; len];
 
 
 
-## 2.数组的访问
+## 2.数组元素的访问
 
 与元组一样，数组也通过下标访问，从`0`开始。不过数组需要使用`[]`
-
-语法：
 
 ```rust
 let val = arr[index];
 ```
 
 其中`index`是要访问的下标，比如：
-
-
 
 ```rust
 let mut arr = [2025; 10];
@@ -122,6 +118,111 @@ let val = arr[num]; // 编译成功，运行 panic
 虽然`num`已经越界了，但是编译期无法确定`num`的值，只能等到运行时触发`panic`。
 
 
+
+### 2.1 Index/IndexMut
+
+上面通过`arr[index]`访问数组元素的核心机制是：`Index`Trait
+
+当你写下 `arr[i]`时，Rust 编译器实际上在后台调用了 `Index`Trait 的 `index`方法。
+
+- `container[index]` 实际上是 `*container.index(index)` 的语法糖
+- `container[index]` 实际上是 `*container.index_mut(index)` 的语法糖
+
+对于数组 `[T; N]`，标准库中大致有这样的实现：
+
+```rust
+impl<T, const N: usize> Index<usize> for [T; N] {
+    type Output = T;
+
+    fn index(&self, index: usize) -> &Self::Output {
+        // 内部会进行边界检查
+        // 如果 index >= N，则会 panic
+        &self[index] // 伪代码，实际实现更复杂
+    }
+}
+```
+
+所以：
+
+```rust
+let arr = [10, 20, 30];
+let x = arr[1];
+// 编译器将其转换为：
+let x = *arr.index(1); // index 返回 &T，* 解引用拿到 T
+```
+
+当我们给一个数组设置为mut，然后通过下标访问时，就是`IndexMut`Trait在发力
+
+```rust
+let mut arr = [1, 2, 3, 4, 5];
+
+// 使用 IndexMut 修改元素
+arr[0] = 10;           // 等价于 *arr.index_mut(0) = 10
+```
+
+
+
+
+
+
+
+### 2.2 Range语法
+
+使用`Struct std::ops::Range`中的Range语法可以从数组中**提取连续的一段元素**作为切片 
+
+Range的结构：
+
+```rust
+pub struct Range<Idx> {
+    pub start: Idx,
+    pub end: Idx,
+}
+```
+
+里面只有两个元素，访问的区间为`[start, end)`，**左包含，右不包含**
+
+- **start**：开始的下标
+- **end**：结束的下标
+
+`Range`语法
+
+```rust
+start..end
+```
+
+使用该语法访问数组，**返回的不是单个元素，而是一个切片 `&[T]`**，这是因为数组（和切片）实现了 `Index<Range<usize>>`。
+
+```rust
+fn main() {
+    let arr = [1, 2, 3, 4, 5];
+    let part = &arr[1..3]; // part 的类型是 &[i32]
+
+    println!("{:#?}", part); // [2,3]
+}
+```
+
+
+
+`Range` 的本质是结构体，`Range`语法编译期会被编译成`Range`结构体
+
+```rust
+let r = 1..5; // 语法糖
+// 等价于：
+let r_explicit = Range { start: 1, end: 5 };
+```
+
+
+
+`Range`只是`Range`结构体家族中的其中一个，其他还有
+
+| **语法** | **对应的 Struct**  | **含义**          |
+| :------- | :----------------- | :---------------- |
+| `a..b`   | `Range`            | `[a, b)`左闭右开  |
+| `a..=b`  | `RangeInclusive`   | `[a, b]`全闭区间  |
+| `a..`    | `RangeFrom`        | `[a, ∞)`          |
+| `..b`    | `RangeTo`          | `(-∞, b)`         |
+| `..=b`   | `RangeToInclusive` | `(-∞, b]`         |
+| `..`     | `RangeFull`        | `(-∞, ∞)`整个范围 |
 
 
 
@@ -256,4 +357,6 @@ for (index, value) in arr.iter().enumerate() {
 ```
 
 
+
+## 4.数组的方法
 

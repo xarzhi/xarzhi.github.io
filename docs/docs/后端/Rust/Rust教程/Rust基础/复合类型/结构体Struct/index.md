@@ -1,7 +1,5 @@
 # 结构体
 
-*`struct`*，或者 *structure*，是一个自定义数据类型，允许你命名和包装多个相关的值，从而形成一个有意义的组合。如果你熟悉一门面向对象语言，*struct* 就像对象中的数据属性。
-
 Rust 中的结构体有三种风格：带有命名字段的结构体，元组结构体和单元结构体。
 
 使用`struct`关键字来定义一个结构体
@@ -24,7 +22,7 @@ struct StructName {
 }
 ```
 
-常规结构体中可以定义任意类型的数据，包括另一个结构体、枚举
+**常规结构体中可以定义任意类型的数据**，包括另一个结构体、枚举
 
 ```rust
 enum Permission {
@@ -55,7 +53,7 @@ struct User {
 
 想要使用结构体，需要先创建结构体实例，一个结构体可以创建多个实例
 
-创建一个实例需要以结构体的名字开头，接着在大括号中使用 `key: value` 键-值对的形式提供字段，其中 key 是字段的名字，value 是需要存储在字段中的数据值。**实例中字段的顺序不需要和它们在结构体中声明的顺序一致**。
+创建一个实例需要以结构体的名字开头，接着在大括号中使用 `key: value` 键-值对的形式提供字段，其中 `key` 是字段的名字，`value` 是需要存储在字段中的数据值。**实例中字段的顺序不需要和它们在结构体中声明的顺序一致**。
 
 ```rust
 struct User {
@@ -68,6 +66,13 @@ struct User {
 let user = User {
     email: String::from("someone@example.com"),
     username: String::from("someusername123"),
+    active: true,
+    sign_in_count: 1,
+};
+
+let user1 = User {
+    email: String::from("12465789@example.com"),
+    username: String::from("ikun"),
     active: true,
     sign_in_count: 1,
 };
@@ -133,6 +138,8 @@ fn main() {
     println!("{}",user.sign_in_count);      // 1
 }
 ```
+
+
 
 
 
@@ -356,56 +363,6 @@ let user2 = User {
 
 
 
-
-
-
-
-## 7.结构体数据的所有权
-
-在上面 结构体的定义中，我们使用了自身拥有所有权的 `String` 类型而不是 `&str` 字符串 slice 类型。这是一个有意而为之的选择，因为我们想要这个结构体拥有它所有的数据，为此只要整个结构体是有效的话其数据也是有效的。
-
-可以使结构体存储被其他对象拥有的数据的引用，不过这么做的话需要用上 **生命周期**（*lifetimes*），这是一个第十章会讨论的 Rust 功能。生命周期确保结构体引用的数据有效性跟结构体本身保持一致。如果你尝试在结构体中存储一个引用而不指定生命周期将是无效的，比如这样：
-
-```rust
-struct User {
-    username: &str,
-    email: &str,
-    sign_in_count: u64,
-    active: bool,
-}
-
-fn main() {
-    let user1 = User {
-        email: "someone@example.com",
-        username: "someusername123",
-        active: true,
-        sign_in_count: 1,
-    };
-}
-```
-
-编译器会抱怨它需要生命周期标识符：
-
-```text
-error[E0106]: missing lifetime specifier
- -->
-  |
-2 |     username: &str,
-  |               ^ expected lifetime parameter
-
-error[E0106]: missing lifetime specifier
- -->
-  |
-3 |     email: &str,
-  |            ^ expected lifetime parameter
-```
-
-第十章会讲到如何修复这个问题以便在结构体中存储引用，不过现在，我们会使用像 `String` 这类拥有所有权的类型来替代 `&str` 这样的引用以修正这个错误。
-
-
-
-
-
 ## 6.增强结构体打印
 
 有如下示例，我们想打印结构体的内容
@@ -521,7 +478,7 @@ fn main() {
 
 `self`是`rust`为了便于操作实例身上属性而设计的关键字，上面的`&selt`等同于`rectangle: &Rectangle`
 
-#### 7.1.2 self
+#### 7.1.1 self
 
 前面提到，在`impl`的方法中，第一个参数可以为`self`，实际上`self`还有多种传参的形式，它们涉及到所有权的变化。
 
@@ -532,9 +489,9 @@ self允许四种使用情况
 - `self / mut self` 获得所有权
 - 指向`Self`的智能指针，`self: Box<Self>`
 
-##### 1.`&self` 不可变引用
+##### `&self`
 
-- 当以`&self` 接收时，相当于`self: &Self`按照不可变引用形式接收参数。
+- 当以`&self` 接收时，相当于`self: &Self`按照**不可变引用**形式接收参数。
 - 此时内部的`self`会拿到一个借用，但是**不占据所有权**。这种情况下你不能在方法内部修改`self`的值，但是可以对它进行读取。
 - 比如此处读取`self.age`并输出。
 
@@ -548,9 +505,9 @@ impl Person {
 
 
 
-##### 2.`&mut self` 可变引用
+##### `&mut self`
 
-- 当以`&mut self` 接收时，相当于`self: &mut Self`按照可变引用形式接收参数。
+- 当以`&mut self` 接收时，相当于`self: &mut Self`按照**可变引用**形式接收参数。
 - 此时内部的`self`会拿到一个**可变借用**，但是**不占据所有权**。这种情况下你可以在方法内部修改`self`的值，说明这个方法会对数据进行某些改动。
 - 下面 `have_birthday` 方法，过完生日后，年龄就要加一岁，因此需要`&mut self`。
 
@@ -565,9 +522,11 @@ impl Person {
 
 
 
-##### 3.`self/mut self` 获取所有权
+##### `self/mut self` 
 
-当以`self` 接收时，相当于`self: Self`，此时如果触发移动，则外部对象会失效，如果是拷贝，则会产生两份副本。这个细节会在后面所有权章节深入讲解，你可以提前认为，这里有可能产生两种行为模式，它和某些`trait`有关。
+当以`self` 接收时，相当于`self: Self`，会**获取传参的所有权**
+
+此时如果触发移动，则外部对象会失效，如果是拷贝，则会产生两份副本。这个细节会在后面所有权章节深入讲解，你可以提前认为，这里有可能产生两种行为模式，它和某些`trait`有关。
 
 ```rust
 impl Person {
@@ -577,11 +536,44 @@ impl Person {
 }
 ```
 
-如果触发的是移动的话，这里有两种常见情况会使用这种传参模式：
+
+
+##### 智能指针
+
+`self`还允许传入指向`Self`类型的智能指针。
+
+例如：
+
+```rust
+struct Data {
+    value: i32,
+}
+
+impl Data {
+    fn new(value: i32) -> Self {
+        Data { value }
+    }
+    
+    fn process_in_heap(self: Box<Self>) -> i32 {
+        println!("处理堆上的数据: {}", self.value);
+        self.value * 2
+    }
+    
+    fn boxed(self) -> Box<Self> {
+        Box::new(self)
+    }
+}
+```
+
+这里就是简单的把`i32`进行了一个包装，不关注这个结构体实现了什么功能，重点在于`process_in_heap`的第一个参数，接受了一个 `self: Box<Self>`，这种行为是允许的。
+
+但是使用智能指针不存在简化的写法，例如`self: &Self`可以简化为`&self`，`self: Box<Self>`没有任何简化形式。除了`Box`其它智能指针也是允许的。
 
 
 
-**1.链式调用**
+
+
+#### 7.1.2 链式调用
 
 链式调用每个方法都返回self，这样就可以连续调用多个方法：
 
@@ -636,12 +628,17 @@ t.show();
 而这种返回`Self`的形式，可以直接链式调用：
 
 ```rust
-Text::new("hello world!").bold().italic().show();
+Text::new("hello world!")
+.bold()
+.italic()
+.show();
 ```
 
 两段代码功能是一样的，但是后者很明显清爽了很多，而且不用维护中间变量`t`。
 
-**2.方法结束后销毁**
+
+
+#### 7.1.3 方法结束后销毁
 
 当方法执行完后对象就不再需要时，使用`self`可以明确表示消费该对象：
 
@@ -683,43 +680,6 @@ ticket.use_ticket();  // 消费ticket
 ```
 
 例如以上代码表示张三买了一张邓紫棋演唱会的门票，当他检票的时候，调用`use_ticket`方法，那么此时外部的`ticket`就失去所有权，无法再使用了，可以理解为这张票在验票完毕后，就无法再使用了，`use_ticket`是最后一个调用的方法。
-
-
-
-
-
-##### 4.智能指针
-
-`self`还允许传入指向`Self`类型的智能指针。
-
-例如：
-
-```rust
-struct Data {
-    value: i32,
-}
-
-impl Data {
-    fn new(value: i32) -> Self {
-        Data { value }
-    }
-    
-    fn process_in_heap(self: Box<Self>) -> i32 {
-        println!("处理堆上的数据: {}", self.value);
-        self.value * 2
-    }
-    
-    fn boxed(self) -> Box<Self> {
-        Box::new(self)
-    }
-}
-```
-
-这里就是简单的把`i32`进行了一个包装，不关注这个结构体实现了什么功能，重点在于`process_in_heap`的第一个参数，接受了一个 `self: Box<Self>`，这种行为是允许的。
-
-但是使用智能指针不存在简化的写法，例如`self: &Self`可以简化为`&self`，`self: Box<Self>`没有任何简化形式。除了`Box`其它智能指针也是允许的。
-
-
 
 
 
@@ -786,9 +746,9 @@ impl Circle {
 
 在以上代码中，`PI`就是一个关联常量，表示圆周率。
 
-因为圆周率是一个固定的值，不会发生改变，所有的`Circle`实例去访问圆周率，都可以直接访问一个常量。同一类型的所有实例，访问到关联常量都是同一份数据，关联常量在内存中只会存储一份。
+因为圆周率是一个固定的值，不会发生改变，所有的`Circle`实例去访问圆周率，都可以直接访问一个常量。同一类型的所有实例，访问到关联常量都是同一份数据，**关联常量在内存中只会存储一份**。
 
-另外的，在关联函数中也可以访问关联常量。比如上述的`get_pi`，它的第一个参数不是`self`，但是方法内依然可以访问`Self::PI`。在`impl`的外部，也可以通过`Self::PI`直接拿到关联常量。
+另外的，在关联函数中也可以访问关联常量。比如上述的`get_pi`，它的第一个参数不是`self`，但是方法内依然可以访问`Self::PI`。在`impl`的外部，也可以通过`Circle::PI`直接拿到关联常量。
 
 关联常量其实相当于其它面向对象语言中的静态成员。
 

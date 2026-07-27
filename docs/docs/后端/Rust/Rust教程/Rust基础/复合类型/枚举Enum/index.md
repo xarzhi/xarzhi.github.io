@@ -460,5 +460,253 @@ fn main() {
 
 
 
+## 9.?操作符
+
+`?`操作符是 `Rust`**错误传播**的核心语法糖，专门用于处理 `Result<T, E>`和 `Option<T>`。
+
+在使用`Result`和`Option`时，很多时候需要用`match`处理错误或者`None`的结果
+
+为了方便，**`?`操作符可以自动取出`Ok/Some`中的值，自动返回处理`Err/None`的结果，而且还不会导致`panic`**
+
+可以理解为`?`操作符把结果取出来，把错误向上传递
 
 
+
+### 9.1 ?操作符的使用
+
+有如下代码
+
+```rust {10}
+fn is_more_than_five(num: u8) -> Result<bool, String> {
+    if num > 5 {
+        Ok(true)
+    } else {
+        Err("小于5".to_string())
+    }
+}
+
+fn main() -> Result<(), String> {
+    is_more_than_five(6);
+
+	Ok(())
+}
+```
+
+如果`is_more_than_five`直接调用，编译器会给出如下提示
+
+![image-20260721131532156](https://gitee.com/xarzhi/picture/raw/master/img/image-20260721131532156.png)
+
+大概意思是，`Result`的结果需要被使用，`Result`可能是`Err`的变体，需要处理`Err`这个错误，那么就有如下情形
+
+1.如果直接把结果赋值给一个变量，因为函数返回的是`Result`，所以想要取出`Ok`中的值，需要使用`unwrap()`等函数，这样又会增加`panic`的风险
+
+```rust
+let res = is_more_than_five(6).unwrap();
+```
+
+2.我们可能就有用`match`、`if let`等去处理这个错误
+
+```rust
+match is_more_than_five(6) {
+    Ok(num) => println!("{:#?}", num),
+    Err(err) => println!("{:#?}", err),
+}
+
+// 或者使用if let 简化
+if let Ok(num) = is_more_than_five(6) {
+    println!("{:#?}", num)
+}
+```
+
+但是这样都比较麻烦，尽管`if let`已经简化了些代码
+
+我们往往都只是想要这个`Ok/Some`的结果，于是使用`?`操作符我们可以得到
+
+```rust
+fn main() -> Result<(), String> {
+    let res = is_more_than_five(6)?;
+    println!("{:?}", res); // true
+
+    let res = is_more_than_five(3)?;
+    println!("{:?}", res); // true
+
+    Ok(())
+}
+```
+
+这便是我们想要的结果，简化了代码，同时也避免了`panic`
+
+
+
+
+
+### 9.2 ?操作符的实质
+
+对于`Result`，差不多相当于这样
+
+- 若结果是`Ok`，则直接返回`Ok`里的值
+- 若结果是`Err`，就返回`Err`，并且内部使用`From::from`包装错误信息
+
+```rust
+match result {
+    Ok(v) => v,
+    Err(e) => return Err(From::from(e)),
+}
+```
+
+
+
+对于`Option`，差不多相当于这样
+
+- 若结果是`Some`，则直接返回`Some`里的值
+- 若结果是`None`，就直接返回`None`
+
+```rust
+match option {
+    Some(v) => v,
+    None => return None,
+};
+```
+
+
+
+### 9.3 错误类型必须兼容
+
+在一个返回`Result`的函数中，调用另一个返回`Result`的函数
+
+想要使用`?`操作符，**两个函数中的`Result<T,E>`中`E`的类型必须一致**
+
+上面的代码，两个函数返回值错误类型都是`String`，所以没有问题
+
+```rust
+fn is_more_than_five(num: u8) -> Result<bool, String> {
+    if num > 5 {
+        Ok(true)
+    } else {
+        Err("小于5".to_string())
+    }
+}
+
+fn main() -> Result<(), String> {
+    let res = is_more_than_five(6)?;
+    println!("{:?}", res); // true
+
+    let res = is_more_than_five(3)?;
+    println!("{:?}", res); // true
+
+    Ok(())
+}
+```
+
+如果是这样
+
+```rust {9,10,13}
+fn is_more_than_five(num: u8) -> Result<bool, String> {
+    if num > 5 {
+        Ok(true)
+    } else {
+        Err("小于5".to_string())
+    }
+}
+
+fn main() -> Result<(), std::io::Error> {
+    let res = is_more_than_five(6)?;
+    println!("{:?}", res); // true
+
+    let res = is_more_than_five(3)?;
+    println!("{:?}", res); // true
+
+    Ok(())
+}
+```
+
+那么编译器就会提示报错了
+
+![image-20260721133823655](https://gitee.com/xarzhi/picture/raw/master/img/image-20260721133823655.png)
+
+
+
+开发中难免会遇到这种情况，那么该怎么办呢
+
+#### 使用`map_err()`
+
+使用`Result`自带的`map_err`方法把错误转化为一样的类型，这是比较常用的
+
+```rust {12}
+fn is_more_than_five(num: u8) -> Result<bool, String> {
+    if num > 5 {
+        Ok(true)
+    } else {
+        Err("小于5".to_string())
+    }
+}
+
+use std::io;
+fn main() -> Result<(), io::Error> {
+    let res = is_more_than_five(6)
+    .map_err(|e| io::Error::new(io::ErrorKind::Other, e))?;
+    
+    println!("{:?}", res); // true
+
+    Ok(())
+}
+```
+
+
+
+
+
+
+
+#### 使用impl From
+
+```rust
+fn inner() -> Result<i32, io::Error> {
+    // ...
+}
+
+fn outer() -> Result<i32, MyError> {
+    let v = inner()?; // ❌ 编译错误
+    Ok(v)
+}
+```
+
+给自己的错误类型实现 `From`
+
+```rust
+use std::io;
+use std::num::ParseIntError;
+
+#[derive(Debug)]
+enum MyError {
+    Io(io::Error),
+    Parse(ParseIntError),
+}
+
+impl From<io::Error> for MyError {
+    fn from(err: io::Error) -> Self {
+        MyError::Io(err)
+    }
+}
+
+impl From<ParseIntError> for MyError {
+    fn from(err: ParseIntError) -> Self {
+        MyError::Parse(err)
+    }
+}
+```
+
+再使用
+
+```rust
+fn outer() -> Result<i32, MyError> {
+    let v = inner()?; // ✅ io::Error → MyError::Io
+    Ok(v)
+}
+```
+
+
+
+
+
+#### 

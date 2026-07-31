@@ -102,7 +102,7 @@ const config = defineConfig({
 		plugins: [
 			groupIconVitePlugin(),
 			SearchPlugin({
-				...flexSearchIndexOptions,
+				// ...flexSearchIndexOptions,
 				previewLength: 62,
 				buttonLabel: 'Search',
 				placeholder: 'Search docs',

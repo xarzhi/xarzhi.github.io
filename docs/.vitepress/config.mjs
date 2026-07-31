@@ -3,6 +3,8 @@ import navbar from './config/navbar'
 import sidebar from './config/sidebar'
 import timeline from 'vitepress-markdown-timeline'
 import { groupIconMdPlugin, groupIconVitePlugin } from 'vitepress-plugin-group-icons'
+import { SearchPlugin } from 'vitepress-plugin-search'
+
 const config = defineConfig({
 	base: '/',
 	head: [
@@ -97,7 +99,17 @@ const config = defineConfig({
 		darkModeSwitchTitle: '切换至浅色模式',
 	},
 	vite: {
-		plugins: [groupIconVitePlugin()],
+		plugins: [
+			groupIconVitePlugin(),
+			SearchPlugin({
+				...flexSearchIndexOptions,
+				previewLength: 62,
+				buttonLabel: 'Search',
+				placeholder: 'Search docs',
+				allow: [],
+				ignore: [],
+			}),
+		],
 		build: {
 			chunkSizeWarningLimit: 5000, // 适当提高阈值
 			rollupOptions: {

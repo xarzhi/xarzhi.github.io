@@ -644,7 +644,7 @@ where
 
 调用 U::from(self)。
 
-也就是说，这种转换是 From<T> for U 实现选择执行的任何操作。
+也就是说，这种转换是 `From<T>` for U 实现选择执行的任何操作。
 
 ```rust
 fn into(self) -> U

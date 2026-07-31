@@ -2,8 +2,6 @@ import { defineConfig } from 'vite'
 import navbar from './config/navbar'
 import sidebar from './config/sidebar'
 import timeline from 'vitepress-markdown-timeline'
-import { groupIconMdPlugin, groupIconVitePlugin } from 'vitepress-plugin-group-icons'
-import { SearchPlugin } from 'vitepress-plugin-search'
 
 const config = defineConfig({
 	base: '/',

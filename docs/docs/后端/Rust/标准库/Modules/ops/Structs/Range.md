@@ -284,12 +284,20 @@ where
 
 ### impl ExactSizeIterator for Range\<i16>
 
-fn len(&self) -> usize
+#### len
+
 返回迭代器的确切剩余长度。 
 
-fn is_empty(&self) -> bool
+```rust
+fn len(&self) -> usize
+```
 
-This is a nightly-only experimental API. (exact_size_is_empty #35428)
+
+
+#### is_empty
+
+`nightly-only`
+
 如果迭代器为空，则返回 true。 
 
 ### impl ExactSizeIterator for Range\<i32>

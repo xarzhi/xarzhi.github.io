@@ -449,7 +449,7 @@ const sidebar = {
 							collapsed: true,
 							link: '/docs/后端/Rust/标准库/Modules/iter/ParseError',
 						},
-						{ 
+						{
 							text: 'Structs',
 							collapsed: true,
 							items: getItems('/docs/后端/Rust/标准库/Modules/string/Structs'),
@@ -461,12 +461,72 @@ const sidebar = {
 						},
 					],
 				},
-				// 		// {
-				// 		// 	text: 'time',
-				// 		// 	link: '/docs/后端/Rust/Rust教程/标准库/Modules/time',
-				// 		// 	collapsed: true,
-				// 		// 	items: getItems('/docs/后端/Rust/Rust教程/标准库/Modules/time/结构体'),
-				// 		// },
+				{
+					text: 'ops',
+					link: '/docs/后端/Rust/标准库/Modules/ops/index.md',
+					collapsed: true,
+					items: [
+						{
+							text: 'Structs',
+							collapsed: true,
+							items: getItems('/docs/后端/Rust/标准库/Modules/ops/Structs'),
+						},
+						{
+							text: 'Traits',
+							collapsed: true,
+							items: getItems('/docs/后端/Rust/标准库/Modules/ops/Traits'),
+						},
+						{
+							text: 'Enums',
+							collapsed: true,
+							items: getItems('/docs/后端/Rust/标准库/Modules/ops/Enums'),
+						},
+					],
+				},
+				{
+					text: 'convert',
+					link: '/docs/后端/Rust/标准库/Modules/convert/index.md',
+					collapsed: true,
+					items: [
+						{
+							text: 'Traits',
+							collapsed: true,
+							items: getItems('/docs/后端/Rust/标准库/Modules/convert/Traits'),
+						},
+						{
+							text: 'Enums',
+							collapsed: true,
+							items: getItems('/docs/后端/Rust/标准库/Modules/convert/Enums'),
+						},
+					],
+				},
+				{
+					text: 'cmp',
+					link: '/docs/后端/Rust/标准库/Modules/cmp/index.md',
+					collapsed: true,
+					items: [
+						{
+							text: 'Derive Macros',
+							collapsed: true,
+							link:'/docs/后端/Rust/标准库/Modules/cmp/DeriveMacros.md'
+						},
+						{
+							text: 'Traits',
+							collapsed: true,
+							items: getItems('/docs/后端/Rust/标准库/Modules/cmp/Traits'),
+						},
+						{
+							text: 'Structs',
+							collapsed: true,
+							items: getItems('/docs/后端/Rust/标准库/Modules/cmp/Structs'),
+						},
+						{
+							text: 'Enums',
+							collapsed: true,
+							items: getItems('/docs/后端/Rust/标准库/Modules/cmp/Enums'),
+						},
+					],
+				},
 				// 		// {
 				// 		// 	text: 'path',
 				// 		// 	link: '/docs/后端/Rust/Rust教程/标准库/Modules/path',
@@ -483,12 +543,13 @@ const sidebar = {
 		},
 		{
 			text: 'Primary Types',
-			items: [
-				{
-					text: 'str',
-					link: '/docs/后端/Rust/标准库/PrimaryTypes/str',
-				},
-			],
+			items: getItems('/docs/后端/Rust/标准库/PrimaryTypes'),
+			// items: [
+			// 	{
+			// 		text: 'str',
+			// 		link: '/docs/后端/Rust/标准库/PrimaryTypes/str',
+			// 	},
+			// ],
 		},
 	],
 }

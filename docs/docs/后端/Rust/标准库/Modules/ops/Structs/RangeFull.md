@@ -5,9 +5,7 @@
 `RangeFull` 主要用作 切片索引，其简写为 `..`。 它不能用作 `Iterator`，因为它没有起点。
 
 ```rust
-pub struct RangeFrom<Idx> {
-    pub start: Idx,
-}
+pub struct RangeFull;
 ```
 
 `RangeFrom`的语法是`..` 

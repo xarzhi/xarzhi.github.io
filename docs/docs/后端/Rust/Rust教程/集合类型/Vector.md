@@ -21,7 +21,7 @@ pub struct Vec<T, #[unstable(feature = "allocator_api", issue = "32838")] A: All
 
 ### 1.1 Vec::new()
 
-使用 `Vec::new` 创建动态数组是最 rusty 的方式，它调用了 `Vec` 中的 `new` 关联函数，不过不可以给于初始值
+使用 `Vec::new` 创建动态数组是最 rust 的方式，它调用了 `Vec` 中的 `new` 关联函数，不过不可以给于初始值
 
 ```rust
 let v: Vec<i32> = Vec::new();

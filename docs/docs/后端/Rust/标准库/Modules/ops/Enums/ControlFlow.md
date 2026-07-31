@@ -379,7 +379,7 @@ fn ne(&self, other: &Rhs) -> bool
 
 ### Residual\<C>
 
-```rusty
+```rust
 impl<B, C> Residual<C> for ControlFlow<B, Infallible>
 ```
 

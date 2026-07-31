@@ -42,6 +42,7 @@
 		"gsap": "^3.13.0",
 		"markdown-it-mathjax3": "^4.3.2",
 		"three": "0.135",
-		"vitepress-markdown-timeline": "^1.2.1"
+		"vitepress-markdown-timeline": "^1.2.1",
+		"vitepress-plugin-group-icons": "^1.7.6"
 	}
 }

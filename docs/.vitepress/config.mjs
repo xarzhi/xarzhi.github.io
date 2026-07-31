@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import navbar from './config/navbar'
 import sidebar from './config/sidebar'
 import timeline from 'vitepress-markdown-timeline'
-
+import { groupIconMdPlugin, groupIconVitePlugin } from 'vitepress-plugin-group-icons'
 const config = defineConfig({
 	base: '/',
 	head: [
@@ -96,35 +96,36 @@ const config = defineConfig({
 		lightModeSwitchTitle: '切换至深色模式',
 		darkModeSwitchTitle: '切换至浅色模式',
 	},
-	// vite: {
-	//   build: {
-	//     chunkSizeWarningLimit: 5000, // 适当提高阈值
-	//     rollupOptions: {
-	//       output: {
-	//         manualChunks: (id) => {
-	//           if (id.includes('node_modules')) {
-	//             if (id.includes('vue') || id.includes('@vue/')) {
-	//               return 'vue-vendor';
-	//             }
-	//             if (id.includes('vitepress')) {
-	//               return 'vitepress-vendor';
-	//             }
-	//             if (id.includes('lodash') || id.includes('lodash-es')) {
-	//               return 'lodash';
-	//             }
-	//             if (id.includes('monaco-editor')) {
-	//               return 'monaco';
-	//             }
-	//             return 'vendor';
-	//           }
-	//           if (id.includes('/components/')) {
-	//             return 'components';
-	//           }
-	//         }
-	//       }
-	//     }
-	//   }
-	// }
+	vite: {
+		plugins: [groupIconVitePlugin()],
+		build: {
+			chunkSizeWarningLimit: 5000, // 适当提高阈值
+			rollupOptions: {
+				output: {
+					manualChunks: id => {
+						if (id.includes('node_modules')) {
+							if (id.includes('vue') || id.includes('@vue/')) {
+								return 'vue-vendor'
+							}
+							if (id.includes('vitepress')) {
+								return 'vitepress-vendor'
+							}
+							if (id.includes('lodash') || id.includes('lodash-es')) {
+								return 'lodash'
+							}
+							if (id.includes('monaco-editor')) {
+								return 'monaco'
+							}
+							return 'vendor'
+						}
+						if (id.includes('/components/')) {
+							return 'components'
+						}
+					},
+				},
+			},
+		},
+	},
 })
 
 export default config

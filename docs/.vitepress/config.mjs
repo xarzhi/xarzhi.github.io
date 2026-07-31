@@ -110,33 +110,33 @@ const config = defineConfig({
 				ignore: [],
 			}),
 		],
-		build: {
-			chunkSizeWarningLimit: 5000, // 适当提高阈值
-			rollupOptions: {
-				output: {
-					manualChunks: id => {
-						if (id.includes('node_modules')) {
-							if (id.includes('vue') || id.includes('@vue/')) {
-								return 'vue-vendor'
-							}
-							if (id.includes('vitepress')) {
-								return 'vitepress-vendor'
-							}
-							if (id.includes('lodash') || id.includes('lodash-es')) {
-								return 'lodash'
-							}
-							if (id.includes('monaco-editor')) {
-								return 'monaco'
-							}
-							return 'vendor'
-						}
-						if (id.includes('/components/')) {
-							return 'components'
-						}
-					},
-				},
-			},
-		},
+		// build: {
+		// 	chunkSizeWarningLimit: 5000, // 适当提高阈值
+		// 	rollupOptions: {
+		// 		output: {
+		// 			manualChunks: id => {
+		// 				if (id.includes('node_modules')) {
+		// 					if (id.includes('vue') || id.includes('@vue/')) {
+		// 						return 'vue-vendor'
+		// 					}
+		// 					if (id.includes('vitepress')) {
+		// 						return 'vitepress-vendor'
+		// 					}
+		// 					if (id.includes('lodash') || id.includes('lodash-es')) {
+		// 						return 'lodash'
+		// 					}
+		// 					if (id.includes('monaco-editor')) {
+		// 						return 'monaco'
+		// 					}
+		// 					return 'vendor'
+		// 				}
+		// 				if (id.includes('/components/')) {
+		// 					return 'components'
+		// 				}
+		// 			},
+		// 		},
+		// 	},
+		// },
 	},
 })
 

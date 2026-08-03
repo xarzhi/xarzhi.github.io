@@ -5,9 +5,9 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"dev": "vitepress dev docs",
-		"build": "vitepress build docs",
-		"preview": "vitepress preview docs"
+		"dev": "node --max-old-space-size=8192 ./node_modules/vitepress/bin/vitepress.js dev docs",
+		"build": "node --max-old-space-size=8192 ./node_modules/vitepress/bin/vitepress.js build docs",
+		"preview": "node --max-old-space-size=8192 ./node_modules/vitepress/bin/vitepress.js preview docs"
 	},
 	"keywords": [
 		"Fade Away",

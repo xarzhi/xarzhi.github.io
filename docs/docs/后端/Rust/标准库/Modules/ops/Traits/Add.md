@@ -236,6 +236,38 @@ impl Add<&isize> for isize
 impl Add<&str> for String
 ```
 
+实现 `+` 运算符以连接两个字符串。
+
+这会消费左侧的 `String`，并重新使用其缓冲区 (如有必要，请增加缓冲区)。 这样做是为了避免分配新的 `String` 并在每个操作上复制整个内容，当通过重复连接构建 *n* 字节的字符串时，这将导致 *O*(*n*^ 2) 运行时间。
+
+右侧的字符串仅是借用的。它的内容被复制到返回的 `String` 中。
+
+将两个 `String` 连接起来，第一个按值取值，第二个借用：
+
+```rust
+let a = String::from("hello");
+let b = String::from(" world");
+let c = a + &b;
+// `a` 已移动，不能再在此处使用。
+```
+
+如果要继续使用第一个 `String`，则可以对其进行克隆并追加到克隆中：
+
+```rust
+let a = String::from("hello");
+let b = String::from(" world");
+let c = a.clone() + &b;
+// `a` 在这里仍然有效。
+```
+
+可以通过将第一个切片转换为 `String` 来完成 `&str` 切片的连接：
+
+```rust
+let a = "hello";
+let b = " world";
+let c = a.to_string() + b;
+```
+
 
 
 ### &u8

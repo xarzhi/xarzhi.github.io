@@ -3597,7 +3597,11 @@ assert_eq!("grüße, jürgen ❤", s.to_ascii_lowercase());
 
 ## Trait Implementations
 
-### impl Add<&str> for String
+### Add<&str>
+
+```rust
+impl Add<&str> for String
+```
 
 实现 `+` 运算符以连接两个字符串。
 
@@ -3655,7 +3659,11 @@ fn add(self, other: &str) -> String
 
 
 
-### impl AddAssign<&str> for String
+### AddAssign<&str>
+
+```rust
+impl AddAssign<&str> for String
+```
 
 实现用于追加到 String 的 += 运算符。
 
@@ -3671,7 +3679,11 @@ fn add_assign(&mut self, other: &str)
 
 
 
-### impl AsMut\<str> for String
+### AsMut\<str>
+
+```rust
+impl AsMut<str> for String
+```
 
 #### as_mut
 
@@ -3683,7 +3695,11 @@ fn as_mut(&mut self) -> &mut str
 
 
 
-### impl AsRef<[u8]> for String
+### AsRef<[u8]>
+
+```rust
+impl AsRef<[u8]> for String
+```
 
 #### as_ref
 
@@ -3695,7 +3711,11 @@ fn as_ref(&self) -> &[u8]
 
 
 
-### impl AsRef\<OsStr> for String
+### AsRef\<OsStr>
+
+```rust
+impl AsRef<OsStr> for String
+```
 
 #### as_ref
 
@@ -3707,7 +3727,11 @@ fn as_ref(&self) -> &OsStr
 
 
 
-### impl AsRef\<Path> for String
+### AsRef\<Path>
+
+```rust
+impl AsRef\<Path> for String
+```
 
 #### as_ref
 
@@ -3719,7 +3743,11 @@ fn as_ref(&self) -> &Path
 
 
 
-### impl AsRef\<str> for String
+### AsRef\<str>
+
+```rust
+impl AsRef<str> for String
+```
 
 #### as_ref
 
@@ -3731,7 +3759,11 @@ fn as_ref(&self) -> &str
 
 
 
-### impl Borrow\<str> for String
+### Borrow\<str>
+
+```rust
+impl Borrow<str> for String
+```
 
 #### borrow
 
@@ -3743,7 +3775,11 @@ fn borrow(&self) -> &str
 
 
 
-### impl BorrowMut\<str> for String
+### BorrowMut\<str>
+
+```rust
+impl BorrowMut<str> for String
+```
 
 #### borrow_mut
 
@@ -3755,7 +3791,11 @@ fn borrow_mut(&mut self) -> &mut str
 
 
 
-### impl Clone for String
+### Clone
+
+```rust
+impl Clone for String
+```
 
 #### clone
 
@@ -3777,7 +3817,11 @@ fn clone_from(&mut self, source: &String)
 
 
 
-### impl Debug for String
+### Debug
+
+```rust
+impl Debug for String
+```
 
 #### fmt
 
@@ -3787,7 +3831,13 @@ fn clone_from(&mut self, source: &String)
 fn fmt(&self, f: &mut Formatter<'_>) -> Result<(), Error>
 ```
 
-### impl Default for String
+### 
+
+Default
+
+```rust
+impl Default for String
+```
 
 #### default
 
@@ -3799,7 +3849,11 @@ fn default() -> String
 
 
 
-### impl Deref for String
+### Deref
+
+```rust
+impl Deref for String
+```
 
 #### Target 
 
@@ -3821,7 +3875,11 @@ fn deref(&self) -> &str
 
 
 
-### impl DerefMut for String
+### DerefMut
+
+```rust
+impl DerefMut for String
+```
 
 #### deref_mut
 
@@ -3833,7 +3891,11 @@ fn deref_mut(&mut self) -> &mut str
 
 
 
-### impl Display for String
+### Display
+
+```rust
+impl Display for String
+```
 
 #### fmt
 
@@ -3845,7 +3907,11 @@ fn fmt(&self, f: &mut Formatter<'_>) -> Result<(), Error>
 
 
 
-### impl<'a> Extend<&'a char> for String
+### Extend<&'a char>
+
+```rust
+impl<'a> Extend<&'a char> for String
+```
 
 #### extend
 
@@ -3861,7 +3927,7 @@ where
 
 #### extend_one
 
-This is a nightly-only experimental API. (extend_one #72631)
+`nightly-only`
 
 用一个元素扩展一个集合。
 
@@ -3873,7 +3939,7 @@ fn extend_one(&mut self, _: &'a char)
 
 #### extend_reserve
 
-This is a nightly-only experimental API. (extend_one #72631)
+`nightly-only`
 
 在集合中为给定数量的附加元素保留容量。
 
@@ -3881,7 +3947,13 @@ This is a nightly-only experimental API. (extend_one #72631)
 fn extend_reserve(&mut self, additional: usize)
 ```
 
-### impl<'a> Extend<&'a str> for String
+
+
+### Extend<&'a str>
+
+```rust
+impl<'a> Extend<&'a str> for String
+```
 
 #### extend
 
@@ -3899,7 +3971,7 @@ where
 
 #### extend_one
 
-This is a nightly-only experimental API. (extend_one #72631)
+`nightly-only`
 
 用一个元素扩展一个集合。
 
@@ -3911,7 +3983,7 @@ fn extend_one(&mut self, s: &'a str)
 
 #### extend_reserve
 
-This is a nightly-only experimental API. (extend_one #72631)
+`nightly-only`
 
 在集合中为给定数量的附加元素保留容量。
 
@@ -3921,7 +3993,11 @@ fn extend_reserve(&mut self, additional: usize)
 
 
 
-### impl Extend<Box<str, Global>> for String
+### Extend<Box<str, Global>>
+
+```rust
+impl Extend<Box<str, Global>> for String
+```
 
 #### extend
 
@@ -3937,7 +4013,7 @@ where
 
 #### extend_one
 
-This is a nightly-only experimental API. (extend_one #72631)
+`nightly-only`
 
 用一个元素扩展一个集合。
 
@@ -3949,7 +4025,7 @@ fn extend_one(&mut self, item: A)
 
 #### extend_reserve
 
-This is a nightly-only experimental API. (extend_one #72631)
+`nightly-only`
 
 在集合中为给定数量的附加元素保留容量。
 
@@ -3959,7 +4035,11 @@ fn extend_reserve(&mut self, additional: usize)
 
 
 
-### impl<'a> Extend<Cow<'a, str>> for String
+### Extend<Cow<'a, str>>
+
+```rust
+impl<'a> Extend<Cow<'a, str>> for String
+```
 
 #### extend
 
@@ -3967,9 +4047,7 @@ fn extend_reserve(&mut self, additional: usize)
 
 ```rust
 fn extend<I>(&mut self, iter: I)
-
 where
-
   I: IntoIterator<Item = Cow<'a, str>>,
 ```
 
@@ -3977,7 +4055,7 @@ where
 
 #### extend_one
 
-This is a nightly-only experimental API. (extend_one #72631)
+`nightly-only`
 
 用一个元素扩展一个集合。
 
@@ -3989,7 +4067,7 @@ fn extend_one(&mut self, s: Cow<'a, str>)
 
 #### extend_reserve
 
-This is a nightly-only experimental API. (extend_one #72631)
+`nightly-only`
 
 在集合中为给定数量的附加元素保留容量。
 
@@ -3997,7 +4075,13 @@ This is a nightly-only experimental API. (extend_one #72631)
 fn extend_reserve(&mut self, additional: usize)
 ```
 
-### impl Extend\<String> for String
+
+
+### Extend\<String>
+
+```rust
+impl Extend<String> for String
+```
 
 #### extend
 
@@ -4013,7 +4097,7 @@ where
 
 #### extend_one
 
-This is a nightly-only experimental API. (extend_one #72631)
+`nightly-only`
 
 用一个元素扩展一个集合。
 
@@ -4025,7 +4109,7 @@ fn extend_one(&mut self, s: String)
 
 #### extend_reserve
 
-This is a nightly-only experimental API. (extend_one #72631)
+`nightly-only`
 
 在集合中为给定数量的附加元素保留容量。
 
@@ -4033,7 +4117,13 @@ This is a nightly-only experimental API. (extend_one #72631)
 fn extend_reserve(&mut self, additional: usize)
 ```
 
-### impl Extend\<char> for String
+
+
+### Extend\<char>
+
+```rust
+impl Extend\<char> for String
+```
 
 #### extend
 
@@ -4041,9 +4131,7 @@ fn extend_reserve(&mut self, additional: usize)
 
 ```rust
 fn extend<I>(&mut self, iter: I)
-
 where
-
   I: IntoIterator<Item = char>,
 ```
 
@@ -4051,7 +4139,7 @@ where
 
 #### extend_one
 
-This is a nightly-only experimental API. (extend_one #72631)
+`nightly-only`
 
 用一个元素扩展一个集合。
 
@@ -4063,7 +4151,7 @@ fn extend_one(&mut self, c: char)
 
 #### extend_reserve
 
-This is a nightly-only experimental API. (extend_one #72631)
+`nightly-only`
 
 在集合中为给定数量的附加元素保留容量。
 
@@ -4073,7 +4161,11 @@ fn extend_reserve(&mut self, additional: usize)
 
 
 
-### impl<'a> From<&'a String> for Cow<'a, str>
+### From<&'a String>
+
+```rust
+impl<'a> From<&'a String> for Cow<'a, str>
+```
 
 #### from
 
@@ -4093,7 +4185,11 @@ assert_eq!(Cow::from(&s), Cow::Borrowed("eggplant"));
 
 
 
-### impl From<&String> for String
+### From<&String>
+
+```rust
+impl From<&String> for String
+```
 
 #### from
 
@@ -4107,7 +4203,11 @@ fn from(s: &String) -> String
 
 
 
-### impl From<&mut str> for String
+### From<&mut str>
+
+```rust
+impl From<&mut str> for String
+```
 
 #### from
 
@@ -4121,7 +4221,11 @@ fn from(s: &mut str) -> String
 
 
 
-### impl From<&str> for String
+### From<&str>
+
+```rust
+impl From<&str> for String
+```
 
 #### from
 
@@ -4135,7 +4239,11 @@ fn from(s: &str) -> String
 
 
 
-### impl From<Box<str, Global>> for String
+### From<Box<str, Global>>
+
+```rust
+impl From<Box<str, Global>> for String
+```
 
 #### from
 
@@ -4160,7 +4268,11 @@ assert_eq!("hello world", s3)
 
 
 
-### impl<'a> From<Cow<'a, str>> for String
+### From<Cow<'a, str>>
+
+```rust
+impl<'a> From<Cow<'a, str>> for String
+```
 
 #### from
 
@@ -4186,7 +4298,11 @@ assert_eq!(&owned[..], "eggplant");
 
 
 
-### impl From\<String> for Arc\<str>
+### From\<String>
+
+```rust
+impl From<String> for Arc<str>
+```
 
 #### from
 
@@ -4207,7 +4323,11 @@ assert_eq!("eggplant", &shared[..]);
 
 
 
-### impl From\<String> for Box<dyn Error + 'static, Global>
+### From\<String>
+
+```rust
+impl From<String> for Box<dyn Error + 'static, Global>
+```
 
 #### from
 
@@ -4233,7 +4353,11 @@ assert!(mem::size_of::<Box<dyn Error>>() == mem::size_of_val(&a_boxed_error))
 
 
 
-### impl From\<String> for Box<dyn Error + Send + Sync + 'static, Global>
+### From\<String>
+
+```rust
+impl From<String> for Box<dyn Error + Send + Sync + 'static, Global>
+```
 
 #### from
 
@@ -4257,7 +4381,11 @@ assert!(mem::size_of::<Box<dyn Error + Send + Sync>>() == mem::size_of_val(&a_bo
 
 
 
-### impl From\<String> for Box<str, Global>
+### From\<String>
+
+```rust
+impl From<String> for Box<str, Global>
+```
 
 #### from
 
@@ -4284,7 +4412,11 @@ assert_eq!("hello world", s3)
 
 
 
-### impl<'a> From\<String> for Cow<'a, str>
+### From\<String>
+
+```rust
+impl<'a> From<String> for Cow<'a, str>
+```
 
 #### from
 
@@ -4305,7 +4437,11 @@ assert_eq!(Cow::from(s), Cow::<'static, str>::Owned(s2));
 
 
 
-### impl From\<String> for OsString
+### From\<String>
+
+```rust
+impl From<String> for OsString
+```
 
 #### from
 
@@ -4321,7 +4457,11 @@ fn from(s: String) -> OsString
 
 
 
-### impl From\<String> for PathBuf
+### From\<String>
+
+```rust
+impl From<String> for PathBuf
+```
 
 #### from
 
@@ -4337,7 +4477,11 @@ fn from(s: String) -> PathBuf
 
 
 
-### impl From\<String> for Rc\<str>
+### From\<String>
+
+```rust
+impl From<String> for Rc<str>
+```
 
 #### from
 
@@ -4358,7 +4502,11 @@ assert_eq!("statue", &shared[..]);
 
 
 
-### impl From\<String> for Vec<u8, Global>
+### From\<String>
+
+```rust
+impl From<String> for Vec<u8, Global>
+```
 
 #### from
 
@@ -4384,7 +4532,11 @@ for b in v1 {
 
 
 
-### impl From\<char> for String
+### From\<char>
+
+```rust
+impl From<char> for String
+```
 
 #### from
 
@@ -4405,7 +4557,11 @@ assert_eq!("a", &s[..]);
 
 
 
-### impl<'a> FromIterator<&'a char> for String
+### FromIterator<&'a char>
+
+```rust
+impl<'a> FromIterator<&'a char> for String
+```
 
 #### from_iter
 
@@ -4419,7 +4575,11 @@ where
 
 
 
-### impl<'a> FromIterator<&'a str> for String
+### FromIterator<&'a str>
+
+```rust
+impl<'a> FromIterator<&'a str> for String
+```
 
 #### from_iter
 
@@ -4433,7 +4593,11 @@ where
 
 
 
-### impl FromIterator<Box<str, Global>> for String
+### FromIterator<Box<str, Global>>
+
+```rust
+impl FromIterator<Box<str, Global>> for String
+```
 
 #### from_iter
 
@@ -4447,7 +4611,11 @@ where
 
 
 
-### impl<'a> FromIterator<Cow<'a, str>> for String
+### FromIterator<Cow<'a, str>>
+
+```rust
+impl<'a> FromIterator<Cow<'a, str>> for String
+```
 
 #### from_iter
 
@@ -4461,7 +4629,11 @@ where
 
 
 
-### impl<'a> FromIterator\<String> for Cow<'a, str>
+### FromIterator\<String>
+
+```rust
+impl<'a> FromIterator<String> for Cow<'a, str>
+```
 
 #### from_iter
 
@@ -4475,7 +4647,11 @@ where
 
 
 
-### impl FromIterator\<String> for String
+### FromIterator\<String>
+
+```rust
+impl FromIterator<String> for String
+```
 
 #### from_iter
 
@@ -4489,7 +4665,11 @@ where
 
 
 
-### impl FromIterator\<char> for String
+### FromIterator\<char>
+
+```rust
+impl FromIterator<char> for String
+```
 
 #### from_iter
 
@@ -4503,7 +4683,11 @@ where
 
 
 
-### impl FromStr for String
+### FromStr
+
+```rust
+impl FromStr for String
+```
 
 #### Err 
 
@@ -4525,7 +4709,11 @@ fn from_str(s: &str) -> Result<String, <String as FromStr>::Err>
 
 
 
-### impl Hash for String
+### Hash
+
+```rust
+impl Hash for String
+```
 
 #### hash
 
@@ -4552,7 +4740,11 @@ where
 
 
 
-### impl Index<Range\<usize>> for String
+### Index<Range\<usize>>
+
+```rust
+impl Index<Range<usize>> for String
+```
 
 #### Output
 
@@ -4574,7 +4766,11 @@ fn index(&self, index: Range<usize>) -> &str
 
 
 
-### impl Index<RangeFrom\<usize>> for String
+### Index<RangeFrom\<usize>>
+
+```rust
+impl Index<RangeFrom<usize>> for String
+```
 
 #### Output 
 
@@ -4596,7 +4792,11 @@ fn index(&self, index: RangeFrom<usize>) -> &str
 
 
 
-### impl Index\<RangeFull> for String
+### Index\<RangeFull>
+
+```rust
+impl Index<RangeFull> for String
+```
 
 #### Output 
 
@@ -4618,7 +4818,11 @@ fn index(&self, _index: RangeFull) -> &str
 
 
 
-### impl Index<RangeInclusive\<usize>> for String
+### Index<RangeInclusive\<usize>>
+
+```rust
+impl Index<RangeInclusive<usize>> for String
+```
 
 #### Output 
 
@@ -4640,7 +4844,11 @@ fn index(&self, index: RangeInclusive<usize>) -> &str
 
 
 
-### impl Index<RangeTo\<usize>> for String
+### Index<RangeTo\<usize>>
+
+```rust
+impl Index<RangeTo<usize>> for String
+```
 
 #### Output
 
@@ -4662,7 +4870,11 @@ fn index(&self, index: RangeTo<usize>) -> &str
 
 
 
-### impl Index<RangeToInclusive\<usize>> for String
+### Index<RangeToInclusive\<usize>>
+
+```rust
+impl Index<RangeToInclusive<usize>> for String
+```
 
 #### Output
 
@@ -4684,7 +4896,11 @@ fn index(&self, index: RangeToInclusive<usize>) -> &str
 
 
 
-### impl IndexMut<Range\<usize>> for String
+### IndexMut<Range\<usize>>
+
+```rust
+impl IndexMut<Range<usize>> for String
+```
 
 #### index_mut
 
@@ -4696,7 +4912,11 @@ fn index_mut(&mut self, index: Range<usize>) -> &mut str
 
 
 
-### impl IndexMut<RangeFrom\<usize>> for String
+### IndexMut<RangeFrom\<usize>>
+
+```rust
+impl IndexMut<RangeFrom\<usize>> for String
+```
 
 #### index_mut
 
@@ -4708,7 +4928,11 @@ fn index_mut(&mut self, index: RangeFrom<usize>) -> &mut str
 
 
 
-### impl IndexMut\<RangeFull> for String
+### IndexMut\<RangeFull>
+
+```rust
+impl IndexMut<RangeFull> for String
+```
 
 #### index_mut
 
@@ -4720,7 +4944,11 @@ fn index_mut(&mut self, _index: RangeFull) -> &mut str
 
 
 
-### impl IndexMut<RangeInclusive\<usize>> for String
+### IndexMut<RangeInclusive\<usize>>
+
+```rust
+impl IndexMut<RangeInclusive<usize>> for String
+```
 
 #### index_mut
 
@@ -4730,7 +4958,13 @@ fn index_mut(&mut self, _index: RangeFull) -> &mut str
 fn index_mut(&mut self, index: RangeInclusive<usize>) -> &mut str
 ```
 
-### impl IndexMut<RangeTo\<usize>> for String
+
+
+### IndexMut<RangeTo\<usize>>
+
+```rust
+impl IndexMut<RangeTo<usize>> for String
+```
 
 
 
@@ -4744,7 +4978,11 @@ fn index_mut(&mut self, index: RangeTo<usize>) -> &mut str
 
 
 
-### impl IndexMut<RangeToInclusive\<usize>> for String
+### IndexMut<RangeToInclusive\<usize>>
+
+```rust
+impl IndexMut<RangeToInclusive<usize>> for String
+```
 
 #### index_mut
 
@@ -4756,7 +4994,11 @@ fn index_mut(&mut self, index: RangeToInclusive<usize>) -> &mut str
 
 
 
-### impl Ord for String
+### Ord
+
+```rust
+impl Ord for String
+```
 
 #### cmp
 
@@ -4804,7 +5046,11 @@ where
 
 
 
-### impl<'a, 'b> PartialEq<&'a str> for String
+### PartialEq<&'a str>
+
+```rust
+impl<'a, 'b> PartialEq<&'a str> for String
+```
 
 #### eq
 
@@ -4824,7 +5070,13 @@ fn eq(&self, other: &&'a str) -> bool
 fn ne(&self, other: &&'a str) -> bool
 ```
 
-### impl<'a, 'b> PartialEq<Cow<'a, str>> for String
+
+
+### PartialEq<Cow<'a, str>>
+
+```rust
+impl<'a, 'b> PartialEq<Cow<'a, str>> for String
+```
 
 #### eq
 
@@ -4844,7 +5096,13 @@ fn eq(&self, other: &Cow<'a, str>) -> bool
 fn ne(&self, other: &Cow<'a, str>) -> bool
 ```
 
-### impl<'a, 'b> PartialEq\<String> for &'a str
+
+
+### PartialEq\<String>
+
+```rust
+impl<'a, 'b> PartialEq<String> for &'a str
+```
 
 #### eq
 
@@ -4864,7 +5122,13 @@ fn eq(&self, other: &String) -> bool
 fn ne(&self, other: &String) -> bool
 ```
 
-### impl<'a, 'b> PartialEq\<String> for Cow<'a, str>
+
+
+### PartialEq\<String>
+
+```rust
+impl<'a, 'b> PartialEq<String> for Cow<'a, str>
+```
 
 #### eq
 
@@ -4884,7 +5148,13 @@ fn eq(&self, other: &String) -> bool
 fn ne(&self, other: &String) -> bool
 ```
 
-### impl PartialEq\<String> for String
+
+
+### PartialEq\<String>
+
+```rust
+impl PartialEq<String> for String
+```
 
 #### eq
 
@@ -4904,7 +5174,13 @@ fn eq(&self, other: &String) -> bool
 fn ne(&self, other: &Rhs) -> bool
 ```
 
-### impl<'a, 'b> PartialEq\<String> for str
+
+
+### PartialEq\<String>
+
+```rust
+impl<'a, 'b> PartialEq<String> for str
+```
 
 #### eq
 
@@ -4926,7 +5202,11 @@ fn ne(&self, other: &String) -> bool
 
 
 
-### impl<'a, 'b> PartialEq\<str> for String
+### PartialEq\<str>
+
+```rust
+impl<'a, 'b> PartialEq<str> for String
+```
 
 #### eq
 
@@ -4948,7 +5228,11 @@ fn ne(&self, other: &str) -> bool
 
 
 
-### impl PartialOrd\<String> for String
+### PartialOrd\<String>
+
+```rust
+impl PartialOrd<String> for String
+```
 
 #### partial_cmp
 
@@ -5000,7 +5284,11 @@ fn ge(&self, other: &Rhs) -> bool
 
 
 
-### impl<'a, 'b> Pattern<'a> for &'b String
+### Pattern<'a>
+
+```rust
+impl<'a, 'b> Pattern<'a> for &'b String
+```
 
 一个方便的 impl，委派给 &str 的 impl。
 
@@ -5014,7 +5302,7 @@ assert_eq!(String::from("Hello world").find("world"), Some(6));
 
 #### Searcher
 
-This is a nightly-only experimental API. (pattern #27721)
+`nightly-only`
 
 此模式的关联搜索者
 
@@ -5026,7 +5314,7 @@ type Searcher = <&'b str as Pattern<'a>>::Searcher
 
 #### into_searcher
 
-This is a nightly-only experimental API. (pattern #27721)
+`nightly-only`
 
 从 self 和 haystack 构造关联的搜索器以进行搜索。
 
@@ -5040,7 +5328,7 @@ fn into_searcher(self, haystack: &'a str) -> <&'b str as Pattern<'a>>::Searcher
 
 #### is_contained_in
 
-This is a nightly-only experimental API. (pattern #27721)
+`nightly-only`
 
 检查模式是否与 haystack 中的任何位置匹配
 
@@ -5052,7 +5340,7 @@ fn is_contained_in(self, haystack: &'a str) -> bool
 
 #### is_prefix_of
 
-This is a nightly-only experimental API. (pattern #27721)
+`nightly-only`
 
 检查模式是否在 haystack 的前面匹配
 
@@ -5064,7 +5352,7 @@ fn is_prefix_of(self, haystack: &'a str) -> bool
 
 #### strip_prefix_of
 
-This is a nightly-only experimental API. (pattern #27721)
+`nightly-only`
 
 如果匹配，则从 haystack 的正面删除模式。
 
@@ -5076,7 +5364,7 @@ fn strip_prefix_of(self, haystack: &'a str) -> Option<&'a str>
 
 #### is_suffix_of
 
-This is a nightly-only experimental API. (pattern #27721)
+`nightly-only`
 
 检查模式是否与 haystack 的后面匹配
 
@@ -5092,13 +5380,17 @@ fn is_suffix_of(self, haystack: &'a str) -> bool
 fn strip_suffix_of(self, haystack: &'a str) -> Option<&'a str>
 ```
 
-This is a nightly-only experimental API. (pattern #27721)
+`nightly-only`
 
 如果匹配，则从 haystack 的后面删除模式。
 
 
 
-### impl ToSocketAddrs for String
+### ToSocketAddrs
+
+```rust
+impl ToSocketAddrs for String
+```
 
 #### Iter 
 
@@ -5118,7 +5410,13 @@ type Iter = IntoIter<SocketAddr, Global>
 fn to_socket_addrs(&self) -> Result<IntoIter<SocketAddr>>
 ```
 
-### impl ToString for String
+
+
+### 
+
+```rust
+impl ToString for String
+```
 
 
 
@@ -5132,7 +5430,11 @@ fn to_string(&self) -> String
 
 
 
-### impl Write for String
+### Write
+
+```rust
+impl Write for String
+```
 
 #### write_str
 
@@ -5164,31 +5466,65 @@ fn write_fmt(&mut self, args: Arguments<'_>) -> Result<(), Error>
 
 
 
-### impl Eq for String
+### Eq
 
-### impl StructuralEq for String
+```rust
+impl Eq for String
+```
 
-### impl StructuralPartialEq for String
+### StructuralEq
+
+```rust
+impl StructuralEq for String
+```
+
+### StructuralPartialEq
+
+```rust
+impl StructuralPartialEq for String
+```
 
 
 
 ## Auto Trait Implementations
 
-### impl RefUnwindSafe for String
+### RefUnwindSafe
 
-### impl Send for String
+```rust
+impl RefUnwindSafe for String
+```
 
-### impl Sync for String
+### Send
 
-### impl Unpin for String
+```rust
+impl Send for String
+```
 
-### impl UnwindSafe for String
+### Sync
+
+```rust
+impl Sync for String
+```
+
+### Unpin
+
+```rust
+impl Unpin for String
+```
+
+### UnwindSafe
+
+```rust
+impl UnwindSafe for String
+```
+
+
 
 
 
 ## Blanket Implementations
 
-### impl\<T> Any for T
+### Any 
 
 ```rust
 impl<T> Any for T
@@ -5198,7 +5534,7 @@ where
 
 
 
-### impl\<T> Borrow\<T> for T
+### Borrow\<T>
 
 ```rust
 impl<T> Borrow<T> for T
@@ -5208,7 +5544,7 @@ where
 
 
 
-### impl\<T> BorrowMut\<T> for T
+### BorrowMut\<T>
 
 ```rust
 impl<T> BorrowMut<T> for T
@@ -5216,11 +5552,17 @@ where
   T: ?Sized,
 ```
 
-### impl\<T> From\<T> for T
+
+
+### From\<T> 
+
+```rust
+impl<T> From<T> for T
+```
 
 
 
-### impl<T, U> Into\<U> for T
+### Into\<U>
 
 ```rust
 impl<T, U> Into<U> for T
@@ -5230,7 +5572,7 @@ where
 
 
 
-### impl\<T> ToOwned for T
+### ToOwned
 
 ```rust
 impl<T> ToOwned for T
@@ -5240,7 +5582,7 @@ where
 
 
 
-### impl\<T> ToString for T
+### ToString
 
 ```rust
 impl<T> ToString for T
@@ -5250,7 +5592,7 @@ where
 
 
 
-### impl<T, U> TryFrom\<U> for T
+### TryFrom\<U>
 
 ```rust
 impl<T, U> TryFrom<U> for T
@@ -5260,7 +5602,7 @@ where
 
 
 
-### impl<T, U> TryInto\<U> for T
+### TryInto\<U>
 
 ```rust
 impl<T, U> TryInto<U> for T

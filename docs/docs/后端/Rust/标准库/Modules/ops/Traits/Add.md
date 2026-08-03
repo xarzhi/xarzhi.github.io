@@ -11,7 +11,7 @@ pub trait Add<Rhs = Self> {
 }
 ```
 
-请注意，默认情况下 Rhs 是 Self，但这不是强制性的。 例如，`std::time::SystemTime` 实现  `Add<Duration>`，它允许以 `SystemTime = SystemTime + Duration` 形式进行操作。
+请注意，默认情况下 `Rhs` 是 `Self`类型，但这不是强制性的。 例如，`std::time::SystemTime` 实现  `Add<Duration>`，它允许以 `SystemTime = SystemTime + Duration` 形式进行操作。
 
 **`Point`结构体的相加**
 

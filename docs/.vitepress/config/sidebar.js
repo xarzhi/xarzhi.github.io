@@ -484,6 +484,18 @@ const sidebar = {
 					],
 				},
 				{
+					text: 'default',
+					link: '/docs/后端/Rust/标准库/Modules/default/index.md',
+					collapsed: true,
+					items: [
+						{
+							text: 'Traits',
+							collapsed: true,
+							items: getItems('/docs/后端/Rust/标准库/Modules/default/Traits'),
+						},
+					],
+				},
+				{
 					text: 'convert',
 					link: '/docs/后端/Rust/标准库/Modules/convert/index.md',
 					collapsed: true,
@@ -508,7 +520,7 @@ const sidebar = {
 						{
 							text: 'Derive Macros',
 							collapsed: true,
-							link:'/docs/后端/Rust/标准库/Modules/cmp/DeriveMacros.md'
+							link: '/docs/后端/Rust/标准库/Modules/cmp/DeriveMacros.md',
 						},
 						{
 							text: 'Traits',
@@ -550,6 +562,21 @@ const sidebar = {
 			// 		link: '/docs/后端/Rust/标准库/PrimaryTypes/str',
 			// 	},
 			// ],
+		},
+		{
+			text: 'Macro',
+			items: [
+				{
+					text: '声明宏',
+					collapsed: true,
+					items: getItems('/docs/后端/Rust/标准库/Macro/声明宏'),
+				},
+				{
+					text: '过程宏',
+					collapsed: true,
+					items: getItems('/docs/后端/Rust/标准库/Macro/过程宏'),
+				},
+			],
 		},
 	],
 }

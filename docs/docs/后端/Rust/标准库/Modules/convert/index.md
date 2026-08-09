@@ -53,4 +53,54 @@
 
 ## Functions
 
-**identity**	identity 函数。
+### identity
+
+接收一个值，原封不动地把它返回去
+
+```rust
+pub const fn identity<T>(x: T) -> T {
+    x
+}
+```
+
+**参数**：
+
+- **x**：接收一个任意类型的值
+
+**返回值**：把参数原封不动返回出去
+
+使用 `identity` 在其他有趣的函数序列中什么也不做：
+
+```rust
+use std::convert::identity;
+
+fn manipulation(x: u32) -> u32 {
+    // 让我们假设添加一个是一个有趣的函数。
+    x + 1
+}
+
+let _arr = &[identity, manipulation];
+```
+
+在条件中将 `identity` 用作 “什么也不做” 的基本情况：
+
+```rust
+use std::convert::identity;
+
+let do_stuff = if condition { manipulation } else { identity };
+
+// 做更多有趣的事...
+
+let _results = do_stuff(42);
+```
+
+使用 `identity` 保留 `Option<T>` 迭代器的 `Some` 变体：
+
+```rust
+use std::convert::identity;
+
+let iter = [Some(1), None, Some(3)].into_iter();
+let filtered = iter.filter_map(identity).collect::<Vec<_>>();
+assert_eq!(vec![1, 3], filtered);
+```
+

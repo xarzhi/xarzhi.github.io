@@ -173,7 +173,7 @@ const nav = [
 						icon: '/sidebar_icons/rust.svg',
 					},
 					{
-						text: '标准库std',
+						text: 'Rust标准库',
 						link: '/docs/后端/Rust/标准库/index.md',
 						icon: '/sidebar_icons/rust.svg',
 					},

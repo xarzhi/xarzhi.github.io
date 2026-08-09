@@ -518,11 +518,6 @@ const sidebar = {
 					collapsed: true,
 					items: [
 						{
-							text: 'Derive Macros',
-							collapsed: true,
-							link: '/docs/后端/Rust/标准库/Modules/cmp/DeriveMacros.md',
-						},
-						{
 							text: 'Traits',
 							collapsed: true,
 							items: getItems('/docs/后端/Rust/标准库/Modules/cmp/Traits'),
@@ -556,12 +551,6 @@ const sidebar = {
 		{
 			text: 'Primary Types',
 			items: getItems('/docs/后端/Rust/标准库/PrimaryTypes'),
-			// items: [
-			// 	{
-			// 		text: 'str',
-			// 		link: '/docs/后端/Rust/标准库/PrimaryTypes/str',
-			// 	},
-			// ],
 		},
 		{
 			text: 'Macro',

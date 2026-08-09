@@ -2,8 +2,6 @@
 
 一个用于将值转换为 `String` 的 trait。
 
-对于任何实现 `Display`trait 的类型，都会自动实现 trait。 因此，不应直接实现 `ToString`： 应该实现`Display`，就可以直接获得 `ToString` 实现。
-
 ```rust
 pub trait ToString {
     // Required method
@@ -11,7 +9,11 @@ pub trait ToString {
 }
 ```
 
+:::tip 
 
+**对于任何实现 `Display`trait 的类型，都会自动实现 trait。 因此，不应直接实现 `ToString`： 应该实现`Display`，就可以直接获得 `ToString` 实现。**
+
+:::
 
 
 

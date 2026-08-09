@@ -60,7 +60,7 @@ identifier '=' expression
 
 例如，以下 [`format!`](https://www.rustwiki.org.cn/zh-CN/std/macro.format.html) 表达式都使用命名参数:
 
-```
+```rust
 format!("{argument}", argument = "test");   // => "test"
 format!("{name} {}", 1, name = 2);          // => "2 1"
 format!("{a} {c} {b}", a="a", b='b', c=3);  // => "a 3 b"
@@ -68,7 +68,7 @@ format!("{a} {c} {b}", a="a", b='b', c=3);  // => "a 3 b"
 
 如果命名参数没有出现在参数列表中，`format!` 将引用当前作用域中的同名变量。
 
-```
+```rust
 let argument = 2 + 2;
 format!("{argument}");   // => "4"
 
@@ -88,7 +88,7 @@ make_string(927, "label"); // => "label 927"
 
 ### Width
 
-```
+```rust
 // 所有这些打印 "Hello x !"
 println!("Hello {:5}!", "x");
 println!("Hello {:1$}!", "x", 5);
@@ -110,7 +110,7 @@ println!("Hello {:width$}!", "x");
 
 ### Fill/Alignment
 
-```
+```rust
 assert_eq!(format!("Hello {:<5}!", "x"),  "Hello x    !");
 assert_eq!(format!("Hello {:-<5}!", "x"), "Hello x----!");
 assert_eq!(format!("Hello {:^5}!", "x"),  "Hello   x  !");
@@ -127,7 +127,7 @@ assert_eq!(format!("Hello {:>5}!", "x"),  "Hello     x!");
 
 请注意，某些类型可能不会实现对齐。特别是，对于 `Debug` trait，通常不会实现该功能。 确保应用填充的一种好方法是格式化输入，然后填充此结果字符串以获得输出：
 
-```
+```rust
 println!("Hello {:^15}!", format!("{:?}", Some("hi"))); // => "Hello   Some("hi")   !"
 ```
 
@@ -135,7 +135,7 @@ println!("Hello {:^15}!", format!("{:?}", Some("hi"))); // => "Hello   Some("hi"
 
 ### Sign/`#`/`0`
 
-```
+```rust
 assert_eq!(format!("Hello {:+}!", 5), "Hello +5!");
 assert_eq!(format!("{:#x}!", 27), "0x1b!");
 assert_eq!(format!("Hello {:05}!", 5),  "Hello 00005!");
@@ -215,7 +215,7 @@ println!("Hello {} is {number:.prec$}", "x", prec = 5, number = 0.01);
 
 而这些：
 
-```
+```rust
 println!("{}, `{name:.*}` has 3 fractional digits", "Hello", 3, name=1234.56);
 println!("{}, `{name:.*}` has 3 characters", "Hello", 3, name="1234.56");
 println!("{}, `{name:>8.*}` has 3 right-aligned characters", "Hello", 3, name="1234.56");
@@ -239,7 +239,7 @@ Hello, `     123` has 3 right-aligned characters
 
 例如，即使系统区域设置使用小数点分隔符 (而不是点)，以下代码也将始终打印 `1.5`。
 
-```
+```rust
 println!("The value is {}", 1.5);
 ```
 
@@ -247,9 +247,15 @@ println!("The value is {}", 1.5);
 
 ## Escaping
 
-字面量字符 `{` 和 `}` 可以通过在它们之前添加相同的字符而包含在字符串中。例如，`{` 字符使用 `{{` 进行转义，而 `}` 字符使用 `}}` 进行转义。
+::: v-pre
 
-```
+字面量字符 `{` 和 `}` 可以通过在它们之前添加相同的字符而包含在字符串中。
+
+例如，`{` 字符使用 `{{` 进行转义，而 `}` 字符使用 `}}` 进行转义。
+
+:::
+
+```rust
 assert_eq!(format!("Hello {{}}"), "Hello {}");
 assert_eq!(format!("{{ Hello"), "{ Hello");
 ```
@@ -262,7 +268,7 @@ assert_eq!(format!("{{ Hello"), "{ Hello");
 
 总结一下，您可以在这里找到格式字符串的完整语法。 所用格式语言的语法是从其他语言中提取的，因此不应太陌生。参数使用类似 Python 的语法格式化，这意味着参数被 `{}` 包围，而不是类似 C 的 `%`。 格式化语法的实际语法为：
 
-```text
+```rust
 format_string := text [ maybe_format text ] *
 maybe_format := '{' '{' | '}' '}' | format
 format := '{' [ argument ] [ ':' format_spec ] [ ws ] * '}'
@@ -312,8 +318,8 @@ parameter := argument '$'
 
 当为您自己的类型实现格式 trait 时，您将必须实现签名的方法：
 
-```
-fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+```rust
+fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {}
 ```
 
 您的类型将作为 `self` 通过引用传递，然后函数应该将输出发送到实现 `fmt::Write` 的格式化程序 `f`。 正确遵守所请求的格式设置参数，取决于每种格式 trait 的实现。 这些参数的值可以通过 [`Formatter`](https://www.rustwiki.org.cn/zh-CN/std/fmt/struct.Formatter.html) 结构体的方法访问。为了解决这个问题，[`Formatter`](https://www.rustwiki.org.cn/zh-CN/std/fmt/struct.Formatter.html) 结构体还提供了一些辅助方法。
@@ -322,7 +328,7 @@ fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
 
 实现格式 traits 的示例如下所示：
 
-```
+```rust
 use std::fmt;
 
 #[derive(Debug)]
@@ -379,7 +385,7 @@ fn main() {
 
 这两个 traits 的输出的一些例子：
 
-```
+```rust
 assert_eq!(format!("{} {:?}", 3, 4), "3 4");
 assert_eq!(format!("{} {:?}", 'a', 'b'), "a 'b'");
 assert_eq!(format!("{} {:?}", "foo\n", "bar\n"), "foo\n \"bar\\n\"");
@@ -393,7 +399,7 @@ assert_eq!(format!("{} {:?}", "foo\n", "bar\n"), "foo\n \"bar\\n\"");
 
 `format!`系列中有许多相关的宏。当前实现的是：
 
-```
+```rust
 format!      // 如上所述
 write!       // 第一个参数是 &mut io::Write 或 &mut fmt::Write，目的地
 writeln!     // 与 write 相同，但追加了一个换行符
@@ -408,7 +414,7 @@ format_args! // 如下面所描述的。
 
 [`write!`](https://www.rustwiki.org.cn/zh-CN/std/macro.write.html) 和 [`writeln!`](https://www.rustwiki.org.cn/zh-CN/std/macro.writeln.html) 是两个宏，用于将格式字符串发送到指定的流。这用于防止格式字符串的中间分配，而是直接写入输出。 在底层，这个函数实际上是调用在 [`std::io::Write`](https://www.rustwiki.org.cn/zh-CN/std/io/trait.Write.html) 和 [`std::fmt::Write`](https://www.rustwiki.org.cn/zh-CN/std/fmt/trait.Write.html) trait 上定义的 [`write_fmt`](https://www.rustwiki.org.cn/zh-CN/std/io/trait.Write.html#method.write_fmt) 函数。 示例用法是：
 
-```
+```rust
 use std::io::Write;
 let mut w = Vec::new();
 write!(&mut w, "Hello {}!", "world");
@@ -420,7 +426,7 @@ write!(&mut w, "Hello {}!", "world");
 
 此和 [`println!`](https://www.rustwiki.org.cn/zh-CN/std/macro.println.html) 将其输出发送到 stdout。与 [`write!`](https://www.rustwiki.org.cn/zh-CN/std/macro.write.html) 宏类似，这些宏的目标是避免在打印输出时进行中间分配。示例用法是：
 
-```
+```rust
 print!("Hello {}!", "world");
 println!("I have a newline {}", "character at the end");
 ```
@@ -437,7 +443,7 @@ println!("I have a newline {}", "character at the end");
 
 [`format_args!`](https://www.rustwiki.org.cn/zh-CN/std/macro.format_args.html) 是一个奇怪的宏，用于安全地传递描述格式字符串的不透明对象。该对象不需要创建任何堆分配，并且仅引用栈上的信息。 在幕后，所有相关的宏都在此方面实现。 首先，一些示例用法是：
 
-```
+```rust
 use std::fmt;
 use std::io::{self, Write};
 

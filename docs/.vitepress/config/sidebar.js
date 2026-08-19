@@ -165,6 +165,7 @@ const sidebar = {
 	'/docs/前端/TypeScript/Ts入门/': [{ text: 'Ts入门', items: getItems('/docs/前端/TypeScript/Ts入门') }],
 	'/docs/前端/框架/React/': getItems('/docs/前端/框架/React'),
 	'/docs/前端/可视化/Canvas/': getItems('/docs/前端/可视化/Canvas'),
+	'/docs/前端/可视化/Svg/': getItems('/docs/前端/可视化/Svg'),
 	'/docs/前端/可视化/WebGL/': getItems('/docs/前端/可视化/WebGL'),
 	'/docs/前端/可视化/Three.js/': [
 		{
@@ -531,6 +532,23 @@ const sidebar = {
 							text: 'Enums',
 							collapsed: true,
 							items: getItems('/docs/后端/Rust/标准库/Modules/cmp/Enums'),
+						},
+					],
+				},
+				{
+					text: 'fmt',
+					link: '/docs/后端/Rust/标准库/Modules/fmt/index.md',
+					collapsed: true,
+					items: [
+						{
+							text: 'Traits',
+							collapsed: true,
+							items: getItems('/docs/后端/Rust/标准库/Modules/fmt/Traits'),
+						},
+						{
+							text: 'Structs',
+							collapsed: true,
+							items: getItems('/docs/后端/Rust/标准库/Modules/fmt/Structs'),
 						},
 					],
 				},

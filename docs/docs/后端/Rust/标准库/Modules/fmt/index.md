@@ -6,7 +6,7 @@
 
 
 
-## Usage
+基本使用
 
 [`format!`](https://www.rustwiki.org.cn/zh-CN/std/macro.format.html) 宏旨在使那些使用 C 的 `printf`/`fprintf` 函数或 Python 的 `str.format` 函数的用户熟悉。
 
@@ -34,7 +34,7 @@ format!("{:#?}", (100, 200));     // => "(
 
 
 
-### 位置参数
+## 位置参数
 
 每个格式化参数都可以指定它引用的值参数，如果省略，则假定它是 “下一个参数”。 例如，格式字符串 `{} {} {}` 将带有三个参数，并且将按照给定的顺序对其进行格式化。 但是，格式字符串 `{2} {1} {0}` 将以相反的顺序格式化参数。
 
@@ -50,7 +50,7 @@ format!("{1} {} {0} {}", 1, 2); // => "2 1 1 2"
 
 
 
-### 命名参数
+## 命名参数
 
 Rust 本身不具有类似于 Python 的等效于函数的命名参数，但是 [`format!`](https://www.rustwiki.org.cn/zh-CN/std/macro.format.html) 宏是一种语法扩展，允许它利用命名参数。 命名参数列在参数列表的末尾，并具有以下语法：
 
@@ -86,44 +86,73 @@ make_string(927, "label"); // => "label 927"
 
 每个要格式化的参数都可以通过许多格式化参数进行转换 (对应于 [语法](https://www.rustwiki.org.cn/zh-CN/std/fmt/index.html#syntax)) 中的 `format_spec`。这些参数会影响所格式化内容的字符串表示形式。
 
-### Width
+### 宽度 Width
+
+`:`后面如果给一个整数，代表**这个占位符最少占多少字符位置**
+
+- 如果实际内容比宽度短，就在前面（或按对齐方向）补填充符凑够
+- 如果实际内容比宽度长，宽度被忽略，按实际长度输出（不会截断）。
 
 ```rust
-// 所有这些打印 "Hello x !"
-println!("Hello {:5}!", "x");
-println!("Hello {:1$}!", "x", 5);
-println!("Hello {1:0$}!", 5, "x");
-println!("Hello {:width$}!", "x", width = 5);
+assert_eq!(format!("{:5}", 27), "   27"); // 实际2字符，补3个空格凑到5
+assert_eq!(format!("{:5}", "ab"), "ab   "); // 实际2字符，往后补全到5
+```
+
+`:`后面如果给一个小数，则代表参数的精度
+
+```rust
+assert_eq!(format!("{:.2}", 27.0011), "27.00");
+```
+
+用 `$` 可以把宽度/精度改成"引用某个参数"：
+
+```rust
+format!("{:width$}", 27, width = 5);        // "   27"
+
 let width = 5;
 println!("Hello {:width$}!", "x");
+
+format!("{:.prec$}", 3.14159, prec = 2);    // "3.14"
 ```
 
-
-
-这是格式应使用的 “最小宽度” 的参数。 如果值的字符串不能填满这么多字符，则 fill/alignment 指定的填充将用于占用所需的空间 (请参见下文)。
-
-通过添加后缀 `$` (表示第二个参数是指定宽度的 [`usize`](https://www.rustwiki.org.cn/zh-CN/std/primitive.usize.html))，也可以在参数列表中以 [`usize`](https://www.rustwiki.org.cn/zh-CN/std/primitive.usize.html) 的形式提供宽度值。
-
-使用 Dollar 语法引用参数不会影响 “下一个参数” 计数器，因此按位置引用参数或使用命名参数通常是一个好主意。
-
-
-
-### Fill/Alignment
+`N$`表示用第 N 个参数的值
 
 ```rust
-assert_eq!(format!("Hello {:<5}!", "x"),  "Hello x    !");
-assert_eq!(format!("Hello {:-<5}!", "x"), "Hello x----!");
-assert_eq!(format!("Hello {:^5}!", "x"),  "Hello   x  !");
-assert_eq!(format!("Hello {:>5}!", "x"),  "Hello     x!");
+format!("{:1$}", 27, 5);                    // "   27"  宽度=第1个参数(5)
+format!("{:.1$}", 3.14159, 2);              // "3.14"   精度=第1个参数(2)
+format!("{:1$.2$}", 3.14159, 10, 3);        // "     3.142"  宽10 精3
 ```
 
-可选的填充字符和对齐方式通常与 [`width`](https://www.rustwiki.org.cn/zh-CN/std/fmt/index.html#width) 参数一起提供。必须在 `width` 之前，`:` 之后定义。 这表示如果要格式化的值小于 `width`，则将在其周围打印一些额外的字符。 对于不同的对齐方式，填充有以下变体：
 
-- `[fill]<` - 参数在 `width` 列中左对齐
-- `[fill]^` - 参数在 `width` 列中居中对齐
-- `[fill]>` - 参数在 `width` 列中右对齐
 
-非数字的默认 [fill/alignment](https://www.rustwiki.org.cn/zh-CN/std/fmt/index.html#fillalignment) 是空格，并且左对齐。数字格式器的默认值也是空格字符，但带有右对齐。 如果为数字指定了 `0` 标志 (见下文)，则隐式填充字符为 `0`。
+
+
+
+
+### 填充和对齐 Fill/Alignment
+
+对于上面的补全，我们发现整数和字符串的补全方向并不一样
+
+- **数值类型**（`i32`/`f64` 等）→ 默认**右对齐**，也就是左边补全
+- **非数值类型**（`&str`/`String`/`char`）→ 默认**左对齐**，也就是右边补全
+
+可以使用如下方式控制对齐方式，必须在 `width` 之前，`:` 之后定义，**默认会用空格当作填充以达到对齐**，也可以在对齐符号前自定义填充的字符
+
+- `[fill]<`：参数在 `width` 列中左对齐
+- `[fill]^`：参数在 `width` 列中居中对齐
+- `[fill]>`：参数在 `width` 列中右对齐
+
+```rust
+assert_eq!(format!("Hello {:<5}!", "x"),  "Hello x    !");  // 规定左对齐
+assert_eq!(format!("Hello {:-<5}!", "x"), "Hello x----!");	// 规定左对齐，并规定 - 为填充字符
+
+assert_eq!(format!("Hello {:^5}!", "x"),  "Hello   x  !");	// 规定居中对齐
+
+assert_eq!(format!("Hello {:>5}!", "x"),  "Hello     x!");	// 规定右对齐
+assert_eq!(format!("Hello {:t>5}!", "x"),  "Hello ttttx!");	// 规定右对齐，并规定 t 为填充字符
+```
+
+
 
 请注意，某些类型可能不会实现对齐。特别是，对于 `Debug` trait，通常不会实现该功能。 确保应用填充的一种好方法是格式化输入，然后填充此结果字符串以获得输出：
 
@@ -133,100 +162,138 @@ println!("Hello {:^15}!", format!("{:?}", Some("hi"))); // => "Hello   Some("hi"
 
 
 
-### Sign/`#`/`0`
+### 特殊符号 Sign/#/0
 
-```rust
-assert_eq!(format!("Hello {:+}!", 5), "Hello +5!");
-assert_eq!(format!("{:#x}!", 27), "0x1b!");
-assert_eq!(format!("Hello {:05}!", 5),  "Hello 00005!");
-assert_eq!(format!("Hello {:05}!", -5), "Hello -0005!");
-assert_eq!(format!("{:#010x}!", 27), "0x0000001b!");
-```
+这些都是**更改格式化程序行为**的标志。
 
-这些都是更改格式化程序行为的标志。
+- `+`：打印出数字的符号，正号`+`，和负号`-`
 
-- `+` - 这适用于数字类型并指示应始终打印符号。默认情况下从不打印正号，默认情况下仅对有符号值打印负号。 该标志指示应始终打印正确的符号 (`+` 或 `-`)。
-- `-` - 当前未使用
-- `#` - 此标志表示应使用 “alternate” 打印形式。替代形式为：
-  - `#?` - 漂亮地打印 [`Debug`](https://www.rustwiki.org.cn/zh-CN/std/fmt/trait.Debug.html) 格式 (添加换行符和缩进)
-  - `#x` - 在参数前面加上 `0x`
-  - `#X` - 在参数前面加上 `0x`
-  - `#b` - 在参数前面加上 `0b`
-  - `#o` - 在参数前面加上 `0o`
-- `0` - 这用于指示对于整数格式，向 `width` 的填充应该使用 `0` 字符，并且是符号感知的。 像 `{:08}` 这样的格式将为整数 `1` 产生 `00000001`，而相同格式将为整数 `-1` 产生 `-0000001`。 请注意，负版本的零比正版本的少零。 请注意，填充零总是放在符号 (如果有) 之后和数字之前。当与 `#` 标志一起使用时，将应用类似的规则：在前缀之后但在数字之前插入填充零。 前缀包括在总宽度中。
+  ```rust
+  println!("{:+}", 15); // +15
+  println!("{:+}", -15); // -15
+  
+  println!("{:+}", 10.0); // +10
+  println!("{:+}", -10.0); // -10
+  ```
+
+- `#`：此标志表示打印出数据的**正式格式**，比如16进制前面加上0x，二进制前面加上0b，等等
+
+  - `#?`：漂亮地打印 `Debug`格式的数据 (添加换行符和缩进)
+
+    ```rust {11}
+    #[derive(Debug)]
+    struct People {
+        name: String,
+    }
+    
+    fn main() {
+        let p = People {
+            name: "ikun".to_string(),
+        };
+    
+        let str = format!("{:#?}", p);
+    
+        println!("{}", str);
+        /*
+           People {
+               name: "ikun",
+           }
+        */
+    }
+    ```
+
+  - `#x`：把参数转化为**16进制小写**，`0x`开头的16进制
+
+    ```rust
+    println!("{:#x}", 166); // 0xa6
+    ```
+
+  - `#X`：把参数转化为**16进制大写**，`0x`开头的16进制
+
+    ```rust
+    println!("{:#X}", 166); // 0xA6
+
+  - `#b`：把参数转化为**二进制**，`0b`开头的二进制
+
+    ```rust
+    println!("{:#b}", 15); // 0b1111
+
+  - `#o`：把参数转化为**八进制**，`0o`开头的八进制
+
+    ```rust
+    println!("{:#o}", 50); // 0o62
+    println!("{:#o}", 166); // 0o246
+
+- `0`：这用于指示对于整数格式，0作为填充标志，需要给定一个宽度，若参数小于给定的宽度，则使用0填充
+
+  ```rust
+  println!("{:0}", 27); // "27"      ← 0 是零填充标志，但没宽度，无效
+  println!("{:05}", 27); // "00027"   ← 0 是零填充标志，宽度5，用0补
+  println!("{:5}", 27); // "   27"   ← 无0标志，宽度5，用空格补
+  ```
+
+  
 
 
 
+### 精度 Precision
 
+使用`.width`来控制精度
 
-### Precision
-
-对于非数字类型，可以将其视为 “最大宽度”。 如果结果字符串的长度大于此宽度，则将其截断为这么多个字符，并且如果设置了这些参数，则会使用适当的 `fill`，`alignment` 和 `width` 发出该截断的值。
-
-对于整数类型，这将被忽略。
-
-对于浮点类型，这指示小数点后应打印多少位。
+对于**浮点类型**，这指示小数点后应打印多少位。
 
 有三种可能的方法来指定所需的 `precision`：
 
-1. 一个整数 `.N`：
+1. 一个整数 `.N`：整数 `N` 本身就是精度。
 
-   整数 `N` 本身就是精度。
+   ```rust
+   println!("{}", 3.14159); // "3.14159"   默认：打印能唯一还原该值的最短形式
+   println!("{:.2}", 3.14159); // "3.14"      保留2位小数（四舍五入）
+   println!("{:.0}", 3.14159); // "3"         0位 → 四舍五入到整数
+   println!("{:.5}", 2.0); // "2.00000"   强制补0到5位
+   ```
 
-2. 整数或名称后跟美元符号 `.N$`：
+2. 整数或名称后跟美元符号 `.N$`：使用格式参数 `N` (必须是 `usize`) 作为精度。
 
-   使用格式参数 `N` (必须是 `usize`) 作为精度。
+   ```rust
+   let width = 5;
+   println!("{:.width$}", 2.0); // "2.00000"   强制补0到5位
+   
+   println!("{:.width$}", 2.0, width = 5); // "2.00000"   强制补0到5位
+   ```
 
 3. 星号 `.*`：
 
-   `.*` 意味着这个 `{...}` 与*两个*格式输入相关联，而不是一个:
+   - 如果使用 `{:.*}` 格式的字符串，则第一个参数代表**精度**（`usize`），第二个参数代表要打印的值。
 
-   - 如果使用 `{:<spec>.*}` 格式的字符串，则第一个输入保存 `usize` 精度，第二个输入保存要打印的值。
-   - 如果使用 `{<arg>:<spec>.*}` 格式的字符串，则 `<arg>` 部分指的是要打印的值，并且 `precision` 被视为使用省略的位置参数指定 (`{}` 而不是 `{<arg>:}`)。
+     ```rust
+     let res = format!("{:.*}", 2, 3.14159); 
+     println!("{:#?}", res); // "3.14"
+     ```
 
-例如，以下所有调用均打印相同的内容 `Hello x is 0.01000`：
+   - 如果使用 `{:<spec>.*}` 格式的字符串，则第一个参数代表**宽度**，第二个参数代表要打印的值。
 
-```rust
-// Hello {arg 0 ("x")} is {arg 1 (0.01) with precision specified inline (5)}
-println!("Hello {0} is {1:.5}", "x", 0.01);
+     ```rust
+     let res = format!("{:6.*}", 2, 3.14159); 
+     println!("{:#?}", res); // "  3.14"  // 指定宽度为6，补全2个空格
+     ```
 
-// Hello {arg 1 ("x")} is {arg 2 (0.01) with precision specified in arg 0 (5)}
-println!("Hello {1} is {2:.0$}", 5, "x", 0.01);
+   - 如果使用 `{<pos>:<spec>.*}` 格式的字符串，则 `<pos>` 部分指的是要打印的值的位置，`<spec>`代表宽度，第一个参数代表精度
 
-// Hello {arg 0 ("x")} is {arg 2 (0.01) with precision specified in arg 1 (5)}
-println!("Hello {0} is {2:.1$}", "x", 5, 0.01);
+     ```rust
+     let res = format!("{1:6.*}", 2, 3.14159);
+     println!("{:#?}", res); // "  3.14"  // 指定宽度为6，补全2个空格
+     ```
 
-// Hello {next arg -> arg 0 ("x")} is {second of next two args -> arg 2 (0.01) with precision specified in first of next two args -> arg 1 (5)}
-//
-println!("Hello {} is {:.*}",    "x", 5, 0.01);
+     
 
-// Hello {arg 1 ("x")} is {arg 2 (0.01) with precision specified in next arg -> arg 0 (5)}
-//
-println!("Hello {1} is {2:.*}",  5, "x", 0.01);
 
-// Hello {next arg -> arg 0 ("x")} is {arg 2 (0.01) with precision specified in next arg -> arg 1 (5)}
-//
-println!("Hello {} is {2:.*}",   "x", 5, 0.01);
 
-// Hello {next arg -> arg 0 ("x")} is {arg "number" (0.01) with precision specified in arg "prec" (5)}
-//
-println!("Hello {} is {number:.prec$}", "x", prec = 5, number = 0.01);
-```
-
-而这些：
+对于**字符串**，这控制**最大字符数**
 
 ```rust
-println!("{}, `{name:.*}` has 3 fractional digits", "Hello", 3, name=1234.56);
-println!("{}, `{name:.*}` has 3 characters", "Hello", 3, name="1234.56");
-println!("{}, `{name:>8.*}` has 3 right-aligned characters", "Hello", 3, name="1234.56");
-```
-
-打印三个明显不同的内容：
-
-```text
-Hello, `1234.560` has 3 fractional digits
-Hello, `123` has 3 characters
-Hello, `     123` has 3 right-aligned characters
+format!("{:.3}", "hello");  // "hel"   最多取前3个字符
+format!("{:.10}", "hi");    // "hi"    内容比精度短，不补不截
 ```
 
 
@@ -245,7 +312,7 @@ println!("The value is {}", 1.5);
 
 
 
-## Escaping
+## 转义 Escaping
 
 ::: v-pre
 
@@ -256,8 +323,11 @@ println!("The value is {}", 1.5);
 :::
 
 ```rust
-assert_eq!(format!("Hello {{}}"), "Hello {}");
-assert_eq!(format!("{{ Hello"), "{ Hello");
+let res = format!("Hello {{}}");
+println!("{:#?}", res);  // "Hello {}"
+
+let res = format!("{{ Hello");
+println!("{:#?}", res);  // "{ Hello"
 ```
 
 
@@ -300,19 +370,19 @@ parameter := argument '$'
 
 当请求使用特定类型的参数格式化时，实际上是在请求将参数归因于特定的 trait。 这允许通过 `{:x}` 格式化多种实际类型 (例如 [`i8`](https://www.rustwiki.org.cn/zh-CN/std/primitive.i8.html) 和 [`isize`](https://www.rustwiki.org.cn/zh-CN/std/primitive.isize.html))。类型到 traits 的当前映射是：
 
-- *nothing* ⇒ [`Display`](https://www.rustwiki.org.cn/zh-CN/std/fmt/trait.Display.html)
-- `?` ⇒ [`Debug`](https://www.rustwiki.org.cn/zh-CN/std/fmt/trait.Debug.html)
-- `x?` ⇒ [`Debug`](https://www.rustwiki.org.cn/zh-CN/std/fmt/trait.Debug.html) 带有小写十六进制整数
-- `X?` ⇒ [`Debug`](https://www.rustwiki.org.cn/zh-CN/std/fmt/trait.Debug.html) 带有大写十六进制整数
-- `o` ⇒ [`Octal`](https://www.rustwiki.org.cn/zh-CN/std/fmt/trait.Octal.html)
-- `x` ⇒ [`LowerHex`](https://www.rustwiki.org.cn/zh-CN/std/fmt/trait.LowerHex.html)
-- `X` ⇒ [`UpperHex`](https://www.rustwiki.org.cn/zh-CN/std/fmt/trait.UpperHex.html)
-- `p` ⇒ [`Pointer`](https://www.rustwiki.org.cn/zh-CN/std/fmt/trait.Pointer.html)
-- `b` ⇒ [`Binary`](https://www.rustwiki.org.cn/zh-CN/std/fmt/trait.Binary.html)
-- `e` ⇒ [`LowerExp`](https://www.rustwiki.org.cn/zh-CN/std/fmt/trait.LowerExp.html)
-- `E` ⇒ [`UpperExp`](https://www.rustwiki.org.cn/zh-CN/std/fmt/trait.UpperExp.html)
+- *nothing* ⇒ [`Display`](./Traits/Display)
+- `?` ⇒ [`Debug`](./Traits/Debug)
+- `x?` ⇒ [`Debug`](./Traits/Debug) 带有小写十六进制整数
+- `X?` ⇒ [`Debug`](./Traits/Debug) 带有大写十六进制整数
+- `o` ⇒ [`Octal`](./Traits/Octal)
+- `x` ⇒ [`LowerHex`](./Traits/LowerHex)
+- `X` ⇒ [`UpperHex`](./Traits/UpperHex)
+- `p` ⇒ [`Pointer`](./Traits/Pointer)
+- `b` ⇒ [`Binary`](./Traits/Binary)
+- `e` ⇒ [`LowerExp`](./Traits/LowerExp)
+- `E` ⇒ [`UpperExp`](./Traits/UpperExp)
 
-这意味着可以使用 `{:b}` 格式化实现 [`fmt::Binary`](https://www.rustwiki.org.cn/zh-CN/std/fmt/trait.Binary.html) trait 的任何类型的参数。标准库还为许多原始类型提供了针对这些 traits 的实现。
+这意味着可以使用 `{:b}` 格式化实现  [`Binary`](./Traits/Binary) trait 的任何类型的 。标准库还为许多原始类型提供了针对这些 traits 的实现。
 
 如果未指定格式 (如 `{}` 或 `{:6}`)，则使用的格式 trait 为 [`Display`](https://www.rustwiki.org.cn/zh-CN/std/fmt/trait.Display.html) trait。
 
@@ -376,12 +446,12 @@ fn main() {
 
 
 
-### `fmt::Display` 与 `fmt::Debug`
+### `Display` 与 `Debug`
 
 这两种格式 traits 具有不同的用途：
 
-- [`fmt::Display`](https://www.rustwiki.org.cn/zh-CN/std/fmt/trait.Display.html) 实现断言该类型可以始终忠实地表示为 UTF-8 字符串。并非所有类型都实现 [`Display`](https://www.rustwiki.org.cn/zh-CN/std/fmt/trait.Display.html) trait。
-- [`fmt::Debug`](https://www.rustwiki.org.cn/zh-CN/std/fmt/trait.Debug.html) 实现应该为所有公共类型实现。 输出通常会尽可能忠实地代表内部状态。 [`Debug`](https://www.rustwiki.org.cn/zh-CN/std/fmt/trait.Debug.html) trait 的目的是方便调试 Rust 代码。在大多数情况下，建议使用 `#[derive(Debug)]` 就足够了。
+- [`fmt::Display`](./Traits/Display) 实现断言该类型可以始终忠实地表示为 UTF-8 字符串。并非所有类型都实现 `Display` trait。
+- [`fmt::Debug`](./Traits/Debug) 实现应该为所有公共类型实现。 输出通常会尽可能忠实地代表内部状态。`Debug` trait 的目的是方便调试 Rust 代码。在大多数情况下，建议使用 `#[derive(Debug)]` 就足够了。
 
 这两个 traits 的输出的一些例子：
 
@@ -410,9 +480,11 @@ eprintln!    // 与 eprint 相同，但追加了一个换行符
 format_args! // 如下面所描述的。
 ```
 
+
+
 ### `write!`
 
-[`write!`](https://www.rustwiki.org.cn/zh-CN/std/macro.write.html) 和 [`writeln!`](https://www.rustwiki.org.cn/zh-CN/std/macro.writeln.html) 是两个宏，用于将格式字符串发送到指定的流。这用于防止格式字符串的中间分配，而是直接写入输出。 在底层，这个函数实际上是调用在 [`std::io::Write`](https://www.rustwiki.org.cn/zh-CN/std/io/trait.Write.html) 和 [`std::fmt::Write`](https://www.rustwiki.org.cn/zh-CN/std/fmt/trait.Write.html) trait 上定义的 [`write_fmt`](https://www.rustwiki.org.cn/zh-CN/std/io/trait.Write.html#method.write_fmt) 函数。 示例用法是：
+[`write!`](../../Macro/声明宏/标准库声明宏#write) 和 [`writeln!`](../../Macro/声明宏/标准库声明宏#writeln) 是两个宏，用于将格式字符串发送到指定的流。这用于防止格式字符串的中间分配，而是直接写入输出。 在底层，这个函数实际上是调用在 [`std::io::Write`](../io/Traits/Write) 和 [`std::fmt::Write`](./Traits/Write) trait 上定义的 [`write_fmt`](./Traits/Write#write_fmt) 函数。 示例用法是：
 
 ```rust
 use std::io::Write;
@@ -424,7 +496,7 @@ write!(&mut w, "Hello {}!", "world");
 
 ### `print!`
 
-此和 [`println!`](https://www.rustwiki.org.cn/zh-CN/std/macro.println.html) 将其输出发送到 stdout。与 [`write!`](https://www.rustwiki.org.cn/zh-CN/std/macro.write.html) 宏类似，这些宏的目标是避免在打印输出时进行中间分配。示例用法是：
+此和 [`println!`](../../Macro/声明宏/标准库声明宏#println) 将其输出发送到 stdout。与[`write!`](../../Macro/声明宏/标准库声明宏#write) 宏类似，这些宏的目标是避免在打印输出时进行中间分配。示例用法是：
 
 ```rust
 print!("Hello {}!", "world");
@@ -435,13 +507,13 @@ println!("I have a newline {}", "character at the end");
 
 ### `eprint!`
 
-[`eprint!`](https://www.rustwiki.org.cn/zh-CN/std/macro.eprint.html) 和 [`eprintln!`](https://www.rustwiki.org.cn/zh-CN/std/macro.eprintln.html) 宏分别与 [`print!`](https://www.rustwiki.org.cn/zh-CN/std/macro.print.html) 和 [`println!`](https://www.rustwiki.org.cn/zh-CN/std/macro.println.html) 相同，只不过它们将其输出发送到 stderr。
+[`eprint!`](../../Macro/声明宏/标准库声明宏#eprint) 和 [`eprintln!`](../../Macro/声明宏/标准库声明宏#eprintln) 宏分别与 [`print!`](../../Macro/声明宏/标准库声明宏#print) 和 [`println!`](../../Macro/声明宏/标准库声明宏#println) 相同，只不过它们将其输出发送到 stderr。
 
 
 
 ### `format_args!`
 
-[`format_args!`](https://www.rustwiki.org.cn/zh-CN/std/macro.format_args.html) 是一个奇怪的宏，用于安全地传递描述格式字符串的不透明对象。该对象不需要创建任何堆分配，并且仅引用栈上的信息。 在幕后，所有相关的宏都在此方面实现。 首先，一些示例用法是：
+[`format_args!`](../../Macro/声明宏/标准库声明宏#format_args) 是一个奇怪的宏，用于安全地传递描述格式字符串的不透明对象。该对象不需要创建任何堆分配，并且仅引用栈上的信息。 在幕后，所有相关的宏都在此方面实现。 首先，一些示例用法是：
 
 ```rust
 use std::fmt;
@@ -456,7 +528,7 @@ fn my_fmt_fn(args: fmt::Arguments<'_>) {
 my_fmt_fn(format_args!(", or a {} too", "function"));
 ```
 
-[`format_args!`](https://www.rustwiki.org.cn/zh-CN/std/macro.format_args.html) 宏的结果是 [`fmt::Arguments`](https://www.rustwiki.org.cn/zh-CN/std/fmt/struct.Arguments.html) 类型的值。 然后可以将此结构体传递到此模块内部的 [`write`](https://www.rustwiki.org.cn/zh-CN/std/fmt/fn.write.html) 和 [`format`](https://www.rustwiki.org.cn/zh-CN/std/fmt/fn.format.html) 函数，以处理格式字符串。 该宏的目的是在处理格式化字符串时甚至进一步防止中间分配。
+[`format_args!`](../../Macro/声明宏/标准库声明宏#format_args) 宏的结果是 [`fmt::Arguments`](./Structs/Arguments) 类型的值。 然后可以将此结构体传递到此模块内部的 [`write`](#write) 和 [`format`](#format) 函数，以处理格式字符串。 该宏的目的是在处理格式化字符串时甚至进一步防止中间分配。
 
 例如，日志记录库可以使用标准格式语法，但是它将在内部绕过此结构体，直到确定了输出应该到达的位置为止。
 

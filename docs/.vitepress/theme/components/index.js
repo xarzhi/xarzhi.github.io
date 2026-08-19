@@ -13,6 +13,8 @@ import CanvasPointIn from "./TestComponents/CanvasPointIn.vue";
 import CanvasWatermark from "./TestComponents/CanvasWatermark.vue";
 import GsapPlugins from "./GsapPlugins.vue";
 import Img from "./Img.vue";
+import Svg from "./SvgComponents/Svg.vue";
+
 function register(app) {
 	app.component('Modal', Modal)
 	app.component('MNavLinks', MNavLinks)
@@ -29,5 +31,6 @@ function register(app) {
 	app.component("CanvasWatermark", CanvasWatermark);
 	app.component("Img", Img);
 	app.component("GsapPlugins", GsapPlugins);
+	app.component('Svg', Svg)
 }
 export { register }

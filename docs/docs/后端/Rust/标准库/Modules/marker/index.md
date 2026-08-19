@@ -27,13 +27,15 @@ Rust 类型可以根据其固有属性以各种有用的方式进行分类。 �
 - [Tuple](https://www.rustwiki.org.cn/zh-CN/std/marker/trait.Tuple.html)：`Experimental`元组类型的标记。
 - [Unsize](https://www.rustwiki.org.cn/zh-CN/std/marker/trait.Unsize.html)：`Experimental`可以把没有大小的类型改为动态大小的类型。
 
+
+
 以下常用可在[Traits](./Traits/Copy)中查看
 
-- Copy：只需复制位即可复制其值的类型。
-- Send：可以跨线程边界传输的类型。
-- Sized：在编译时已知大小为常量的类型。
-- Sync：可以在线程之间安全共享引用的类型。
-- Unpin：固定后可以安全移动的类型。
+- [Copy](./Traits/Copy)：只需复制位即可复制其值的类型。
+- [Send](./Traits/Send)：可以跨线程边界传输的类型。
+- [Sized](./Traits/Sized)：在编译时已知大小为常量的类型。
+- [Sync](./Traits/Sync)：可以在线程之间安全共享引用的类型。
+- [Unpin](./Traits/Unpin)：固定后可以安全移动的类型。
 
 
 

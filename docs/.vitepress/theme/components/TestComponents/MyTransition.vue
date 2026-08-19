@@ -139,7 +139,9 @@ function onLeave(el, done) {
 </style>
 <style lang="scss" scoped>
 .demo {
-	box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07), 0 1px 4px rgba(0, 0, 0, 0.07);
+	box-shadow:
+		0 3px 12px rgba(0, 0, 0, 0.07),
+		0 1px 4px rgba(0, 0, 0, 0.07);
 	padding: 10px;
 	border-radius: 4px;
 	margin-bottom: 20px;

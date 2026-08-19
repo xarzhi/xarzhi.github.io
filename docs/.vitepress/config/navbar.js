@@ -79,6 +79,11 @@ const nav = [
 				icon: '/sidebar_icons/canva.svg',
 			},
 			{
+				text: 'Svg',
+				link: '/docs/前端/可视化/Svg/02.基本图形的绘制',
+				icon: '/sidebar_icons/svg.svg',
+			},
+			{
 				text: 'Threejs',
 				link: '/docs/前端/可视化/Three.js/基本使用/01.安装threejs',
 				icon: '/sidebar_icons/threejs-light.svg',

@@ -2,7 +2,6 @@ import { defineConfig } from 'vite'
 import navbar from './config/navbar'
 import sidebar from './config/sidebar'
 import timeline from 'vitepress-markdown-timeline'
-
 const config = defineConfig({
 	base: '/',
 	head: [
@@ -96,7 +95,15 @@ const config = defineConfig({
 		lightModeSwitchTitle: '切换至深色模式',
 		darkModeSwitchTitle: '切换至浅色模式',
 	},
-	vite: {},
+	vite: {
+		preprocessorOptions: {
+			scss: {
+				silenceDeprecations: ['legacy-js-api'],
+				api: 'modern-compiler', // 或 'modern'
+				logger: { warn: (msg, opts) => console.warn(msg, opts?.span) },
+			},
+		},
+	},
 })
 
 export default config

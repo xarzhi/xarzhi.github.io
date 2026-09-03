@@ -552,6 +552,89 @@ const sidebar = {
 						},
 					],
 				},
+				{
+					text: 'time',
+					link: '/docs/后端/Rust/标准库/Modules/time/index.md',
+					collapsed: true,
+					items: [
+						{
+							text: 'Structs',
+							collapsed: true,
+							items: getItems('/docs/后端/Rust/标准库/Modules/time/Structs'),
+						},
+					],
+				},
+				{
+					text: 'thread',
+					link: '/docs/后端/Rust/标准库/Modules/thread/index.md',
+					collapsed: true,
+					items: [
+						{
+							text: 'Structs',
+							collapsed: true,
+							items: getItems('/docs/后端/Rust/标准库/Modules/thread/Structs'),
+						},
+					],
+				},
+				{
+					text: 'sync',
+					link: '/docs/后端/Rust/标准库/Modules/sync/index.md',
+					collapsed: true,
+					items: [
+						{
+							text: 'Structs',
+							collapsed: true,
+							items: getItems('/docs/后端/Rust/标准库/Modules/sync/Structs'),
+						},
+						{
+							text: 'Enums',
+							collapsed: true,
+							items: getItems('/docs/后端/Rust/标准库/Modules/sync/Enums'),
+						},
+						{
+							text: 'Modules',
+							collapsed: true,
+							items: [
+								{
+									text: 'atomic',
+									collapsed: true,
+									link: '/docs/后端/Rust/标准库/Modules/sync/Modules/atomic/index.md',
+									items: [
+										{
+											text: 'Structs',
+											collapsed: true,
+											items: getItems(
+												'/docs/后端/Rust/标准库/Modules/sync/Modules/atomic/Structs'
+											),
+										},
+										{
+											text: 'Enums',
+											collapsed: true,
+											items: getItems('/docs/后端/Rust/标准库/Modules/sync/Modules/atomic/Enums'),
+										},
+									],
+								},
+								{
+									text: 'mpsc',
+									collapsed: true,
+									link: '/docs/后端/Rust/标准库/Modules/sync/Modules/mpsc/index.md',
+									items: [
+										{
+											text: 'Structs',
+											collapsed: true,
+											items: getItems('/docs/后端/Rust/标准库/Modules/sync/Modules/mpsc/Structs'),
+										},
+										{
+											text: 'Enums',
+											collapsed: true,
+											items: getItems('/docs/后端/Rust/标准库/Modules/sync/Modules/mpsc/Enums'),
+										},
+									],
+								},
+							],
+						},
+					],
+				},
 				// 		// {
 				// 		// 	text: 'path',
 				// 		// 	link: '/docs/后端/Rust/Rust教程/标准库/Modules/path',

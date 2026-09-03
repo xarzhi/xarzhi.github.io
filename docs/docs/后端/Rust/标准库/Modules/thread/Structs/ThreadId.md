@@ -8,7 +8,7 @@ pub struct ThreadId(_);
 
 `ThreadId` 是一个不透明的对象，它唯一的标识了在进程生命周期期中创建的每个线程。ThreadIds 保证不会被重用，即使线程终止时也是如此。 ThreadId 受 Rust 标准库的控制，ThreadId 和底层平台的线程标识符概念之间可能没有任何关系 – 因此，这两个概念不能互换使用。
 
-可以从[Thread ](./Thread)上的 [id ]((./Thread#id))方法中检索 `ThreadId`。
+可以从[Thread ](./Thread)上的 [id](./Thread#id)方法中检索 `ThreadId`。
 
 ```rust
 fn main() {

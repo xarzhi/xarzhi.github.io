@@ -207,7 +207,7 @@ fn main() -> io::Result<()> {
 pub fn current() -> Thread
 ```
 
-**返回值**：返回一个[Thread](./Thread)当前线程句柄
+**返回值**：返回一个[Thread](./Structs/Thread)当前线程句柄
 
 ```rust
 fn main() {

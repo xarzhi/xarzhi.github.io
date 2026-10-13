@@ -121,7 +121,35 @@ fn main() {
 
 
 
+
+
 ## Type Definitions
 
 - **LockResult**：一种类型别名，用于可能导致中毒的锁定方法。
 - **TryLockResult**：一种非别名锁定方法结果的类型别名。
+
+
+
+### LockResult
+
+```rust
+pub type LockResult<Guard> = Result<Guard, PoisonError<Guard>>;
+```
+
+一种类型别名，用于可能导致中毒的锁定方法。
+
+此结果的 Ok 变体表示该原语没有中毒，并且其中包含 `Guard`。 Err 变体表示该原语已中毒。 请注意，Err 变体还带有关联的守卫，可以通过 `into_inner` 方法获取它。
+
+
+
+
+
+### TryLockResult
+
+```rust
+pub type TryLockResult<Guard> = Result<Guard, TryLockError<Guard>>;
+```
+
+一种非别名锁定方法结果的类型别名。
+
+有关更多信息，请参见 `LockResult`。 `TryLockResult` 不一定持有 Err 类型的相关保护，因为可能由于其他原因没有获得锁。

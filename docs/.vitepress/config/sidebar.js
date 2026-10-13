@@ -280,6 +280,7 @@ const sidebar = {
 	],
 	'/docs/前端/一些问题/': getItems('/docs/前端/一些问题/'),
 	'/docs/其他问题': getItems('/docs/其他问题'),
+	'/docs/中医见解': getItems('/docs/中医见解'),
 	'/docs/后端/Rust/Rust教程': [
 		{
 			text: 'Rust基础',

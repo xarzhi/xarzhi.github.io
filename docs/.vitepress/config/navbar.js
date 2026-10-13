@@ -207,7 +207,18 @@ const nav = [
 	},
 	{
 		text: '其他问题',
-		link: '/docs/其他问题/01.Typora使用PicGo实现图床',
+		items: [
+			{
+				text: '技术笔记',
+				link: '/docs/其他问题/01.Typora使用PicGo实现图床',
+				// icon: '/sidebar_icons/canva.svg',
+			},
+			{
+				text: '中医见解',
+				link: '/docs/中医见解/01.五脏',
+				// icon: '/sidebar_icons/svg.svg',
+			},
+		],
 	},
 ]
 

@@ -783,8 +783,6 @@ assert_eq!(*values, [1, 2, 3])
 
 
 
-##### 
-
 :::tip Safety
 
 与 [`MaybeUninit::assume_init`](https://www.rustwiki.org.cn/zh-CN/std/mem/union.MaybeUninit.html#method.assume_init) 一样，由调用者负责确保内部值确实处于初始化状态。
@@ -1417,8 +1415,6 @@ fn as_fd(&self) -> BorrowedFd<'_>
 
 这个 impl 允许在 Arc 上实现需要 AsHandle 的 traits。
 
-
-
 ```rust
 use std::fs::File;
 use std::sync::Arc;
@@ -1435,8 +1431,6 @@ impl MyTrait for Box<File> {}
 ```rust
 fn as_handle(&self) -> BorrowedHandle<'_>
 ```
-
-
 
 
 
@@ -1490,8 +1484,6 @@ fn as_ref(&self) -> &T
 `Windows only`
 
 这个 impl 允许在 Arc 上实现需要 AsSocket 的 traits。
-
-
 
 ```rust
 use std::net::UdpSocket;
@@ -1578,228 +1570,200 @@ fn clone_from(&mut self, source: &Self)
 
 
 
+### impl\<T> Debug for Arc\<T>
 
-
-
-
-
-
+```rust
 impl<T> Debug for Arc<T>
 
 where
 
   T: Debug + ?Sized,
-
-```rust
 ```
 
 
-
-fn fmt(&self, f: &mut Formatter<'_>) -> Result<(), Error>
 
 使用给定的格式化程序格式化该值。 
 
 ```rust
+fn fmt(&self, f: &mut Formatter<'_>) -> Result<(), Error>
 ```
 
 
 
+### impl\<T> Default for Arc\<T>
+
+```rust
 impl<T> Default for Arc<T>
 
 where
 
   T: Default,
-
-```rust
 ```
 
 
 
+#### default
+
+用 T 的 Default 值创建一个新的 `Arc<T>`。
+
+```rust
 fn default() -> Arc<T>
-
-用 T 的 Default 值创建一个新的 Arc<T>。
-
-```rust
 ```
 
 
 
-
-
+```rust
 use std::sync::Arc;
-
-
-
 let x: Arc<i32> = Default::default();
-
 assert_eq!(*x, 0);
-
-```rust
 ```
 
 
 
-impl<T> Deref for Arc<T>
-
-where
-
-  T: ?Sized,
-
-type Target = T
-
-```rust
-```
-
-
+### impl\<T> Deref for Arc\<T>
 
 解引用后的结果类型。
 
+```rust
+impl<T> Deref for Arc<T>
+where
+  T: ?Sized,
+type Target = T
+```
 
 
-fn deref(&self) -> &T
+
+
+
+#### deref
 
 解引用值。
 
 ```rust
+fn deref(&self) -> &T
 ```
 
 
 
-impl<T> Display for Arc<T>
-
-where
-
-  T: Display + ?Sized,
+### impl\<T> Display for Arc\<T>
 
 ```rust
+impl<T> Display for Arc<T>
+where
+  T: Display + ?Sized,
 ```
 
-
-
-fn fmt(&self, f: &mut Formatter<'_>) -> Result<(), Error>
+#### fmt
 
 使用给定的格式化程序格式化该值。 
 
 ```rust
+fn fmt(&self, f: &mut Formatter<'_>) -> Result<(), Error>
 ```
 
 
 
-impl<T> Drop for Arc<T>
-
-where
-
-  T: ?Sized,
+### impl\<T> Drop for Arc\<T>
 
 ```rust
+impl<T> Drop for Arc<T>
+where
+  T: ?Sized,
 ```
 
 
 
-fn drop(&mut self)
+#### drop
 
 丢弃 Arc。
 
 ```rust
+fn drop(&mut self)
 ```
 
 
 
 这将减少强引用计数。 如果强引用计数达到零，那么唯一的其他引用 (如果有) 是 Weak，因此我们将 drop 作为内部值。
 
-
-
-
-
+```rust
 use std::sync::Arc;
-
-
 
 struct Foo;
 
-
-
 impl Drop for Foo {
-
   fn drop(&mut self) {
-
-​    println!("dropped!");
-
+    println!("dropped!");
   }
-
 }
-
-```rust
 ```
 
-let foo = Arc::new(Foo);
 
+
+```rust
+let foo = Arc::new(Foo);
 let foo2 = Arc::clone(&foo);
 
-
-
 drop(foo);  // 不打印任何东西
-
 drop(foo2);  // 打印 "dropped!"
-
-```rust
 ```
 
 
 
+### impl\<T> Error for Arc\<T>
+
+```rust
 impl<T> Error for Arc<T>
-
 where
-
   T: Error + ?Sized,
-
-
-
-```rust
 ```
 
 
 
-fn (&self) -> Option<&(dyn Error + 'static)>
+#### source
 
 此错误的下级来源 (如果有)。 
 
 ```rust
+fn source(&self) -> Option<&(dyn Error + 'static)>
 ```
 
 
 
-fn provide<'a>(&'a self, req: &mut Demand<'a>)
+#### provide
 
 This is a nightly-only experimental API. (error_generic_member_access #99301)
 
 提供对用于错误报告的上下文的基于类型的访问。 
 
 ```rust
+fn provide<'a>(&'a self, req: &mut Demand<'a>)
 ```
 
 
 
-impl<T> From<&[T]> for Arc<[T]>
-
-where
-
-  T: Clone,
+### impl\<T> From<&[T]> for Arc<[T]>
 
 ```rust
+impl<T> From<&[T]> for Arc<[T]>
+where
+  T: Clone,
 ```
 
 
 
-fn from(v: &[T]) -> Arc<[T]>
+#### from
 
 分配一个引用计数的切片，并通过克隆 v 的项来填充它。
 
 ```rust
+fn from(v: &[T]) -> Arc<[T]>
 ```
 
 
 
+
+
+```rust
 Example
 
 let original: &[i32] = &[1, 2, 3];
@@ -1807,123 +1771,130 @@ let original: &[i32] = &[1, 2, 3];
 let shared: Arc<[i32]> = Arc::from(original);
 
 assert_eq!(&[1, 2, 3], &shared[..]);
-
-```rust
 ```
 
 
 
+### impl From<&CStr> for Arc\<CStr>
+
+```rust
 impl From<&CStr> for Arc<CStr>
+```
 
 
 
-fn from(s: &CStr) -> Arc<CStr>
+#### from
 
 通过将内容复制到新分配的 Arc 中，将 &CStr 转换为 Arc<CStr>。
 
 ```rust
+fn from(s: &CStr) -> Arc<CStr>
 ```
 
 
 
-
-
-impl From<&OsStr> for Arc<OsStr>
-
-
-
-fn from(s: &OsStr) -> Arc<OsStr>
-
-将字符串复制到新分配的 Arc<OsStr> 中。
+### impl From<&OsStr> for Arc\<OsStr>
 
 ```rust
+impl From<&OsStr> for Arc<OsStr>
 ```
 
 
 
+#### from
+
+将字符串复制到新分配的 `Arc<OsStr>` 中。
+
+```rust
+fn from(s: &OsStr) -> Arc<OsStr>
+```
 
 
+
+### impl From<&Path> for Arc\<Path>
+
+```rust
 impl From<&Path> for Arc<Path>
+```
 
 
 
-fn from(s: &Path) -> Arc<Path>
+#### from
 
 通过将 Path 数据复制到新的 Arc 缓冲区，将 Path 转换为 Arc。
 
 ```rust
+fn from(s: &Path) -> Arc<Path>
 ```
 
 
 
+### impl From<&str> for Arc\<str>
 
-
+```rust
 impl From<&str> for Arc<str>
+```
 
 
 
-fn from(v: &str) -> Arc<str>
+#### from
 
 分配一个引用计数的 str 并将 v 复制到其中。
 
 ```rust
+fn from(v: &str) -> Arc<str>
 ```
 
 
 
-Example
-
+```rust
 let shared: Arc<str> = Arc::from("eggplant");
 
 assert_eq!("eggplant", &shared[..]);
-
-```rust
 ```
 
 
 
+### impl\<W> From<Arc\<W>> for RawWaker
+
+```rust
 impl<W> From<Arc<W>> for RawWaker
-
 where
-
   W: Wake + Send + Sync + 'static,
-
-```rust
 ```
 
 
 
-fn from(waker: Arc<W>) -> RawWaker
+#### from
 
 使用 Wake 类型作为 RawWaker。
 
 ```rust
+fn from(waker: Arc<W>) -> RawWaker
 ```
 
 
 
 此转换不使用堆分配或原子操作。
 
-
-
-
-
-impl<W> From<Arc<W>> for Waker
-
-where
-
-  W: Wake + Send + Sync + 'static,
+### impl\<W> From<Arc\<W>> for Waker
 
 ```rust
+impl<W> From<Arc<W>> for Waker
+where
+  W: Wake + Send + Sync + 'static,
 ```
 
 
 
-fn from(waker: Arc<W>) -> Waker
+
+
+#### from
 
 使用 Wake 类型作为 Waker。
 
 ```rust
+fn from(waker: Arc<W>) -> Waker
 ```
 
 
@@ -1934,188 +1905,208 @@ fn from(waker: Arc<W>) -> Waker
 
 
 
+### impl From<Arc\<str>> for Arc<[u8]>
+
+```rust
 impl From<Arc<str>> for Arc<[u8]>
+```
 
 
 
-fn from(rc: Arc<str>) -> Arc<[u8]>
+#### from
 
 将原子引用计数的字符串切片转换为字节切片。
 
 ```rust
+fn from(rc: Arc<str>) -> Arc<[u8]>
 ```
 
 
 
 Example
 
+```rust
 let string: Arc<str> = Arc::from("eggplant");
 
 let bytes: Arc<[u8]> = Arc::from(string);
 
 assert_eq!("eggplant".as_bytes(), bytes.as_ref());
-
-```rust
 ```
 
 
 
+### impl\<T> From<Box<T, Global>> for Arc\<T>
+
+```rust
 impl<T> From<Box<T, Global>> for Arc<T>
-
 where
-
   T: ?Sized,
-
-```rust
 ```
 
-
-
-fn from(v: Box<T, Global>) -> Arc<T>
+#### from
 
 将 boxed 对象移动到新的引用计数分配。
 
 ```rust
+fn from(v: Box<T, Global>) -> Arc<T>
 ```
 
 
 
 Example
 
+```rust
 let unique: Box<str> = Box::from("eggplant");
 
 let shared: Arc<str> = Arc::from(unique);
 
 assert_eq!("eggplant", &shared[..]);
-
-```rust
 ```
 
 
 
+### impl From\<CString> for Arc\<CStr>
+
+```rust
 impl From<CString> for Arc<CStr>
+```
 
 
 
+#### from
+
+通过将 CString 数据移动到新的 Arc 缓冲区中，将 CString 转换为 `Arc<CStr>`。
+
+```rust
 fn from(s: CString) -> Arc<CStr>
-
-通过将 CString 数据移动到新的 Arc 缓冲区中，将 CString 转换为 Arc<CStr>。
-
-```rust
 ```
 
 
 
+### impl<'a, B> From<Cow<'a, B>> for Arc\<B>
 
-
+```rust
 impl<'a, B> From<Cow<'a, B>> for Arc<B>
-
 where
-
   B: ToOwned + ?Sized,
-
   Arc<B>: From<&'a B> + From<<B as ToOwned>::Owned>,
-
-```rust
 ```
 
-fn from(cow: Cow<'a, B>) -> Arc<B>
+
+
+#### from
 
 通过复制其内容，从写时克隆指针创建一个原子引用计数指针。
 
 ```rust
+fn from(cow: Cow<'a, B>) -> Arc<B>
 ```
 
 
 
 Example
 
+```rust
 let cow: Cow<'_, str> = Cow::Borrowed("eggplant");
 
 let shared: Arc<str> = Arc::from(cow);
 
 assert_eq!("eggplant", &shared[..]);
-
-```rust
 ```
 
 
 
+### impl From\<OsString> for Arc\<OsStr>
+
+```rust
 impl From<OsString> for Arc<OsStr>
+```
 
 
 
+#### from
+
+通过将 OsString 数据移动到新的 Arc 缓冲区中，将 OsString 转换为 `Arc<OsStr>`。
+
+```rust
 fn from(s: OsString) -> Arc<OsStr>
-
-通过将 OsString 数据移动到新的 Arc 缓冲区中，将 OsString 转换为 Arc<OsStr>。
-
-```rust
 ```
 
 
 
 
 
+### impl From\<PathBuf> for Arc\<Path>
+
+```rust
 impl From<PathBuf> for Arc<Path>
+```
 
 
 
-fn from(s: PathBuf) -> Arc<Path>
+#### from
 
-通过将 PathBuf 数据移动到新的 Arc 缓冲区中，将 PathBuf 转换为 Arc<Path>。
+通过将 PathBuf 数据移动到新的 Arc 缓冲区中，将 PathBuf 转换为 `Arc<Path>`。
 
 ```rust
+fn from(s: PathBuf) -> Arc<Path>
+```
+
+
+
+### impl From\<String> for Arc\<str>
+
+```rust
+impl From<String> for Arc<str>
 ```
 
 
 
 
 
-impl From<String> for Arc<str>
-
-
-
-fn from(v: String) -> Arc<str>
+#### from
 
 分配一个引用计数的 str 并将 v 复制到其中。
 
 ```rust
+fn from(v: String) -> Arc<str>
 ```
 
 
 
 Example
 
+```rust
 let unique: String = "eggplant".to_owned();
 
 let shared: Arc<str> = Arc::from(unique);
 
 assert_eq!("eggplant", &shared[..]);
-
-```rust
 ```
 
 
 
-impl<T> From<T> for Arc<T>
-
-
-
-fn from(t: T) -> Arc<T>
-
-将 T 转换为 Arc<T>
+### impl\<T> From\<T> for Arc\<T>
 
 ```rust
+impl<T> From<T> for Arc<T>
+```
+
+
+
+#### from
+
+将 T 转换为 `Arc<T>`
+
+```rust
+fn from(t: T) -> Arc<T>
 ```
 
 
 
 转换将值移动到新分配的 Arc 中。 相当于调用 Arc::new(t)。
 
-
-
 ```rust
-
 let x = 5;
 
 let arc = Arc::new(5);
@@ -2126,45 +2117,50 @@ assert_eq!(Arc::from(x), arc);
 
 
 
+### impl\<T> From<Vec<T, Global>> for Arc<[T]>
+
+```rust
 impl<T> From<Vec<T, Global>> for Arc<[T]>
+```
 
 
 
-fn from(v: Vec<T, Global>) -> Arc<[T]>
+#### from
 
 分配一个引用计数的切片，并将 v 的项移入其中。
 
 ```rust
+fn from(v: Vec<T, Global>) -> Arc<[T]>
 ```
 
 
 
 Example
 
+```rust
 let unique: Vec<i32> = vec![1, 2, 3];
 
 let shared: Arc<[i32]> = Arc::from(unique);
 
 assert_eq!(&[1, 2, 3], &shared[..]);
-
-```rust
 ```
 
 
 
-impl<T> FromIterator<T> for Arc<[T]>
-
-
-
-fn from_iter<I>(iter: I) -> Arc<[T]>
-
-where
-
-  I: IntoIterator<Item = T>,
-
-获取 Iterator 中的每个元素，并将其收集到 Arc<[T]> 中。
+### impl\<T> FromIterator\<T> for Arc<[T]>
 
 ```rust
+impl<T> FromIterator<T> for Arc<[T]>
+```
+
+
+
+获取 Iterator 中的每个元素，并将其收集到 `Arc<[T]>` 中。
+
+```rust
+fn from_iter<I>(iter: I) -> Arc<[T]>
+where
+  I: IntoIterator<Item = T>,
 ```
 
 
@@ -2173,71 +2169,65 @@ where
 
 一般情况
 
-在一般情况下，首先要收集到 Vec<T> 中来收集到 Arc<[T]> 中。也就是说，编写以下内容时：
+在一般情况下，首先要收集到 `Vec<T>` 中来收集到 `Arc<[T]>` 中。也就是说，编写以下内容时：
 
-
-
+```rust
 let evens: Arc<[u8]> = (0..10).filter(|&x| x % 2 == 0).collect();
+```
 
 这就像我们写的那样：
 
-
-
+```rust
 let evens: Arc<[u8]> = (0..10).filter(|&x| x % 2 == 0)
 
   .collect::<Vec<_>>() // 第一组分配在此处发生。
 
   .into(); // `Arc<[T]>` 的第二个分配在此处进行。
+```
 
-这将分配构造 Vec<T> 所需的次数，然后分配一次，以将 Vec<T> 转换为 Arc<[T]>。
-
-
+这将分配构造 `Vec<T>` 所需的次数，然后分配一次，以将 Vec<T> 转换为 Arc<[T]>。
 
 已知长度的迭代器
 
 当您的 Iterator 实现 TrustedLen 且大小正确时，将为 Arc<[T]> 进行一次分配。例如：
 
-
-
-let evens: Arc<[u8]> = (0..10).collect(); // 这里只进行一次分配。
-
-
-
-impl<T> Hash for Arc<T>
-
-where
-
-  T: Hash + ?Sized,
-
 ```rust
+let evens: Arc<[u8]> = (0..10).collect(); // 这里只进行一次分配。
 ```
 
 
 
-fn hash<H>(&self, state: &mut H)
+### impl\<T> Hash for Arc\<T>
 
+```rust
+impl<T> Hash for Arc<T>
 where
+  T: Hash + ?Sized,
+```
 
-  H: Hasher,
+
+
+#### hash
 
 将该值输入给定的 Hasher。 
 
 ```rust
+fn hash<H>(&self, state: &mut H)
+where
+  H: Hasher,
 ```
 
 
 
-fn hash_slice<H>(data: &[Self], state: &mut H)
-
-where
-
-  H: Hasher,
-
-  Self: Sized,
+#### hash_slice
 
 将这种类型的切片送入给定的 Hasher 中。 
 
 ```rust
+fn hash_slice<H>(data: &[Self], state: &mut H)
+where
+  H: Hasher,
+  Self: Sized,
 ```
 
 

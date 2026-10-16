@@ -13,6 +13,7 @@
 				<a class="btn2" href="/docs/收藏的网站/">网址导航</a>
 			</div>
 		</div>
+		<Projects />
 	</div>
 </template>
 
@@ -23,6 +24,7 @@ import Cube from './ThreeComponents/Cube.vue'
 
 import { onMounted, ref, onUnmounted, shallowRef } from 'vue'
 import { getRandom } from '../utils/utils'
+import Projects from './Projects.vue'
 
 const textArr = [
 	'花有重开日，人无再少年',

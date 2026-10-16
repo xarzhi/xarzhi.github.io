@@ -34,6 +34,8 @@
 		"animejs": "^3.2.2",
 		"medium-zoom": "^1.1.0",
 		"sass-embedded": "^1.100.0",
+		"unplugin-auto-import": "^21.1.0",
+		"unplugin-vue-components": "^32.1.0",
 		"vitepress": "^1.6.4",
 		"vue": "^3.4.27"
 	},

@@ -10,8 +10,8 @@ import { useRoute, useData, useRouter } from 'vitepress'
 import { h } from 'vue'
 import { register } from './components/index'
 import Layout from './Layout.vue'
-import ElementPlus from 'element-plus'
-import 'element-plus/dist/index.css'
+// element-plus 改为按需自动引入（见 .vitepress/config.mjs 的 ElementPlusResolver）
+// 仅保留暗色主题变量，组件样式由 unplugin-vue-components 按需注入
 import 'element-plus/theme-chalk/dark/css-vars.css'
 import useClickParticles from './hooks/useClickParticles.js'
 
@@ -21,7 +21,6 @@ export default {
 		// 注册全局组件
 		register(app)
 		app.component('Layout', Layout)
-		app.use(ElementPlus)
 	},
 	Layout: () => {
 		const props = {}

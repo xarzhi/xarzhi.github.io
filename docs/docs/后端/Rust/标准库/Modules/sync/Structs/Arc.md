@@ -706,7 +706,7 @@ assert_eq!(*values, [0, 0, 0])
 
 
 
-### impl\<T> Arc<MaybeUninit\<T>>
+### impl\<T> Arc\<MaybeUninit\<T>>
 
 #### assume_init
 
@@ -1103,7 +1103,7 @@ fn main() {
 
 
 
-### impl<T: Clone> Arc\<T>
+### impl\<T: Clone> Arc\<T>
 
 #### make_mut
 
@@ -1210,7 +1210,7 @@ assert!(ptr::eq(ptr, inner.as_ptr()));
 
 
 
-### impl<T: ?Sized> Arc\<T>
+### impl\<T: ?Sized> Arc\<T>
 
 #### get_mut
 
@@ -1314,7 +1314,7 @@ println!("{}", &*x); // Use-after-free
 
 
 
-### impl Arc<dyn Any + Send + Sync + 'static>
+### impl Arc\<dyn Any + Send + Sync + 'static>
 
 #### downcase
 
@@ -1382,7 +1382,7 @@ unsafe {
 
 ## Trait Implementations
 
-### impl<T: AsFd> AsFd for Arc\<T>
+### impl\<T: AsFd> AsFd for Arc\<T>
 
 这个 impl 允许在 Arc 上实现需要 AsFd 的 traits。
 
@@ -1409,7 +1409,7 @@ fn as_fd(&self) -> BorrowedFd<'_>
 
 
 
-### impl<T: AsHandle> AsHandle for Arc\<T>
+### impl\<T: AsHandle> AsHandle for Arc\<T>
 
 `Windows only`
 
@@ -1436,7 +1436,7 @@ fn as_handle(&self) -> BorrowedHandle<'_>
 
 
 
-### impl<T: AsRawFd> AsRawFd for Arc\<T>
+### impl\<T: AsRawFd> AsRawFd for Arc\<T>
 
 这个 impl 允许在 Arc 上实现需要 AsRawFd 的 traits。
 
@@ -1479,7 +1479,7 @@ fn as_ref(&self) -> &T
 
 
 
-### impl<T: AsSocket> AsSocket for Arc\<T>
+### impl\<T: AsSocket> AsSocket for Arc\<T>
 
 `Windows only`
 
@@ -1855,7 +1855,7 @@ assert_eq!("eggplant", &shared[..]);
 
 
 
-### impl\<W> From<Arc\<W>> for RawWaker
+### impl\<W> From\<Arc\<W>> for RawWaker
 
 ```rust
 impl<W> From<Arc<W>> for RawWaker
@@ -1877,7 +1877,7 @@ fn from(waker: Arc<W>) -> RawWaker
 
 此转换不使用堆分配或原子操作。
 
-### impl\<W> From<Arc\<W>> for Waker
+### impl\<W> From\<Arc\<W>> for Waker
 
 ```rust
 impl<W> From<Arc<W>> for Waker
@@ -1905,7 +1905,7 @@ fn from(waker: Arc<W>) -> Waker
 
 
 
-### impl From<Arc\<str>> for Arc<[u8]>
+### impl From\<Arc\<str>> for Arc\<[u8]>
 
 ```rust
 impl From<Arc<str>> for Arc<[u8]>
@@ -1935,7 +1935,7 @@ assert_eq!("eggplant".as_bytes(), bytes.as_ref());
 
 
 
-### impl\<T> From<Box<T, Global>> for Arc\<T>
+### impl\<T> From\<Box\<T, Global>> for Arc\<T>
 
 ```rust
 impl<T> From<Box<T, Global>> for Arc<T>
@@ -1983,7 +1983,7 @@ fn from(s: CString) -> Arc<CStr>
 
 
 
-### impl<'a, B> From<Cow<'a, B>> for Arc\<B>
+### impl\<'a, B> From\<Cow\<'a, B>> for Arc\<B>
 
 ```rust
 impl<'a, B> From<Cow<'a, B>> for Arc<B>
@@ -2117,7 +2117,7 @@ assert_eq!(Arc::from(x), arc);
 
 
 
-### impl\<T> From<Vec<T, Global>> for Arc<[T]>
+### impl\<T> From\<Vec\<T, Global>> for Arc\<[T]>
 
 ```rust
 impl<T> From<Vec<T, Global>> for Arc<[T]>
@@ -2185,7 +2185,7 @@ let evens: Arc<[u8]> = (0..10).filter(|&x| x % 2 == 0)
   .into(); // `Arc<[T]>` 的第二个分配在此处进行。
 ```
 
-这将分配构造 `Vec<T>` 所需的次数，然后分配一次，以将 Vec<T> 转换为 Arc<[T]>。
+这将分配构造 `Vec<T>` 所需的次数，然后分配一次，以将 Vec\<T> 转换为 Arc\<[T]>。
 
 已知长度的迭代器
 
@@ -2299,7 +2299,7 @@ where
 
 
 
-### impl\<T> PartialEq<Arc\<T>> for Arc\<T>
+### impl\<T> PartialEq\<Arc\<T>> for Arc\<T>
 
 ```rust
 impl<T> PartialEq<Arc<T>> for Arc<T>
@@ -2353,7 +2353,7 @@ assert!(five != Arc::new(6));
 
 
 
-### impl\<T> PartialOrd<Arc\<T>> for Arc\<T>
+### impl\<T> PartialOrd\<Arc\<T>> for Arc\<T>
 
 ```rust
 impl<T> PartialOrd<Arc<T>> for Arc<T>
@@ -2484,7 +2484,7 @@ fn fmt(&self, f: &mut Formatter<'_>) -> Result<(), Error>
 
 
 
-### impl<T, const N: usize> TryFrom<Arc<[T]>> for Arc<[T; N]>
+### impl\<T, const N: usize> TryFrom\<Arc\<[T]>> for Arc\<[T; N]>
 
 #### Error
 
@@ -2508,7 +2508,7 @@ fn try_from(
 
 
 
-### impl<T, U> CoerceUnsized<Arc\<U>> for Arc\<T>
+### impl\<T, U> CoerceUnsized\<Arc\<U>> for Arc\<T>
 
 ```rust
 impl<T, U> CoerceUnsized<Arc<U>> for Arc<T>
@@ -2519,7 +2519,7 @@ where
 
 
 
-### impl<T, U> DispatchFromDyn<Arc\<U>> for Arc\<T>
+### impl\<T, U> DispatchFromDyn\<Arc\<U>> for Arc\<T>
 
 ```rust
 impl<T, U> DispatchFromDyn<Arc<U>> for Arc<T>
@@ -2582,7 +2582,7 @@ where
 
 ## Auto Trait Implementations
 
-### impl<T: ?Sized> RefUnwindSafe for Arc\<T>
+### impl\<T: ?Sized> RefUnwindSafe for Arc\<T>
 
 ```rust
 impl<T: ?Sized> RefUnwindSafe for Arc<T>
@@ -2632,7 +2632,7 @@ where
 
 
 
-### impl<T, U> Into\<U> for T
+### impl\<T, U> Into\<U> for T
 
 ```rust
 impl<T, U> Into<U> for T
@@ -2672,7 +2672,7 @@ where
 
 
 
-### impl<T, U> TryFrom\<U> for T
+### impl\<T, U> TryFrom\<U> for T
 
 ```rust
 impl<T, U> TryFrom<U> for T
@@ -2682,7 +2682,7 @@ where
 
 
 
-### impl<T, U> TryInto\<U> for T
+### impl\<T, U> TryInto\<U> for T
 
 ```rust
 impl<T, U> TryInto<U> for T

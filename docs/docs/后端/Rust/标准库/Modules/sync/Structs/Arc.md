@@ -1785,7 +1785,7 @@ impl From<&CStr> for Arc<CStr>
 
 #### from
 
-通过将内容复制到新分配的 Arc 中，将 &CStr 转换为 Arc<CStr>。
+通过将内容复制到新分配的 Arc 中，将 &CStr 转换为 `Arc<CStr>`。
 
 ```rust
 fn from(s: &CStr) -> Arc<CStr>

@@ -99,6 +99,14 @@ const config = defineConfig({
 			AutoImport({ resolvers: [ElementPlusResolver()], dts: false }),
 			Components({ resolvers: [ElementPlusResolver()], dts: false }),
 		],
+		// 按需引入的组件样式由 element-plus 包内部的 `.../components/*/style/css` 模块注入，
+		// 里面是 `import 'element-plus/theme-chalk/base.css'` 这类裸 CSS 导入。
+		// SSR 构建默认把 element-plus 当外部依赖（不打包），Node 直接去 import 这个 .css
+		// 就会抛 `Unknown file extension ".css"`（GitHub Actions/Ubuntu 上必现）。
+		// 让 Vite 把 element-plus 一起打包进 SSR bundle 即可——SSR 下 CSS 导入会被置空。
+		ssr: {
+			noExternal: ['element-plus'],
+		},
 		css: {
 			preprocessorOptions: {
 				scss: {

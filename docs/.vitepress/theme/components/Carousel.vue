@@ -1,49 +1,43 @@
 <template>
-	<div
-		class="x-carousel"
-		@mouseenter="pause"
-		@mouseleave="resume"
-	>
+	<div class="x-carousel" @mouseenter="pause" @mouseleave="resume">
 		<div class="stage">
 			<div
-				v-for="(img, i) in images"
-				:key="i"
-				class="slide"
-				:class="{ active: i === current }"
+				class="track"
+				:style="{ transform: `translateX(-${current * 100}%)` }"
 			>
-				<img :src="img" :alt="alt" draggable="false" />
+				<div v-for="(img, i) in images" :key="i" class="slide">
+					<img :src="img" :alt="alt" draggable="false" />
+				</div>
 			</div>
 		</div>
 
-		<button
-			v-if="images.length > 1"
-			class="nav prev"
-			aria-label="上一张"
-			@click="prev"
-		>
+		<button v-if="images.length > 1" class="nav prev" aria-label="上一张" @click="prev">
 			<svg viewBox="0 0 24 24" width="18" height="18">
-				<path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+				<path
+					d="M15 18l-6-6 6-6"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				/>
 			</svg>
 		</button>
-		<button
-			v-if="images.length > 1"
-			class="nav next"
-			aria-label="下一张"
-			@click="next"
-		>
+		<button v-if="images.length > 1" class="nav next" aria-label="下一张" @click="next">
 			<svg viewBox="0 0 24 24" width="18" height="18">
-				<path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+				<path
+					d="M9 6l6 6-6 6"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				/>
 			</svg>
 		</button>
 
 		<div v-if="images.length > 1" class="dots">
-			<span
-				v-for="(img, i) in images"
-				:key="i"
-				class="dot"
-				:class="{ on: i === current }"
-				@click="go(i)"
-			></span>
+			<span v-for="(img, i) in images" :key="i" class="dot" :class="{ on: i === current }" @click="go(i)"></span>
 		</div>
 	</div>
 </template>
@@ -113,24 +107,24 @@ onBeforeUnmount(() => {
 		position: relative;
 		width: 100%;
 		height: 100%;
+		overflow: hidden;
+	}
+
+	.track {
+		display: flex;
+		width: 100%;
+		height: 100%;
+		transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+		will-change: transform;
 	}
 
 	.slide {
-		position: absolute;
-		inset: 0;
+		flex: 0 0 100%;
+		width: 100%;
+		height: 100%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		opacity: 0;
-		visibility: hidden;
-		transition:
-			opacity 0.5s ease,
-			visibility 0.5s;
-
-		&.active {
-			opacity: 1;
-			visibility: visible;
-		}
 
 		img {
 			height: 100%;

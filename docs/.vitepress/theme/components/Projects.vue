@@ -17,13 +17,7 @@
 
 				<p class="app_desc">{{ p.desc }}</p>
 				<div class="pics">
-					<el-carousel>
-						<el-carousel-item v-for="item in p.pics" :key="item">
-							<div class="pic">
-								<img :src="item" class="img" />
-							</div>
-						</el-carousel-item>
-					</el-carousel>
+					<Carousel :images="p.pics" :alt="p.name" />
 				</div>
 
 				<div class="foot">
@@ -36,6 +30,8 @@
 </template>
 
 <script setup>
+import Carousel from './Carousel.vue'
+
 const projects = [
 	{
 		name: 'Meow Player',
@@ -228,10 +224,10 @@ const projects = [
 			height: 50px;
 		}
 		.pics {
-			height: 200px;
+			height: 180px;
 			margin-bottom: 10px;
 			overflow: hidden;
-			
+			border-radius: 8px;
 		}
 
 		.foot {

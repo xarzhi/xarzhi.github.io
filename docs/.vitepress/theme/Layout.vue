@@ -4,6 +4,7 @@
 import { useData } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import { nextTick, provide } from 'vue'
+import Live2dRem from './components/Live2dRem.vue'
 const { isDark } = useData()
 const enableTransitions = () => {
 	if (!document || !window) return
@@ -40,6 +41,7 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
 <template>
 	<DefaultTheme.Layout />
 	<go-top />
+	<Live2dRem />
 </template>
 
 <style>

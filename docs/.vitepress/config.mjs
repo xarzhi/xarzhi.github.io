@@ -9,6 +9,8 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 const isDev = process.argv.includes('dev')
 const config = defineConfig({
 	base: '/',
+	// 需要把构建产物写到别处时用：VP_OUT_DIR=xxx pnpm build
+	...(process.env.VP_OUT_DIR ? { outDir: process.env.VP_OUT_DIR } : {}),
 	head: [
 		[
 			'meta',

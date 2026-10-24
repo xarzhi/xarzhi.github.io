@@ -131,7 +131,7 @@ const projects = [
 <style lang="scss" scoped>
 .projects {
 	width: 100%;
-	max-width: 1152px;
+	max-width: 1440px;
 	margin: 0 auto;
 	padding: 40px 24px 80px;
 	box-sizing: border-box;
@@ -158,7 +158,7 @@ const projects = [
 
 	.grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+		grid-template-columns: repeat(3, 1fr);
 		gap: 16px;
 	}
 

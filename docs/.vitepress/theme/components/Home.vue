@@ -20,7 +20,8 @@
 <script setup>
 import Circle from './ThreeComponents/Circle.vue'
 import GlassBox from './ThreeComponents/GlassBox.vue'
-import Cube from './ThreeComponents/Cube.vue'
+import Rubik from './ThreeComponents/Rubik.vue'
+import AnimationModel from './ThreeComponents/AnimationModel.vue'
 
 import { onMounted, ref, onUnmounted, shallowRef } from 'vue'
 import { getRandom } from '../utils/utils'
@@ -39,8 +40,15 @@ const textArr = [
 const text = ref('')
 const timer = ref()
 const textIndex = ref(0)
-const componentName = shallowRef(Cube)
-const boxArr = [Circle, GlassBox, Cube]
+const componentName = shallowRef(Rubik)
+const boxArr = [Circle, GlassBox, Rubik, AnimationModel]
+/** 预览用：?box=rubik / circle / glass / animation 可直接指定首屏展示的组件 */
+const boxByName = {
+	rubik: Rubik,
+	circle: Circle,
+	glass: GlassBox,
+	animation: AnimationModel,
+}
 
 const randomBox = () => {
 	componentName.value = boxArr[getRandom(0, boxArr.length - 1)]
@@ -55,6 +63,12 @@ const changeText = () => {
 }
 changeText()
 onMounted(() => {
+	// 在挂载后再处理预览参数，避免服务端与客户端渲染结果不一致
+	const picked = boxByName[
+		(new URLSearchParams(window.location.search).get('box') || '').toLowerCase()
+	]
+	if (picked) componentName.value = picked
+
 	timer.value = setInterval(() => {
 		changeText()
 	}, 5000)
@@ -78,11 +92,16 @@ onUnmounted(() => {
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		/* 魔方/玻璃盒的 canvas 是绝对定位铺满的，兜底裁剪，避免溢出撑破首屏 */
+		overflow: hidden;
 	}
 
 	.content {
 		min-width: 500px;
 		height: 200px;
+		/* 魔方的操作按钮/提示是绝对定位在 .image 底部的，
+		   留出间距免得和标题贴在一起 */
+		margin-top: 24px;
 
 		.title {
 			background: var(--vp-home-hero-name-background);

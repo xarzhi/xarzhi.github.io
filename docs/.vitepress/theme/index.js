@@ -14,6 +14,7 @@ import Layout from './Layout.vue'
 // 仅保留暗色主题变量，组件样式由 unplugin-vue-components 按需注入
 import 'element-plus/theme-chalk/dark/css-vars.css'
 import useClickParticles from './hooks/useClickParticles.js'
+import { codeClickCopy } from './plugins/code-click-copy'
 
 export default {
 	extends: DefaultTheme,
@@ -21,6 +22,8 @@ export default {
 		// 注册全局组件
 		register(app)
 		app.component('Layout', Layout)
+		// 单击行内代码即复制（围栏代码块保持原生行为，可用 { codeBlock: true } 一并开启）
+		app.use(codeClickCopy())
 	},
 	Layout: () => {
 		const props = {}

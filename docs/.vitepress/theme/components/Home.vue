@@ -1,7 +1,23 @@
 <template>
 	<div class="home">
 		<div class="image">
-			<component :is="componentName" />
+			<!--
+				必须用 ClientOnly 包住。
+
+				componentName 由 randomBox() 随机选（Circle / GlassBox / Rubik / AnimationModel），
+				服务端和客户端各随一次，选到不同组件时 hydration 就对不上：
+				Vue 会复用 SSR 那棵 DOM，把新组件的子节点塞进旧组件的根元素里，
+				根元素的 class 却不是新组件的 —— 实测拿到过 GlassBox 的 id="container" + 丢了 class="rubik"。
+				一旦 class="rubik" 丢了，`.rubik{position:relative;height:100%}` 全部失效，
+				里面 `position:absolute;inset:0` 的 .rubik__stage 只能去向 body 找包含块，
+				canvas 被撑成整页高度（实测 1152x2186），魔方放大四倍还盖住下面的内容。
+
+				这几张 canvas 本来就没法 SSR，跳过服务端渲染既消除水合不一致，也不会有布局跳动
+				（.image 有固定 500px 高度）。
+			-->
+			<ClientOnly>
+				<component :is="componentName" />
+			</ClientOnly>
 		</div>
 		<div class="content">
 			<div class="title">Fade away</div>
@@ -94,6 +110,13 @@ onUnmounted(() => {
 		align-items: center;
 		/* 魔方/玻璃盒的 canvas 是绝对定位铺满的，兜底裁剪，避免溢出撑破首屏 */
 		overflow: hidden;
+		/*
+			兜底：让 .image 自己成为定位包含块。
+			子组件的 `.xxx__stage` 是 position:absolute;inset:0，正常情况下它的包含块是组件根元素
+			（`.rubik{position:relative}`）。万一组件根的 class 因为任何原因没生效，
+			没有这一行，stage 会一路找到 body，把 canvas 撑成整页高度；有这一行就最多被裁成 500px。
+		*/
+		position: relative;
 	}
 
 	.content {

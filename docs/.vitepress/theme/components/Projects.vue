@@ -109,7 +109,7 @@ const projects = [
 
 		pics: [
 			'https://gitee.com/xarzhi/picture/raw/master/img/PixPin_2026-10-22_12-43-16.png',
-			'https://gitee.com/xarzhi/picture/raw/master/img/PixPin_2026-10-22_12-43-48.png',
+			'https://gitee.com/xarzhi/picture/raw/master/img/image-20261025141742909.png',
 		],
 	},
 	// {

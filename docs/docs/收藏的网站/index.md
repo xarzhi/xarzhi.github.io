@@ -4,6 +4,8 @@ sidebar: false
 prev: false
 next: false
 outline: deep
+# 右侧大纲的二级项默认折叠（只有这页需要，其它页面保持全展开）
+outlineCollapse: true
 ---
 
 <link rel="stylesheet" href="/.vitepress/theme/style/nav.scss"></link>

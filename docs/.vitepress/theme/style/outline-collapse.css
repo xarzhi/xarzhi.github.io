@@ -1,5 +1,10 @@
 /*
   右侧「当前页大纲」：带二级项的条目默认折叠，点右侧箭头展开。
+
+  只在 frontmatter 写了 outlineCollapse: true 的页面生效（目前只有 /docs/收藏的网站/）。
+  这条规则靠 <html data-outline-collapse> 这个属性判断 —— 属性由 OutlineCollapse.vue
+  随 frontmatter 增删，普通页面没有它，这里的所有规则就都不匹配，多级大纲照旧全展开。
+
   结构由 OutlineCollapse.vue 在运行时补出来（VitePress 的 outline 没法直接替换），
   所以这些样式必须是全局的，不能写 scoped。
 */
@@ -12,36 +17,36 @@
   里面 <a> 的 offsetParent 就从 .content 变成 li，offsetTop 全部退化成
   「相对自己这一行」的小值 —— 实测滑块直接偏出 82px 到 670px。
 
-  flex 不需要任何定位上下文，offsetParent 保持是 .content，滑块的换算就恢复正常。
+  flex 不需要任何定位上下文，offsetParent 保持原样，滑块的换算就恢复正常。
 */
-.VPDocAsideOutline .VPDocOutlineItem.root > li.has-children {
+html[data-outline-collapse] .VPDocAsideOutline .VPDocOutlineItem.root > li.has-children {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
 }
 
-.VPDocAsideOutline .VPDocOutlineItem.root > li.has-children > .outline-link {
+html[data-outline-collapse] .VPDocAsideOutline .VPDocOutlineItem.root > li.has-children > .outline-link {
 	flex: 1 1 auto;
 	/* 不写 min-width: 0 的话，overflow: hidden + text-overflow: ellipsis 不会生效 */
 	min-width: 0;
 }
 
 /* 子列表独占一行，所以必须整行宽度 + border-box（它自带左右 16px 内边距） */
-.VPDocAsideOutline .VPDocOutlineItem.root > li.has-children > .VPDocOutlineItem.nested {
+html[data-outline-collapse] .VPDocAsideOutline .VPDocOutlineItem.root > li.has-children > .VPDocOutlineItem.nested {
 	flex: 0 0 100%;
 	box-sizing: border-box;
 }
 
 /* 默认折叠 */
-.VPDocAsideOutline li.has-children > .VPDocOutlineItem.nested {
+html[data-outline-collapse] .VPDocAsideOutline li.has-children > .VPDocOutlineItem.nested {
 	display: none;
 }
 
-.VPDocAsideOutline li.has-children.is-open > .VPDocOutlineItem.nested {
+html[data-outline-collapse] .VPDocAsideOutline li.has-children.is-open > .VPDocOutlineItem.nested {
 	display: block;
 }
 
-.vp-outline-toggle {
+html[data-outline-collapse] .vp-outline-toggle {
 	flex: 0 0 20px;
 	width: 20px;
 	/* 和大纲项的 line-height: 32px 对齐 */
@@ -58,18 +63,18 @@
 	transition: color 0.25s;
 }
 
-.vp-outline-toggle:hover {
+html[data-outline-collapse] .vp-outline-toggle:hover {
 	color: var(--vp-c-text-1);
 }
 
-.vp-outline-toggle:focus-visible {
+html[data-outline-collapse] .vp-outline-toggle:focus-visible {
 	outline: 2px solid var(--vp-c-brand-1);
 	outline-offset: -2px;
 	border-radius: 4px;
 }
 
 /* 小箭头：用两条边框拼出来，省一个 svg */
-.vp-outline-toggle::before {
+html[data-outline-collapse] .vp-outline-toggle::before {
 	content: '';
 	width: 5px;
 	height: 5px;
@@ -81,7 +86,7 @@
 	margin-top: -2px;
 }
 
-li.is-open > .vp-outline-toggle::before {
+html[data-outline-collapse] li.is-open > .vp-outline-toggle::before {
 	transform: rotate(45deg);
 	margin-top: -2px;
 }

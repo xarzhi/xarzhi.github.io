@@ -5,10 +5,12 @@
 
 <script setup>
 import { onMounted, onUnmounted, nextTick } from 'vue'
-import { onContentUpdated } from 'vitepress'
+import { onContentUpdated, useData } from 'vitepress'
 
 /*
-  右侧「当前页大纲」的二级项默认折叠。
+  右侧「当前页大纲」的二级项默认折叠 —— 只有 frontmatter 里写了 outlineCollapse: true
+  的页面才生效（目前就是 /docs/收藏的网站/，那页一排 tab 撑出来的二级项太多）。
+  其它页面完全不动，多级大纲照旧全展开。
 
   VitePress 的 VPDocAsideOutline 是本地导入的组件，没有对外暴露替换方式，
   全局注册同名组件也覆盖不了，所以这里只能等它把 DOM 渲染出来之后再动手：
@@ -20,6 +22,11 @@ import { onContentUpdated } from 'vitepress'
         a.outline-link            ← 一级项，点击跳转
         ul.VPDocOutlineItem.nested ← 二级列表，默认 display: none
 */
+
+const { frontmatter } = useData()
+const enabled = () => !!frontmatter.value.outlineCollapse
+// CSS 靠这个属性决定折叠规则要不要生效（html 上，切页面时随 frontmatter 一起摘掉）
+const FLAG = 'data-outline-collapse'
 
 // 标记已处理过的 li，避免重复插入按钮
 const DONE = 'data-vp-collapse'
@@ -116,6 +123,8 @@ let pinTimers = []
   这个判定没法改，只能在点击之后把高亮纠正回真正被点的那一项。
 */
 const pinTo = (link) => {
+  // 普通页面的大纲是竖着排的，不存在同 y 坐标的问题，不需要干预
+  if (!enabled()) return
   pinTimers.forEach(clearTimeout)
   const apply = () => {
     const root = document.querySelector('.VPDocAsideOutline .VPDocOutlineItem.root')
@@ -165,20 +174,53 @@ const observe = () => {
   observedRoot = root
 }
 
+/*
+  从折叠页切到普通页时，Vue 是按位置复用 <li> 的（v-for 没写 key），
+  我们加进去的按钮、class、标记全都会留在新页面的 DOM 上。
+  普通页面必须保持「多级大纲全展开 + 没有箭头」，所以这里要清干净。
+*/
+const reset = () => {
+  document.documentElement.removeAttribute(FLAG)
+  observer?.disconnect()
+  observer = null
+  observedRoot = null
+
+  const root = document.querySelector('.VPDocAsideOutline .VPDocOutlineItem.root')
+  if (!root) return
+
+  for (const btn of root.querySelectorAll('.vp-outline-toggle')) btn.remove()
+  for (const el of root.querySelectorAll(`[${DONE}], [${PIN}]`)) {
+    el.removeAttribute(DONE)
+    el.removeAttribute(PIN)
+  }
+  for (const li of root.querySelectorAll('.has-children, .is-open')) {
+    li.classList.remove('has-children', 'is-open')
+  }
+}
+
 let timer = 0
 const run = async () => {
   // aside 的 headers 是在它自己的 onContentUpdated 里赋值的，Vue 更新 DOM 是异步的，
   // 所以等一个 tick 再改；再用 rAF 兜一次，防止字体/布局后渲染晚一拍
   await nextTick()
+
+  if (!enabled()) {
+    reset()
+    return
+  }
+  document.documentElement.setAttribute(FLAG, '')
+
   decorate()
   observe()
   requestAnimationFrame(() => {
+    if (!enabled()) return
     decorate()
     observe()
   })
   // 路由切换时同样的 URL 会先清空再渲染，补一个延迟兜底
   clearTimeout(timer)
   timer = setTimeout(() => {
+    if (!enabled()) return
     decorate()
     revealActive()
   }, 120)
@@ -189,10 +231,8 @@ onMounted(() => {
   window.addEventListener('hashchange', onHashChange)
 })
 onUnmounted(() => {
+  reset()
   window.removeEventListener('hashchange', onHashChange)
-  observer?.disconnect()
-  observer = null
-  observedRoot = null
   pinTimers.forEach(clearTimeout)
   clearTimeout(timer)
 })

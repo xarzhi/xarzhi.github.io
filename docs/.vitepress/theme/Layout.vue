@@ -5,6 +5,7 @@ import { useData } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import { nextTick, provide } from 'vue'
 import Live2dRem from './components/Live2dRem.vue'
+import OutlineCollapse from './components/OutlineCollapse.vue'
 const { isDark } = useData()
 const enableTransitions = () => {
 	if (!document || !window) return
@@ -42,6 +43,8 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }) => {
 	<DefaultTheme.Layout />
 	<go-top />
 	<Live2dRem />
+	<!-- 右侧「当前页大纲」的二级项默认折叠，见组件内的说明 -->
+	<OutlineCollapse />
 </template>
 
 <style>

@@ -1,25 +1,33 @@
 <template>
   <span>
-    <h2 v-if="title" :id="formatTitle" tabindex="-1">
+    <h2 v-if="title" :id="sectionIdOf" tabindex="-1">
       {{ title }}
-      <a class="header-anchor" :href="`#${formatTitle}`" aria-hidden="true"></a>
+      <a class="header-anchor" :href="`#${sectionIdOf}`" aria-hidden="true"></a>
     </h2>
     <div class="tab">
-      <template v-if="items[0].items">
+      <template v-if="withTabs">
         <div class="tab-head">
           <div class="tab-head-box" ref="tabHeadBox">
             <div class="slider" ref="slider"></div>
-            <div
+            <!--
+              这里必须用 h3，不能用 div。
+
+              VitePress 右侧「当前页大纲」是运行时扫 DOM 生成的：
+              theme-default/composables/outline.js 的 getHeaders() 用
+              document.querySelectorAll('.VPDoc :where(h1,h2,h3,h4,h5,h6)') 取标题。
+              也就是说只有真正的 heading 元素才会被收进菜单，给 div 设 id 是没用的。
+              换成 h3 之后，这些 tab 就自动变成「实用工具」等 h2 下的二级菜单项。
+            -->
+            <h3
               v-for="(item, index) in items"
               :key="item.title"
-              @click="handleClick(item, index, $event)"
-              :class="{
-                'tab-head-item': true,
-                active: activeIndex === index,
-              }"
+              :id="tabIdOf(item)"
+              tabindex="-1"
+              :class="{ 'tab-head-item': true, active: activeIndex === index }"
+              @click="selectTab(index)"
             >
               {{ item.title }}
-            </div>
+            </h3>
           </div>
         </div>
         <Pan :PanItems="PanItems"></Pan>
@@ -31,44 +39,81 @@
   </span>
 </template>
 <script setup>
-import { computed, ref, nextTick, onMounted } from "vue";
-import { slugify } from "@mdit-vue/shared";
-import { useRoute, useData } from "vitepress";
+import { computed, ref, nextTick, onMounted, onUnmounted } from "vue";
 import Pan from "./Pan.vue";
+import { sectionId, tabId, hasTabs } from "../utils/nav-headings";
 const props = defineProps(["title", "items", "noIcon"]);
-const route = useRoute();
-const formatTitle = computed(() => {
-  return slugify(props.title);
-});
 
-const PanItems = ref([]);
+const sectionIdOf = computed(() => sectionId(props.title));
+// 只有 items 里带着子 items 才渲染 tab 栏，也才需要把它们挂进大纲
+const withTabs = computed(() => hasTabs(props.items));
+
+// tab 的锚点 id 带上分组前缀，不同分组下的同名 tab 才不会冲突
+const tabIdOf = (item) => tabId(props.title, item?.title);
+
+const PanItems = ref(withTabs.value ? props.items[0].items : props.items);
 const activeIndex = ref(0);
 const slider = ref(null);
 const tabHeadBox = ref(null);
-if (props.items[0].items) {
-  PanItems.value = props.items[0].items;
-} else {
-  PanItems.value = props.items;
-}
 
-const data = useData();
+const moveSlider = (index) => {
+  const el = tabHeadBox.value?.querySelectorAll(".tab-head-item")[index];
+  if (!el || !slider.value) return;
+  slider.value.style.left = el.offsetLeft + "px";
+  slider.value.style.width = el.offsetWidth + "px";
+};
+
+const selectTab = (index, { updateHash = true } = {}) => {
+  const item = props.items[index];
+  if (!item?.items) return;
+  activeIndex.value = index;
+  PanItems.value = item.items;
+  // 文字换成另一个 tab 后宽度会变，等 DOM 更新完再量
+  nextTick(() => moveSlider(index));
+  if (updateHash) replaceHash(tabIdOf(item));
+};
+
+// 点 tab 只改地址栏、不滚动：用户此刻就停在这组 tab 旁边，页面跳一下反而突兀。
+// 反方向（点大纲里的二级项）走浏览器原生锚点导航，会触发 hashchange，由 syncFromHash 接住。
+const replaceHash = (id) => {
+  if (!id) return;
+  history.replaceState(history.state, "", `#${id}`);
+};
+
+const currentHashId = () => {
+  const raw = window.location.hash.slice(1);
+  if (!raw) return "";
+  try {
+    return decodeURIComponent(raw);
+  } catch {
+    return raw;
+  }
+};
+
+// 当前 hash 指向本组的第几个 tab，没有则 -1
+const indexFromHash = () => {
+  if (!withTabs.value) return -1;
+  const id = currentHashId();
+  if (!id) return -1;
+  return props.items.findIndex((item) => tabIdOf(item) === id);
+};
+
+const syncFromHash = () => {
+  const index = indexFromHash();
+  if (index >= 0 && index !== activeIndex.value) selectTab(index, { updateHash: false });
+};
 
 onMounted(() => {
-  const items = tabHeadBox.value?.querySelectorAll(".tab-head-item");
-  // console.log(items.length)
-  if (items) {
-    const [item] = items;
-    slider.value.style.left = item.offsetLeft + "px";
-    slider.value.style.width = item.offsetWidth + "px";
-  }
+  // 带 #前端-开发框架 这种链接进来时，直接展开对应的 tab
+  const index = indexFromHash();
+  if (index > 0) selectTab(index, { updateHash: false });
+  nextTick(() => moveSlider(activeIndex.value));
+  window.addEventListener("hashchange", syncFromHash);
 });
-const handleClick = (item, index, e) => {
-  PanItems.value = item.items;
-  activeIndex.value = index;
-  location.hash = props.title + "/" + item.title;
-  slider.value.style.left = e.target.offsetLeft + "px";
-  slider.value.style.width = e.target.offsetWidth + "px";
-};
+
+onUnmounted(() => {
+  window.removeEventListener("hashchange", syncFromHash);
+});
 </script>
 
 <style lang="scss" scoped>
@@ -115,6 +160,15 @@ html[class="dark"] {
       position: relative;
       z-index: 1;
       .tab-head-item {
+        /*
+          tab 用 <h3> 是为了被右侧大纲收录（见模板里的注释）。
+          代价是要把 .vp-doc h3 的全局样式全部抹掉，否则字会变成 20px/粗体/带 32px 上外边距，
+          tab 条会被撑得完全变形。
+        */
+        margin: 0;
+        font-size: inherit;
+        font-weight: 400;
+        letter-spacing: normal;
         min-width: 80px;
         padding: 0 10px;
         height: 25px;
@@ -127,6 +181,7 @@ html[class="dark"] {
         position: relative;
         z-index: 1;
         transition: all 0.3s;
+        white-space: nowrap;
         .title {
           font-weight: normal;
         }

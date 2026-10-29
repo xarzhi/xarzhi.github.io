@@ -552,12 +552,6 @@ export const NAV_DATA = [
         title: "技术论坛",
         items: [
           {
-            title: "吾爱破解",
-            link: "https://www.52pojie.cn/",
-            desc: "吾爱破解论坛深耕软件逆向工程与反病毒技术领域，汇聚众多技术爱好者的智慧与经验，共同探索与分享前沿安全技术和防护策略，构建业内最具影响力的技术交流平台。 ",
-            icon: "https://gitee.com/xarzhi/picture/raw/master/img/image-20250213145003474.png",
-          },
-          {
             title: "精易论坛",
             link: "https://bbs.125.la/",
             desc: "专注于易语言的论坛",

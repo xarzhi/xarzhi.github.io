@@ -47,6 +47,19 @@ const projects = [
 		action: '查看文档',
 	},
 	{
+		name: 'Meow Desk',
+		desc: '基于C++和Core-ui的一款windows桌面图标管理工具，后续会添加各种小组件',
+		tags: ['C++', '图标管理', '收纳'],
+		link: 'https://github.com/xarzhi/iNotes',
+		action: '查看源码',
+		logo: 'https://gitee.com/xarzhi/picture/raw/master/img/iClick-gpui.png',
+		pics: [
+			'https://gitee.com/xarzhi/picture/raw/master/img/PixPin_2026-10-22_12-43-16.png',
+			'https://gitee.com/xarzhi/picture/raw/master/img/image-20261025141742909.png',
+			'https://gitee.com/xarzhi/picture/raw/master/img/image-20261029203343201.png',
+		],
+	},
+	{
 		name: 'iClick',
 		desc: '用 GPUI 写的键鼠连点器，支持模糊点击、操作间隔与循环间隔、随机延迟等。',
 		tags: ['Rust', 'GPUI', '效率工具'],
@@ -99,19 +112,7 @@ const projects = [
 			'https://gitee.com/xarzhi/picture/raw/master/img/PixPin_2026-10-22_12-22-34.png',
 		],
 	},
-	{
-		name: 'Meow Desk',
-		desc: '基于C++和Core-ui的一款windows桌面图标管理工具，后续会添加各种小组件',
-		tags: ['C++', '图标管理', '收纳'],
-		link: 'https://github.com/xarzhi/iNotes',
-		action: '查看源码',
-		logo: 'https://gitee.com/xarzhi/picture/raw/master/img/iClick-gpui.png',
 
-		pics: [
-			'https://gitee.com/xarzhi/picture/raw/master/img/PixPin_2026-10-22_12-43-16.png',
-			'https://gitee.com/xarzhi/picture/raw/master/img/image-20261025141742909.png',
-		],
-	},
 	// {
 	// 	name: 'xHot',
 	// 	desc: '精简、快速的 Windows 截图工具：截图 / 标注 / 长截图 / 钉图 / OCR 取字，F1 一键触发。',

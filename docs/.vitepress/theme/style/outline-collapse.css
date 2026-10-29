@@ -1,0 +1,87 @@
+/*
+  右侧「当前页大纲」：带二级项的条目默认折叠，点右侧箭头展开。
+  结构由 OutlineCollapse.vue 在运行时补出来（VitePress 的 outline 没法直接替换），
+  所以这些样式必须是全局的，不能写 scoped。
+*/
+
+/*
+  这里用 flex 而不是「li 加 position: relative + 箭头绝对定位」。
+
+  VitePress 定位那个滑块（.outline-marker）用的是 activeLink.offsetTop + 39，
+  而 offsetTop 是相对 offsetParent 量的。一旦给 li 加 position: relative，
+  里面 <a> 的 offsetParent 就从 .content 变成 li，offsetTop 全部退化成
+  「相对自己这一行」的小值 —— 实测滑块直接偏出 82px 到 670px。
+
+  flex 不需要任何定位上下文，offsetParent 保持是 .content，滑块的换算就恢复正常。
+*/
+.VPDocAsideOutline .VPDocOutlineItem.root > li.has-children {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+.VPDocAsideOutline .VPDocOutlineItem.root > li.has-children > .outline-link {
+	flex: 1 1 auto;
+	/* 不写 min-width: 0 的话，overflow: hidden + text-overflow: ellipsis 不会生效 */
+	min-width: 0;
+}
+
+/* 子列表独占一行，所以必须整行宽度 + border-box（它自带左右 16px 内边距） */
+.VPDocAsideOutline .VPDocOutlineItem.root > li.has-children > .VPDocOutlineItem.nested {
+	flex: 0 0 100%;
+	box-sizing: border-box;
+}
+
+/* 默认折叠 */
+.VPDocAsideOutline li.has-children > .VPDocOutlineItem.nested {
+	display: none;
+}
+
+.VPDocAsideOutline li.has-children.is-open > .VPDocOutlineItem.nested {
+	display: block;
+}
+
+.vp-outline-toggle {
+	flex: 0 0 20px;
+	width: 20px;
+	/* 和大纲项的 line-height: 32px 对齐 */
+	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: transparent;
+	color: var(--vp-c-text-3);
+	cursor: pointer;
+	transition: color 0.25s;
+}
+
+.vp-outline-toggle:hover {
+	color: var(--vp-c-text-1);
+}
+
+.vp-outline-toggle:focus-visible {
+	outline: 2px solid var(--vp-c-brand-1);
+	outline-offset: -2px;
+	border-radius: 4px;
+}
+
+/* 小箭头：用两条边框拼出来，省一个 svg */
+.vp-outline-toggle::before {
+	content: '';
+	width: 5px;
+	height: 5px;
+	border-right: 1.5px solid currentColor;
+	border-bottom: 1.5px solid currentColor;
+	transform: rotate(-45deg);
+	transform-origin: 60% 60%;
+	transition: transform 0.25s;
+	margin-top: -2px;
+}
+
+li.is-open > .vp-outline-toggle::before {
+	transform: rotate(45deg);
+	margin-top: -2px;
+}

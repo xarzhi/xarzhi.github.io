@@ -20,9 +20,6 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
-import { withBase } from "vitepress";
-import { slugify } from "@mdit-vue/shared";
 const props = defineProps(["PanItems"]);
 
 const handleJump = (item) => {

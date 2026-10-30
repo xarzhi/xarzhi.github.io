@@ -13,13 +13,12 @@
 			模型加载失败，刷新页面重试
 		</p>
 
-		<div v-if="mounted" class="animodel__footer">
-			<p v-if="hint" class="animodel__hint">{{ hint }}</p>
-			<!-- CC Attribution：署名是授权条件，别删 -->
-			<p class="animodel__credit">
-				Littlest Tokyo by Glen Fox · CC Attribution
-			</p>
-		</div>
+		<!--
+			底部文案（操作提示 + CC 署名）已按要求去掉，画布现在铺满整个容器。
+			注意：Littlest Tokyo 的作者 Glen Fox 以 CC Attribution 协议发布，
+			署名是授权条件。如果这个站点要公开发布，建议在页面某处（比如关于/致谢）
+			保留一句 "Littlest Tokyo by Glen Fox · CC Attribution"。
+		-->
 	</div>
 </template>
 
@@ -46,8 +45,6 @@ const DRACO_PATH = '/draco/'
 const props = defineProps({
 	/** 是否允许拖动旋转视角（触屏设备会自动关闭，避免抢占页面滚动） */
 	interactive: { type: Boolean, default: true },
-	/** 是否显示操作提示 */
-	showHint: { type: Boolean, default: true },
 })
 
 const container = ref(null)
@@ -55,7 +52,6 @@ const mounted = ref(false)
 const ready = ref(false)
 const failed = ref(false)
 const progress = ref(0)
-const hint = ref('')
 const canInteract = ref(false)
 
 let disposeScene = null
@@ -70,8 +66,6 @@ onMounted(() => {
 			? window.matchMedia('(pointer: fine)').matches
 			: true
 	canInteract.value = props.interactive && finePointer
-	hint.value =
-		props.showHint && canInteract.value ? '拖动旋转视角' : ''
 
 	// ---- 基础（以下参数与官方示例逐项对应）-----------------------------
 	const scene = new THREE.Scene()
@@ -248,19 +242,60 @@ onMounted(() => {
 		cancelAnimationFrame(raf)
 	}
 
+	/**
+	 * 是否在视口内。必须自己记状态：
+	 * IntersectionObserver 只在「相交状态变化」时回调，切到别的标签页再切回来时，
+	 * 元素的相交状态没变过（一直在视口里），回调根本不会再触发。
+	 * 所以「隐藏时 stop() 之后谁来 start()」只能靠 visibilitychange 自己判断，
+	 * 两个信号合并成一个 applyVisibility()，缺一个就会出现
+	 * 「切回来画布不动了、拖也没反应」的假死。
+	 */
+	let inViewport = true
+
+	/**
+	 * 切走时如果鼠标一直按着，pointerup 会丢在别的标签页里，
+	 * OrbitControls 的内部 state 就卡在 ROTATE（回来不按键拖也会跟着转）。
+	 * 回到前台时补发一个 pointerup 把它复位；没有监听者时就是个空操作。
+	 */
+	const releaseStuckPointer = () => {
+		const doc = renderer.domElement.ownerDocument
+		try {
+			doc.dispatchEvent(
+				new PointerEvent('pointerup', { pointerId: 1, bubbles: true })
+			)
+		} catch (error) {
+			// 老浏览器没有 PointerEvent 构造器，忽略即可
+		}
+	}
+
+	const applyVisibility = () => {
+		const shouldRun =
+			inViewport && document.visibilityState !== 'hidden'
+		if (!shouldRun) {
+			stop()
+			return
+		}
+		if (!running) {
+			// 只在「由停到跑」这一次做补偿，滚出滚进视口时不会误触发
+			if (controls) {
+				releaseStuckPointer()
+				// 停掉的这段时间相机可能已经被拖动过，补渲染一帧
+				controls.update()
+			}
+		}
+		start()
+	}
+
 	const visibility = new IntersectionObserver(
 		(entries) => {
-			const visible = entries.some((entry) => entry.isIntersecting)
-			visible && document.visibilityState !== 'hidden' ? start() : stop()
+			inViewport = entries.some((entry) => entry.isIntersecting)
+			applyVisibility()
 		},
 		{ threshold: 0 }
 	)
 	visibility.observe(host)
 
-	const onVisibilityChange = () => {
-		if (document.visibilityState === 'hidden') stop()
-	}
-	document.addEventListener('visibilitychange', onVisibilityChange)
+	document.addEventListener('visibilitychange', applyVisibility)
 	start()
 
 	mounted.value = true
@@ -270,7 +305,7 @@ onMounted(() => {
 		cancelled = true
 		stop()
 		visibility.disconnect()
-		document.removeEventListener('visibilitychange', onVisibilityChange)
+		document.removeEventListener('visibilitychange', applyVisibility)
 		observer.disconnect()
 		window.removeEventListener('load', onWindowLoad)
 
@@ -363,59 +398,13 @@ onBeforeUnmount(() => {
 }
 
 /*
- * 底部文案区：提示 + 署名放进同一个 flex 列按文档流排列。
- * 不要各自绝对定位 —— hint 是 <p>，绝对定位的 bottom 按 margin box 计算，
- * 很容易和下面的署名叠在一起（魔方组件踩过这个坑）。
+ * 底部文案区已移除（原来放「拖动旋转视角」提示和 CC 署名），
+ * 画布现在铺满整个 .animodel 容器。若要把署名加回来，记得别用各自的 absolute 定位 ——
+ * hint 是 <p>，绝对定位的 bottom 按 margin box 算，很容易和署名叠在一起（魔方组件踩过）。
  */
-.animodel__footer {
-	position: absolute;
-	left: 50%;
-	bottom: 10px;
-	z-index: 2;
-	transform: translateX(-50%);
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 3px;
-	max-width: 94%;
-	pointer-events: none;
-}
-
-.animodel__hint {
-	margin: 0 !important;
-	width: 100%;
-	font-size: 11px;
-	line-height: 16px;
-	letter-spacing: 0.04em;
-	color: var(--vp-c-text-3);
-	text-align: center;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	/* 万一模型底部压到这一行，用背景色描边把字托出来 */
-	text-shadow: 0 1px 4px var(--vp-c-bg), 0 0 10px var(--vp-c-bg);
-}
-
-.animodel__credit {
-	margin: 0 !important;
-	width: 100%;
-	font-size: 10px;
-	line-height: 14px;
-	letter-spacing: 0.02em;
-	color: var(--vp-c-text-3);
-	text-align: center;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	opacity: 0.65;
-}
-
 @media (max-width: 720px) {
 	.animodel {
 		min-height: 260px;
-	}
-	.animodel__hint {
-		display: none;
 	}
 }
 </style>

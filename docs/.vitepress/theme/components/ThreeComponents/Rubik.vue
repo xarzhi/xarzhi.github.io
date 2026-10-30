@@ -320,6 +320,8 @@ onMounted(() => {
 	let elapsed = 0
 	let raf = 0
 	let running = false
+	/** 元素是否在视口内（由 IntersectionObserver 维护，切标签页时不会变） */
+	let inViewport = true
 
 	const tick = () => {
 		const delta = Math.min(clock.getDelta(), 0.05)
@@ -350,17 +352,36 @@ onMounted(() => {
 
 	const visibility = new IntersectionObserver(
 		entries => {
-			const visible = entries.some(entry => entry.isIntersecting)
-			visible && document.visibilityState !== 'hidden' ? start() : stop()
+			inViewport = entries.some(entry => entry.isIntersecting)
+			applyVisibility()
 		},
 		{ threshold: 0 }
 	)
 	visibility.observe(host)
 
-	const onVisibilityChange = () => {
-		if (document.visibilityState === 'hidden') stop()
+	/*
+		页面可见 + 元素在视口内，才跑渲染循环。
+
+		这里必须两个条件都主动判断、双向切换。之前的写法是「IntersectionObserver 里判一次、
+		visibilitychange 里只在 hidden 时 stop()」——切回来时没有任何地方调用 start()，
+		而 IntersectionObserver 也不会因为切标签页重新触发（元素一直待在视口里，isIntersecting 没变），
+		于是 rAF 链彻底断掉：转层、拖拽的事件监听都还在跑，状态也在改，
+		但一帧都不再绘制，看起来就是「魔方卡死、点了没反应」。
+	*/
+	const applyVisibility = () => {
+		const shouldRun = inViewport && document.visibilityState !== 'hidden'
+		if (!shouldRun) {
+			stop()
+			return
+		}
+		// 切回来时清掉可能残留的拖拽：pointerup 要是丢在了后台标签页里，
+		// drag 会一直非空，onPointerDown 里的 `|| drag` 会把之后所有拖拽都挡掉
+		drag = null
+		if (controls) controls.enabled = !solving.value
+		start()
 	}
-	document.addEventListener('visibilitychange', onVisibilityChange)
+
+	document.addEventListener('visibilitychange', applyVisibility)
 	start()
 
 	// ---- 提示文案 ------------------------------------------------------
@@ -370,7 +391,7 @@ onMounted(() => {
 	disposeScene = () => {
 		stop()
 		visibility.disconnect()
-		document.removeEventListener('visibilitychange', onVisibilityChange)
+		document.removeEventListener('visibilitychange', applyVisibility)
 		if (canInteract) {
 			host.removeEventListener('pointerenter', onEnter)
 			host.removeEventListener('pointerleave', onLeave)

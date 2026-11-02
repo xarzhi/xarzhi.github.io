@@ -134,7 +134,6 @@ onBeforeUnmount(() => {
 			user-select: none;
 			-webkit-user-drag: none;
 			border-radius: 4px;
-			box-shadow: 0 0 5px 0 #ddd;
 		}
 	}
 

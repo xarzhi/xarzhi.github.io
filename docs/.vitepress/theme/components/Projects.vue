@@ -12,7 +12,6 @@
 						<img :src="p.logo" alt="" />
 					</span>
 					<a class="name" :href="p.link" target="_blank" rel="noopener noreferrer">{{ p.name }}</a>
-					<span class="arrow">↗</span>
 				</div>
 
 				<p class="app_desc">{{ p.desc }}</p>
@@ -38,7 +37,7 @@ const projects = [
 		desc: '使用 Rust + GPUI 开发的本地音乐播放器，界面流畅、启动轻快，专注纯粹的本地听歌体验。',
 		tags: ['Rust', 'GPUI', '音乐播放器'],
 		link: 'https://xarzhi.github.io/meow-player-docs/',
-		logo: 'https://gitee.com/xarzhi/picture/raw/master/img/image-20261022122603595.png',
+		logo: '/meow-player-logo.png',
 		pics: [
 			'https://gitee.com/xarzhi/picture/raw/master/img/PixPin_2026-10-22_12-21-58.png',
 			'https://gitee.com/xarzhi/picture/raw/master/img/PixPin_2026-10-22_12-21-44.png',
@@ -48,15 +47,29 @@ const projects = [
 	},
 	{
 		name: 'Meow Desk',
-		desc: '基于C++和Core-ui的一款windows桌面图标管理工具，后续会添加各种小组件',
+		desc: '基于 C++ 和 Core-ui 的一款windows桌面图标管理工具，后续会添加各种小组件',
 		tags: ['C++', '图标管理', '收纳'],
 		link: 'https://github.com/xarzhi/iNotes',
 		action: '查看源码',
-		logo: 'https://gitee.com/xarzhi/picture/raw/master/img/iClick-gpui.png',
+		logo: 'https://gitee.com/xarzhi/picture/raw/master/img/MeowDesk.png',
 		pics: [
-			'https://gitee.com/xarzhi/picture/raw/master/img/PixPin_2026-10-22_12-43-16.png',
 			'https://gitee.com/xarzhi/picture/raw/master/img/image-20261025141742909.png',
+			'https://gitee.com/xarzhi/picture/raw/master/img/PixPin_2026-10-22_12-43-16.png',
 			'https://gitee.com/xarzhi/picture/raw/master/img/image-20261029203343201.png',
+		],
+	},
+	{
+		name: 'Maneki',
+		desc: '基于 Rust + Iced 框架',
+		tags: ['Rust', 'Iced', '视频播放器'],
+		link: 'https://github.com/xarzhi/Maneki',
+		action: '查看源码',
+		logo: 'https://gitee.com/xarzhi/picture/raw/master/img/image-20261102190026746.png',
+		pics: [
+			'https://gitee.com/xarzhi/picture/raw/master/img/PixPin_2026-11-02_18-43-18.png',
+			'https://gitee.com/xarzhi/picture/raw/master/img/PixPin_2026-11-02_18-46-37.png',
+			'https://gitee.com/xarzhi/picture/raw/master/img/PixPin_2026-11-02_18-51-49.png',
+			'https://gitee.com/xarzhi/picture/raw/master/img/PixPin_2026-11-02_18-48-56.png',
 		],
 	},
 	{
@@ -112,20 +125,6 @@ const projects = [
 			'https://gitee.com/xarzhi/picture/raw/master/img/PixPin_2026-10-22_12-22-34.png',
 		],
 	},
-
-	// {
-	// 	name: 'xHot',
-	// 	desc: '精简、快速的 Windows 截图工具：截图 / 标注 / 长截图 / 钉图 / OCR 取字，F1 一键触发。',
-	// 	tags: ['Rust', 'GPUI', '截图工具', 'Windows'],
-	// 	color: '#22d3ee',
-	// 	link: 'https://github.com/xarzhi/xhot',
-	// 	action: '查看源码',
-	// 	pics: [
-	// 		'https://gitee.com/xarzhi/picture/raw/master/img/PixPin_2026-10-22_12-21-58.png',
-	// 		'https://gitee.com/xarzhi/picture/raw/master/img/PixPin_2026-10-22_12-21-44.png',
-	// 		'https://gitee.com/xarzhi/picture/raw/master/img/PixPin_2026-10-22_12-21-32.png',
-	// 	],
-	// },
 ]
 </script>
 

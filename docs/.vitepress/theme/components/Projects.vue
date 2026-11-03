@@ -21,7 +21,6 @@
 
 				<div class="foot">
 					<span v-for="t in p.tags" :key="t" class="tag">{{ t }}</span>
-					<span class="go">{{ p.action }}</span>
 				</div>
 			</div>
 		</div>
@@ -42,14 +41,15 @@ const projects = [
 			'https://gitee.com/xarzhi/picture/raw/master/img/PixPin_2026-10-22_12-21-58.png',
 			'https://gitee.com/xarzhi/picture/raw/master/img/PixPin_2026-10-22_12-21-44.png',
 			'https://gitee.com/xarzhi/picture/raw/master/img/PixPin_2026-10-22_12-21-32.png',
+			'https://gitee.com/xarzhi/picture/raw/master/img/image-20261103180319585.png',
 		],
 		action: '查看文档',
 	},
 	{
 		name: 'Meow Desk',
-		desc: '基于 C++ 和 Core-ui 的一款windows桌面图标管理工具，后续会添加各种小组件',
+		desc: '基于 C++ 和 Core-ui 的一款windows桌面图标管理工具',
 		tags: ['C++', '图标管理', '收纳'],
-		link: 'https://github.com/xarzhi/iNotes',
+		link: 'https://github.com/xarzhi/Meow-Desk',
 		action: '查看源码',
 		logo: 'https://gitee.com/xarzhi/picture/raw/master/img/MeowDesk.png',
 		pics: [
@@ -60,7 +60,7 @@ const projects = [
 	},
 	{
 		name: 'Maneki',
-		desc: '基于 Rust + Iced 框架',
+		desc: '基于 Rust + Iced 开发的本地视频播放器，快速打开视频，同时也支持音频播放',
 		tags: ['Rust', 'Iced', '视频播放器'],
 		link: 'https://github.com/xarzhi/Maneki',
 		action: '查看源码',
@@ -70,6 +70,7 @@ const projects = [
 			'https://gitee.com/xarzhi/picture/raw/master/img/PixPin_2026-11-02_18-46-37.png',
 			'https://gitee.com/xarzhi/picture/raw/master/img/PixPin_2026-11-02_18-51-49.png',
 			'https://gitee.com/xarzhi/picture/raw/master/img/PixPin_2026-11-02_18-48-56.png',
+			'https://gitee.com/xarzhi/picture/raw/master/img/PixPin_2026-11-03_13-58-43.png',
 		],
 	},
 	{
@@ -86,7 +87,7 @@ const projects = [
 		desc: '一站式工具箱，集合图片 / 视频 / 音频 / 开发 / 设计工具：格式转换、智能抠图、压缩、GIF、Base64、图标提取、Markdown ↔ HTML、GLTF 预览、白板等。',
 		tags: ['Tauri 2', 'Vue 3', 'ant-design-vue', 'three.js'],
 		link: 'https://github.com/xarzhi/xtoolkit',
-		logo: 'https://gitee.com/xarzhi/picture/raw/master/img/xtools.png',
+		logo: 'https://gitee.com/xarzhi/picture/raw/master/img/PixPin_2026-11-03_20-36-49.jpg',
 		action: '查看源码',
 		pics: ['https://gitee.com/xarzhi/picture/raw/master/img/PixPin_2026-10-22_12-20-54.png'],
 	},

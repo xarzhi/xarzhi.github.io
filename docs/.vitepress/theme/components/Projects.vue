@@ -80,7 +80,19 @@ const projects = [
 		link: 'https://github.com/xarzhi/iClick-gpui',
 		action: '查看源码',
 		logo: 'https://gitee.com/xarzhi/picture/raw/master/img/iClick-gpui.png',
-		pics: ['https://gitee.com/xarzhi/picture/raw/master/img/PixPin_2026-10-22_12-20-43.png'],
+		pics: [
+			'https://gitee.com/xarzhi/picture/raw/master/img/image-20261104194425849.png',
+			'https://gitee.com/xarzhi/picture/raw/master/img/image-20261104194431380.png',
+		],
+	},
+	{
+		name: 'xRename',
+		desc: '用 GPUI 开发的文件批量重命名工具',
+		tags: ['Rust', 'GPUI', '效率工具'],
+		link: 'https://github.com/xarzhi/xRename',
+		action: '查看源码',
+		logo: 'https://gitee.com/xarzhi/picture/raw/master/img/image-20261104194027554.png',
+		pics: ['https://gitee.com/xarzhi/picture/raw/master/img/PixPin_2026-11-04_19-38-05.png'],
 	},
 	{
 		name: 'xToolkit',
